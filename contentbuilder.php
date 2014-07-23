@@ -1,0 +1,5306 @@
+<!--
+	Content Form for each wireframe
+	6/20/2014
+	Joseph Carlson
+	
+-->
+
+<?php
+include 'header.php';
+
+	if(isset($_GET['domain']) && isset($_GET['wireframe']) && isset($_GET['language'])){
+
+		$domain_name = $_GET['domain'];
+		$wireframe = $_GET['wireframe'];
+		$wf_array = $content_array[$wireframe];
+		$language = $_GET['language'];
+	}
+
+?>		
+
+
+<div class="body-wrapper">
+	<div class="lSide">
+	<?php if(isset($_GET['domain']) && isset($_GET['wireframe']) && isset($_GET['language'])){ ?>
+		<div class="pickTask">
+			<div class="pickTaskContainer" style="opacity: 1;" id="step1">
+				<img class="taskIcon tnumbers"  src="images/number-1.png" />
+				<div class="taskText">
+					Meta
+				</div>
+			</div>
+			<div class="pickTaskContainer" id="step2">
+				<img class="taskIcon tnumbers"  src="images/number-2.png" />
+				<div class="taskText">
+					Navigation
+				</div>
+			</div>
+			<div class="pickTaskContainer" id="step3">
+				<img class="taskIcon tnumbers" src="images/number-3.png" />
+				<div class="taskText">
+					Home
+				</div>
+			</div>
+			<div class="pickTaskContainer" id="step4">
+				<img class="taskIcon tnumbers" src="images/number-4.png" />
+				<div class="taskText">
+					Content
+				</div>
+			</div>
+		</div>
+		<img id="dots" src="images/dots.png" />
+		<a id="feedbackLink" href="suggestion.php"><div id="feedback">Errors &<br>Feedback</div></a>
+		<button class="standard-button" id="autofill">Auto Fill</button>
+	<?php } ?>
+	</div>
+
+	<div class="left-wrapper">
+	
+	<?php
+		
+		if(!isset($_GET['domain']) && !isset($_GET['wireframe']) && !isset($_GET['language'])){
+
+			echo '<form class="panel taskform" autocomplete="off"  method="get" action="contentbuilder.php" >
+				
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Domain Information <span class="sub-panel-title">- Set Domain & Wireframe </span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="domain_url">Domain URL:</label>
+						<input type="text" id="domain" name="domain" class="input-standard contentForm validation" placeholder="example.com" required />
+
+						<label for="wireframe_number">Wireframe Number:</label>
+						<input type="text" id="wireframe" name="wireframe" class="input-standard contentForm validation" placeholder="Wireframe Number" required />
+						<label for="language">Language:</label>
+						<select name="language" style="height: 33px;" class="input-standard contentForm validation" id="language">
+							<option value="english">English</option>
+							<option value="spanish">Spanish</option>
+							<option value="french">French</option>
+						</select>	
+						<input style="margin: 20px;" class="submitButton btn-success" type="submit" />
+						</form>';
+
+		}	
+		
+				
+	?>
+
+	<?php function wireframe1($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];
+		$st = $wf_array['site_tagline'];	
+		$cta = $wf_array['call_to_actions'];
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$ch = $wf_array['content_headings'];
+		$cb = $wf_array['content_boxes'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+						
+						<label for="title_tagline">Title Tagline:</label>
+						<input type="text" id="title_tagline" name="tagline" class="input-standard contentForm validation" data-min="<?=$st['min']?>" data-max="<?=$st['max']?>" placeholder="Title Tagline" required />
+						
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+						
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div> 
+				</div>
+			
+			</form>
+	<?php } ?>
+	
+	<?php function wireframe2($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$cta = $wf_array['call_to_actions'];
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$ch = $wf_array['content_headings'];
+		$cb = $wf_array['content_boxes'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+						
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+						
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+						
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<label for="content_heading_4">Content Heading 4:</label>
+						<input type="text" id="content_heading_4" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 4" required />
+						<p>
+							<label class="tLabel" for="content_box_4">Content Box 4:</label>
+							<textarea rows="8" cols="50" id="content_box_4" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 4" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div> 
+				</div>
+			
+			</form>
+	<?php } ?>
+	
+	<?php function wireframe3($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];
+		$st = $wf_array['site_tagline'];	
+		$cta = $wf_array['call_to_actions'];
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$ch = $wf_array['content_headings'];
+		$cb = $wf_array['content_boxes'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+
+				<div id="contentp1" >
+				
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+						
+						<label for="title_tagline">Title Tagline:</label>
+						<input type="text" id="title_tagline" name="tagline" class="input-standard contentForm validation" data-min="<?=$st['min']?>" data-max="<?=$st['max']?>" placeholder="Title Tagline" required />
+						
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+						
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+						
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div> 
+				</div>
+			
+			</form>
+	<?php } ?>
+	
+	<?php function wireframe4($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$cta = $wf_array['call_to_actions'];
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$ch = $wf_array['content_headings'];
+		$cb = $wf_array['content_boxes'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+
+				<div id="contentp1" >
+				
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+						
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+						
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+						
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<label for="content_heading_4">Content Heading 4:</label>
+						<input type="text" id="content_heading_4" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 4" required />
+						<p>
+							<label class="tLabel" for="content_box_4">Content Box 4:</label>
+							<textarea rows="8" cols="50" id="content_box_4" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 4" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div> 
+				</div>
+			
+			</form>
+	<?php } ?>
+	
+	<?php function wireframe5($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$cta = $wf_array['call_to_actions'];
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$ch = $wf_array['content_headings'];
+		$cb = $wf_array['content_boxes'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+
+				<div id="contentp1" >
+				
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+						
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+						
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+						
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div> 
+				</div>
+			
+			</form>
+	<?php } ?>
+	
+	<?php function wireframe6($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$cta = $wf_array['call_to_actions'];
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$ch = $wf_array['content_headings'];
+		$cb = $wf_array['content_boxes'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+
+				<div id="contentp1" >
+				
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+						
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+						
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+						
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div> 
+				</div>
+			
+			</form>
+	<?php } ?>
+
+	<?php function wireframe7($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$st = $wf_array['site_tagline'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$ch = $wf_array['content_headings'];
+		$cb = $wf_array['content_boxes'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+
+				<div id="contentp1" >
+				
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="title_tagline">Title Tagline:</label>
+						<input type="text" id="title_tagline" name="tagline" class="input-standard contentForm validation" data-min="<?=$st['min']?>" data-max="<?=$st['max']?>" placeholder="Title Tagline" required />
+						
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+						
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="content_heading_2">Content Heading 2:</label>
+							<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+							<label for="content_heading_3">Content Heading 3:</label>
+							<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div> 
+				</div>
+			
+			</form>
+	<?php } ?>
+
+	<?php function wireframe8($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$cta = $wf_array['call_to_actions'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$ch = $wf_array['content_headings'];
+		$cb = $wf_array['content_boxes'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+
+				<div id="contentp1" >
+				
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+			
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+					
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+						
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="content_heading_2">Content Heading 2:</label>
+							<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+							<label for="content_heading_3">Content Heading 3:</label>
+							<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+							<label for="content_heading_4">Content Heading 4:</label>
+							<input type="text" id="content_heading_4" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 4" required />
+						<p>
+							<label class="tLabel" for="content_box_4">Content Box 4:</label>
+							<textarea rows="8" cols="50" id="content_box_4" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 4" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div> 
+				</div>
+			
+			</form>
+	<?php } ?>
+
+	<?php function wireframe9($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$cta = $wf_array['call_to_actions'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$ch = $wf_array['content_headings'];
+		$cb = $wf_array['content_boxes'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+					
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+						
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="content_heading_2">Content Heading 2:</label>
+							<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+							<label for="content_heading_3">Content Heading 3:</label>
+							<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+
+				</div>
+			
+			</form>
+	<?php } ?>
+
+	<?php function wireframe10($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$cta = $wf_array['call_to_actions'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$ch = $wf_array['content_headings'];
+		$cb = $wf_array['content_boxes'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+					
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+						
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="content_heading_2">Content Heading 2:</label>
+							<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+							<label for="content_heading_3">Content Heading 3:</label>
+							<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+
+				</div>
+			
+			</form>
+	<?php } ?>
+	
+	<?php function wireframe11($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$cta = $wf_array['call_to_actions'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$ch = $wf_array['content_headings'];
+		$cb = $wf_array['content_boxes'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+					
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+						
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="content_heading_2">Content Heading 2:</label>
+							<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+							<label for="content_heading_3">Content Heading 3:</label>
+							<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+							<label for="content_heading_4">Content Heading 4:</label>
+							<input type="text" id="content_heading_4" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 4" required />
+						<p>
+							<label class="tLabel" for="content_box_4">Content Box 4:</label>
+							<textarea rows="8" cols="50" id="content_box_4" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 4" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+							<label for="content_heading_5">Content Heading 5:</label>
+							<input type="text" id="content_heading_5" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 5" required />
+						<p>
+							<label class="tLabel" for="content_box_5">Content Box 5:</label>
+							<textarea rows="8" cols="50" id="content_box_5" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 5" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+
+				</div>
+			
+			</form>
+	<?php } ?>
+
+	<?php function wireframe12($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$cta = $wf_array['call_to_actions'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+					
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<p>
+							<label class="tLabel" for="content_box_4">Content Box 4:</label>
+							<textarea rows="8" cols="50" id="content_box_4" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 4" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+
+				</div>
+			
+			</form>
+	<?php } ?>
+
+	<?php function wireframe13($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_4">Content Heading 4:</label>
+						<input type="text" id="content_heading_4" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 4" required />
+
+						<p>
+							<label class="tLabel" for="content_box_4">Content Box 4:</label>
+							<textarea rows="8" cols="50" id="content_box_4" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 4" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+
+				</div>
+			
+			</form>
+	<?php } ?>
+
+	<?php function wireframe14($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_4">Content Heading 4:</label>
+						<input type="text" id="content_heading_4" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 4" required />
+
+						<p>
+							<label class="tLabel" for="content_box_4">Content Box 4:</label>
+							<textarea rows="8" cols="50" id="content_box_4" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 4" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+
+				</div>
+			
+			</form>
+	<?php } ?>
+
+	<?php function wireframe15($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$cta = $wf_array['call_to_actions'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+					
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe16($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_4">Content Heading 4:</label>
+						<input type="text" id="content_heading_4" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 4" required />
+
+						<p>
+							<label class="tLabel" for="content_box_4">Content Box 4:</label>
+							<textarea rows="8" cols="50" id="content_box_4" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 4" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe17($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe18($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$ctat = $wf_array['call_to_action_titles'];
+		$ctac = $wf_array['call_to_action_content'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Call to Action Titles:</label>
+						<input type="text" id="slider_1" name="content[page1][call_to_action_titles]" class="input-standard contentForm validation" data-min="<?=$ctat['min']?>" data-max="<?=$ctat['max']?>" placeholder="Call to Action Title Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][call_to_action_titles]" class="input-standard contentForm validation" data-min="<?=$ctat['min']?>" data-max="<?=$ctat['max']?>" placeholder="Call to Action Title Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][call_to_action_titles]" class="input-standard contentForm validation" data-min="<?=$ctat['min']?>" data-max="<?=$ctat['max']?>" placeholder="Call to Action Title Page 3" required />
+						
+						<label for="slider_1">Call to Action Content:</label>
+						<input type="text" id="slider_1" name="content[page1][call_to_action_content]" class="input-standard contentForm validation" data-min="<?=$ctac['min']?>" data-max="<?=$ctac['max']?>" placeholder="Call to Action Content Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][call_to_action_content]" class="input-standard contentForm validation" data-min="<?=$ctac['min']?>" data-max="<?=$ctac['max']?>" placeholder="Call to Action Content Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][call_to_action_content]" class="input-standard contentForm validation" data-min="<?=$ctac['min']?>" data-max="<?=$ctac['max']?>" placeholder="Call to Action Content Page 3" required />
+
+					
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe19($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe20($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$cta = $wf_array['call_to_actions'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe21($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$cta = $wf_array['call_to_actions'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe22($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$cta = $wf_array['call_to_actions'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe23($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe24($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$cta = $wf_array['call_to_actions'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$bch = $wf_array['bottom_content_heading'];
+		$bc = $wf_array['bottom_content'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="bottom_content_heading">Bottom Content Heading:</label>
+						<input type="text" id="bottom_content_heading" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$bch['min']?>" data-max="<?=$bch['max']?>" placeholder="Bottom Content Heading" required />
+
+						<p>
+							<label class="tLabel" for="bottom_content">Bottom Content</label>
+							<textarea rows="8" cols="50" id="bottom_content" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$bc['min']?>" data-max="<?=$bc['max']?>" placeholder="Bottom Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe25($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe26($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_4">Content Heading 4:</label>
+						<input type="text" id="content_heading_4" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 4" required />
+
+						<p>
+							<label class="tLabel" for="content_box_4">Content Box 4:</label>
+							<textarea rows="8" cols="50" id="content_box_4" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 4" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe27($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$hpt = $wf_array['homepage_title'];
+		$cta = $wf_array['call_to_actions'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe28($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$hpt = $wf_array['homepage_title'];
+		$cta = $wf_array['call_to_actions'];
+		$bc = $wf_array['bottom_content'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+
+						<label for="slider_4"></label>
+						<input type="text" id="slider_4" name="content[page4][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 4" required />
+
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<p>
+							<label class="tLabel" for="bottom_content">Bottom Content</label>
+							<textarea rows="8" cols="50" id="bottom_content" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$bc['min']?>" data-max="<?=$bc['max']?>" placeholder="Bottom Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe29($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$hpt = $wf_array['homepage_title'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+	<?php function wireframe30($wf_array, $domain_name, $username, $wireframe, $language){ 
+	
+		$tt = $wf_array['title_tag'];
+		$md = $wf_array['meta_description'];	
+		$pt = $wf_array['page_titles'];
+		$pc = $wf_array['page_content'];
+		$pn = $wf_array['navigation_page_names'];
+		$cb = $wf_array['content_boxes'];
+		$ch = $wf_array['content_headings'];
+		$hpt = $wf_array['homepage_title'];
+		$cta = $wf_array['call_to_actions'];
+		
+	?>
+		
+			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+				<div id="contentp1" >
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 1 <span class="sub-panel-title">- Meta & Title Information - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="author_nickname">Author Nickname:</label>
+						<input type="text" id="author_nickname" name="author_nickname" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="Author Nickname" required />
+						
+						<label for="title_tag">Title Tag:</label>
+						<input type="text" id="title_tag" name="title_tag" class="input-standard contentForm validation" data-min="<?=$tt['min']?>" data-max="<?=$tt['max']?>" placeholder="Title Tag" required />
+
+						<label for="meta_description">Meta Description:</label>
+						<input type="text" id="meta_description" name="meta_description" class="input-standard contentForm validation" data-min="<?=$md['min']?>" data-max="<?=$md['max']?>" placeholder="Meta Description" required />
+						
+						<div class="submitCon noBackground">
+							<input id="next1" class="submitButton" value="Next" readonly />
+						</div> 	
+						
+				</div>
+				
+				<div id="contentp2" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 2 <span class="sub-panel-title">- Navigation - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page">About Page:</label>
+						<input type="text" id="about_page" name="content[about][nav]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page" required />
+						
+						<label for="Page_1">Page 1:</label>
+						<input type="text" id="Page_1" name="content[page1][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 1" required />
+						
+						<label for="Page_2">Page 2:</label>
+						<input type="text" id="Page_2" name="content[page2][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 2" required />
+						
+						<label for="Page_3">Page 3:</label>
+						<input type="text" id="Page_3" name="content[page3][nav]" class="input-standard contentForm validation" data-min="<?=$pn['min']?>" data-max="<?=$pn['max']?>" placeholder="Page 3" required />
+						
+						<div class="submitCon noBackground">
+							<input id="prev2" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next2" class="submitButton" value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp3" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 3 <span class="sub-panel-title">- Home Page - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
+
+						<label for="home_page_title">Home Page title:</label>
+						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						
+						<label for="content_heading_1">Content Heading 1:</label>
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+
+						<p>
+							<label class="tLabel" for="top_content_box">Content Box 1:</label>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_2">Content Heading 2:</label>
+						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
+
+						<p>
+							<label class="tLabel" for="content_box_2">Content Box 2:</label>
+							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+
+						<label for="content_heading_3">Content Heading 3:</label>
+						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
+
+						<p>
+							<label class="tLabel" for="content_box_3">Content Box 3:</label>
+							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<div class="submitCon noBackground">
+							<input id="prev3" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input id="next3" class="submitButton"  value="Next" readonly />
+						</div> 
+				</div>
+				
+				<div id="contentp4" style="display: none;">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Content Part 4 <span class="sub-panel-title">- Content Pages - <?=$domain_name?> <span class="charcount"></span></span>
+							</div>
+						</div>
+					</div>
+					
+						<label for="about_page_title">About Page Title:</label>
+						<input type="text" id="about_page_title" name="content[about][title]" class="input-standard contentForm validation" data-min="3" data-max="100" placeholder="About Page Title" required />
+						<p>
+							<label class="tLabel" for="about_page_content">About Page Content:</label>
+							<textarea rows="8" cols="50" id="about_page_content" name="content[about][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="About Page Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_1_title">Page 1 Title:</label>
+							<input type="text" id="page_1_title" name="content[page1][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 1 Title" required />
+						<p>
+							<label class="tLabel" for="page_1_content">Page 1 Content:</label>
+							<textarea rows="8" cols="50" id="page_1_content" name="content[page1][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 1 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+							<label for="page_2_title">Page 2 Title:</label>
+							<input type="text" id="page_2_title" name="content[page2][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 2 Title" required />
+						<p>
+							<label class="tLabel" for="page_2_content">Page 2 Content:</label>
+							<textarea rows="8" cols="50" id="page_2_content" name="content[page2][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 2 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						
+						<label for="page_3_title">Page 3 Title:</label>
+						<input type="text" id="page_3_title" name="content[page3][title]" class="input-standard contentForm validation" data-min="<?=$pt['min']?>" data-max="<?=$pt['max']?>" placeholder="Page 3 Title" required />
+						<p>
+							<label class="tLabel" for="page_3_content">Page 3 Content:</label>
+							<textarea rows="8" cols="50" id="page_3_content" name="content[page3][content]" class="input-standard contentForm ctextarea validation" data-min="<?=$pc['min']?>" data-max="<?=$pc['max']?>" placeholder="Page 3 Content" required ></textarea>
+							<span class="edit_link" > Use Visual Editor</span>
+						</p>
+						<input type="hidden" name="username" value="<?=$username?>" />
+						<input type="hidden" name="site_url" value="<?=$domain_name?>" />
+						<input type="hidden" name="wireframe" value="<?=$wireframe?>" />
+						<input type="hidden" name="language" value="<?=$language?>" />
+						<div class="submitCon noBackground">
+							<input id="prev4" style="margin-left: 20px;float: left;" class="submitButton" value="Previous" readonly />
+							<input class="submitButton btn-success btn-valid" type="Submit" name="Submit" />
+						</div>
+				</div>
+			</form>
+	<?php } ?>
+
+
+	<?php
+		
+	if(isset($_GET['wireframe'])){
+
+		switch($wireframe) {
+						
+			case 1:
+				wireframe1($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 2:
+				wireframe2($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 3:
+				wireframe3($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 4:
+				wireframe4($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 5:
+				wireframe5($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 6:
+				wireframe6($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 7:
+				wireframe7($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 8:
+				wireframe8($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 9:
+				wireframe9($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 10:
+				wireframe10($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 11:
+				wireframe11($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 12:
+				wireframe12($wf_array, $domain_name, $username, $wireframe, $language);
+				break;	
+			case 13:
+				wireframe13($wf_array, $domain_name, $username, $wireframe, $language);
+				break;	
+			case 14:
+				wireframe14($wf_array, $domain_name, $username, $wireframe, $language);
+				break;	
+			case 15:
+				wireframe15($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 16:
+				wireframe16($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 17:
+				wireframe17($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 18:
+				wireframe18($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 19:
+				wireframe19($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 20:
+				wireframe20($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 21:
+				wireframe21($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 22:
+				wireframe22($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 23:
+				wireframe23($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 24:
+				wireframe24($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 25:
+				wireframe25($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 26:
+				wireframe26($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 27:
+				wireframe27($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 28:
+				wireframe28($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 29:
+				wireframe29($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+			case 30:
+				wireframe30($wf_array, $domain_name, $username, $wireframe, $language);
+				break;
+
+			}}
+					
+			?>
+	
+	</div>
+
+
+
+<div id="edit_wrap" style="display: none;"><span class="close">Close</span><div id="mce_15" class="mce-tinymce mce-container mce-panel" hidefocus="1" tabindex="-1" style="visibility: hidden; border-width: 1px;"><div id="mce_15-body" class="mce-container-body mce-stack-layout"><div id="mce_16" class="mce-container mce-menubar mce-toolbar mce-first mce-stack-layout-item" role="menubar" style="border-width: 0px 0px 1px;"><div id="mce_16-body" class="mce-container-body mce-flow-layout"><div id="mce_17" class="mce-widget mce-btn mce-menubtn mce-first mce-flow-layout-item" tabindex="-1" role="menuitem" aria-haspopup="true"><button id="mce_17-open" role="presentation" type="button" tabindex="-1"><span>File</span> <i class="mce-caret"></i></button></div><div id="mce_18" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item" tabindex="-1" role="menuitem" aria-haspopup="true"><button id="mce_18-open" role="presentation" type="button" tabindex="-1"><span>Edit</span> <i class="mce-caret"></i></button></div><div id="mce_19" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item" tabindex="-1" role="menuitem" aria-haspopup="true"><button id="mce_19-open" role="presentation" type="button" tabindex="-1"><span>View</span> <i class="mce-caret"></i></button></div><div id="mce_20" class="mce-widget mce-btn mce-menubtn mce-last mce-flow-layout-item" tabindex="-1" role="menuitem" aria-haspopup="true"><button id="mce_20-open" role="presentation" type="button" tabindex="-1"><span>Format</span> <i class="mce-caret"></i></button></div></div></div><div id="mce_21" class="mce-toolbar-grp mce-container mce-panel mce-stack-layout-item" hidefocus="1" tabindex="-1"><div id="mce_21-body" class="mce-container-body mce-stack-layout"><div id="mce_22" class="mce-container mce-toolbar mce-first mce-last mce-stack-layout-item" role="toolbar"><div id="mce_22-body" class="mce-container-body mce-flow-layout"><div id="mce_23" class="mce-container mce-first mce-flow-layout-item mce-btn-group" role="toolbar"><div id="mce_23-body"><div id="mce_2" class="mce-widget mce-btn mce-first mce-disabled" tabindex="-1" role="button" aria-labeledby="mce_2" aria-label="Undo" aria-disabled="true"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-undo"></i></button></div><div id="mce_3" class="mce-widget mce-btn mce-last mce-disabled" tabindex="-1" role="button" aria-labeledby="mce_3" aria-label="Redo" aria-disabled="true"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-redo"></i></button></div></div></div><div id="mce_24" class="mce-container mce-flow-layout-item mce-btn-group" role="toolbar"><div id="mce_24-body"><div id="mce_4" class="mce-widget mce-btn mce-menubtn mce-first mce-last" tabindex="-1" role="button" aria-haspopup="true"><button id="mce_4-open" role="presentation" type="button" tabindex="-1"><span>Formats</span> <i class="mce-caret"></i></button></div></div></div><div id="mce_25" class="mce-container mce-flow-layout-item mce-btn-group" role="toolbar"><div id="mce_25-body"><div id="mce_5" class="mce-widget mce-btn mce-first" tabindex="-1" role="button" aria-labeledby="mce_5" aria-label="Bold"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-bold"></i></button></div><div id="mce_6" class="mce-widget mce-btn mce-last" tabindex="-1" role="button" aria-labeledby="mce_6" aria-label="Italic"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-italic"></i></button></div></div></div><div id="mce_26" class="mce-container mce-flow-layout-item mce-btn-group" role="toolbar"><div id="mce_26-body"><div id="mce_7" class="mce-widget mce-btn mce-first" tabindex="-1" role="button" aria-labeledby="mce_7" aria-label="Align left"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-alignleft"></i></button></div><div id="mce_8" class="mce-widget mce-btn" tabindex="-1" role="button" aria-labeledby="mce_8" aria-label="Align center"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-aligncenter"></i></button></div><div id="mce_9" class="mce-widget mce-btn" tabindex="-1" role="button" aria-labeledby="mce_9" aria-label="Align right"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-alignright"></i></button></div><div id="mce_10" class="mce-widget mce-btn mce-last" tabindex="-1" role="button" aria-labeledby="mce_10" aria-label="Justify"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-alignjustify"></i></button></div></div></div><div id="mce_27" class="mce-container mce-flow-layout-item mce-btn-group" role="toolbar"><div id="mce_27-body"><div id="mce_11" class="mce-widget mce-btn mce-first" tabindex="-1" role="button" aria-labeledby="mce_11" aria-label="Bullet list"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-bullist"></i></button></div><div id="mce_12" class="mce-widget mce-btn" tabindex="-1" role="button" aria-labeledby="mce_12" aria-label="Numbered list"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-numlist"></i></button></div><div id="mce_13" class="mce-widget mce-btn" tabindex="-1" role="button" aria-labeledby="mce_13" aria-label="Decrease indent"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-outdent"></i></button></div><div id="mce_14" class="mce-widget mce-btn mce-last" tabindex="-1" role="button" aria-labeledby="mce_14" aria-label="Increase indent"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-indent"></i></button></div></div></div><div id="mce_28" class="mce-container mce-last mce-flow-layout-item mce-btn-group" role="toolbar"><div id="mce_28-body"></div></div></div></div></div></div><div id="mce_29" class="mce-edit-area mce-container mce-panel mce-stack-layout-item" hidefocus="1" tabindex="-1" style="border-width: 1px 0px 0px;"><iframe id="mce_0_ifr" src='javascript:""' frameborder="0" allowtransparency="true" title="Rich Text Area. Press ALT-F9 for menu. Press ALT-F10 for toolbar. Press ALT-0 for help" style="width: 100%; height: 529px; display: block;"></iframe></div><div id="mce_30" class="mce-statusbar mce-container mce-panel mce-last mce-stack-layout-item" hidefocus="1" tabindex="-1" style="border-width: 1px 0px 0px;"><div id="mce_30-body" class="mce-container-body mce-flow-layout"><div id="mce_31" class="mce-path mce-first mce-flow-layout-item"><div role="button" class="mce-path-item mce-last" data-index="0" tabindex="-1" id="mce_31-0">p</div></div><div id="mce_32" class="mce-last mce-flow-layout-item mce-resizehandle"><i class="mce-ico mce-i-resize"></i></div></div></div></div></div><textarea class="textarea" id="mce_0" style="display: none;" aria-hidden="true"></textarea></div>
+
+	<div class="right-wrapper">
+
+		<div class="right-margin">
+			<div class="panel">
+				<div class="panel-default">
+					<div class="panel-heading">
+						<div class="panel-title">
+						Note Pad <span class="sub-panel-title"> - Quick Notes</span>
+						</div>
+					</div>
+				</div>
+					<textarea class="input-standard contentNotes" name="contentNotes" placeholder="Enter any notes here..."></textarea>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="overlay"></div>
+</body>
+</html>
+

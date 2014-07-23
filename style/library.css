@@ -1,0 +1,161 @@
+/*
+	This is the CSS library for Boostability Note
+
+*/
+
+
+.left-wrapper{
+	width: 50%;
+	float: left;
+	min-width: 560px;
+}
+
+.left-wrapper-dash{
+	width: 50%;
+	float: left;
+	min-width: 560px;
+}
+
+.right-wrapper{
+	width: 50%;
+	float: left;
+	min-width: 560px;
+}
+
+.full-width{
+	width: calc(100% + 40px);
+	display: inline-block;
+	min-width: 560px;
+}
+
+
+.panel {
+	margin-bottom: 20px;
+	background-color: #fff;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+	box-shadow: 0 1px 1px rgba(0,0,0,.05);
+	width: 100%;
+}
+
+/* Apply to panel header container */
+.panel-default {
+	color: #333;
+	background-color: #f5f5f5;
+	border-color: #ddd;
+}
+
+/* Apply to panel header title */
+.panel-title {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+/* Apply this to sub headings in panel */
+.sub-panel-title{
+	font-weight: 300;
+}
+
+.panel-heading {
+	padding: 10px 15px;
+	border-bottom: 1px solid #ddd;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+}
+
+/* Apply in new row for panel conent */
+.row {
+	margin: 10px 15px;
+}
+
+
+
+/* apply to every standard button */
+.standard-button {
+	color: #fff;
+	background-color: #428bca;
+	border-color: #357ebd;
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+}
+
+.standard-button:hover {
+	color: #fff;
+	background-color: #3276b1;
+	border-color: #285e8e;
+}
+
+
+
+.btn-success {
+	color: #fff;
+	background-color: #5cb85c;
+	border-color: #4cae4c;
+}
+
+.btn-success:hover {
+	color: #fff;
+	background-color: #47a447;
+	border-color: #398439;
+}
+
+.standard-wrapper{
+	margin: 0 auto;
+	width: 95%;
+	text-align: center;
+}
+
+.right-margin{
+	margin-left: 40px;
+	float: left;
+	width: 100%;
+}
+
+/* apply to every standard input box */
+.input-standard {
+    height: 30px;
+    padding: 5px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+	font-family: tauri;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075) ;
+    -webkit-transition: border-color ease-in-out .25s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .25s,box-shadow ease-in-out .15s;
+
+}
+
+.input-standard:focus {
+	border-color: #66afe9;
+	outline: 10;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+	
+
+}
+
+
+
