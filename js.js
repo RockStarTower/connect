@@ -705,6 +705,17 @@ $(document).ready(function() {
 
 	});
 
+	$("#forgot1").click(function(){
+console.log("whatsup");
+		$("#RegisterBox1").css('display', 'none');
+		$("#RegisterBox2").css('display', 'block');
+	});
 
+	$("#forgot2").click(function(){
+
+		$("#RegisterBox2").css('display', 'none');
+		$("#RegisterBox1").css('display', 'block');
+	});
 });
+
 
