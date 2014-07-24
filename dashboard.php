@@ -10,10 +10,6 @@ $num = mysqli_num_rows($number);
 ?>
 
 
-
-
-
-
 <div class="full-width-wrapper">
 
 	<?php if ($user_role == 'admin') { ?>

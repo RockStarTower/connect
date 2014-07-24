@@ -3081,6 +3081,15 @@ include 'header.php';
 						<label for="slider_3"></label>
 						<input type="text" id="slider_3" name="content[page3][call_to_action_content]" class="input-standard contentForm validation" data-min="<?=$ctac['min']?>" data-max="<?=$ctac['max']?>" placeholder="Call to Action Content Page 3" required />
 
+						<label for="intro_message_button_label">Intro Message Label:</label>
+						<input type="text" id="intro_message_button_label" name="content[homepage][intro_message_label]" class="input-standard contentForm validation" data-min="<?=$ctac['min']?>" data-max="<?=$ctac['max']?>" placeholder="Intro Message Content" required />
+
+						<label for="intro_message">Intro Message Content:</label>
+						<input type="text" id="intro_message" name="content[homepage][intro_message_content]" class="input-standard contentForm validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Intro Message Content" required />
+
+						<label for="blog_area_title">Blog Area Title:</label>
+						<input type="text" id="blog_area_title" name="content[homepage][blog_area_title]" class="input-standard contentForm validation" data-min="<?=$ctac['min']?>" data-max="<?=$ctac['max']?>" placeholder="Blog Area Title" required />
+
 					
 						<label for="home_page_title">Home Page title:</label>
 						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
