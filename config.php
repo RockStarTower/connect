@@ -1,6 +1,6 @@
 <?php 
 
-$root_url = 'http://69.195.124.109/~zapoonsc/connect/';
+$root_url = 'http://localhost/connect/';
 
 define('DB_NAME', '');
 define('DB_HOST', 'localhost');

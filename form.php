@@ -1,6 +1,3 @@
-<?php
-include 'loginCheck.php';
-?>
 <div  id="newUser" style="display: none; margin-top: 0px;" class="full-width-wrapper">
 	<div class="panel panel-default">
 	  	<div class="panel-heading">
