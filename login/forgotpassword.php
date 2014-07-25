@@ -22,7 +22,7 @@ include '../config.php';
 	if ($email == $emailcheck) {
 		mail ( $email , $subject, $message, $headers) or die ("Sorry looks like something went wrong!");
 	} else {
-		echo ("buzz off");
+		echo ("Invalid email address");
 	}
 
 

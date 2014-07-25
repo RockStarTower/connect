@@ -1,8 +1,13 @@
 <div class="loginRegisterBox" id="RegisterBox1">
+
 <form autocomplete="off" id='login' action='login/login.php' method='post' accept-charset='UTF-8'>
+
 <input type='hidden' name='submitted' id='submitted' value='1'/>
+
 <div class="formLbl">Username: </div> <input id="topInput" class="loginControl" type='text' name='username' id='username' placeholder="Username"  maxlength="50" required/></br>
+
 <div class="formLbl" id="formBotL">Password: </div><input id="botInput" class="loginControl" type='password' name='password' id='password' placeholder="Password" maxlength="50" required/></br>
+	
 	<div class="well wellLogin well-sm text-right">
 
 		<button  id="loginSub" type='submit' name='Submit' data-bind="click: login, returnKey: login">
@@ -11,25 +16,41 @@
 			Log In
 		</button>
 		<span class="btn btn-link" style="float: right; color: #428bca;font-weight: 400;cursor: pointer;border-radius: 0; font-size: 15px;"><b id="forgot1"class="fa fa-key">Forgot Password?</b></span>
+
 	</div>
+
 </form>
+
 </div>
 
 <!-- SECOND FORM -->
 
 
 <div class="loginRegisterBox" id="RegisterBox2">
-<form autocomplete="off" id='login' action='login/forgotpassword.php' method='post' accept-charset='UTF-8'>
-<input type='hidden' name='submitted' id='submitted' value='1'/>
-<div class="formLbl">Email: </div> <input id="topInput" class="loginControl" type='text' name='email' id='email' placeholder="Example@boostability.com"  maxlength="50" required/></br>
-	<div class="well wellLogin well-sm text-right">
 
-		<button  id="loginSub" type='submit' name='Submit' data-bind="click: login, returnKey: login">
-			<i class="fa fa-envelope-square">
-			</i>
-			Submit
-		</button>
-		<span class="btn btn-link" style="float: right; color: #428bca;font-weight: 400;cursor: pointer;border-radius: 0; font-size: 15px;"><b id="forgot2" class="fa fa-key">Cancel</b></span>
-	</div>
-</form>
+	<form autocomplete="off" id='login2' accept-charset='UTF-8'>
+
+		<input type='hidden' name='submitted' id='submitted' value='1'/>
+
+		<div class="formLbl">
+				Email: 		
+		</div> 
+
+		<input id="topInput" class="loginControl" type='text' name='email' id='email' placeholder="Example@boostability.com"  maxlength="50" required/></br>
+
+		<div id="emailmessage">
+
+		</div>
+
+		<div class="well wellLogin2 well-sm text-right">
+
+				<button  id="loginSub2" name='Submit' data-bind="click: login, returnKey: login">
+					<i class="fa fa-envelope-square">
+					</i>
+					Submit
+				</button>
+			<span class="btn btn-link" style="float: right; color: #428bca;font-weight: 400;cursor: pointer;border-radius: 0; font-size: 15px;"><b id="forgot2" class="fa fa-times">Cancel</b></span>
+
+		</div>
+	</form>
 </div>

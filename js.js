@@ -706,7 +706,7 @@ $(document).ready(function() {
 	});
 
 	$("#forgot1").click(function(){
-console.log("whatsup");
+
 		$("#RegisterBox1").css('display', 'none');
 		$("#RegisterBox2").css('display', 'block');
 	});
@@ -715,6 +715,19 @@ console.log("whatsup");
 
 		$("#RegisterBox2").css('display', 'none');
 		$("#RegisterBox1").css('display', 'block');
+	});
+
+	$("#loginSub2").click(function(){
+
+		$.ajax({
+			type: 'POST',
+			url: 'login/forgotpassword.php',
+			data: $("#login2").serialize(),
+			success: function(e){
+				$("#emailmessage").html(e);
+				console.log(e);
+			}
+		});
 	});
 });
 
