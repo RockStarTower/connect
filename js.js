@@ -652,16 +652,37 @@ $(document).ready(function() {
 
 	$("#accAlert").hide();
 
+	/*$('.tCell').each(function() {
+		var firstVal;
+		if ( $(this).attr('contenteditable') !== undefined && $(this).attr('contenteditable') !== false ) {
+			firstVal = $(this).text();
+			$(this).attr('data-first-val', firstVal);
+		} else {
+			firstVal = $(this).children('select').val();
+			$(this).children('select').attr('data-first-val', firstVal);
+		}
+	});*/
+
 	$(".userTable").focusout(function(){
+
+		/*var selectVal = $(this).children('select').val();
+		var selectData = $(this).children('select').attr('data-first-val');
+		var tdText = $(this).text();
+		var tdData = $(this).attr('data-first-val');
+
+		if ( ( selectVal == selectData && tdData != undefined ) || ( tdText == tdData && selectData != undefined ) ) {
+			console.log(selectVal + ' ' + selectData + ', ' + tdText + ' ' + tdData);
+			return false;
+		}*/
 
 		var ID = $(this).attr("id");
 		var firstname = $("#firstname" + ID).text();
 		var lastname = $("#lastname" + ID).text();	
-		var email = $("#email" + ID).text();
-		var password = $("#password" + ID).text();	
+		var email = $("#email" + ID).text();	
 		var role = $("#role" + ID).val();
+		var status = $("#status" + ID).val();
 
-		var dataString = 'user_id='+ ID +'&first_name='+firstname+'&last_name='+lastname+'&email='+email+'&password='+password+'&role='+role;
+		var dataString = 'user_id='+ ID +'&first_name='+firstname+'&last_name='+lastname+'&email='+email+'&role='+role+'&status='+status;
 
 		if(firstname.length>0&& lastname.length>0 && email.length>0) {
 
@@ -675,8 +696,7 @@ $(document).ready(function() {
 				$("#firstname"+ID).text(firstname);
 				$("#lastname"+ID).text(lastname);
 				$("#email"+ID).text(email);
-				$("#password"+ID).text(password);
-
+				$("#selectedOne"+ID).text(status);
 				
 				$("#accAlert").html("<b>Update:</b> User " + firstname + " has been updated!");
 				$("#accAlert").fadeIn(1000).delay(5000).fadeOut(1000);
@@ -717,8 +737,9 @@ $(document).ready(function() {
 		$("#RegisterBox1").css('display', 'block');
 	});
 
-	$("#loginSub2").click(function(){
+	$("#loginSub2").click(function(e){
 
+		e.preventDefault();
 		$.ajax({
 			type: 'POST',
 			url: 'login/forgotpassword.php',
@@ -727,8 +748,35 @@ $(document).ready(function() {
 				$("#emailmessage").html(e);
 				console.log(e);
 			}
+
 		});
+		return false;
 	});
+
+
+	$("#loginSub").click(function(e){
+
+		e.preventDefault();
+		$.ajax({
+			type: 'POST',
+			url: 'login/login.php',
+			data: $("#login").serialize(),
+			success: function(e){
+
+				if(e == true){
+					window.location.href = "dashboard.php";
+				} else{
+					$("#loginMessage").html(e);
+				}
+				
+			}
+
+
+		});
+		return false;
+	});
+
+
 });
 
 

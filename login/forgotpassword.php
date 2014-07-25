@@ -2,15 +2,13 @@
 
 include '../config.php';
 
-	$email = ($_POST['email']);
 
-	$result = mysqli_query($con, "SELECT password FROM users WHERE email = '$email'");
+	$email = $_POST['email'];
+
+	$result = mysqli_query($con, "SELECT password, email FROM users WHERE email = '$email'");
 	$row = mysqli_fetch_array($result);
-	$password = $row[0];
-
-	$check = mysqli_query($con, "SELECT email FROM users WHERE email = '$email'");
-	$rows = mysqli_fetch_array($check);
-	$emailcheck = $rows[0];
+	$password = $row['password'];
+	$emailcheck = $row['email'];
 
 	$emailcheck = strtolower($emailcheck);
 	$email = strtolower($email);
@@ -20,9 +18,15 @@ include '../config.php';
 	$headers = ("From: connect@boostability.com");
 
 	if ($email == $emailcheck) {
-		mail ( $email , $subject, $message, $headers) or die ("Sorry looks like something went wrong!");
+
+		if(mail($email, $subject, $message, $headers)) { 
+     		echo "<span style='color: green;'>Your password has been sent to your email!</span>"; 
+     	} else{
+     		echo "<span style='color: red;'>Sorry looks like something went wrong!</span>";
+     	}
+
 	} else {
-		echo ("Invalid email address");
+		echo ("<span style='color: red;'>Invalid email address</span>");
 	}
 
 

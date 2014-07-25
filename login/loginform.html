@@ -1,16 +1,16 @@
 <div class="loginRegisterBox" id="RegisterBox1">
 
-<form autocomplete="off" id='login' action='login/login.php' method='post' accept-charset='UTF-8'>
+<form autocomplete="off" id='login' accept-charset='UTF-8'>
 
 <input type='hidden' name='submitted' id='submitted' value='1'/>
 
 <div class="formLbl">Username: </div> <input id="topInput" class="loginControl" type='text' name='username' id='username' placeholder="Username"  maxlength="50" required/></br>
 
 <div class="formLbl" id="formBotL">Password: </div><input id="botInput" class="loginControl" type='password' name='password' id='password' placeholder="Password" maxlength="50" required/></br>
-	
-	<div class="well wellLogin well-sm text-right">
 
-		<button  id="loginSub" type='submit' name='Submit' data-bind="click: login, returnKey: login">
+	<div class="well wellLogin well-sm text-right">
+		<span style="float: left; padding-left: 20px;" id="loginMessage"></span>
+		<button  id="loginSub" name='Submit'>
 			<i class="fa fa-sign-in">
 			</i>
 			Log In
@@ -44,7 +44,7 @@
 
 		<div class="well wellLogin2 well-sm text-right">
 
-				<button  id="loginSub2" name='Submit' data-bind="click: login, returnKey: login">
+				<button  id="loginSub2" name='Submit' >
 					<i class="fa fa-envelope-square">
 					</i>
 					Submit

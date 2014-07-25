@@ -63,25 +63,24 @@ $num = mysqli_num_rows($number);
 				<th class='tTitle'>Lastname</th>
 				<th class='tTitle'>Email</th>
 				<th class='tTitle'>Username</th>
-				<th class='tTitle'>Password</th>
 				<th class='tTitle'>ID</th>
 				<th class='tTitle'>Role</th>
+				<th class='tTitle'>Status</th>
 				</tr>";
 
 				$firstname = $row['firstname'];
 				$lastname = $row['lastname'];
 				$email = $row['email'];
 				$username = $row['username'];
-				$password = $row['password'];
 				$id = $row['id'];
 				$role = $row['role'];
+				$status = $row['status'];
 
 				echo "<tr id=" . $id . " class='userTable'>
 					<td class='tCell' id='firstname" . $id . "'  contenteditable>" . $firstname . "</td>
 					<td class='tCell' id='lastname" . $id . "' contenteditable>" . $lastname . "</td>
 					<td class='tCell' id='email" . $id . "' contenteditable>" . $email . "</td>
 					<td class='tCell' id='username" . $id . "' >" . $username . "</td>
-					<td class='tCell' id='password" . $id . "' contenteditable>" . $password . "</td>
 					<td class='tCell' id='id" . $id . "' >" . $id . "</td>
 					<td class='tCell'>
 						<select id='role" . $id . "' name='role' style='height: 33px;' class='btn btn-primary input-standard contentForm' id='language'>
@@ -93,7 +92,15 @@ $num = mysqli_num_rows($number);
 							<option id='custom" . $id . "'>custom</option>
 							<option id='admin" . $id . "'>admin</option>
 						</select>
-				</div></td>
+						</div></td>
+					<td class='tCell'>
+						<select id='status" . $id . "' name='status' style='height: 33px;' class='btn btn-primary input-standard contentForm' id='language'>
+							<option id='selectedOne". $id . "' selected style='display: none;'>". $status . "</option>
+							<option id='content" . $id . "'>active</option>
+							<option id='blog" . $id . "'>pending</option>
+							<option id='design" . $id . "'>inactive</option>
+						</select>
+						</div></td>
 				</tr>";
 			}
 			echo "</table>";

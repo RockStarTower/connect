@@ -11,6 +11,7 @@ $filename_array = array(
 	'logo.png',
 	'favicon.ico',
 	'slider1.jpg',
+    'slider1.png',
 	'slider2.jpg',
 	'slider3.jpg',
 	'slider4.jpg',
