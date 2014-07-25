@@ -32,6 +32,7 @@ $filename_array = array(
 );
 
 foreach ($filename_array as $file) {
+
     $image_file = @file_get_contents('content/' . $domain . '/' . $file);
     $file_sub4 = substr($file, 0, 4);
     $file_base = substr($file, 0, -4);

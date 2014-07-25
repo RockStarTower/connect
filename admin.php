@@ -3,6 +3,14 @@
 include "header.php";
 
 ?>
+<style type="text/css">
+ .btn{
+ 	margin-top: 0px;
+ }
+ .btn-primary{
+ 	min-width: 120px !important;
+ }
+</style>
 
 <?php
 
@@ -65,6 +73,7 @@ $num = mysqli_num_rows($number);
 				<th class='tTitle'>Username</th>
 				<th class='tTitle'>ID</th>
 				<th class='tTitle'>Role</th>
+				<th class='tTitle'>Manager</th>
 				<th class='tTitle'>Status</th>
 				</tr>";
 
@@ -74,7 +83,15 @@ $num = mysqli_num_rows($number);
 				$username = $row['username'];
 				$id = $row['id'];
 				$role = $row['role'];
+				$manager = $row['manager'];
 				$status = $row['status'];
+
+				if ($manager == "true"){
+					$results = "checked";
+				} else{
+					$results = "";
+				}
+
 
 				echo "<tr id=" . $id . " class='userTable'>
 					<td class='tCell' id='firstname" . $id . "'  contenteditable>" . $firstname . "</td>
@@ -93,6 +110,7 @@ $num = mysqli_num_rows($number);
 							<option id='admin" . $id . "'>admin</option>
 						</select>
 						</div></td>
+					<td class='tCell'><input class='mCheck' id='manager" . $id . "' type='checkbox' $results /></td>
 					<td class='tCell'>
 						<select id='status" . $id . "' name='status' style='height: 33px;' class='btn btn-primary input-standard contentForm' id='language'>
 							<option id='selectedOne". $id . "' selected style='display: none;'>". $status . "</option>
@@ -102,6 +120,7 @@ $num = mysqli_num_rows($number);
 						</select>
 						</div></td>
 				</tr>";
+
 			}
 			echo "</table>";
 	?>

@@ -681,8 +681,9 @@ $(document).ready(function() {
 		var email = $("#email" + ID).text();	
 		var role = $("#role" + ID).val();
 		var status = $("#status" + ID).val();
+		var manager = $("#manager" + ID).is(':checked');
 
-		var dataString = 'user_id='+ ID +'&first_name='+firstname+'&last_name='+lastname+'&email='+email+'&role='+role+'&status='+status;
+		var dataString = 'user_id='+ ID +'&first_name='+firstname+'&last_name='+lastname+'&email='+email+'&role='+role+'&status='+status+'&manager='+manager;
 
 		if(firstname.length>0&& lastname.length>0 && email.length>0) {
 
