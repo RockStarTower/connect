@@ -12,7 +12,6 @@
 <div  class="loginCon">
 <div class="imgCon">
 <img style="margin-left: 50px;" id="loginLogo" src="images/connectM.png">
-<p>words going here</p>
 </div>
 <hr class="indexHR" >
 <?php include 'login/loginform.html';?>
