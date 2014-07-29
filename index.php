@@ -10,10 +10,10 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 <div  class="loginCon">
-<div class="imgCon">
-<img style="margin-left: 50px;" id="loginLogo" src="images/connectM.png">
-</div>
-<hr class="indexHR" >
-<?php include 'login/loginform.html';?>
-</div>
+	<div class="imgCon">
+	<img style="margin-left: 50px;" id="loginLogo" src="images/connectM.png">
+	</div>
+		<hr class="indexHR" >
+		<?php include 'login/loginform.html';?>
+	</div>
 </html>
