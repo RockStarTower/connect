@@ -21,6 +21,7 @@ if ($username_login && $password_login) {
 			$result = $row['id'];
 			$dbrole = $row['role'];
             $status = $row['status'];
+            $manager = $row['manager'];
         }
 
         // Check to see if username and password match
@@ -32,10 +33,11 @@ if ($username_login && $password_login) {
 			$_SESSION['username'] = $username_login;
 			$_SESSION['id'] = $result;
 			$_SESSION['role'] = $dbrole;
+            $_SESSION['manager'] = $manager;
             echo true;
 
 			}else{
-                echo "<span style='color: red;'>Your account needs to be activated by a manager.</span>";
+                echo "<span style='color: red;'>Ask a manager to activate this account.</span>";
             }
         } else {
             echo "<span style='color: red;'>Sorry $username_login. Incorrect password!</span>";

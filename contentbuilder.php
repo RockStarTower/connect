@@ -71,12 +71,12 @@ include 'header.php';
 					</div>
 					
 						<label for="domain_url">Domain URL:</label>
-						<input type="text" id="domain" name="domain" class="input-standard contentForm validation" placeholder="example.com" required />
+						<input type="text" id="domain" name="domain" class="input-standard contentForm" placeholder="example.com" required />
 
 						<label for="wireframe_number">Wireframe Number:</label>
-						<input type="text" id="wireframe" name="wireframe" class="input-standard contentForm validation" placeholder="Wireframe Number" required />
+						<input type="text" id="wireframe" name="wireframe" class="input-standard contentForm" placeholder="Wireframe Number" required />
 						<label for="language">Language:</label>
-						<select name="language" style="height: 33px;" class="input-standard contentForm validation" id="language">
+						<select name="language" style="height: 33px;" class="input-standard contentForm" id="language">
 							<option value="english">English</option>
 							<option value="spanish">Spanish</option>
 							<option value="french">French</option>
@@ -106,6 +106,7 @@ include 'header.php';
 			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
 				
 				<div id="contentp1" >
+
 					<div class="panel-default">
 						<div class="panel-heading">
 							<div class="panel-title">
@@ -5294,6 +5295,22 @@ include 'header.php';
 	<div class="right-wrapper">
 
 		<div class="right-margin">
+
+			<div class="panel">
+				<div class="panel-default">
+					<div class="panel-heading">
+						<div class="panel-title">
+						Progress <span class="sub-panel-title"> - Form Completion Progress</span>
+						</div>
+					</div>
+				</div>
+					<div style="margin-bottom: 1px;"class="progress">
+			  <div id="formProgress" class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuemin="0" aria-valuemax="100" >
+			  </div>
+			</div>
+
+			</div>
+			
 			<div class="panel">
 				<div class="panel-default">
 					<div class="panel-heading">

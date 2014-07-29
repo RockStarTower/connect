@@ -520,7 +520,7 @@ $(document).ready(function() {
 	});
 
 	$('.submitCon').bind("keyup keypress", function(e) {
-		console.log("hi");
+	
 	  var code = e.keyCode || e.which; 
 	  if (code  == 13) {               
 	    e.preventDefault();
@@ -529,7 +529,7 @@ $(document).ready(function() {
 	});
 
 	$('.submit-button').bind("keyup keypress", function(e) {
-		console.log("hi");
+
 	  var code = e.keyCode || e.which; 
 	  if (code  == 13) {               
 	    e.preventDefault();
@@ -539,29 +539,31 @@ $(document).ready(function() {
 
 	$('.btn-valid').hide();
 	var y = 0;
-	window.setInterval(function(){
 
-		var all = document.getElementsByClassName("validation").length;
+	if(window.location.href.indexOf("contentbuilder") > -1) {
+		window.setInterval(function(){
 
-		$(".validation").each(function(){
-			
-			if ($(this).attr('data-valid') == 'valid'){
+			var all = document.getElementsByClassName("validation").length;
 
-				y++;
+			$(".validation").each(function(){
+				
+				if ($(this).attr('data-valid') == 'valid'){
 
-			} else {
-				y = 0;
-				$('.btn-valid').fadeOut(400);
-			}	
+					y++;
 
-			if (y >= all){
+				} else {
+					y = 0;
+					$('.btn-valid').fadeOut(400);
+				}	
 
-						$('.btn-valid').fadeIn(400);
-						
-			}
-		});	
-	}, 1000);
+				if (y >= all){
 
+							$('.btn-valid').fadeIn(400);
+							
+				}
+			});	
+		}, 1000);
+	}
 	//Adding up the three page titles
 
 	$('.validation').keyup(function(){
@@ -572,7 +574,7 @@ $(document).ready(function() {
 	        var count2 = $('#Page_3').val().length;
 	        
 	        var sum = count + count1 + count2;
-	        console.log(sum);
+
 	        if (sum > 1 && sum <= 90){
 	        	$('#Page_1').attr('data-valid', 'valid');
 	        	$('#Page_2').attr('data-valid', 'valid');
@@ -652,28 +654,7 @@ $(document).ready(function() {
 
 	$("#accAlert").hide();
 
-	/*$('.tCell').each(function() {
-		var firstVal;
-		if ( $(this).attr('contenteditable') !== undefined && $(this).attr('contenteditable') !== false ) {
-			firstVal = $(this).text();
-			$(this).attr('data-first-val', firstVal);
-		} else {
-			firstVal = $(this).children('select').val();
-			$(this).children('select').attr('data-first-val', firstVal);
-		}
-	});*/
-
 	$(".userTable").focusout(function(){
-
-		/*var selectVal = $(this).children('select').val();
-		var selectData = $(this).children('select').attr('data-first-val');
-		var tdText = $(this).text();
-		var tdData = $(this).attr('data-first-val');
-
-		if ( ( selectVal == selectData && tdData != undefined ) || ( tdText == tdData && selectData != undefined ) ) {
-			console.log(selectVal + ' ' + selectData + ', ' + tdText + ' ' + tdData);
-			return false;
-		}*/
 
 		var ID = $(this).attr("id");
 		var firstname = $("#firstname" + ID).text();
@@ -700,7 +681,7 @@ $(document).ready(function() {
 				$("#selectedOne"+ID).text(status);
 				
 				$("#accAlert").html("<b>Update:</b> User " + firstname + " has been updated!");
-				$("#accAlert").fadeIn(1000).delay(5000).fadeOut(1000);
+				$("#accAlert").fadeIn(600).delay(1500).fadeOut(600);
 				}
 			});
 		}
@@ -726,6 +707,7 @@ $(document).ready(function() {
 
 	});
 
+
 	$("#forgot1").click(function(){
 
 		$("#RegisterBox1").css('display', 'none');
@@ -735,7 +717,22 @@ $(document).ready(function() {
 	$("#forgot2").click(function(){
 
 		$("#RegisterBox2").css('display', 'none');
+		$("#RegisterBox3").css('display', 'none');
 		$("#RegisterBox1").css('display', 'block');
+	});
+
+	$("#forgot6").click(function(){
+
+		$("#RegisterBox2").css('display', 'none');
+		$("#RegisterBox3").css('display', 'none');
+		$("#RegisterBox1").css('display', 'block');
+	});
+
+	$("#newUserLink").click(function(){
+
+		$("#RegisterBox2").css('display', 'none');
+		$("#RegisterBox1").css('display', 'none');
+		$("#RegisterBox3").css('display', 'block');
 	});
 
 	$("#loginSub2").click(function(e){
@@ -747,7 +744,6 @@ $(document).ready(function() {
 			data: $("#login2").serialize(),
 			success: function(e){
 				$("#emailmessage").html(e);
-				console.log(e);
 			}
 
 		});
@@ -776,6 +772,69 @@ $(document).ready(function() {
 		});
 		return false;
 	});
+
+	$("#loginSub4").click(function(e){
+
+		e.preventDefault();
+		$.ajax({
+			type: 'POST',
+			url: 'login/registration.php',
+			data: $("#registrationForm").serialize(),
+			success: function(e){
+
+					$("#loginMessage2").html(e);
+				
+			}
+
+
+		});
+		return false;
+	});
+
+
+	// These functions control the progress bar on contentbuilder
+	var progress = 0;
+	$(".validation").each(function(){
+
+			++progress;				
+			
+	});
+
+	var totalProgress = 0;
+
+	if(window.location.href.indexOf("contentbuilder") > -1) {
+
+       window.setInterval(function(){
+
+	 		var totalProgress = 0;
+	 		$("[data-valid='valid'").each(function(){
+
+				++totalProgress;
+
+			});
+
+	 		var sum = totalProgress / progress;
+	 		var endProgress = sum * 100;
+	 		$("#formProgress").css("width", endProgress + "%");
+			$("#formProgress").text(Math.round(endProgress / 1) + "%");
+			if (endProgress == 100){
+				$("#formProgress").addClass('progress-bar-success');
+				$("#formProgress").removeClass('active');
+				$("#formProgress").removeClass('progress-bar-striped');
+			} else{
+				$("#formProgress").removeClass('progress-bar-success');
+				$("#formProgress").addClass('active');
+				$("#formProgress").addClass('progress-bar-striped');
+			}
+
+		}, 500);
+
+    }
+
+ 	
+	
+
+	
 
 
 });

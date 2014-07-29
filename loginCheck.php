@@ -15,6 +15,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 	$username = $_SESSION['username'];
 	$user_id = $_SESSION['id'];
 	$user_role = $_SESSION['role'];
+	$manager = $_SESSION['manager'];
 }
 
 
