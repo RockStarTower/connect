@@ -209,7 +209,7 @@ $total = $row[0];
 								Report Error
 							</a>
 						</li>
-						<?php if ($user_role == 'admin') { ?>
+						<?php if ($user_role == 'admin' || $manager == 'true') { ?>
 						<li class="divider"></li>
 						<li>
 							<a href="admin.php">
