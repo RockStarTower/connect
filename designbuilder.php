@@ -57,7 +57,7 @@ include 'header.php';
 				<input type="hidden" name="wireframe" value="<?=$wireframe;?>" />
 			</form>
 			<div class="submit-button">
-			<button data-domain="<?=$domain_name?>" data-wireframe="<?=$wireframe?>" id="button_id" style="margin: 20px; margin-top: -45px;" type="button" class="submitButton btn-success btn-valid">Submit</button>
+			<button data-domain="<?=$domain_name?>" data-wireframe="<?=$wireframe?>" id="button_id" style="margin: 20px; margin-top: -45px; display: block !important;" type="button" class="submitButton btn-success btn-valid">Submit</button>
 			</div>
 		</div>
 		<div class="panel">

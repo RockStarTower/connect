@@ -801,7 +801,6 @@ $(document).ready(function() {
 	});
 
 	var totalProgress = 0;
-
 	if(window.location.href.indexOf("contentbuilder") > -1) {
 
        window.setInterval(function(){
@@ -827,14 +826,9 @@ $(document).ready(function() {
 				$("#formProgress").addClass('progress-bar-striped');
 			}
 
-		}, 500);
+		}, 1000);
 
     }
-
- 	
-	
-
-	
 
 
 });
