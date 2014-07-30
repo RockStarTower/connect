@@ -57,7 +57,7 @@ include 'header.php';
 				<input type="hidden" name="wireframe" value="<?=$wireframe;?>" />
 			</form>
 			<div class="submit-button">
-			<button data-domain="<?=$domain_name?>" data-wireframe="<?=$wireframe?>" id="button_id" style="margin: 20px; margin-top: -45px; display: block !important;" type="button" class="submitButton btn-success btn-valid">Submit</button>
+			<button data-domain="<?=$domain_name?>" data-wireframe="<?=$wireframe?>" id="button_id" style="margin: 20px; margin-top: -45px;" type="button" class="submitButton btn-success btn-valid">Submit</button>
 			</div>
 		</div>
 		<div class="panel">
@@ -72,6 +72,7 @@ include 'header.php';
 				<div id="image_error"></div>
 			
 			</div>
+
 	</div>
 	<div class="right-wrapper">
 		<div class="right-margin">
@@ -755,23 +756,44 @@ include 'header.php';
 			
 			</div>
 				
-
-
-			
-					
-			
-
-			
-			<div class="panel">
-				<div class="panel-default">
-					<div class="panel-heading">
-						<div class="panel-title">
-						Note Pad <span class="sub-panel-title"> - Quick Notes</span>
-						</div>
+				<div class="panel panel-info">
+					 <div class="panel-heading">
+						 <h3 class="panel-title"><i class="fa fa-lightbulb-o"></i> Autobuilder Instructions For Designers</h3>
+				 	 </div>
+				 	<div class="panel-body docPanel">
+						<ul class="media-list">
+							<b>AutoBuilder has been designed to make your work fast and simple. If you have any feedback, 
+							suggestions, or if you need to report errors please fill out the <a href="suggestion.php">Contact</a> page.</b> <br>
+						  <li class="media">
+						    <div class="media-body">
+						    	<h4 class="media-heading">Step 1</h4>
+								First make sure you are using the correct naming conventions for the images you want to upload. Here is an example for each image type: logo.png, favicon.ico, slider1.jpg, image1.jpg, icon1.png, background.png. If they are named incorrectly or the wrong size it it will show up in the upload errors box. You will need to re-upload that file as it will automatically be deleted.
+						    </div>
+						  </li>
+						</ul>
+						<ul class="media-list">
+						  <li class="media">
+						    <div class="media-body">
+						    	<h4 class="media-heading">Step 2</h4>
+						    	Once all the images are uploaded and there are no errors. Enter in the Alt Text (a very short description of the image). When all the Alt text has been validated the submit button will appear. Once you click submit you are finished!
+						    </div>
+						  </li>
+						</ul>
 					</div>
 				</div>
-					<textarea class="input-standard contentNotes" name="contentNotes" placeholder="Enter any notes here..."></textarea>
-			</div>
+				<!--
+				<div class="panel">
+					<div class="panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+							Note Pad <span class="sub-panel-title"> - Quick Notes</span>
+							</div>
+						</div>
+					</div>
+
+						<textarea class="input-standard contentNotes" name="contentNotes" placeholder="Enter any notes here..."></textarea>
+				</div>
+				-->
 		</div>	
 	</div>
 </div>

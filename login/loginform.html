@@ -1,31 +1,29 @@
 <div class="loginRegisterBox" id="RegisterBox1">
 
-<form autocomplete="off" id='login' accept-charset='UTF-8'>
+	<form autocomplete="off" id='login' accept-charset='UTF-8'>
 
-<input type='hidden' name='submitted' id='submitted' value='1'/>
+		<input type='hidden' name='submitted' id='submitted' value='1'/>
 
-<div class="formLbl">Username: </div> <input id="topInput" class="loginControl" type='text' name='username' id='username' placeholder="Username"  maxlength="50" required/></br>
+		<div class="formLbl">Username: </div> <input id="topInput" class="loginControl" type='text' name='username' id='username' placeholder="Username"  maxlength="50" required/></br>
 
-<div class="formLbl" id="formBotL">Password: </div><input id="botInput" class="loginControl" type='password' name='password' id='password' placeholder="Password" maxlength="50" required/></br>
+		<div class="formLbl" id="formBotL">Password: </div><input id="botInput" class="loginControl" type='password' name='password' id='password' placeholder="Password" maxlength="50" required/></br>
 
-	<div class="well wellLogin well-sm text-right">
-		<span style="float: left; padding-left: 20px;" id="loginMessage"></span>
-		<button  id="loginSub" name='Submit'>
-			<i class="fa fa-sign-in">
-			</i>
-			Log In
-		</button>
-		<span class="btn btn-link" style="float: right; color: #428bca;font-weight: 400;cursor: pointer;border-radius: 0; font-size: 15px;"><b id="forgot1"class="fa fa-key">Forgot Password</b></span><span class="btn btn-link" style="float: right; color: #428bca;font-weight: 400;cursor: pointer;border-radius: 0; font-size: 15px;"><b id="newUserLink"class="fa fa-plus">New User</b></span>
+		<div class="well wellLogin well-sm text-right">
+			<span style="float: left; padding-left: 20px;" id="loginMessage"></span>
+			<button  id="loginSub" name='Submit'>
+				<i class="fa fa-sign-in">
+				</i>
+				Log In
+			</button>
+			<span class="btn btn-link" style="float: right; color: #428bca;font-weight: 400;cursor: pointer;border-radius: 0; font-size: 15px;"><b id="forgot1"class="fa fa-key">Forgot Password</b></span><span class="btn btn-link" style="float: right; color: #428bca;font-weight: 400;cursor: pointer;border-radius: 0; font-size: 15px;"><b id="newUserLink"class="fa fa-plus">New User</b></span>
 
-	</div>
+		</div>
 
-</form>
+	</form>
 
 </div>
 
 <!-- SECOND FORM -->
-
-
 <div class="loginRegisterBox" id="RegisterBox2">
 
 	<form autocomplete="off" id='login2' accept-charset='UTF-8'>
@@ -43,13 +41,12 @@
 		</div>
 
 		<div class="well wellLogin2 well-sm text-right">
-
 				<button  id="loginSub2" name='Submit' >
 					<i class="fa fa-envelope-square">
 					</i>
 					Submit
 				</button>
-			<span class="btn btn-link" style="float: right; color: #428bca;font-weight: 400;cursor: pointer;border-radius: 0; font-size: 15px;"><b id="forgot2" class="fa fa-times">Cancel</b></span>
+			<span class="btn btn-link regButton2"><b id="forgot2" class="fa fa-times">Cancel</b></span>
 
 		</div>
 	</form>
@@ -57,8 +54,7 @@
 
 
 <!-- NEW USER FORM -->
-
-<div id="RegisterBox3" style="display: none; margin-top: 0px; " class="full-width-wrapper">
+<div id="RegisterBox3" class="full-width-wrapper regBox3">
 	<div class="panel panel-default">
 	  	<div class="panel-heading">
 			<div class="panel-title">
@@ -66,7 +62,7 @@
 			</div>
 		</div>
 	  <div class="panel-body">
-		    <form id="registrationForm" style="max-width: 700px; margin: 10 auto; margin-left: 130px;">
+		    <form id="registrationForm" class="regForm">
 			<input class="loginControl form-control" type="text" placeholder="First Name" name="firstname" required><br>
 			<input class="loginControl form-control" type="text" name="lastname" placeholder="Last Name" required><br>
 			<input class="loginControl form-control" type="email" name="email" placeholder="Email" required><br>
@@ -83,11 +79,11 @@
 							<option >custom</option>
 						</select><br>
 			<input id="loginSub4" type="submit">
-			<span class="btn btn-link" style="margin: 5px; padding: 10px; vertical-align: -8px;color: #428bca;font-weight: 400;cursor: pointer;border-radius: 0; font-size: 15px;"><b id="forgot6" class="fa fa-times">Cancel</b></span>
+			<span class="btn btn-link regButton"><b id="forgot6" class="fa fa-times">Cancel</b></span>
 			</form>
 
 			<div style="border: none;" class="well wellLogin2 well-sm text-right">
-				<span style="float: left; padding-left: 20px;" id="loginMessage2"></span>
+				<span class="loginMess2" id="loginMessage2"></span>
 			</div>
 	  </div>
 	</div>

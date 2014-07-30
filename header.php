@@ -206,7 +206,7 @@ $total = $row[0];
 						<li>
 							<a href="suggestion.php">
 								<i class="fa fa-wrench"></i>
-								Report Error
+								Contact Us
 							</a>
 						</li>
 						<?php if ($user_role == 'admin' || $manager == 'true') { ?>

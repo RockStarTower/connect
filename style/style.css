@@ -522,6 +522,7 @@ margin-top: 16px;
 	width: 90% !important;
 	margin: 0 auto;
 	margin-top: 20px;
+	min-width: 895px;
 }
 
 
@@ -1379,6 +1380,7 @@ div.rightForm {
 
 .dashPanel{
 	width: calc(100% - 40px);
+	min-height: 120px;
 }
 
 .quickLink{
@@ -1473,3 +1475,73 @@ float: right;
 	font-size: 14px;
 	line-height: 1.42857143;
 }
+
+.regForm {
+
+	max-width: 700px; 
+	margin: 10 auto; 
+	margin-left: 130px;
+
+}
+
+.regButton{
+
+	margin: 5px; 
+	padding: 10px; 
+	vertical-align: -8px;
+	color: #428bca;
+	font-weight: 400;
+	cursor: pointer;
+	border-radius: 0; 
+	font-size: 15px;
+
+}
+
+.loginMess2{
+	float: left; 
+	padding-left: 20px;
+}
+
+.regBox3{
+	display: none; 
+	margin-top: 0px;
+}
+
+.regButton2{
+	float: right; 
+	color: #428bca;
+	font-weight: 400;
+	cursor: pointer;
+	border-radius: 0; 
+	font-size: 15px;
+}
+
+.docPanel{
+	padding-top: 30px !important;
+	padding-right: 40px !important;
+	padding-left: 40px !important;
+	max-width: 800px;
+}
+
+.airplaneExtra{
+	float: left;
+	font-size: 180px;
+	padding: 46px;
+	padding-right: 77px;
+}
+
+.wrenchExtra{
+	float: left;
+	font-size: 80px;
+	padding: 15px;
+	padding-right: 77px;
+	padding-left: 30px;
+}
+
+.errorDash{
+	font-size: 18px;
+	padding: 20px;
+}
+
+
+

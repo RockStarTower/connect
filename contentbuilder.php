@@ -5311,6 +5311,7 @@ include 'header.php';
 
 			</div>
 			
+			<!--
 			<div class="panel">
 				<div class="panel-default">
 					<div class="panel-heading">
@@ -5320,6 +5321,46 @@ include 'header.php';
 					</div>
 				</div>
 					<textarea class="input-standard contentNotes" name="contentNotes" placeholder="Enter any notes here..."></textarea>
+			</div>
+			-->
+			<div class="panel panel-info">
+				 <div class="panel-heading">
+					 <h3 class="panel-title"><i class="fa fa-lightbulb-o"></i> Autobuilder Instructions For Content Writers</h3>
+			 	 </div>
+			 	 <div class="glyphicon glyphicon-send airplaneExtra">
+			 	 </div>
+			 	<div class="panel-body docPanel">
+					<ul class="media-list">
+						<b>AutoBuilder has been designed to make your work fast and simple. If you have any feedback, 
+						suggestions, or if you need to report errors please fill out the <a href="suggestion.php">Contact</a> page.</b> <br>
+					  <li class="media">
+					    <div class="media-body">
+					    	<h4 class="media-heading">Step 1</h4>
+							First you need to generate the correct form. To do this enter in the domain name (without the http//www.), the wireframe number, 
+					    	and select the language. After hitting submit this should bring you to a new page with the correct form generated. Remember to double check
+					    	the domain and wireframe!
+					    </div>
+					  </li>
+					</ul>
+					<ul class="media-list">
+					  <li class="media">
+					    <div class="media-body">
+					    	<h4 class="media-heading">Step 2</h4>
+					    	Once the form is generated. It will be broken up into four different parts. You can use the left panel to jump around to different parts of the form. It will
+					    	show you which part you are on. You can begin to fill out the form. Selected inputs are highlighted in blue. If they are a valid character length it will turn green. If they are invalid they will turn red.
+					    </div>
+					  </li>
+					</ul>
+					<ul class="media-list">
+					  <li class="media">
+					    <div class="media-body">
+					    	<h4 class="media-heading">Step 3</h4>
+					      	In order for the submit button to appear, every input will need to be highlighted green. If all the 
+					      	informatino looks good just click submit and you're done! This will create a file that design and development can use by entering in the same domain name.
+					    </div>
+					  </li>
+					</ul>
+				</div>
 			</div>
 		</div>
 
