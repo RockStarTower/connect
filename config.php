@@ -1,7 +1,5 @@
 <?php 
 
-$root_url = 'http://localhost/connect/';
-
 include 'dbconnect.php';
 
 $content_array = array(
