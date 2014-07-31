@@ -1,10 +1,3 @@
-<!--
-	Content Form for each wireframe
-	6/20/2014
-	Joseph Carlson
-	
--->
-
 <?php
 include 'header.php';
 

@@ -1,5 +1,9 @@
 <?php
 
+include 'header.php';
+
+
+
 if(isset($_GET['domain'])){
 
 	$domain_name = $_GET['domain'];
@@ -27,10 +31,6 @@ if(isset($_GET['domain'])){
 
 <?php
 if(!isset($_GET['domain'])){
-
-
-include 'header.php';
-
 
 
 	
