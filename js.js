@@ -558,7 +558,7 @@ $(document).ready(function() {
 
                 }
             });
-        }, 1000);
+        }, 2000);
     }
 
     if (window.location.href.indexOf("designbuilder") > -1) {
@@ -583,7 +583,7 @@ $(document).ready(function() {
 
                 }
             });
-        }, 1000);
+        }, 2000);
     }
 
 
@@ -852,7 +852,7 @@ $(document).ready(function() {
                 $("#formProgress").addClass('progress-bar-striped');
 
             }
-        }, 1000);
+        }, 2000);
     }
 
 

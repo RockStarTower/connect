@@ -2,17 +2,7 @@
 
 $root_url = 'http://localhost/connect/';
 
-define('DB_NAME', '');
-define('DB_HOST', 'localhost');
-define('DB_USER', '');
-define('DB_PASS', '');
-
-$con=mysqli_connect("localhost","zapoonsc_connect","!F&eJYx556Vq","zapoonsc_connect");
-
-// Check connection
-if (mysqli_connect_errno()) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-} 
+include 'dbconnect.php';
 
 $content_array = array(
 '1' => array(

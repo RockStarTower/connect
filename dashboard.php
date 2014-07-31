@@ -16,26 +16,23 @@ $num = mysqli_num_rows($number);
 		<div style="min-width: 540px;" class="well well-sm"><span class="glyphicon glyphicon-link quickLink">&nbsp;</span><a href="suggestion.php">Support Tickets <span style="vertical-align: 1;" class="badge"><?php echo $num ?></span></a><a class="quickLink" href="admin.php">Administration</a></div>
 	<?php } ?>
 
-
 	<div class="left-wrapper-dash">
-
-	<div style="text-align: center;" class="jumbotron">
-		  <h1>Welcome to Connect</h1>
-		  <p>Boost Connect houses applications like AutoBuilder and Boost Note. <br> For further instructions click the get started button below. </p>
-		  <?php if ($user_role == 'admin') { ?>
-		  <p><a href="contentbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
-		  <?php } ?>
-		  <?php if ($user_role == 'content') { ?>
-		  <p><a href="contentbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
-		  <?php } ?>
-		  <?php if ($user_role == 'design') { ?>
-		  <p><a href="designbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
-		  <?php } ?>
-		  <?php if ($user_role == 'blogs') { ?>
-		  <p><a href="devbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
-		  <?php } ?>
-	</div>
-
+		<div style="text-align: center;" class="jumbotron">
+			  <h1>Welcome to Connect</h1>
+			  <p>Boost Connect houses applications like AutoBuilder and Boost Note. <br> For further instructions click the get started button below. </p>
+			  <?php if ($user_role == 'admin') { ?>
+			  <p><a href="contentbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
+			  <?php } ?>
+			  <?php if ($user_role == 'content') { ?>
+			  <p><a href="contentbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
+			  <?php } ?>
+			  <?php if ($user_role == 'design') { ?>
+			  <p><a href="designbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
+			  <?php } ?>
+			  <?php if ($user_role == 'blogs') { ?>
+			  <p><a href="devbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
+			  <?php } ?>
+		</div>
 	</div>
 	<div class="right-wrapper dashWrapper">
 		<div class="right-margin">
