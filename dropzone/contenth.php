@@ -100,7 +100,8 @@ switch($wireframe) {
 		break;
 	case 21:
 		$_POST['content']['homepage']['content'] = array(
-		'slide_title' => array($pixe_slide_title => $pixe_slide_content.'[button link="'."'.".'sanitize_title('.$about_title.');'.".'".'"]' . $call_to_action . '[/button]<img alt="../wp-content/uploads/slider/slider1.jpg" src=""/>'), 
+		'homepage_title' => array($hp_h1),
+		'slide_title' => array($call_to_action.'[button link="'."'.".'sanitize_title("About");'.".'".'"] Click Here [/button]<img alt="../wp-content/uploads/slider/slider1.jpg" src=""/>'), 
 		'feature_1' => array($title1 => $content1),
 		'feature_2' => array($title2 => $content2),
 		'feature_3' => array($title3 => $content3),);
@@ -148,7 +149,5 @@ if (!file_exists($domain_dir)) {
 $encode = json_encode($_POST);
 
 file_put_contents('content/'.$domain.'/content.json', $encode);
-
-header("Location: ".$root_url."contentbuilder.php");
 echo "Content file Created!";
 ?>

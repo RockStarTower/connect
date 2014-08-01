@@ -96,7 +96,7 @@ include 'header.php';
 		$hpt = $wf_array['homepage_title'];
 		
 	?>
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off">
 				
 				<div id="contentp1" >
 
@@ -272,7 +272,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 
 				<div id="contentp1" >
 					<div class="panel-default">
@@ -447,7 +447,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 
 				<div id="contentp1" >
 				
@@ -618,7 +618,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 
 				<div id="contentp1" >
 				
@@ -793,7 +793,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 
 				<div id="contentp1" >
 				
@@ -952,7 +952,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 
 				<div id="contentp1" >
 				
@@ -1120,7 +1120,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 
 				<div id="contentp1" >
 				
@@ -1283,7 +1283,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 
 				<div id="contentp1" >
 				
@@ -1462,7 +1462,7 @@ include 'header.php';
 	?>
 		
 
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -1631,7 +1631,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -1800,7 +1800,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -1984,7 +1984,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -2152,7 +2152,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -2323,7 +2323,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -2495,7 +2495,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -2664,7 +2664,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -2834,7 +2834,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -2996,7 +2996,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -3184,7 +3184,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -3345,7 +3345,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -3515,7 +3515,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -3680,7 +3680,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -3849,7 +3849,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -4012,7 +4012,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -4190,7 +4190,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -4350,7 +4350,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -4520,7 +4520,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -4682,7 +4682,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -4860,7 +4860,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -5021,7 +5021,7 @@ include 'header.php';
 		
 	?>
 		
-			<form id="wireframeForm" class="panel taskform" autocomplete="off"  method="post" action="dropzone/contenth.php" >
+			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
 				<div id="contentp1" >
 					<div class="panel-default">
 						<div class="panel-heading">

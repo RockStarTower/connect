@@ -855,5 +855,24 @@ $(document).ready(function() {
         }, 1000);
     }
 
+    if (window.location.href.indexOf("contentbuilder") > -1) {
+        $(".btn-valid").click(function(e) {
+
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: 'dropzone/contenth.php',
+                data: $("#wireframeForm").serialize(),
+                success: function(e) {
+
+                    $(".btn-valid").val(e);
+
+                }
+
+
+            });
+            return false;
+        });
+    }
 
 });
