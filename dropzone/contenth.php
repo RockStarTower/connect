@@ -6,6 +6,13 @@ $wireframe = $_POST['wireframe'];
 $hp_h1 = $_POST['content']['homepage']['content']['homepage_title'];
 $hp_content_titles = $_POST['content']['homepage']['title'];
 $hp_content_boxes = $_POST['content']['homepage']['box'];
+
+if ($wireframe == 21){
+
+	$call_to_action = $_POST['content']['page1']['slider_content'];
+
+}
+
 $counter = 1;
 
 $_POST['content']['privacy'] = privacyPolicy($_POST['language'], strtoupper($_POST['site_url']));
@@ -93,7 +100,7 @@ switch($wireframe) {
 		break;
 	case 21:
 		$_POST['content']['homepage']['content'] = array(
-		'slide_title' => array($pixe_slide_title => $pixe_slide_content.'[button link="'."'.".'sanitize_title('.$about_title.');'.".'".'"]Click here[/button]<img alt="../wp-content/uploads/slider/slider1.jpg" src=""/>'), 
+		'slide_title' => array($pixe_slide_title => $pixe_slide_content.'[button link="'."'.".'sanitize_title('.$about_title.');'.".'".'"]' . $call_to_action . '[/button]<img alt="../wp-content/uploads/slider/slider1.jpg" src=""/>'), 
 		'feature_1' => array($title1 => $content1),
 		'feature_2' => array($title2 => $content2),
 		'feature_3' => array($title3 => $content3),);
