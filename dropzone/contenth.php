@@ -100,8 +100,8 @@ switch($wireframe) {
 		break;
 	case 21:
 		$_POST['content']['homepage']['content'] = array(
-		'homepage_title' => array($hp_h1),
-		'slide_title' => array($call_to_action.'[button link="'."'.".'sanitize_title("About");'.".'".'"] Click Here [/button]<img alt="../wp-content/uploads/slider/slider1.jpg" src=""/>'), 
+		'homepage_title' => $hp_h1,
+		'slide_title' => $call_to_action.'[button link="'."'.".'sanitize_title("About");'.".'".'"] Click Here [/button]<img alt="../wp-content/uploads/slider/slider1.jpg" src=""/>', 
 		'feature_1' => array($title1 => $content1),
 		'feature_2' => array($title2 => $content2),
 		'feature_3' => array($title3 => $content3),);
