@@ -20,7 +20,6 @@ if(isset($_GET['domain'])){
 	    // read the file from disk
 	    readfile($file);
 	}
-	echo 'this ran';
 
 } else {
 	echo 'No domain Set.';
