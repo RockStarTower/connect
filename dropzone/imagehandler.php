@@ -48,9 +48,12 @@ foreach ($filename_array as $file) {
 
                     for ($i = 1; $i <= 5; $i++) {
                    
-                        $slider_images = @file_get_contents('content/' . $domain . '/' . 'slider' . $i . '.jpg');
-
-                        if ($file_base != 'slider5') {
+                        if ($wireframe == 21){
+                            $slider_images = @file_get_contents('content/' . $domain . '/' . 'slider' . $i . '.png');
+                        } else{
+                            $slider_images = @file_get_contents('content/' . $domain . '/' . 'slider' . $i . '.jpg');
+                        }
+                        if ($file_base != 'slider4' || $wireframe != 21) {
                             $json_data['content']['page' . $i]['slider_image'] = base64_encode($slider_images);
                         } else {
                             $json_data['content']['about']['slider_image'] = base64_encode($slider_images);
