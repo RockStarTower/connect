@@ -1,7 +1,7 @@
 html {
 	background-image: url(../images/blacklinen.png);
 	font-family: 'Tauri', sans-serif;
-	background-color: black;
+	background-color: #494949;
 }
 
 
@@ -9,7 +9,7 @@ body {
 	background-image: url(../images/blacklinen.png);
 	display: block;
 	margin: 0px !important;
-	background-color: black !important;
+	background-color: #494949 !important;
 	font-family: 'Tauri', Helvetica !important;
 
 }
