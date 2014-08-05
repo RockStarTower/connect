@@ -412,7 +412,6 @@ $(document).ready(function() {
 
             if (count < min) {
 
-                //$('.charcount').html(' - Characters: ' + count + ' (' + min + ' to ' + max + ')');
                 var characterCount = ('Characters: ' + count + ' (' + min + ' to ' + max + ')');
                 $(this).attr('data-placement', 'top'); 
                 $(this).attr('data-original-title', characterCount);
@@ -618,16 +617,25 @@ $(document).ready(function() {
                 $('#Page_1').attr('data-valid', 'valid');
                 $('#Page_2').attr('data-valid', 'valid');
                 $('#Page_3').attr('data-valid', 'valid');
-                $('#Page_1').css('border-color', 'green');
-                $('#Page_2').css('border-color', 'green');
-                $('#Page_3').css('border-color', 'green');
+
+                $('#Page_1').removeClass('has-error');
+                $('#Page_2').removeClass('has-error');
+                $('#Page_3').removeClass('has-error');
+                $('#Page_1').addClass('has-success');
+                $('#Page_2').addClass('has-success');
+                $('#Page_3').addClass('has-success');
+
             } else {
                 $('#Page_1').attr('data-valid', 'invalid');
                 $('#Page_2').attr('data-valid', 'invalid');
                 $('#Page_3').attr('data-valid', 'invalid');
-                $('#Page_1').css('border-color', 'red');
-                $('#Page_2').css('border-color', 'red');
-                $('#Page_3').css('border-color', 'red');
+
+                $('#Page_1').addClass('has-error');
+                $('#Page_2').addClass('has-error');
+                $('#Page_3').addClass('has-error');
+                $('#Page_1').removeClass('has-success');
+                $('#Page_2').removeClass('has-success');
+                $('#Page_3').removeClass('has-success');
 
             }
         }
