@@ -67,7 +67,7 @@ include 'header.php';
 						<input type="text" id="domain" name="domain" class="input-standard contentForm" placeholder="example.com" required />
 
 						<label for="wireframe_number">Wireframe Number:</label>
-						<input type="text" id="wireframe" name="wireframe" class="input-standard contentForm" placeholder="Wireframe Number" required />
+						<input type="number" min="1" max="30" id="wireframe" name="wireframe" class="input-standard contentForm" placeholder="Wireframe Number" required />
 						<label for="language">Language:</label>
 						<select name="language" style="height: 33px;" class="input-standard contentForm" id="language">
 							<option value="english">English</option>
@@ -5179,7 +5179,6 @@ include 'header.php';
 
 
 	<?php
-		
 	if(isset($_GET['wireframe'])){
 
 		switch($wireframe) {

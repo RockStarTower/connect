@@ -391,13 +391,15 @@ $(document).ready(function() {
             var max = $(this).attr('data-max');
 
             if (count < min || count > max) {
-                $(this).css('border-color', 'red');
                 $(this).attr('data-valid', 'invalid');
+                $(this).addClass('has-error');
+                $(this).removeClass('has-success');
 
             } else {
-                $(this).css('border-color', '#5cb85c');
                 $(this).attr('data-valid', 'valid');
                 $('.charcount').html('');
+                $(this).removeClass('has-error');
+                $(this).addClass('has-success');
             }
 
             if (count < min) {
@@ -876,3 +878,16 @@ $(document).ready(function() {
     }
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+

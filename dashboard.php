@@ -33,10 +33,33 @@ $num = mysqli_num_rows($number);
 			  <p><a href="devbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
 			  <?php } ?>
 		</div>
+		<?php if ($user_role == 'blogs' || $user_role == 'admin') { ?>
+			<div class="panel dashPanel" >
+				<div class="panel-success panel-info">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<span class="glyphicon glyphicon-cog">&nbsp;</span>Download the Plugin <span class="sub-panel-title">- AutoBuilder WordPress Plugin</span>	
+						</div>
+					</div>
+					<div style="display: inline-block; margin: 20px;" class="btn-group">
+					  <button type="button" onclick="window.location='zipdownloader/zipdownloader1.php';" class="btn btn-danger">Download Latest V1.0B</button>
+					  <button type="button" style="margin-right: 20px;" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+					    <span style="margin-top: 8px; height: 8px;" class="caret"></span>
+					    <span class="sr-only">Toggle Dropdown</span>
+					  </button>
+					  <ul class="dropdown-menu" role="menu">
+					    <li><a href="zipdownloader/zipdownloader2.php">Second</a></li>
+					    <li><a href="zipdownloader/zipdownloader3.php">third</a></li>
+					    <li><a href="zipdownloader/zipdownloader4.php">oldest version</a></li>
+					  </ul>
+						Make sure you have the latest verison of the AutoBuilder plugin. Released: 8/4/2014 You can download a previous release with the dropdown menu.
+					</div>
+				</div>
+			</div>
+		<?php } ?>
 	</div>
 	<div class="right-wrapper dashWrapper">
 		<div class="right-margin">
-
 			<div class="working dashPanel">
 				<div class="panel-success panel-default">
 					<div class="panel-heading">
