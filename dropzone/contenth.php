@@ -4,7 +4,10 @@ include ("../config.php");
 $domain = $_POST['site_url'];
 $wireframe = $_POST['wireframe'];
 $hp_h1 = $_POST['content']['homepage']['content']['homepage_title'];
-$hp_content_titles = $_POST['content']['homepage']['title'];
+
+if ($wireframe != 12){
+	$hp_content_titles = $_POST['content']['homepage']['title'];
+}
 $hp_content_boxes = $_POST['content']['homepage']['box'];
 
 if ($wireframe == 21){
@@ -17,9 +20,11 @@ $counter = 1;
 
 $_POST['content']['privacy'] = privacyPolicy($_POST['language'], strtoupper($_POST['site_url']));
 
-foreach ($hp_content_titles as $hp_title) {
-	${'title' . $counter} = $hp_title;
-	$counter ++;
+if ($wireframe != 12){
+	foreach ($hp_content_titles as $hp_title) {
+		${'title' . $counter} = $hp_title;
+		$counter ++;
+	}
 }
 $counter = 1;
 foreach ($hp_content_boxes as $hp_box) {
@@ -149,5 +154,5 @@ if (!file_exists($domain_dir)) {
 $encode = json_encode($_POST);
 
 file_put_contents('content/'.$domain.'/content.json', $encode);
-echo "Content file Created!";
+echo "Content Created!";
 ?>

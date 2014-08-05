@@ -375,8 +375,13 @@ $(document).ready(function() {
         $('.navbar').css('-webkit-filter', 'blur(0px)');
     });
 
+
+     
+
     // FORM VALIDATION
     $('.validation').focus(function() {
+
+        $(".validation").tooltip();
 
         $(this).keyup(function(e) {
 
@@ -400,18 +405,27 @@ $(document).ready(function() {
                 $('.charcount').html('');
                 $(this).removeClass('has-error');
                 $(this).addClass('has-success');
+
+                $(this).removeAttr('data-placement'); 
+                $(this).attr('data-original-title', 'Correct Character Count');
             }
 
             if (count < min) {
 
-                $('.charcount').html(' - Characters: ' + count + ' (' + min + ' to ' + max + ')');
+                //$('.charcount').html(' - Characters: ' + count + ' (' + min + ' to ' + max + ')');
+                var characterCount = ('Characters: ' + count + ' (' + min + ' to ' + max + ')');
+                $(this).attr('data-placement', 'top'); 
+                $(this).attr('data-original-title', characterCount);
+
+
 
             }
 
             if (count > max) {
 
-                $('.charcount').html(' - Characters: ' + count + ' (' + min + ' to ' + max + ')');
-
+                var maxcharCount = ('Characters: ' + count + ' (' + min + ' to ' + max + ')');
+                $(this).attr('data-placement', 'top'); 
+                $(this).attr('data-original-title', maxcharCount);
             }
 
         });
@@ -872,6 +886,24 @@ $(document).ready(function() {
                 }
 
 
+            });
+            return false;
+        });
+    }
+
+     if (window.location.href.indexOf("suggestion") > -1) {
+        $("#suggestionSubmit").click(function(e) {
+
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: 'suggestionh.php',
+                data: $("#suggestionForm").serialize(),
+                success: function(e) {
+
+                    $("#suggestionSubmit").val(e);
+
+                }
             });
             return false;
         });

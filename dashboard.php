@@ -64,7 +64,7 @@ $num = mysqli_num_rows($number);
 				<div class="panel-success panel-default">
 					<div class="panel-heading">
 						<div class="panel-title">
-						<span class="glyphicon glyphicon-cog">&nbsp;</span>Have Suggestions? <span class="sub-panel-title">- Report bugs or errors!</span>
+						<span class="glyphicon glyphicon-cog">&nbsp;</span>Have Suggestions?
 						</div>
 					</div>
 				</div>

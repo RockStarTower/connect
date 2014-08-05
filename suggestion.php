@@ -11,7 +11,6 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
 
 		mysqli_query($con, "UPDATE feedback SET Status = 'closed' WHERE ID = '".$closed."'");
 
-		header('Location: '.$_SERVER['REQUEST_URI']);
 	}	
 ?>
 
@@ -42,7 +41,7 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
 			
 			while ($row = mysqli_fetch_assoc($result)) {
 			
-				if (!$i++) echo "<table class='pResults' >
+				if (!$i++) echo "<table class='table table-striped' >
 				<tr class=''>
 				<th class='tTitle'>Type</th>
 				<th class='tTitle'>Comment</th>
@@ -150,7 +149,7 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
 <?php } else{ ?>
 	
 	<div id="centerDiv">
-		<form id="suggestionForm" class="panel taskform" autocomplete="off"  method="post" action="suggestionh.php" >
+		<form id="suggestionForm" class="panel taskform" autocomplete="off" >
 			<div class="panel-default">
 				<div class="panel-heading">
 					<div class="panel-title">
@@ -162,17 +161,17 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
 				<input style="width: 40%; margin: 40px; margin-left: 4%" class="sInputs" type="date" name="date" placeholder="yyyy-mm-dd" value="<?=$oneday?>" required /> 
 				<br>
 				<select style="width: 40%; margin: 40px; margin-left: 4%" class="sInputs" name="suggestionType" required >
-					<option value=" " default>Please Select Type</option>
-					<option value="suggestion">General Suggestion</option>
-					<option value="boost_note">Boost Note</option>
-					<option value="autobuilder">Auto Builder</option>
+					<option value=" " style="display: none;" default>Please Select Type</option>
+					<option value="suggestion">New Feature Request</option>
+					<option value="bug">Bug / Error/ Somethings broken!</option>
+					<option value="question">I Have A Question</option>
 				</select>
 				<textarea style="margin-left: 40px; margin-bottom: 20px; width: 90%; margin-left: 4%;" rows="8" cols="50" id="" name="overview" class="input-standard contentForm ctextarea"  placeholder="Describe issue or suggestion here..." required ></textarea>	
 				<input type="hidden" name="username" value="<?=$username?>" />
 				<input type="hidden" name="status" value="open" />
 			
 			<div class="submitCon noBackground">
-				<input class="submitButton btn-success" style="margin-right: 40px;" type="Submit" name="Submit" />
+				<input id="suggestionSubmit" class="submitButton btn-success" style="margin-right: 40px;" type="Submit" name="Submit" />
 			</div> 
 		</form>
 	</div>

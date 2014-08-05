@@ -16,7 +16,7 @@ VALUES ('$type', '$comment', '$username', '$status', '$date')");
 
 mysqli_close($con);
 
-echo "Your ticket has been submitted!";
+echo "Ticket Submitted!";
 
 ?>
 

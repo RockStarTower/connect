@@ -9,7 +9,9 @@ include 'header.php';
 	}
 
 ?>
-
+<script src="dropzone/dropzone.js"></script>
+<link rel="stylesheet" type="text/css" href="dropzone/css/basic.css">
+<link rel="stylesheet" type="text/css" href="dropzone/css/dropzone.css">
 
 <div class="body-wrapper">
 
@@ -35,7 +37,7 @@ include 'header.php';
 						<input type="text" id="domain" name="domain" class="input-standard contentForm" placeholder="example.com" required />
 
 						<label for="wireframe_number">Wireframe Number:</label>
-						<input type="text" id="wireframe" name="wireframe" class="input-standard contentForm" placeholder="Wireframe Number" required />
+						<input type="number" min="1" max="30" id="wireframe" name="wireframe" class="input-standard contentForm" placeholder="Wireframe Number" required />
 						<input style="margin: 20px;" class="submitButton btn-success" type="submit" />
 						</form>';
 

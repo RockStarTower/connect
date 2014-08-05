@@ -2,9 +2,7 @@
 
 $wireframe = $_POST['wireframe'];
 $domain = $_POST['domain'];
-
 $json_file = file_get_contents('content/' . $domain . '/content.json');
-
 $json_data = json_decode($json_file, true);
 
 $filename_array = array(
@@ -45,18 +43,37 @@ foreach ($filename_array as $file) {
                     $json_data['content']['homepage']['background'] = base64_encode($image_file);
                 break;
             case $file_sub4 == 'slid':
-                for ($i = 1; $i <= 4; $i++) {
+
+                if ($wireframe == 28){
+
+                    for ($i = 1; $i <= 5; $i++) {
                    
-                    if ($wireframe == 21){
-                        $slider_images = @file_get_contents('content/' . $domain . '/' . 'slider' . $i . '.png');
-                    } else{
-                        $slider_images = @file_get_contents('content/' . $domain . '/' . 'slider' . $i . '.jpg');
+                        if ($wireframe == 21){
+                            $slider_images = @file_get_contents('content/' . $domain . '/' . 'slider' . $i . '.png');
+                        } else{
+                            $slider_images = @file_get_contents('content/' . $domain . '/' . 'slider' . $i . '.jpg');
+                        }
+                        if ($file_base != 'slider4' || $wireframe != 21) {
+                            $json_data['content']['page' . $i]['slider_image'] = base64_encode($slider_images);
+                        } else {
+                            $json_data['content']['about']['slider_image'] = base64_encode($slider_images);
+                        }
                     }
-                    if ($file_base != 'slider4' || $wireframe != 21) {
-                        $json_data['content']['page' . $i]['slider_image'] = base64_encode($slider_images);
-                    } else {
-                        $json_data['content']['about']['slider_image'] = base64_encode($slider_images);
-                    }
+                } else {
+
+                    for ($i = 1; $i <= 4; $i++) {
+                       
+                        if ($wireframe == 21){
+                            $slider_images = @file_get_contents('content/' . $domain . '/' . 'slider' . $i . '.png');
+                        } else{
+                            $slider_images = @file_get_contents('content/' . $domain . '/' . 'slider' . $i . '.jpg');
+                        }
+                        if ($file_base != 'slider4' || $wireframe != 21) {
+                            $json_data['content']['page' . $i]['slider_image'] = base64_encode($slider_images);
+                        } else {
+                            $json_data['content']['about']['slider_image'] = base64_encode($slider_images);
+                        }
+                    } 
                 }
                 break;
             case $file_sub4 == 'logo' || $file_sub4 == 'favi' || $file_sub4 == 'lomo':
