@@ -44,6 +44,9 @@ include 'header.php';
 		<img id="dots" src="images/dots.png" />
 		<a id="feedbackLink" href="suggestion.php"><div id="feedback">Errors &<br>Feedback</div></a>
 		<button class="standard-button" id="autofill">Auto Fill</button>
+		<?php if ($user_role == 'blogs' || $user_role == 'admin'){ ?>
+			<input type="checkbox" id="devMode" /> Dev Mode
+		<?php } ?>
 	<?php } ?>
 	</div>
 
@@ -69,7 +72,7 @@ include 'header.php';
 						<label for="wireframe_number">Wireframe Number:</label>
 						<input type="number" min="1" max="30" id="wireframe" name="wireframe" class="input-standard contentForm" placeholder="Wireframe Number" required />
 						<label for="language">Language:</label>
-						<select name="language" style="height: 33px;" class="input-standard contentForm" id="language">
+						<select name="language"  class="input-standard contentForm" id="language">
 							<option value="english">English</option>
 							<option value="spanish">Spanish</option>
 							<option value="french">French</option>

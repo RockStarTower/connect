@@ -375,62 +375,6 @@ $(document).ready(function() {
         $('.navbar').css('-webkit-filter', 'blur(0px)');
     });
 
-
-     
-
-    // FORM VALIDATION
-    $('.validation').focus(function() {
-
-        $(".validation").tooltip();
-
-        $(this).keyup(function(e) {
-
-            var sspace = $(this).val().replace(/ +/g, ' ');
-
-            if ($(this).val() != sspace) {
-                $(this).val(sspace);
-            }
-
-            var count = $(this).val().length;
-            var min = $(this).attr('data-min');
-            var max = $(this).attr('data-max');
-
-            if (count < min || count > max) {
-                $(this).attr('data-valid', 'invalid');
-                $(this).addClass('has-error');
-                $(this).removeClass('has-success');
-
-            } else {
-                $(this).attr('data-valid', 'valid');
-                $('.charcount').html('');
-                $(this).removeClass('has-error');
-                $(this).addClass('has-success');
-
-                $(this).removeAttr('data-placement'); 
-                $(this).attr('data-original-title', 'Correct Character Count');
-            }
-
-            if (count < min) {
-
-                var characterCount = ('Characters: ' + count + ' (' + min + ' to ' + max + ')');
-                $(this).attr('data-placement', 'top'); 
-                $(this).attr('data-original-title', characterCount);
-
-
-
-            }
-
-            if (count > max) {
-
-                var maxcharCount = ('Characters: ' + count + ' (' + min + ' to ' + max + ')');
-                $(this).attr('data-placement', 'top'); 
-                $(this).attr('data-original-title', maxcharCount);
-            }
-
-        });
-
-    });
-
     $(function() {
         Dropzone.options.dropzoneForm = {
             init: function() {
@@ -548,33 +492,145 @@ $(document).ready(function() {
         }
     });
 
+
+    $('#devMode').change(function(){
+        if ($(this).attr('devmode')){
+            console.log('hi');
+            $(this).removeAttr('devmode', 'true');
+        } else {
+            console.log('this');
+            $(this).attr('devmode', 'true');  
+        }
+    });
+
+     
+    
+        // FORM VALIDATION
+        console.log("true");
+        $('.validation').focus(function() {
+            if (!$('#devMode').attr('devmode')){
+            $(".validation").tooltip();
+
+            $(this).keyup(function(e) {
+
+                var sspace = $(this).val().replace(/ +/g, ' ');
+
+                if ($(this).val() != sspace) {
+                    $(this).val(sspace);
+                }
+
+                var count = $(this).val().length;
+                var min = $(this).attr('data-min');
+                var max = $(this).attr('data-max');
+
+                if (count < min || count > max) {
+                    $(this).attr('data-valid', 'invalid');
+                    $(this).addClass('has-error');
+                    $(this).removeClass('has-success');
+
+                } else {
+                    $(this).attr('data-valid', 'valid');
+                    $('.charcount').html('');
+                    $(this).removeClass('has-error');
+                    $(this).addClass('has-success');
+
+                    $(this).removeAttr('data-placement'); 
+                    $(this).attr('data-original-title', 'Correct Character Count');
+                }
+
+                if (count < min) {
+
+                    var characterCount = ('Characters: ' + count + ' (' + min + ' to ' + max + ')');
+                    $(this).attr('data-placement', 'top'); 
+                    $(this).attr('data-original-title', characterCount);
+
+
+
+                }
+
+                if (count > max) {
+
+                    var maxcharCount = ('Characters: ' + count + ' (' + min + ' to ' + max + ')');
+                    $(this).attr('data-placement', 'top'); 
+                    $(this).attr('data-original-title', maxcharCount);
+                }
+
+            });
+            }
+        });
+    
+
     $('.btn-valid').hide();
     var y = 0;
 
     if (window.location.href.indexOf("contentbuilder") > -1) {
         window.setInterval(function() {
+            if (!$('#devMode').attr('devmode')){
+                    var all = document.getElementsByClassName("validation").length;
 
-            var all = document.getElementsByClassName("validation").length;
+                    $(".validation").each(function() {
 
-            $(".validation").each(function() {
+                        if ($(this).attr('data-valid') == 'valid') {
 
-                if ($(this).attr('data-valid') == 'valid') {
+                                y++;
 
-                    y++;
+                            } else {
+                                y = 0;
+                                $('.btn-valid').fadeOut(400);
+                            }
+
+                            if (y >= all) {
+
+                                $('.btn-valid').fadeIn(400);
+
+                            }
+
+                    });
+            } else {
+                $('.btn-valid').fadeIn(400);
+            }
+        }, 1000);        
+    }
+
+    //Adding up the three page titles
+    $('.validation').keyup(function() {
+        if (!$('#devMode').attr('devmode')){
+            if ($("#Page_1").length) {
+                var count = $('#Page_1').val().length;
+                var count1 = $('#Page_2').val().length;
+                var count2 = $('#Page_3').val().length;
+
+                var sum = count + count1 + count2;
+
+                if (sum > 1 && sum <= 90) {
+                    $('#Page_1').attr('data-valid', 'valid');
+                    $('#Page_2').attr('data-valid', 'valid');
+                    $('#Page_3').attr('data-valid', 'valid');
+
+                    $('#Page_1').removeClass('has-error');
+                    $('#Page_2').removeClass('has-error');
+                    $('#Page_3').removeClass('has-error');
+                    $('#Page_1').addClass('has-success');
+                    $('#Page_2').addClass('has-success');
+                    $('#Page_3').addClass('has-success');
 
                 } else {
-                    y = 0;
-                    $('.btn-valid').fadeOut(400);
+                    $('#Page_1').attr('data-valid', 'invalid');
+                    $('#Page_2').attr('data-valid', 'invalid');
+                    $('#Page_3').attr('data-valid', 'invalid');
+
+                    $('#Page_1').addClass('has-error');
+                    $('#Page_2').addClass('has-error');
+                    $('#Page_3').addClass('has-error');
+                    $('#Page_1').removeClass('has-success');
+                    $('#Page_2').removeClass('has-success');
+                    $('#Page_3').removeClass('has-success');
                 }
+            }
+        }
+    });
+    
 
-                if (y >= all) {
-
-                    $('.btn-valid').fadeIn(400);
-
-                }
-            });
-        }, 1000);
-    }
 
     if (window.location.href.indexOf("designbuilder") > -1) {
         window.setInterval(function() {
@@ -601,45 +657,6 @@ $(document).ready(function() {
         }, 1000);
     }
 
-
-    //Adding up the three page titles
-
-    $('.validation').keyup(function() {
-
-        if ($("#Page_1").length) {
-            var count = $('#Page_1').val().length;
-            var count1 = $('#Page_2').val().length;
-            var count2 = $('#Page_3').val().length;
-
-            var sum = count + count1 + count2;
-
-            if (sum > 1 && sum <= 90) {
-                $('#Page_1').attr('data-valid', 'valid');
-                $('#Page_2').attr('data-valid', 'valid');
-                $('#Page_3').attr('data-valid', 'valid');
-
-                $('#Page_1').removeClass('has-error');
-                $('#Page_2').removeClass('has-error');
-                $('#Page_3').removeClass('has-error');
-                $('#Page_1').addClass('has-success');
-                $('#Page_2').addClass('has-success');
-                $('#Page_3').addClass('has-success');
-
-            } else {
-                $('#Page_1').attr('data-valid', 'invalid');
-                $('#Page_2').attr('data-valid', 'invalid');
-                $('#Page_3').attr('data-valid', 'invalid');
-
-                $('#Page_1').addClass('has-error');
-                $('#Page_2').addClass('has-error');
-                $('#Page_3').addClass('has-error');
-                $('#Page_1').removeClass('has-success');
-                $('#Page_2').removeClass('has-success');
-                $('#Page_3').removeClass('has-success');
-
-            }
-        }
-    });
 
 
     //Removing microsoft word rich text formatting 
