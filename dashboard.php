@@ -6,7 +6,7 @@ include 'header.php';
 
 $number = mysqli_query($con, 'SELECT * FROM feedback WHERE status="open"');
 $num = mysqli_num_rows($number);
-$users_online = count(glob(session_save_path() . '/*')) - 11;
+
 
 
 $users_result = mysqli_query($con, 'SELECT * FROM users');
@@ -19,7 +19,7 @@ $total_user_number = mysqli_num_rows($users_result);
 	<?php if ($user_role == 'admin') { ?>
 		<div style="min-width: 540px;" class="well well-sm">
 		<span class="glyphicon glyphicon-link quickLink">&nbsp;</span>
-		<a href="suggestion.php">Support Tickets <span style="vertical-align: 1;" class="badge"><?php echo $num ?></span></a><a class="quickLink" href="admin.php">Administration</a>Active Online Users: <span style="vertical-align: 1;" class="badge"><?php echo $users_online ?></span> &nbsp;&nbsp;Total Users: <span style="vertical-align: 1;" class="badge"><?php echo $total_user_number ?></span>
+		<a href="suggestion.php">Support Tickets <span style="vertical-align: 1;" class="badge"><?php echo $num ?></span></a><a class="quickLink" href="admin.php">Administration</a> Total Users: <span style="vertical-align: 1;" class="badge"><?php echo $total_user_number ?></span>
 		</div>
 	<?php } ?>
 
