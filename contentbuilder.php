@@ -45,7 +45,9 @@ include 'header.php';
 		<a id="feedbackLink" href="suggestion.php"><div id="feedback">Errors &<br>Feedback</div></a>
 		<button class="standard-button" id="autofill">Auto Fill</button>
 		<?php if ($user_role == 'blogs' || $user_role == 'admin'){ ?>
-			<input type="checkbox" id="devMode" /> Dev Mode
+			<div id="devModeBox">
+				<input type="checkbox" id="devMode" /> Dev Mode
+			</div>
 		<?php } ?>
 	<?php } ?>
 	</div>
@@ -77,9 +79,8 @@ include 'header.php';
 							<option value="spanish">Spanish</option>
 							<option value="french">French</option>
 						</select>	
-						<input style="margin: 20px;" class="submitButton btn-success" type="submit" />
+						<input style="margin: 20px; margin-right: 38px;" class="submitButton btn-success" type="submit" />
 						</form>';
-
 		}	
 		
 				

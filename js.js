@@ -495,10 +495,8 @@ $(document).ready(function() {
 
     $('#devMode').change(function(){
         if ($(this).attr('devmode')){
-            console.log('hi');
             $(this).removeAttr('devmode', 'true');
         } else {
-            console.log('this');
             $(this).attr('devmode', 'true');  
         }
     });
@@ -506,7 +504,6 @@ $(document).ready(function() {
      
     
         // FORM VALIDATION
-        console.log("true");
         $('.validation').focus(function() {
             if (!$('#devMode').attr('devmode')){
             $(".validation").tooltip();

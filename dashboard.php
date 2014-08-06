@@ -6,32 +6,39 @@ include 'header.php';
 
 $number = mysqli_query($con, 'SELECT * FROM feedback WHERE status="open"');
 $num = mysqli_num_rows($number);
+$users_online = count(glob(session_save_path() . '/*')) - 11;
 
+
+$users_result = mysqli_query($con, 'SELECT * FROM users');
+$total_user_number = mysqli_num_rows($users_result);
 ?>
 
 
 <div class="full-width-wrapper">
 
 	<?php if ($user_role == 'admin') { ?>
-		<div style="min-width: 540px;" class="well well-sm"><span class="glyphicon glyphicon-link quickLink">&nbsp;</span><a href="suggestion.php">Support Tickets <span style="vertical-align: 1;" class="badge"><?php echo $num ?></span></a><a class="quickLink" href="admin.php">Administration</a></div>
+		<div style="min-width: 540px;" class="well well-sm">
+		<span class="glyphicon glyphicon-link quickLink">&nbsp;</span>
+		<a href="suggestion.php">Support Tickets <span style="vertical-align: 1;" class="badge"><?php echo $num ?></span></a><a class="quickLink" href="admin.php">Administration</a>Active Online Users: <span style="vertical-align: 1;" class="badge"><?php echo $users_online ?></span> &nbsp;&nbsp;Total Users: <span style="vertical-align: 1;" class="badge"><?php echo $total_user_number ?></span>
+		</div>
 	<?php } ?>
 
 	<div class="left-wrapper-dash">
 		<div style="text-align: center;" class="jumbotron">
-			  <h1>Welcome to Connect</h1>
-			  <p>Boost Connect houses applications like AutoBuilder and Boost Note. <br> For further instructions click the get started button below. </p>
-			  <?php if ($user_role == 'admin') { ?>
-			  <p><a href="contentbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
-			  <?php } ?>
-			  <?php if ($user_role == 'content') { ?>
-			  <p><a href="contentbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
-			  <?php } ?>
-			  <?php if ($user_role == 'design') { ?>
-			  <p><a href="designbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
-			  <?php } ?>
-			  <?php if ($user_role == 'blogs') { ?>
-			  <p><a href="devbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
-			  <?php } ?>
+			<h1>Welcome to Connect</h1>
+		    <p>Boost Connect houses applications like AutoBuilder and Boost Note. <br> For further instructions click the get started button below. </p>
+			<?php if ($user_role == 'admin') { ?>
+			<p><a href="contentbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
+			<?php } ?>
+			<?php if ($user_role == 'content') { ?>
+			<p><a href="contentbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
+			<?php } ?>
+			<?php if ($user_role == 'design') { ?>
+			<p><a href="designbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
+			<?php } ?>
+			<?php if ($user_role == 'blogs') { ?>
+			<p><a href="devbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
+			<?php } ?>
 		</div>
 		<?php if ($user_role == 'blogs' || $user_role == 'admin') { ?>
 			<div class="panel dashPanel" >
