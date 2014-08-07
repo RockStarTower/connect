@@ -14,7 +14,6 @@ include 'config.php';
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="dropzone/dropzone.js"></script>
 <script type="text/javascript" src="js.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
