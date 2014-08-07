@@ -6,6 +6,12 @@ include 'header.php';
 		$domain_name = $_GET['domain'];
 		$wireframe = $_GET['wireframe'];
 
+		$file_path = ('dropzone/content/' . $domain_name . '/content.json');
+
+		if(!file_exists($file_path)){ // file does not exist
+		    die('Domain not found');
+		} 
+
 	}
 
 ?>

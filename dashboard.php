@@ -49,7 +49,7 @@ $total_user_number = mysqli_num_rows($users_result);
 						</div>
 					</div>
 					<div style="display: inline-block; margin: 20px;" class="btn-group">
-					  <button type="button" onclick="window.location='zipdownloader/zipdownloader1.php';" class="btn btn-danger">Download Latest V1.0B</button>
+					  <button type="button" onclick="window.location='zipdownloader/zipdownloader1.php';" class="btn btn-danger">Download Latest V1.0</button>
 					  <button type="button" style="margin-right: 20px;" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
 					    <span style="margin-top: 8px; height: 8px;" class="caret"></span>
 					    <span class="sr-only">Toggle Dropdown</span>

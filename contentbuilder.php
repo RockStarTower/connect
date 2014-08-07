@@ -2898,7 +2898,7 @@ include 'header.php';
 							</div>
 						</div>
 					</div>
-					
+
 						<label for="home_page_title">Home Page title:</label>
 						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
 						
