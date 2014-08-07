@@ -375,33 +375,35 @@ $(document).ready(function() {
         $('.navbar').css('-webkit-filter', 'blur(0px)');
     });
 
-    $(function() {
-        Dropzone.options.dropzoneForm = {
-            init: function() {
-                this.on("complete", function() {
-                    if (this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0) {
-                        if ($.trim($('#image_error').text()).length === 0) {
-                            //location.reload();
-                        } else {
-                            $('#image_error').show();
+    if (window.location.href.indexOf("designbuilder") > -1) {
+        $(function() {
+            Dropzone.options.dropzoneForm = {
+                init: function() {
+                    this.on("complete", function() {
+                        if (this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0) {
+                            if ($.trim($('#image_error').text()).length === 0) {
+                                //location.reload();
+                            } else {
+                                $('#image_error').show();
+                            }
+                            //$('#upload_wrap').hide();
                         }
-                        //$('#upload_wrap').hide();
-                    }
-                });
-            },
-            success: function(file, response) {
-                if (response == 'success') {
-                    file.previewElement.classList.add('dz-success');
-                    file.previewElement.classList.remove('dz-processing');
+                    });
+                },
+                success: function(file, response) {
+                    if (response == 'success') {
+                        file.previewElement.classList.add('dz-success');
+                        file.previewElement.classList.remove('dz-processing');
 
-                } else {
-                    file.previewElement.classList.add('dz-error');
-                    file.previewElement.classList.remove('dz-processing');
-                    $('#image_error').append(response);
+                    } else {
+                        file.previewElement.classList.add('dz-error');
+                        file.previewElement.classList.remove('dz-processing');
+                        $('#image_error').append(response);
+                    }
                 }
-            }
-        };
-    });
+            };
+        });
+    }
 
     $("#domain").focusout(function() {
         var textbox = $(this);
