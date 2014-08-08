@@ -1668,7 +1668,6 @@ $design_dimensions = array(
 		'slider3.jpg' => array('width' => '1077', 'height' => '450'),
 		'image1.jpg' => array('width' => '344', 'height' => '346'),
 		'image2.jpg' => array('width' => '344', 'height' => '346'),
-		'image3.jpg' => array('width' => '200', 'height' => '290'),
 	),
 	'28' => array(
 		'logo.png' => array('minWidth' => '350', 'maxWidth' => '657', 'minHeight' => '90', 'maxHeight' => '165'),

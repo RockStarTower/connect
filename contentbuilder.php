@@ -1742,8 +1742,6 @@ include 'header.php';
 							<span class="edit_link" > Use Visual Editor</span>
 						</p>
 
-							<label for="content_heading_3">Content Heading 3:</label>
-							<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
 						<p>
 							<label class="tLabel" for="content_box_3">Content Box 3:</label>
 							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
@@ -1819,7 +1817,8 @@ include 'header.php';
 		$ch = $wf_array['content_headings'];
 		$cb = $wf_array['content_boxes'];
 		$hpt = $wf_array['homepage_title'];
-		
+		$tc = $wf_array['top_content'];
+		$tch = $wf_array['top_content_heading'];
 	?>
 		
 			<form id="wireframeForm" class="panel taskform" autocomplete="off" >
@@ -1896,11 +1895,11 @@ include 'header.php';
 						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
 						
 						<label for="content_heading_1">Content Heading 1:</label>
-						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
+						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$tch['min']?>" data-max="<?=$tch['max']?>" placeholder="Content Heading 1" required />
 						
 						<p>
 							<label class="tLabel" for="top_content_box">Content Box 1:</label>
-							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$tc['min']?>" data-max="<?=$tc['max']?>" placeholder="Top Content Box" required ></textarea>
 							<span class="edit_link" > Use Visual Editor</span>
 						</p>
 							<label for="content_heading_2">Content Heading 2:</label>
