@@ -217,8 +217,8 @@ $content_array = array(
 			'max' => 40,
 		),
 		'content_boxes' => array(
-			'min' => 380,
-			'max' => 420,
+			'min' => 430,
+			'max' => 570,
 		),
 		'page_titles' => array(
 			'min' => 10,

@@ -4369,6 +4369,7 @@ include 'header.php';
 		$cb = $wf_array['content_boxes'];
 		$ch = $wf_array['content_headings'];
 		$hpt = $wf_array['homepage_title'];
+		$cta = $wf_array['call_to_actions'];
 		
 	?>
 		
@@ -4432,6 +4433,14 @@ include 'header.php';
 							</div>
 						</div>
 					</div>
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
 
 						<label for="home_page_title">Home Page title:</label>
 						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
