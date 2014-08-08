@@ -44,7 +44,7 @@ switch($wireframe) {
 		break;
 	case 4:
 		$_POST['content']['homepage']['content'] = '<div class="et_builder clearfix"><div class="et_lb_module et_lb_text_block et_lb_first">[widgetkit id=ab_slider_id]<h1>'.$hp_h1.'</h1></div> <!-- end .et_lb_text_block --><div class="et_lb_module et_lb_column et_lb_1_3 et_lb_first"><div class="et_lb_module et_lb_text_block box1"><h2>'.$title1.'</h2><div><img alt="'.$title1.'" src="../wp-content/uploads/image1.jpg"></div><p>'.$content1.'</p></div> <!-- end .et_lb_text_block --><div class="et_lb_module et_lb_text_block box3"><h2>'.$title2.'</h2><div><img alt="'.$title2.'" src="../wp-content/uploads/image2.jpg"></div><p>'.$content2.'</p></div> <!-- end .et_lb_text_block --></div> <!-- end .et_lb_column_et_lb_1_3 --><div class="et_lb_module et_lb_column et_lb_1_3"><div class="et_lb_module et_lb_text_block box2"><h2>'.$title3.'</h2><div><img alt="'.$title3.'" src="../wp-content/uploads/image3.jpg"></div><p>'.$content3.'</p></div> <!-- end .et_lb_text_block --><div class="et_lb_module et_lb_text_block box4"><h2>'.$title4.'</h2><div><img alt="'.$title4.'" src="../wp-content/uploads/image4.jpg"></div><p>'.$content4.'</p></div> <!-- end .et_lb_text_block --></div> <!-- end .et_lb_column_et_lb_1_3 --><div class="et_lb_module et_lb_column et_lb_1_3"><div class="et_lb_module et_lb_widget_area">[do_widget "Recent Posts"]</div> <!-- end .et_lb_widget_area --></div> <!-- end .et_lb_column_et_lb_1_3 --></div>';
-		
+		break;
 	case 5:
 		$_POST['content']['homepage']['content'] = '<div class="et_builder clearfix"><div class="et_lb_module et_lb_text_block et_lb_first">[widgetkit id=ab_slider_id]<h1>'.$hp_h1.'</h1></div><div class="et_lb_module et_lb_column et_lb_1_2 et_lb_first"><div class="et_lb_module et_lb_text_block box"><h2>'.$title1.'</h2><div class="image1"><img alt="'.$title1.'" src="../wp-content/uploads/image1.jpg" /></div><p>'.$content1.'</p><div class="image2"><img alt="'.$title1.'" src="../wp-content/uploads/image2.jpg" /></div><p>'.$content2.'</p></div></div><div class="et_lb_module et_lb_column et_lb_1_2"><div class="et_lb_module et_lb_widget_area">[do_widget "Recent Posts"]</div></div></div>';
 		break;
@@ -140,8 +140,6 @@ switch($wireframe) {
 		break;
 }
 
-
-
 $domain_dir = 'content/' . $domain;
 
 if (!file_exists($domain_dir)) {
@@ -155,4 +153,5 @@ $encode = json_encode($_POST);
 
 file_put_contents('content/'.$domain.'/content.json', $encode);
 echo "Content Created!";
+
 ?>
