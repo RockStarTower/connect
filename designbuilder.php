@@ -775,7 +775,7 @@ include 'header.php';
 						  <li class="media">
 						    <div class="media-body">
 						    	<h4 class="media-heading">Step 1</h4>
-								First make sure you are using the correct naming conventions for the images you want to upload. Here is an example for each image type: logo.png, favicon.ico, slider1.jpg, image1.jpg, icon1.png, background.png. If they are named incorrectly or the wrong size it it will show up in the upload errors box. You will need to re-upload that file as it will automatically be deleted.
+								First make sure you are using the correct naming conventions for the images you want to upload. Here is an example for each image type: <br><br>   logo.png <br> favicon.ico <br>  slider1.jpg <br>  image1.jpg <br>  icon1.png <br>  background.png <br><br> Every letter is lowercase, there are no spaces or dashes. If they are named incorrectly or the wrong size it will show up in the upload errors box. You will need to re-upload that file as it will automatically be deleted.
 						    </div>
 						  </li>
 						</ul>

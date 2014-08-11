@@ -2002,6 +2002,7 @@ include 'header.php';
 		$pn = $wf_array['navigation_page_names'];
 		$cb = $wf_array['content_boxes'];
 		$hpt = $wf_array['homepage_title'];
+		$tc = $wf_array['top_content'];
 		
 	?>
 		
@@ -2080,7 +2081,7 @@ include 'header.php';
 						
 						<p>
 							<label class="tLabel" for="top_content_box">Content Box 1:</label>
-							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Top Content Box" required ></textarea>
+							<textarea rows="8" cols="50" id="top_content_box" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$tc['min']?>" data-max="<?=$tc['max']?>" placeholder="Top Content Box" required ></textarea>
 							<span class="edit_link" > Use Visual Editor</span>
 						</p>
 
@@ -2341,6 +2342,7 @@ include 'header.php';
 		$cb = $wf_array['content_boxes'];
 		$ch = $wf_array['content_headings'];
 		$hpt = $wf_array['homepage_title'];
+		$cta = $wf_array['call_to_actions'];
 		
 	?>
 		
@@ -2404,6 +2406,14 @@ include 'header.php';
 							</div>
 						</div>
 					</div>
+						<label for="slider_1">Slider Call to Action:</label>
+						<input type="text" id="slider_1" name="content[page1][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 1" required />
+						
+						<label for="slider_2"></label>
+						<input type="text" id="slider_2" name="content[page2][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 2" required />
+						
+						<label for="slider_3"></label>
+						<input type="text" id="slider_3" name="content[page3][slider_content]" class="input-standard contentForm validation" data-min="<?=$cta['min']?>" data-max="<?=$cta['max']?>" placeholder="Call to Action Page 3" required />
 					
 						<label for="home_page_title">Home Page title:</label>
 						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
