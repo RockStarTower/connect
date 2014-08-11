@@ -3024,6 +3024,7 @@ include 'header.php';
 		$ctat = $wf_array['call_to_action_titles'];
 		$ctac = $wf_array['call_to_action_content'];
 		$hpt = $wf_array['homepage_title'];
+		$tagline = $wf_array['tagline'];
 		
 	?>
 		
@@ -3107,17 +3108,10 @@ include 'header.php';
 						<input type="text" id="slider_3" name="content[page3][call_to_action_content]" class="input-standard contentForm validation" data-min="<?=$ctac['min']?>" data-max="<?=$ctac['max']?>" placeholder="Call to Action Content Page 3" required />
 
 						<label for="intro_message_button_label">Intro Message Label:</label>
-						<input type="text" id="intro_message_button_label" name="content[homepage][intro_message_label]" class="input-standard contentForm validation" data-min="<?=$ctac['min']?>" data-max="<?=$ctac['max']?>" placeholder="Intro Message Content" required />
+						<input type="text" id="intro_message_button_label" name="content[homepage][intro_message_label]" class="input-standard contentForm validation" data-min="<?=$ctat['min']?>" data-max="<?=$ctat['max']?>" placeholder="Intro Message Content" required />
 
 						<label for="intro_message">Intro Message Content:</label>
-						<input type="text" id="intro_message" name="content[homepage][intro_message_content]" class="input-standard contentForm validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Intro Message Content" required />
-
-						<label for="blog_area_title">Blog Area Title:</label>
-						<input type="text" id="blog_area_title" name="content[homepage][blog_area_title]" class="input-standard contentForm validation" data-min="<?=$ctac['min']?>" data-max="<?=$ctac['max']?>" placeholder="Blog Area Title" required />
-
-					
-						<label for="home_page_title">Home Page title:</label>
-						<input type="text" id="home_page_title" name="content[homepage][content][homepage_title]" class="input-standard contentForm validation" data-min="<?=$hpt['min']?>" data-max="<?=$hpt['max']?>" placeholder="Home Page title" required />
+						<input type="text" id="intro_message" name="content[homepage][intro_message_content]" class="input-standard contentForm validation" data-min="<?=$tagline['min']?>" data-max="<?=$tagline['max']?>" placeholder="Intro Message Content" required />
 						
 						<label for="content_heading_1">Content Heading 1:</label>
 						<input type="text" id="content_heading_1" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 1" required />
