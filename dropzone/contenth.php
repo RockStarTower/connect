@@ -3,6 +3,11 @@ include ("../config.php");
 
 $domain = $_POST['site_url'];
 $wireframe = $_POST['wireframe'];
+$language = $_POST['language'];
+$site_url = $_POST['site_url'];
+$username = $_POST['username'];
+
+$date = date("y-m-d");
 
 
 $hp_h1 = $_POST['content']['homepage']['content']['homepage_title'];
@@ -157,5 +162,11 @@ $encode = json_encode($_POST);
 
 file_put_contents('content/'.$domain.'/content.json', $encode);
 echo "Content Created!";
+
+$status = 'design';
+
+mysqli_query($con, "INSERT INTO ticket (username, wireframe, url, language, date, status) 
+VALUES ('$username', '$wireframe', '$site_url', '$language', '$date', '$status')");
+
 
 ?>

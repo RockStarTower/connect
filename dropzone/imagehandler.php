@@ -1,4 +1,5 @@
 <?php
+include ("../config.php");
 
 $wireframe = $_POST['wireframe'];
 $domain = $_POST['domain'];
@@ -92,5 +93,7 @@ if (file_put_contents('content/' . $domain . '/content.json', $encode)) {
 } else {
     echo "Error With Update";
 }
+
+mysqli_query($con, "UPDATE ticket  SET status = 'development' WHERE url = '$domain'");
 
 ?>
