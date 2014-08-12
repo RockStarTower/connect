@@ -22,6 +22,7 @@ $total_user_number = mysqli_num_rows($users_result);
 		<a href="suggestion.php">Support Tickets <span style="vertical-align: 1;" class="badge"><?php echo $num ?></span></a><a class="quickLink" href="admin.php">Administration</a> Total Users: <span style="vertical-align: 1;" class="badge"><?php echo $total_user_number ?></span>
 		</div>
 	<?php } ?>
+	
 
 	<div class="left-wrapper-dash">
 		<div style="text-align: center;" class="jumbotron">
