@@ -3,7 +3,10 @@ include ("../config.php");
 
 $domain = $_POST['site_url'];
 $wireframe = $_POST['wireframe'];
+
+
 $hp_h1 = $_POST['content']['homepage']['content']['homepage_title'];
+
 
 if ($wireframe != 12){
 	$hp_content_titles = $_POST['content']['homepage']['title'];
@@ -99,6 +102,7 @@ switch($wireframe) {
 		break;
 	case 19:
 		$_POST['content']['homepage']['content'] = '<div class="et_builder clearfix"><div class="et_lb_module et_lb_column et_lb_2_3 et_lb_first"><div class="et_lb_module et_lb_text_block"><div><img class="float-left first" alt="" src="../wp-content/uploads/image1.jpg"></div><div><img class="float-left" alt="" src="../wp-content/uploads/image2.jpg"></div><div><img class="float-right" alt="" src="../wp-content/uploads/image3.jpg"></div></div> <!-- end .et_lb_text_block --><div class="et_lb_module et_lb_text_block"><h3>'.$title1.'</h3><p>'.$content1.'</p><h3>'.$title2.'</h3><p>'.$content2.'</p><h3>'.$title3.'</h3><p>'.$content3.'</p></div> <!-- end .et_lb_text_block --></div> <!-- end .et_lb_column_et_lb_2_3 --><div class="et_lb_module et_lb_column et_lb_1_3"><div class="et_lb_module et_lb_widget_area">[do_widget "Recent Posts"]</div> <!-- end .et_lb_widget_area --></div> <!-- end .et_lb_column_et_lb_1_3 --></div>';
+		$_POST['content']['homepage']['homepage_title'] = $hp_h1;
 		break;
 	case 20:
 		$_POST['content']['homepage']['content'] = '<div class="et_builder clearfix"><div class="et_lb_module et_lb_text_block et_lb_first"><div id="slide-wrap"><div id="left-slide"><div><img alt="" src="../wp-content/uploads/slider/slider1.jpg"></div><h3><a href="/'."'".'.$'.'page_titles['."'".'0'."'".']'.".'".'/">'.$slidecaption1.'</a></h3></div><div id="right-slide"><div id="right-slide-top"><div><img alt="" src="../wp-content/uploads/slider/slider2.jpg"></div><h3><a href="/'."'".'.$'.'page_titles['."'".'1'."'".']'.".'".'/">'.$slidecaption2.'</a></h3></div><div id="right-slide-bottom"><div><img alt="" src="../wp-content/uploads/slider/slider3.jpg"></div><h3><a href="/'."'".'.$'.'page_titles['."'".'2'."'".']'.".'".'/">'.$slidecaption3.'</a></h3></div></div></div><div id="placeholder"></div></div><div class="et_lb_module et_lb_text_block et_lb_first page-title"><h1>'.$hp_h1.'</h1></div><div class="et_lb_module et_lb_widget_area et_lb_first">[do_widget "Recent Posts"]</div><div class="et_lb_module et_lb_column et_lb_1_3 et_lb_first"><div class="et_lb_module et_lb_text_block"><div><img alt="'.$title1.'" src="../wp-content/uploads/image1.jpg"></div><h4>'.$title1.'</h4><p>'.$content1.'</p></div></div><div class="et_lb_module et_lb_column et_lb_1_3"><div class="et_lb_module et_lb_text_block"><div><img alt="'.$title2.'" src="../wp-content/uploads/image2.jpg"></div><h4>'.$title2.'</h4><p>'.$content2.'</p></div></div><div class="et_lb_module et_lb_column et_lb_1_3"><div class="et_lb_module et_lb_text_block"><div><img alt="'.$title3.'" src="/wp-content/uploads/Image-3.jpeg"></div><h4>'.$title3.'</h4><p>'.$content3.'</p></div></div></div>';
