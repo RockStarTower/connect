@@ -1,4 +1,5 @@
 <?php
+include ("config.php");
 
 if(isset($_GET['domain'])){
 
@@ -20,6 +21,8 @@ if(isset($_GET['domain'])){
 	    readfile($file);
 	}
 
+	mysqli_query($con, "UPDATE ticket  SET status = 'completed' WHERE url = '$domain_name'");
+	
 } else {
 	echo 'No domain Set.';
 }

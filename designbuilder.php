@@ -802,10 +802,68 @@ include 'header.php';
 						<textarea class="input-standard contentNotes" name="contentNotes" placeholder="Enter any notes here..."></textarea>
 				</div>
 				-->
+
 		</div>	
 	</div>
 </div>
 
+
+<?php } ?>
+
+<?php if(!isset($_GET['domain']) & !isset($_GET['wireframe'])){ ?>
+
+		<div class="panel taskform"  >
+					
+			<div class="panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+					Domain Information <span class="sub-panel-title">- Set Domain & Wireframe </span>
+					</div>
+				</div>
+			</div>
+
+		<?php
+		$result = mysqli_query($con, 'SELECT * FROM ticket WHERE status = "design" ORDER BY date DESC LIMIT 20');
+
+				if (!$result) {
+					printf("Error: %s\n", mysqli_error($con));
+					exit();
+				}
+
+				$i = 0;
+				
+				while ($row = mysqli_fetch_assoc($result)) {
+				
+					if (!$i++) echo "<table class='table table-striped' >
+					<tr class=''>
+					<th class='tTitle'>Date</th>
+					<th class='tTitle'>Content Creator</th>
+					<th class='tTitle'>URL</th>
+					<th class='tTitle'>Wireframe</th>
+					<th class='tTitle'>Language</th>
+					<th class='tTitle'>Design Link</th>
+					</tr>";
+
+					$date = $row['date'];
+					$username = $row['username'];
+					$url = $row['url'];
+					$wireframe = $row['wireframe'];
+					$language = $row['language'];
+					
+					echo "<tr class=''>";
+					echo "<td class='tCell'>" . $date . "</td>";
+					echo "<td class='tCell'>" . $username . "</td>";
+					echo "<td class='tCell'>" . $url . "</td>";
+					echo "<td class='tCell'>" . $wireframe . "</td>";
+					echo "<td class='tCell'>" . $language . "</td>";
+					echo "<td class='tCell' ><a href='designbuilder.php?domain=".$url."&wireframe=".$wireframe."'>Click Here To Add Images</a></td>";
+					echo "</tr>";
+				}
+				echo "</table>";
+		?>
+
+		</div>
+	</div>
 
 <?php } ?>
 
