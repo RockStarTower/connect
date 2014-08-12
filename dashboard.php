@@ -40,6 +40,16 @@ $total_user_number = mysqli_num_rows($users_result);
 			<p><a href="devbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
 			<?php } ?>
 		</div>
+
+		<?php
+		    $date = getdate();
+		    if($date['mday'] == 12 && $date['mon'] == 8){
+
+		        echo '<div style="font-size: 16px; text-align: center;" class="alert alert-danger" role="alert"><strong >Attention:</strong> Download the New Version of AutoBuilder Released Today!</div>';
+
+		    }
+		?>
+		
 		<?php if ($user_role == 'blogs' || $user_role == 'admin') { ?>
 			<div class="panel dashPanel" >
 				<div class="panel-success panel-info">
@@ -91,7 +101,7 @@ $total_user_number = mysqli_num_rows($users_result);
 						</div>
 					</div>
 				</div>
-				<div style="max-height: 500px; overflow: scroll;">
+				<div style="max-height: 500px; overflow-y: scroll;">
 					<div style="padding: 5px; padding-left: 30px; padding-right: 30px;">
 						<h3>Connect & AutoBuilder</h3>
 						<span>8/11/2014 </span>
