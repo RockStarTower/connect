@@ -817,13 +817,13 @@ include 'header.php';
 			<div class="panel-default">
 				<div class="panel-heading">
 					<div class="panel-title">
-					Domain Information <span class="sub-panel-title">- Set Domain & Wireframe </span>
+					Domains Ready <span class="sub-panel-title">-  Oldest Domains Ascending</span>
 					</div>
 				</div>
 			</div>
 
 		<?php
-		$result = mysqli_query($con, 'SELECT * FROM ticket WHERE status = "design" ORDER BY date DESC LIMIT 20');
+		$result = mysqli_query($con, 'SELECT * FROM ticket WHERE status = "design" ORDER BY date ASC LIMIT 20');
 
 				if (!$result) {
 					printf("Error: %s\n", mysqli_error($con));
@@ -856,7 +856,7 @@ include 'header.php';
 					echo "<td class='tCell'>" . $url . "</td>";
 					echo "<td class='tCell'>" . $wireframe . "</td>";
 					echo "<td class='tCell'>" . $language . "</td>";
-					echo "<td class='tCell' ><a href='designbuilder.php?domain=".$url."&wireframe=".$wireframe."'>Click Here To Add Images</a></td>";
+					echo "<td class='tCell' ><a href='designbuilder.php?domain=".$url."&wireframe=".$wireframe."'><input type='hidden' id='domain' name='domain' value='$url'/><input style='margin: 0px; height: 24px; padding: 2px;' class='submitButton btn-primary' type='button' value='Add Images' /></a></td>";
 					echo "</tr>";
 				}
 				echo "</table>";
