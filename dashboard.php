@@ -89,7 +89,7 @@ $total_user_number = mysqli_num_rows($users_result);
 					<div class="glyphicon glyphicon-wrench wrenchExtra">
 				    </div>
 				    <div class="errorDash">
-				    	If we missed something, or if you found a issue let us know! <a href="suggestion.php">Click Here</a> to contact us, or you can use the "report error" link from the dropdown under your name.
+				    	If we missed something, or if you found a issue let us know! <a href="suggestion.php">Click Here</a> to contact us, or you can use the "Contact Us" link from the dropdown under your username.
 				    </div>
 				
 			</div>
