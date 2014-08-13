@@ -68,6 +68,337 @@ include 'header.php';
 			<button data-domain="<?=$domain_name?>" data-wireframe="<?=$wireframe?>" id="button_id" style="margin: 20px; margin-top: -45px;" type="button" class="submitButton btn-success btn-valid">Submit</button>
 			</div>
 		</div>
+
+		
+		<div class="panel">
+			<div class="panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+					Image Upload Reference <span class="sub-panel-title">- Acceptable Names & Sizes</span>
+					</div>
+				</div>
+			</div>
+			<div class="imageSizeCon">
+		<?php if ($wireframe == 1){ ?>
+			logo.png => (minWidth => 300, maxWidth => 600, minHeight => 50, maxHeight => 150) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 880, height => 350) <br>
+			slider2.jpg => (width => 880, height => 350) <br>
+			slider3.jpg => (width => 880, height => 350) <br>
+			image1.jpg => (width => 200, height => 290) <br>
+			image2.jpg => (width => 200, height => 290) <br>
+			image3.jpg => (width => 200, height => 290) <br>
+		<?php } else if ($wireframe == 2){ ?>
+			logo.png => (minWidth => 300, maxWidth => 600, minHeight => 100, maxHeight => 200) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 960, height => 350) <br>
+			slider2.jpg => (width => 960, height => 350) <br>
+			slider3.jpg => (width => 960, height => 350) <br>
+			image1.jpg => (width => 226, height => 150) <br>
+			image2.jpg => (width => 226, height => 150) <br>
+			image3.jpg => (width => 226, height => 150) <br>
+			image4.jpg => (width => 226, height => 150) <br>
+		<?php } else if ($wireframe == 3){ ?>
+			logo.png => (minWidth => 300, maxWidth => 500, minHeight => 75, maxHeight => 125) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 864, height => 350) <br>
+			slider2.jpg => (width => 864, height => 350) <br>
+			slider3.jpg => (width => 864, height => 350) <br>
+			image1.jpg => (width => 274, height => 150) <br>
+			image2.jpg => (width => 274, height => 150) <br>
+			image3.jpg => (width => 274, height => 150) <br>
+		<?php } else if ($wireframe == 4){ ?>
+			logo.png => (minWidth => 280, maxWidth => 600, minHeight => 75, maxHeight => 200) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 960, height => 350) <br>
+			slider2.jpg => (width => 960, height => 350) <br>
+			slider3.jpg => (width => 960, height => 350) <br>
+			image1.jpg => (width => 307, height => 300) <br>
+			image2.jpg => (width => 307, height => 300) <br>
+			image3.jpg => (width => 307, height => 300) <br>
+			image4.jpg => (width => 307, height => 300) <br>
+		<?php } else if ($wireframe == 5){ ?>
+			logo.png => (minWidth => 250, maxWidth => 600, minHeight => 75, maxHeight => 150) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 960, height => 350) <br>
+			slider2.jpg => (width => 960, height => 350) <br>
+			slider3.jpg => (width => 960, height => 350) <br>
+			image1.jpg => (width => 260, height => 250) <br>
+			image2.jpg => (width => 260, height => 250) <br>
+		<?php } else if ($wireframe == 6){ ?>
+			logo.png => (minWidth => 250, maxWidth => 600, minHeight => 60, maxHeight => 150) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 582, height => 350) <br>
+			slider2.jpg => (width => 582, height => 350) <br>
+			slider3.jpg => (width => 582, height => 350) <br>
+			image1.jpg => (width => 262, height => 150) <br>
+			image2.jpg => (width => 262, height => 150) <br>
+		<?php } else if ($wireframe == 7){ ?>
+			logo.png => (minWidth => 200, maxWidth => 450, minHeight => 60, maxHeight => 150) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 1400, height => 300) <br>
+			slider2.jpg => (width => 1400, height => 300) <br>
+			slider3.jpg => (width => 1400, height => 300) <br>
+			image1.jpg => (width => 288, height => 150) <br>
+			image2.jpg => (width => 288, height => 150) <br>
+			image3.jpg => (width => 288, height => 150) <br>
+		<?php } else if ($wireframe == 8){ ?>
+			logo.png => (minWidth => 150, maxWidth => 450, minHeight => 50, maxHeight => 120) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 912, height => 350) <br>
+			slider2.jpg => (width => 912, height => 350) <br>
+			slider3.jpg => (width => 912, height => 350) <br>
+			image1.jpg => (width => 212, height => 250) <br>
+		<?php } else if ($wireframe == 9){ ?>
+			logo.png => (minWidth => 150, maxWidth => 450, minHeight => 25, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 730, height => 350) <br>
+			slider2.jpg => (width => 730, height => 350) <br>
+			slider3.jpg => (width => 730, height => 350) <br>
+			image1.jpg => (width => 150, height => 132) <br>
+			image2.jpg => (width => 150, height => 132) <br>
+			image3.jpg => (width => 150, height => 132) <br>
+		<?php } else if ($wireframe == 10){ ?>
+			logo.png => (minWidth => 250, maxWidth => 600, minHeight => 60, maxHeight => 120) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 940, height => 350) <br>
+			slider2.jpg => (width => 940, height => 350) <br>
+			slider3.jpg => (width => 940, height => 350) <br>
+			image1.jpg => (width => 150, height => 150) <br>
+			image2.jpg => (width => 300, height => 200) <br>
+			image3.jpg => (width => 300, height => 200) <br>
+		<?php } else if ($wireframe == 11){ ?>
+			logo.png => (minWidth => 150, maxWidth => 500, minHeight => 30, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 960, height => 350) <br>
+			slider2.jpg => (width => 960, height => 350) <br>
+			slider3.jpg => (width => 960, height => 350) <br>
+			image1.jpg => (width => 220, height => 150) <br>
+			image2.jpg => (width => 220, height => 150) <br>
+			image3.jpg => (width => 220, height => 150) <br>
+			image4.jpg => (width => 220, height => 150) <br>
+		<?php } else if ($wireframe == 12){ ?>
+			logo.png => (minWidth => 150, maxWidth => 350, minHeight => 30, maxHeight => 80) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 940, height => 350) <br>
+			slider2.jpg => (width => 940, height => 350) <br>
+			slider3.jpg => (width => 940, height => 350) <br>
+			image1.jpg => (width => 250, height => 250) <br>
+			image2.jpg => (width => 190, height => 150) <br>
+			image3.jpg => (width => 190, height => 150) <br>
+			image4.jpg => (width => 190, height => 150) <br>
+		<?php } else if ($wireframe == 13){ ?>
+			logo.png => (minWidth => 150, maxWidth => 600, minHeight => 30, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 943, height => 345) <br>
+			slider2.jpg => (width => 943, height => 345) <br>
+			slider3.jpg => (width => 943, height => 345) <br>
+			image1.jpg => (width => 130, height => 130) <br>
+			image2.jpg => (width => 130, height => 130) <br>
+			image3.jpg => (width => 130, height => 130) <br>
+			image4.jpg => (width => 130, height => 130) <br>
+		<?php } else if ($wireframe == 14){ ?>
+			logo.png => (minWidth => 100, maxWidth => 202, minHeight => 100, maxHeight => 202) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 760, height => 350) <br>
+			slider2.jpg => (width => 760, height => 350) <br>
+			slider3.jpg => (width => 760, height => 350) <br>
+			image1.jpg => (width => 179, height => 179) <br>
+			image2.jpg => (width => 179, height => 179) <br>
+			image3.jpg => (width => 179, height => 179) <br>
+			image4.jpg => (width => 179, height => 179) <br>
+			image1.png => (width => 179, height => 179) <br>
+			image2.png => (width => 179, height => 179) <br>
+			image3.png => (width => 179, height => 179) <br>
+			image4.png => (width => 179, height => 179) <br>
+		<?php } else if ($wireframe == 15){ ?>
+			logo.png => (minWidth => 100, maxWidth => 375, minHeight => 20, maxHeight => 60) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 700, height => 350) <br>
+			slider2.jpg => (width => 700, height => 350) <br>
+			slider3.jpg => (width => 700, height => 350) <br>
+			image1.jpg => (width => 339, height => 300) <br>
+			image2.jpg => (width => 339, height => 300) <br>
+			image3.jpg => (width => 700, height => 300) <br>
+		<?php } else if ($wireframe == 16){ ?>
+			logo.png => (minWidth => 100, maxWidth => 600, minHeight => 20, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 461, height => 271) <br>
+			slider2.jpg => (width => 461, height => 271) <br>
+			slider3.jpg => (width => 461, height => 271) <br>
+			image1.jpg => (width => 185, height => 185) <br>
+			image2.jpg => (width => 185, height => 185) <br>
+			image3.jpg => (width => 185, height => 185) <br>
+			image4.jpg => (width => 185, height => 185) <br>
+		<?php } else if ($wireframe == 17){ ?>
+			logo.png => (minWidth => 100, maxWidth => 450, minHeight => 20, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 462, height => 306) <br>
+			slider2.jpg => (width => 462, height => 306) <br>
+			slider3.jpg => (width => 462, height => 306) <br>
+			image1.jpg => (width => 310, height => 310) <br>
+			image2.jpg => (width => 310, height => 310) <br>
+		<?php } else if ($wireframe == 18){ ?>
+			logo.png => (minWidth => 100, maxWidth => 450, minHeight => 20, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			background.jpg => (width => 1064, height => 304) <br>
+			background.png => (width => 1064, height => 304) <br>
+			image1.jpg => (width => 479, height => 262) <br>
+			image2.jpg => (width => 479, height => 262) <br>
+			image3.jpg => (width => 479, height => 262) <br>
+			icon1.png => (width => 50, height => 50) <br>
+			icon2.png => (width => 50, height => 50) <br>
+			icon3.png => (width => 50, height => 50) <br>
+		<?php } else if ($wireframe == 19){ ?>
+			logo.png => (minWidth => 250, maxWidth => 500, minHeight => 60, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 960, height => 350) <br>
+			slider2.jpg => (width => 960, height => 350) <br>
+			slider3.jpg => (width => 960, height => 350) <br>
+			image1.jpg => (width => 175, height => 220) <br>
+			image2.jpg => (width => 175, height => 220) <br>
+			image3.jpg => (width => 175, height => 220) <br>
+		<?php } else if ($wireframe == 20){ ?>
+			logo.png => (minWidth => 100, maxWidth => 700, minHeight => 20, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 688, height => 500) <br>
+			slider2.jpg => (width => 688, height => 248) <br>
+			slider3.jpg => (width => 688, height => 248) <br>
+			image1.jpg => (width => 371, height => 350) <br>
+			image2.jpg => (width => 371, height => 350) <br>
+			image3.jpg => (width => 371, height => 350) <br>
+		<?php } else if ($wireframe == 21){ ?>
+			logo.png => (minWidth => 100, maxWidth => 700, minHeight => 20, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.png => (width => 813, height => 230) <br>
+			icon1.png => (width => 50, height => 50) <br>
+			icon2.png => (width => 50, height => 50) <br>
+			icon3.png => (width => 50, height => 50) <br>
+		<?php } else if ($wireframe == 22){ ?>
+			logo.png => (minWidth => 295, maxWidth => 500, minHeight => 88, maxHeight => 115) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 960, height => 350) <br>
+			slider2.jpg => (width => 960, height => 350) <br>
+			slider3.jpg => (width => 960, height => 350) <br>
+			image1.jpg => (width => 255, height => 180) <br>
+			image2.jpg => (width => 255, height => 180) <br>
+			image3.jpg => (width => 255, height => 180) <br>
+		<?php } else if ($wireframe == 23){ ?>
+			logo.png => (minWidth => 100, maxWidth => 300, minHeight => 20, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 960, height => 295) <br>
+			slider2.jpg => (width => 960, height => 295) <br>
+			slider3.jpg => (width => 960, height => 295) <br>
+			image1.jpg => (width => 250, height => 250) <br>
+			image2.jpg => (width => 250, height => 250) <br>
+			image3.jpg => (width => 250, height => 250) <br>
+		<?php } else if ($wireframe == 24){ ?>
+			logo.png => (minWidth => 100, maxWidth => 300, minHeight => 20, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 960, height => 380) <br>
+			slider2.jpg => (width => 960, height => 380) <br>
+			slider3.jpg => (width => 960, height => 380) <br>
+			image1.jpg => (width => 220, height => 150) <br>
+			image2.jpg => (width => 220, height => 150) <br>
+			image3.jpg => (width => 220, height => 150) <br>
+			image4.jpg => (width => 715, height => 275) <br>
+		<?php } else if ($wireframe == 25){ ?>
+			logo.png => (minWidth => 100, maxWidth => 315, minHeight => 20, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 535, height => 300) <br>
+			slider2.jpg => (width => 535, height => 300) <br>
+			slider3.jpg => (width => 535, height => 300) <br>
+			image1.jpg => (width => 250, height => 250) <br>
+			image2.jpg => (width => 250, height => 250) <br>
+			image3.jpg => (width => 250, height => 250) <br>
+			background.jpg => (minWidth => 2000, maxWidth => 2300, minHeight => 600, maxHeight => 700) <br>
+		<?php } else if ($wireframe == 26){ ?>
+			logo.png => (minWidth => 200, maxWidth => 300, minHeight => 60, maxHeight => 150) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 855, height => 333) <br>
+			slider2.jpg => (width => 855, height => 333) <br>
+			slider3.jpg => (width => 855, height => 333) <br>
+			image1.jpg => (width => 179, height => 179) <br>
+			image2.jpg => (width => 179, height => 179) <br>
+			image3.jpg => (width => 179, height => 179) <br>
+			image4.jpg => (width => 179, height => 179) <br>
+			image1.png => (width => 179, height => 179) <br>
+			image2.png => (width => 179, height => 179) <br>
+			image3.png => (width => 179, height => 179) <br>
+			image4.png => (width => 179, height => 179) <br>
+		<?php } else if ($wireframe == 27){ ?>
+			logo.png => (minWidth => 200, maxWidth => 300, minHeight => 90, maxHeight => 95) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 1077, height => 450) <br>
+			slider2.jpg => (width => 1077, height => 450) <br>
+			slider3.jpg => (width => 1077, height => 450) <br>
+			image1.jpg => (width => 344, height => 346) <br>
+			image2.jpg => (width => 344, height => 346) <br>
+		<?php } else if ($wireframe == 28){ ?>
+			logo.png => (minWidth => 350, maxWidth => 657, minHeight => 90, maxHeight => 165) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 437, height => 200) <br>
+			slider2.jpg => (width => 437, height => 200) <br>
+			slider3.jpg => (width => 437, height => 200) <br>
+			slider4.jpg => (width => 437, height => 200) <br>
+			image1.jpg => (width => 575, height => 250) <br>
+		<?php } else if ($wireframe == 29){ ?>
+			logo.png => (minWidth => 100, maxWidth => 300, minHeight => 20, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 539, height => 350) <br>
+			slider2.jpg => (width => 539, height => 350) <br>
+			slider3.jpg => (width => 539, height => 350) <br>
+			image1.jpg => (width => 307, height => 175) <br>
+			image2.jpg => (width => 307, height => 175) <br>
+			image3.jpg => (width => 307, height => 175) <br>
+			background.jpg => (minWidth => 2000, maxWidth => 2300, minHeight => 600, maxHeight => 700) <br>
+		<?php } else if ($wireframe == 30){ ?>
+			logo.png => (minWidth => 100, maxWidth => 300, minHeight => 20, maxHeight => 100) <br>
+			lomogo.png => (minWidth => 50, maxWidth => 350, minHeight => 40, maxHeight => 350) <br>
+			favicon.ico => (minWidth => 48, maxWidth => 64, minHeight => 48, maxHeight => 64) <br>
+			slider1.jpg => (width => 652, height => 319) <br>
+			slider2.jpg => (width => 652, height => 319) <br>
+			slider3.jpg => (width => 652, height => 319) <br>
+			image1.jpg => (width => 150, height => 132) <br>
+			image2.jpg => (width => 150, height => 132) <br>
+			image3.jpg => (width => 150, height => 132) <br>
+			image1.png => (width => 150, height => 132) <br>
+			image2.png => (width => 150, height => 132) <br>
+			image3.png => (width => 150, height => 132) <br>
+		<?php } ?>
+			</div>
+			</div>
+
+		
 		<div class="panel">
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -84,6 +415,7 @@ include 'header.php';
 	</div>
 	<div class="right-wrapper">
 		<div class="right-margin">
+
 
 			<div class="panel">
 					<div class="panel-default">
@@ -775,7 +1107,7 @@ include 'header.php';
 						  <li class="media">
 						    <div class="media-body">
 						    	<h4 class="media-heading">Step 1</h4>
-								First make sure you are using the correct naming conventions for the images you want to upload. Here is an example for each image type: <br><br>   logo.png <br> favicon.ico <br>  slider1.jpg <br>  image1.jpg <br>  icon1.png <br>  background.png <br><br> Every letter is lowercase, there are no spaces or dashes. If they are named incorrectly or the wrong size it will show up in the upload errors box. You will need to re-upload that file as it will automatically be deleted.
+								First make sure you are using the correct naming conventions for the images you want to upload. Every letter is lowercase, there are no spaces or dashes. If they are named incorrectly or the wrong size it will show up in the upload errors box. You will need to re-upload that file as it will automatically be deleted.
 						    </div>
 						  </li>
 						</ul>
@@ -836,12 +1168,12 @@ include 'header.php';
 				
 					if (!$i++) echo "<table class='table table-striped' >
 					<tr class=''>
-					<th class='tTitle'>Date</th>
-					<th class='tTitle'>Content Creator</th>
-					<th class='tTitle'>URL</th>
-					<th class='tTitle'>Wireframe</th>
-					<th class='tTitle'>Language</th>
-					<th class='tTitle'>Design Link</th>
+					<th class='tTitle titleFont'>Date</th>
+					<th class='tTitle titleFont'>Content Creator</th>
+					<th class='tTitle titleFont'>URL</th>
+					<th class='tTitle titleFont'>Wireframe</th>
+					<th class='tTitle titleFont'>Language</th>
+					<th class='tTitle titleFont'>Design Link</th>
 					</tr>";
 
 					$date = $row['date'];
@@ -867,4 +1199,12 @@ include 'header.php';
 
 <?php } ?>
 
-
+<style>
+.validation {
+	margin: 2px !important;
+}
+label {
+	margin: 0px;
+	padding-top: 12px !important;
+}
+</style>

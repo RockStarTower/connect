@@ -1570,6 +1570,15 @@ float: right;
 	padding: 4px;
 }
 
+.titleFont{
+	font-size: 13px;
+}
+
+.imageSizeCon{
+	padding: 10px;
+	padding-left: 20px;
+	font-size: 14px;
+}
 
 
 /* LIBRARY CSS */

@@ -122,12 +122,12 @@ echo "<input id='day7' type='hidden' value='" . $day7 . "' ></input>";
 				
 					if (!$i++) echo "<table class='table table-striped' >
 					<tr class=''>
-					<th class='tTitle'>Date</th>
-					<th class='tTitle'>Content Creator</th>
-					<th class='tTitle'>URL</th>
-					<th class='tTitle'>Wireframe</th>
-					<th class='tTitle'>Language</th>
-					<th class='tTitle'>Design Link</th>
+					<th class='tTitle titleFont'>Date</th>
+					<th class='tTitle titleFont'>Content Creator</th>
+					<th class='tTitle titleFont'>URL</th>
+					<th class='tTitle titleFont'>Wireframe</th>
+					<th class='tTitle titleFont'>Language</th>
+					<th class='tTitle titleFont'>Design Link</th>
 					</tr>";
 
 					$date = $row['date'];
@@ -159,7 +159,7 @@ echo "<input id='day7' type='hidden' value='" . $day7 . "' ></input>";
 		<div class="right-margin">
 			<div class="panel panel-info">
 					 <div class="panel-heading">
-						 <h3 class="panel-title"><i class="fa fa-lightbulb-o"></i> Autobuilder Instructions For Designers</h3>
+						 <h3 class="panel-title"><i class="fa fa-lightbulb-o"></i> Autobuilder Instructions For Developers</h3>
 				 	 </div>
 				 	<div class="panel-body docPanel">
 						<ul class="media-list">
