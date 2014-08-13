@@ -43,7 +43,9 @@ include 'header.php';
 		</div>
 		<img id="dots" src="images/dots.png" />
 		<a id="feedbackLink" href="suggestion.php"><div id="feedback">Errors &<br>Feedback</div></a>
+		<?php if ($user_role == 'admin'){ ?>
 		<button class="standard-button" id="autofill">Auto Fill</button>
+		<?php } ?>
 		<?php if ($user_role == 'blogs' || $user_role == 'admin'){ ?>
 			<div id="devModeBox">
 				<input type="checkbox" id="devMode" /> Dev Mode
