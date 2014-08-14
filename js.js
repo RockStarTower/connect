@@ -894,9 +894,9 @@ $(document).ready(function() {
             }
         }, 1000);
     }
-	
+	$('#contentSuccess').hide();
     if (window.location.href.indexOf("contentbuilder") > -1) {
-    	$('#contentSuccess').hide();
+    	
         $(".btn-valid").click(function(e) {
 
             e.preventDefault();
