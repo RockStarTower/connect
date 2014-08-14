@@ -894,8 +894,9 @@ $(document).ready(function() {
             }
         }, 1000);
     }
-
+	
     if (window.location.href.indexOf("contentbuilder") > -1) {
+    	$('#contentSuccess').hide();
         $(".btn-valid").click(function(e) {
 
             e.preventDefault();
@@ -904,11 +905,11 @@ $(document).ready(function() {
                 url: 'dropzone/contenth.php',
                 data: $("#wireframeForm").serialize(),
                 success: function(e) {
-
-                    $(".btn-valid").val(e);
+                	$("#contentSuccess").fadeIn(800);
+                	$("#contentSuccess").text(e);
+                    $(".btn-valid").val('Content Created!');
 
                 }
-
 
             });
             return false;

@@ -13,6 +13,7 @@ include 'header.php';
 
 
 <div class="body-wrapper">
+		
 	<div class="lSide">
 	<?php if(isset($_GET['domain']) && isset($_GET['wireframe']) && isset($_GET['language'])){ ?>
 		<div class="pickTask">
@@ -5390,6 +5391,7 @@ include 'header.php';
 					</ul>
 				</div>
 			</div>
+			<div id="contentSuccess" class="alert alert-success" role="alert" style="width: 100%; height: 20px; text-align: center; margin: 0px !important; padding-left: 0px; padding-right: 0px;"></div>
 		</div>
 
 	</div>

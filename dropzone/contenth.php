@@ -169,7 +169,7 @@ if (!file_exists($domain_dir)) {
 $encode = json_encode($_POST);
 
 file_put_contents('content/'.$domain.'/content.json', $encode);
-echo "Content Created!";
+echo "The content file has been created successfully!";
 
 $status = 'design';
 
