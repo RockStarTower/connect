@@ -1,6 +1,5 @@
 <?php
 include 'header.php';
-//this is a test
 ?>
 
 
