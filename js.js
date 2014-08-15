@@ -588,7 +588,7 @@ $(document).ready(function() {
             } else {
                 $('.btn-valid').fadeIn(400);
             }
-        }, 1000);        
+        }, 3000);        
     }
 
     //Adding up the three page titles
@@ -653,7 +653,7 @@ $(document).ready(function() {
 
                 }
             });
-        }, 1000);
+        }, 3000);
     }
 
 
@@ -754,8 +754,10 @@ $(document).ready(function() {
 
         $(".adminPanel").css('display', 'block');
         $("#newUser").css('display', 'none');
+        $(".blogticketPanel").css('display', 'none');
         $("#userbtn1").addClass("active");
         $("#userbtn2").removeClass("active");
+        $("#userbtn3").removeClass("active");
 
     });
 
@@ -764,8 +766,20 @@ $(document).ready(function() {
 
         $(".adminPanel").css('display', 'none');
         $("#newUser").css('display', 'block');
+        $(".blogticketPanel").css('display', 'none');
         $("#userbtn2").addClass("active");
         $("#userbtn1").removeClass("active");
+        $("#userbtn3").removeClass("active");
+
+    });
+    $("#userbtn3").click(function() {
+
+        $(".blogticketPanel").css('display', 'block');
+        $(".adminPanel").css('display', 'none');
+        $("#newUser").css('display', 'none');
+        $("#userbtn3").addClass("active");
+        $("#userbtn1").removeClass("active");
+        $("#userbtn2").removeClass("active");
 
     });
 
@@ -907,7 +921,7 @@ $(document).ready(function() {
                 success: function(e) {
                 	$("#contentSuccess").fadeIn(800);
                 	$("#contentSuccess").text(e);
-                    $(".btn-valid").val('Content Created!');
+                    $(".btn-valid").prop('disabled', "true");
 
                 }
 
@@ -927,6 +941,7 @@ $(document).ready(function() {
                 success: function(e) {
 
                     $("#suggestionSubmit").val(e);
+                    $("#suggestionSubmit").prop('disabled', "true");
 
                 }
             });
