@@ -20,7 +20,7 @@ if(mysqli_num_rows($number) > 0) {
 	$role = mysqli_real_escape_string($con, $_POST['role']);
 	$status = mysqli_real_escape_string($con, $_POST['status']);
 	$manager = mysqli_real_escape_string($con, $_POST['manager']);
-    $headers = "From: connect@boostability.com\r\n";
+    $headers = ("From: connect@boostability.com");
     $headers = "CC: jcarlson@boostability.com\r\n";
     $headers = "MIME-Version: 1.0\r\n";
     $headers = "Content-Type: text/html; charset=ISO-8859-1\r\n";
