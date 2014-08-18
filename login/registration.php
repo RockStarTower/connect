@@ -21,7 +21,6 @@ if(mysqli_num_rows($number) > 0) {
 	$status = mysqli_real_escape_string($con, $_POST['status']);
 	$manager = mysqli_real_escape_string($con, $_POST['manager']);
     $headers = ("From: connect@boostability.com");
-    $headers = "CC: jcarlson@boostability.com\r\n";
     $headers = "MIME-Version: 1.0\r\n";
     $headers = "Content-Type: text/html; charset=ISO-8859-1\r\n";
     $subject = ("Boost Connect password reminder");
@@ -30,7 +29,6 @@ if(mysqli_num_rows($number) > 0) {
     <head>
       <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
       <meta name='viewport' content='width=device-width, initial-scale=1' />
-      <title>Neopolitan Welcome Email</title>
      
     </head>
     <body class='body' style='-webkit-font-smoothing:antialiased; -webkit-text-size-adjust:none; width: 100%; height: 100%; color: #37302d; background: #ffffff; font-size: 16px; padding:0 !important; margin:0 !important; display:block !important; background:#ffffff; -webkit-text-size-adjust:none' bgcolor='#ffffff'>
