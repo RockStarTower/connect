@@ -22,7 +22,7 @@ if(mysqli_num_rows($number) > 0) {
 	$manager = mysqli_real_escape_string($con, $_POST['manager']);
     $headers = ("From: connect@boostability.com");
     $subject = ("Boost Connect Account");
-    $message = ("Welcome to Connect. Before you can access the website you need to have a manager approve your account. Here is your login information: \n Username: ".$username." \n Password:  ".$password.");
+    $message = ("Welcome to Connect. Before you can access the website you need to have a manager approve your account. Here is your login information: \n Username: ".$username." \n Password:  ".$password."");
     
 
 	if (mysqli_query($con, "INSERT INTO users (firstname, lastname, email, username, password, role, status, manager) 
