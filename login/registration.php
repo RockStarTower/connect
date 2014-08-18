@@ -20,8 +20,12 @@ if(mysqli_num_rows($number) > 0) {
 	$role = mysqli_real_escape_string($con, $_POST['role']);
 	$status = mysqli_real_escape_string($con, $_POST['status']);
 	$manager = mysqli_real_escape_string($con, $_POST['manager']);
-    $headers = ("From: connect@boostability.com");
-    $subject = ("Boost Connect password reminder");
+    $headers = "From: " . $email . "\r\n";
+    $headers .= "Reply-To: ". $email ."\r\n";
+    $headers .= "CC: jcarlson@boostability.com\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+    $subject = ("Boost Connect Account");
     $message = ("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
     <html xmlns='http://www.w3.org/1999/xhtml'>
     <head>
