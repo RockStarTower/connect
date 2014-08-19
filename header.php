@@ -20,7 +20,7 @@ include 'config.php';
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script>
-        tinymce.init({selector:'.textarea'});
+        tinymce.init({selector:'.textarea', height: 450});
 </script>
 
 <?php
