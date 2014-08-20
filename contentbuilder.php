@@ -5384,7 +5384,7 @@ include 'header.php';
 					    <div class="media-body">
 					    	<h4 class="media-heading">Step 3</h4>
 					      	In order for the submit button to appear, every input will need to be highlighted green. If all the 
-					      	informatino looks good just click submit and you're done! This will create a file that design and development can use by entering in the same domain name.
+					      	information looks good click submit and you're done! This will create a file that design and development can use by entering in the same domain name.
 					    </div>
 					  </li>
 					</ul>
