@@ -657,13 +657,14 @@ $(document).ready(function() {
     }
 
 
-
     //Removing microsoft word rich text formatting 
     $('.validation').focusout(function() {
 
         str = $(this).val();
         var textbox = $('.validation');
 
+        // vertical pipe
+        //str = str.replace (/\u007C/g, "\$");
         // smart single quotes and apostrophe
         str = str.replace(/[\u2018|\u2019|\u201A]/g, "\'");
         // smart double quotes
@@ -681,6 +682,12 @@ $(document).ready(function() {
         //  spaces
         str = str.replace(/[\u02DC|\u00A0]/g, " ");
         $(this).val(str);
+        	if ($(this).attr("id") == "title_tag"){
+        		console.log("whatup");
+        		newString = str.replace ("'", "|", $(this).val());
+        		$(this).val(newString);
+        	}
+
     });
 
     $('#autofill').on('click', function() {
