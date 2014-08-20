@@ -27,7 +27,7 @@ $total_user_number = mysqli_num_rows($users_result);
 
 		<?php
 		    $date = getdate();
-		    if($date['mday'] == 15 && $date['mon'] == 8){
+		    if($date['mday'] == 20 && $date['mon'] == 8){
 
 		        echo '<div style="font-size: 16px; text-align: center;" class="alert alert-danger" role="alert"><strong >Attention:</strong> Download the New Version of AutoBuilder Released Today!</div>';
 
@@ -61,14 +61,14 @@ $total_user_number = mysqli_num_rows($users_result);
 						</div>
 					</div>
 					<div style="display: inline-block; margin: 20px;" class="btn-group">
-					  <button type="button" onclick="window.location='zipdownloader/zipdownloader1.php';" class="btn btn-danger">Download Latest V1.01</button>
+					  <button type="button" onclick="window.location='zipdownloader/zipdownloader1.php';" class="btn btn-danger">Download Latest V1.02</button>
 					  <button type="button" style="margin-right: 20px;" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
 					    <span style="margin-top: 8px; height: 8px;" class="caret"></span>
 					    <span class="sr-only">Toggle Dropdown</span>
 					  </button>
 					  <ul class="dropdown-menu" role="menu">
-					    <li><a href="zipdownloader/zipdownloader2.php">Version 1.00</a></li>
-					    <li><a href="zipdownloader/zipdownloader3.php">third</a></li>
+					    <li><a href="zipdownloader/zipdownloader2.php">Version 1.01</a></li>
+					    <li><a href="zipdownloader/zipdownloader3.php">Version 1.00</a></li>
 					    <li><a href="zipdownloader/zipdownloader4.php">oldest version</a></li>
 					  </ul>
 						Make sure you have the latest verison of the AutoBuilder plugin. Released: 8/4/2014 You can download a previous release with the dropdown menu.
