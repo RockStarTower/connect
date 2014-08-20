@@ -64,7 +64,11 @@ include "header.php";
 		</div>
 
 		<?php
-			$result = mysqli_query($con, 'SELECT * FROM ticket ORDER BY date DESC');
+        
+            $min = 0;
+            $max = 20;
+    
+			$result = mysqli_query($con, 'SELECT * FROM ticket ORDER BY date DESC LIMIT '.$min.', '.$max.'');
 
 			if (!$result) {
 				printf("Error: %s\n", mysqli_error($con));
