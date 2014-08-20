@@ -4,6 +4,7 @@ include 'header.php';
 
 
 
+
 <?php
 
 $oneday = date('20y-m-d',strtotime("-0 days"));
@@ -22,7 +23,7 @@ echo "<input id='fiveday' type='hidden' value='" . $fiveday . "' ></input>";
 echo "<input id='sixday' type='hidden' value='" . $sixday . "' ></input>";
 echo "<input id='sevenday' type='hidden' value='" . $sevenday . "' ></input>";
 
-/*grabbing information for incomplete */
+/*grabbing information for incomplete again */
 
 $result1 = mysqli_query($con, "SELECT count(1) FROM custom WHERE finished = 'Incomplete' AND date = '" . $oneday . "' ");
 $row1 = mysqli_fetch_array($result1);

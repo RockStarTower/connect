@@ -3,14 +3,23 @@ include 'loginCheck.php';
 include 'config.php';
 ?>
 
+
+
+<!--
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="style/style.css">
+-->
+
 <link rel="stylesheet" type="text/css" href="style/style.css">
 
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 <link href='http://fonts.googleapis.com/css?family=Tauri' rel='stylesheet' type='text/css'>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="dropzone/css/basic.css">
 <link rel="stylesheet" type="text/css" href="dropzone/css/dropzone.css">
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+
+<!--<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">-->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -18,7 +27,7 @@ include 'config.php';
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script>
-        tinymce.init({selector:'.textarea'});
+        tinymce.init({selector:'.textarea', height: 450});
 </script>
 
 <?php

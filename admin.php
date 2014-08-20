@@ -19,6 +19,9 @@ include "header.php";
 	<?php
 	$number = mysqli_query($con, 'SELECT * FROM users');
 	$num = mysqli_num_rows($number);
+
+	$result = mysqli_query($con, 'SELECT * FROM ticket ');
+	$numBlogs = mysqli_num_rows($result);
 	?>
 
 	<div class="full-width-wrapper">
@@ -36,6 +39,12 @@ include "header.php";
 					    	New User
 					    </a>
 				  </li>
+				  <li id="userbtn3" style="width: 120px; margin: 5; float: left;" >
+					    <a href="#" onClick="return false;">
+					    	<span style="margin: 2px;" class="badge pull-right"><?php echo $numBlogs ?></span>
+					    	Blogs
+					    </a>
+				  </li>
 				</ul>
 			</div>
 		</div>
@@ -45,7 +54,62 @@ include "header.php";
 		
 	</div>
 
-	<div class="panel adminPanel">
+	<div style="display: none;" class="panel blogticketPanel">
+		<div class="panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+				<span class="glyphicon glyphicon-folder-open">&nbsp;</span> Completed Blogs <span class="sub-panel-title">- Ticket Tracking System</span>
+				</div>
+			</div>
+		</div>
+
+		<?php
+        
+            $min = 0;
+            $max = 20;
+    
+			$result = mysqli_query($con, 'SELECT * FROM ticket ORDER BY date DESC LIMIT '.$min.', '.$max.'');
+
+			if (!$result) {
+				printf("Error: %s\n", mysqli_error($con));
+				exit();
+			}
+
+			$i = 0;
+			
+			while ($row = mysqli_fetch_assoc($result)) {
+
+				if (!$i++) echo "<table class='table table-striped' >
+				<tr class=''>
+				<th class='tTitle'>Content Username</th>
+				<th class='tTitle'>Wireframe</th>
+				<th class='tTitle'>URL</th>
+				<th class='tTitle'>Language</th>
+				<th class='tTitle'>Date Completed</th>
+
+				</tr>";
+
+				$username = $row['username'];
+				$wireframe = $row['wireframe'];
+				$url = $row['url'];
+				$language = $row['language'];
+				$date = $row['date'];
+
+				echo "<tr class='userTable'>
+					<td class='tCell'>" . $username . "</td>
+					<td class='tCell'>" . $wireframe . "</td>
+					<td class='tCell'>" . $url . "</td>
+					<td class='tCell'>" . $language . "</td>
+					<td class='tCell'>" . $date . "</td>
+				</tr>";
+			}
+
+			echo "</table>";
+		?>
+
+		</div>
+
+		<div class="panel adminPanel">
 		<div class="panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">

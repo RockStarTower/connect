@@ -1,17 +1,20 @@
 html {
-	background-image: url(../images/blacklinen.png);
 	font-family: 'Tauri', sans-serif;
-	background-color: #494949;
+	background-color: #222222;
 }
 
 
 body {
-	background-image: url(../images/blacklinen.png);
+	
 	display: block;
 	margin: 0px !important;
-	background-color: #494949 !important;
+	background-color: #222222 !important;
 	font-family: 'Tauri', Helvetica !important;
 
+}
+
+b, strong{
+    font-weight: 300 !important;   
 }
 
 .loginCon {
@@ -378,7 +381,7 @@ margin-top: 16px;
 	padding-left: 20px;
 	float: right;
 	margin: 10px;
-	background-color: #f5f5f5;
+	background-color: #303030 !important;
 	border-radius: 7; 
 }
 
@@ -534,7 +537,13 @@ margin-top: 16px;
 	min-width: 895px;
 }
 
+.table-striped{
+    background-color: #375a7f;   
+}
 
+.usertable{
+    background-color: #375a7f !important;   
+}
 
 .tTitle {
 	padding: 5px;
@@ -549,6 +558,8 @@ margin-top: 16px;
 	line-height: 14px;
 	padding: 4px;
 	max-width: 150px;
+    color: white;
+    background-color: #464545 !important;
 }
 
 .lCell {
@@ -688,7 +699,8 @@ margin-top: 16px;
 }
 
 .working{
-	background-color: #FFFFFF;
+	background-color: #464545 !important;
+    color: #ffffff ;
 	border: 1px solid transparent;
 	border-radius: 4px;
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
@@ -788,6 +800,9 @@ margin-top: 16px;
 	height: 100%;
 	background-color: #222;
 	z-index: 1000
+    border-right-color: #464545;
+    border-right-width: 1px;
+    border-right-style: solid;
 }
 
 .taskText{
@@ -858,6 +873,10 @@ margin-top: 16px;
 	font-family: tauri;
 	min-width: 400px;
 	
+}
+
+.progress {
+    background-color: #464545 !important;   
 }
 
 .subcellInput{
@@ -1015,6 +1034,7 @@ label {
 	display: inline-block !important;
 	font-size: 14px !important;
 	font-family: tauri !important;
+    font-weight: 300 !important;
 
 }
 
@@ -1035,8 +1055,7 @@ textarea {
 }
 
 .noBackground{
-	background-color: white !important;
-	margin-right: 30px;
+	background-color: #303030;
 }
 
 .contentNotes{
@@ -1373,6 +1392,8 @@ div.rightForm {
 
 .jumbotron{
 	border-radius: 4px;
+    background-color: #464545 !important;
+    color: #ffffff !important;
 }
 
 .two-thirds{
@@ -1395,6 +1416,12 @@ div.rightForm {
 .quickLink{
 	margin-left: 30px;
 	margin-right: 30px;
+}
+
+.well{
+    background-color: #464545 !important;
+    color: #ffffff !important;   
+    border-color: #464545 !important;
 }
 
 .wellLogin{
@@ -1587,6 +1614,15 @@ float: right;
 	font-size: 14px;
 }
 
+.panel-info {
+    border: none !important;
+}
+
+.tTitle{
+    background-color: #375a7f !important;   
+    color: white;
+}
+
 
 /* LIBRARY CSS */
 
@@ -1623,19 +1659,21 @@ float: right;
 
 .panel {
 	margin-bottom: 20px;
-	background-color: #fff;
+	background-color: #464545 !important;
 	border: 1px solid transparent;
-	border-radius: 4px;
+	border-radius: 4px !important;
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
 	box-shadow: 0 1px 1px rgba(0,0,0,.05);
 	width: 100%;
+    color: white;
 }
 
 /* Apply to panel header container */
 .panel-default {
-	color: #333;
-	background-color: #f5f5f5;
-	border-color: #ddd;
+	color: #ffffff;
+
+    border-color: #375a7f;
+
 }
 
 /* Apply to panel header title */
@@ -1643,7 +1681,6 @@ float: right;
 	margin-top: 0;
 	margin-bottom: 0;
 	font-size: 16px;
-	font-weight: bold;
 }
 
 /* Apply this to sub headings in panel */
@@ -1656,6 +1693,10 @@ float: right;
 	border-bottom: 1px solid #ddd;
 	border-top-right-radius: 3px;
 	border-top-left-radius: 3px;
+    color: #ffffff !important;
+    background-color: #375a7f !important;
+    border-color: #375a7f !important;
+
 }
 
 /* Apply in new row for panel conent */
@@ -1730,7 +1771,7 @@ float: right;
     color: #555;
     background-color: #fff;
     background-image: none;
-    border: 1px solid #ccc;
+    border: 1px solid #151515;
     border-radius: 4px;
 	font-family: tauri;
 	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
@@ -1765,6 +1806,7 @@ float: right;
 	
 	.working {
 		margin-left: 0px;
+        
 	}
 	
 	.right-margin{

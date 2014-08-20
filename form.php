@@ -20,6 +20,7 @@
 							<option >onsite</option>
 							<option >custom</option>
 							<option >admin</option>
+							<option >QA</option>
 						</select><br>
 			<input class="btn btn-primary" type="submit">
 			</form>

@@ -1,6 +1,3 @@
-<?php 
-include ("{connect.php");
-?>
 <form class="panel taskForm" method="post" action="task/onsitesh.php" >
 <div class="cusFormCon">
 <div class="panel-default">

@@ -23,9 +23,19 @@ $total_user_number = mysqli_num_rows($users_result);
 		</div>
 	<?php } ?>
 	
+   
+
+		<?php
+		    $date = getdate();
+		    if($date['mday'] == 15 && $date['mon'] == 8){
+
+		        echo '<div style="font-size: 16px; text-align: center;" class="alert alert-danger" role="alert"><strong >Attention:</strong> Download the New Version of AutoBuilder Released Today!</div>';
+
+		    }
+		?>
 
 	<div class="left-wrapper-dash">
-		<div style="text-align: center;" class="jumbotron">
+		 <div style="text-align: center;" class="jumbotron customJumbo">
 			<h1>Welcome to Connect</h1>
 		    <p>Boost Connect houses applications like AutoBuilder and Boost Note. <br> For further instructions click the get started button below. </p>
 			<?php if ($user_role == 'admin') { ?>
@@ -41,15 +51,6 @@ $total_user_number = mysqli_num_rows($users_result);
 			<p><a href="devbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
 			<?php } ?>
 		</div>
-
-		<?php
-		    $date = getdate();
-		    if($date['mday'] == 12 && $date['mon'] == 8){
-
-		        echo '<div style="font-size: 16px; text-align: center;" class="alert alert-danger" role="alert"><strong >Attention:</strong> Download the New Version of AutoBuilder Released Today!</div>';
-
-		    }
-		?>
 		
 		<?php if ($user_role == 'blogs' || $user_role == 'admin') { ?>
 			<div class="panel dashPanel" >
@@ -60,13 +61,13 @@ $total_user_number = mysqli_num_rows($users_result);
 						</div>
 					</div>
 					<div style="display: inline-block; margin: 20px;" class="btn-group">
-					  <button type="button" onclick="window.location='zipdownloader/zipdownloader1.php';" class="btn btn-danger">Download Latest V1.0</button>
+					  <button type="button" onclick="window.location='zipdownloader/zipdownloader1.php';" class="btn btn-danger">Download Latest V1.01</button>
 					  <button type="button" style="margin-right: 20px;" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
 					    <span style="margin-top: 8px; height: 8px;" class="caret"></span>
 					    <span class="sr-only">Toggle Dropdown</span>
 					  </button>
 					  <ul class="dropdown-menu" role="menu">
-					    <li><a href="zipdownloader/zipdownloader2.php">Second</a></li>
+					    <li><a href="zipdownloader/zipdownloader2.php">Version 1.00</a></li>
 					    <li><a href="zipdownloader/zipdownloader3.php">third</a></li>
 					    <li><a href="zipdownloader/zipdownloader4.php">oldest version</a></li>
 					  </ul>

@@ -1,12 +1,12 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-    $(".dropdown").click(function() {
+    $(".dropdown").click(function () {
 
         $(this).addClass("open");
 
     });
 
-    $(".dropdown").mouseleave(function() {
+    $(".dropdown").mouseleave(function () {
 
         $(this).removeClass("open");
 
@@ -51,7 +51,7 @@ $(document).ready(function() {
     }
 
     //Admin panel buttons
-    $(".btn-group").on("click", function() {
+    $(".btn-group").on("click", function () {
 
         if ($(this).hasClass("open")) {
             $(this).removeClass("open");
@@ -64,7 +64,7 @@ $(document).ready(function() {
 
 
     // Below is the code for the plus button on custom web form
-    $("#plus1").click(function() {
+    $("#plus1").click(function () {
 
         $('#subItem2').css("display", "block");
         $('#plus1').css("visibility", "hidden");
@@ -72,91 +72,91 @@ $(document).ready(function() {
     });
 
 
-    $("#plus2").click(function() {
+    $("#plus2").click(function () {
 
         $('#subItem3').css("display", "block");
         $('#plus2').css("visibility", "hidden");
 
     });
 
-    $("#plus3").click(function() {
+    $("#plus3").click(function () {
 
         $('#subItem4').css("display", "block");
         $('#plus3').css("visibility", "hidden");
 
     });
 
-    $("#plus4").click(function() {
+    $("#plus4").click(function () {
 
         $('#subItem5').css("display", "block");
         $('#plus4').css("visibility", "hidden");
 
     });
 
-    $("#plus5").click(function() {
+    $("#plus5").click(function () {
 
         $('#subItem6').css("display", "block");
         $('#plus5').css("visibility", "hidden");
 
     });
 
-    $("#plus6").click(function() {
+    $("#plus6").click(function () {
 
         $('#subItem7').css("display", "block");
         $('#plus6').css("visibility", "hidden");
 
     });
 
-    $("#plus7").click(function() {
+    $("#plus7").click(function () {
 
         $('#subItem8').css("display", "block");
         $('#plus7').css("visibility", "hidden");
 
     });
 
-    $("#plus8").click(function() {
+    $("#plus8").click(function () {
 
         $('#subItem9').css("display", "block");
         $('#plus8').css("visibility", "hidden");
 
     });
 
-    $("#plus9").click(function() {
+    $("#plus9").click(function () {
 
         $('#subItem10').css("display", "block");
         $('#plus9').css("visibility", "hidden");
 
     });
 
-    $("#plus10").click(function() {
+    $("#plus10").click(function () {
 
         $('#subItem11').css("display", "block");
         $('#plus10').css("visibility", "hidden");
 
     });
 
-    $("#plus11").click(function() {
+    $("#plus11").click(function () {
 
         $('#subItem12').css("display", "block");
         $('#plus11').css("visibility", "hidden");
 
     });
 
-    $("#plus12").click(function() {
+    $("#plus12").click(function () {
 
         $('#subItem13').css("display", "block");
         $('#plus12').css("visibility", "hidden");
 
     });
 
-    $("#plus13").click(function() {
+    $("#plus13").click(function () {
 
         $('#subItem14').css("display", "block");
         $('#plus13').css("visibility", "hidden");
 
     });
 
-    $("#plus14").click(function() {
+    $("#plus14").click(function () {
 
         $('#subItem15').css("display", "block");
         $('#plus14').css("visibility", "hidden");
@@ -165,11 +165,11 @@ $(document).ready(function() {
     });
 
     //code below adds total time up
-    $(".sTime").focusout(function() {
+    $(".sTime").focusout(function () {
 
         var sum = 0;
 
-        $('.sTime').each(function() {
+        $('.sTime').each(function () {
             sum += Number($(this).val());
         });
 
@@ -178,21 +178,21 @@ $(document).ready(function() {
     });
 
     //code below is for displaying forms clicked.
-    $("#customIcon").click(function() {
+    $("#customIcon").click(function () {
 
         $('#customCon').css("display", "block");
         $('#formPH').css("display", "none");
 
     });
 
-    $("#blogsIcon").click(function() {
+    $("#blogsIcon").click(function () {
 
         $('#blogsCon').css("display", "block");
         $('#formPH').css("display", "none");
 
     });
 
-    $("#onsiteIcon").click(function() {
+    $("#onsiteIcon").click(function () {
 
         $('#onsiteCon').css("display", "block");
         $('#formPH').css("display", "none");
@@ -201,14 +201,14 @@ $(document).ready(function() {
 
 
     //Custom web subtask display
-    $("#subTasksIcon").click(function() {
+    $("#subTasksIcon").click(function () {
 
         $('#subTasks').css("display", "block");
 
     });
 
     // CONTENT FORM
-    $("#next1").click(function() {
+    $("#next1").click(function () {
 
         $('#contentp1').css("display", "none");
         $('#contentp2').css("display", "block");
@@ -220,7 +220,7 @@ $(document).ready(function() {
         $('#step2').css("opacity", "1");
     });
 
-    $("#next2").click(function() {
+    $("#next2").click(function () {
 
         $('#contentp1').css("display", "none");
         $('#contentp2').css("display", "none");
@@ -232,7 +232,7 @@ $(document).ready(function() {
 
     });
 
-    $("#next3").click(function() {
+    $("#next3").click(function () {
 
         $('#contentp1').css("display", "none");
         $('#contentp2').css("display", "none");
@@ -244,7 +244,7 @@ $(document).ready(function() {
 
     });
 
-    $("#step1").click(function() {
+    $("#step1").click(function () {
 
         $('#contentp1').css("display", "block");
         $('#contentp2').css("display", "none");
@@ -261,7 +261,7 @@ $(document).ready(function() {
     // PREVIOUS BUTTONS
 
 
-    $("#prev2").click(function() {
+    $("#prev2").click(function () {
 
         $('#contentp1').css("display", "block");
         $('#contentp2').css("display", "none");
@@ -273,7 +273,7 @@ $(document).ready(function() {
 
     });
 
-    $("#prev3").click(function() {
+    $("#prev3").click(function () {
 
         $('#contentp1').css("display", "none");
         $('#contentp2').css("display", "block");
@@ -285,7 +285,7 @@ $(document).ready(function() {
 
     });
 
-    $("#prev4").click(function() {
+    $("#prev4").click(function () {
 
         $('#contentp1').css("display", "none");
         $('#contentp2').css("display", "none");
@@ -301,7 +301,7 @@ $(document).ready(function() {
 
     // STEP IMAGES
 
-    $("#step2").click(function() {
+    $("#step2").click(function () {
 
         $('#contentp1').css("display", "none");
         $('#contentp2').css("display", "block");
@@ -315,7 +315,7 @@ $(document).ready(function() {
 
     });
 
-    $("#step3").click(function() {
+    $("#step3").click(function () {
 
         $('#contentp1').css("display", "none");
         $('#contentp2').css("display", "none");
@@ -329,7 +329,7 @@ $(document).ready(function() {
 
     });
 
-    $("#step4").click(function() {
+    $("#step4").click(function () {
 
         $('#contentp1').css("display", "none");
         $('#contentp2').css("display", "none");
@@ -345,12 +345,12 @@ $(document).ready(function() {
 
     // TINY MCE STUFF
     $('.edit_link').css("visibility", "hidden");
-    $('.ctextarea').focus(function() {
+    $('.ctextarea').focus(function () {
         $('.edit_link').css("visibility", "hidden");
         $(this).siblings('.edit_link').css("visibility", "visible");
     });
 
-    $('.edit_link').click(function() {
+    $('.edit_link').click(function () {
         $('.ctextarea').removeClass('currentcontent');
         $(this).siblings('.ctextarea').addClass('currentcontent');
         var content = $(this).siblings('.ctextarea').val();
@@ -364,7 +364,7 @@ $(document).ready(function() {
         tinyMCE.activeEditor.setContent(content);
     });
 
-    $('.close').click(function() {
+    $('.close').click(function () {
         var newcontent = tinyMCE.activeEditor.getContent();
         $('#edit_wrap').hide();
         $('.overlay').hide();
@@ -376,10 +376,10 @@ $(document).ready(function() {
     });
 
     if (window.location.href.indexOf("designbuilder") > -1) {
-        $(function() {
+        $(function () {
             Dropzone.options.dropzoneForm = {
-                init: function() {
-                    this.on("complete", function() {
+                init: function () {
+                    this.on("complete", function () {
                         if (this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0) {
                             if ($.trim($('#image_error').text()).length === 0) {
                                 //location.reload();
@@ -495,18 +495,18 @@ $(document).ready(function() {
     });
 
 
-    $('#devMode').change(function(){
+    $('#devMode').change(function () {
         if ($(this).attr('devmode')){
             $(this).removeAttr('devmode', 'true');
         } else {
-            $(this).attr('devmode', 'true');  
+            $(this).attr('devmode', 'true');
         }
     });
 
      
     
         // FORM VALIDATION
-        $('.validation').focus(function() {
+        $('.validation').focus(function () {
             if (!$('#devMode').attr('devmode')){
             $(".validation").tooltip();
 
@@ -563,7 +563,7 @@ $(document).ready(function() {
     var y = 0;
 
     if (window.location.href.indexOf("contentbuilder") > -1) {
-        window.setInterval(function() {
+        window.setInterval(function () {
             if (!$('#devMode').attr('devmode')){
                     var all = document.getElementsByClassName("validation").length;
 
@@ -588,7 +588,7 @@ $(document).ready(function() {
             } else {
                 $('.btn-valid').fadeIn(400);
             }
-        }, 1000);        
+        }, 3000);        
     }
 
     //Adding up the three page titles
@@ -653,7 +653,7 @@ $(document).ready(function() {
 
                 }
             });
-        }, 1000);
+        }, 3000);
     }
 
 
@@ -761,8 +761,10 @@ $(document).ready(function() {
 
         $(".adminPanel").css('display', 'block');
         $("#newUser").css('display', 'none');
+        $(".blogticketPanel").css('display', 'none');
         $("#userbtn1").addClass("active");
         $("#userbtn2").removeClass("active");
+        $("#userbtn3").removeClass("active");
 
     });
 
@@ -771,8 +773,20 @@ $(document).ready(function() {
 
         $(".adminPanel").css('display', 'none');
         $("#newUser").css('display', 'block');
+        $(".blogticketPanel").css('display', 'none');
         $("#userbtn2").addClass("active");
         $("#userbtn1").removeClass("active");
+        $("#userbtn3").removeClass("active");
+
+    });
+    $("#userbtn3").click(function() {
+
+        $(".blogticketPanel").css('display', 'block');
+        $(".adminPanel").css('display', 'none');
+        $("#newUser").css('display', 'none');
+        $("#userbtn3").addClass("active");
+        $("#userbtn1").removeClass("active");
+        $("#userbtn2").removeClass("active");
 
     });
 
@@ -901,8 +915,9 @@ $(document).ready(function() {
             }
         }, 1000);
     }
-
+	$('#contentSuccess').hide();
     if (window.location.href.indexOf("contentbuilder") > -1) {
+    	
         $(".btn-valid").click(function(e) {
 
             e.preventDefault();
@@ -911,11 +926,11 @@ $(document).ready(function() {
                 url: 'dropzone/contenth.php',
                 data: $("#wireframeForm").serialize(),
                 success: function(e) {
-
-                    $(".btn-valid").val(e);
+                	$("#contentSuccess").fadeIn(800);
+                	$("#contentSuccess").text(e);
+                    $(".btn-valid").prop('disabled', "true");
 
                 }
-
 
             });
             return false;
@@ -933,6 +948,7 @@ $(document).ready(function() {
                 success: function(e) {
 
                     $("#suggestionSubmit").val(e);
+                    $("#suggestionSubmit").prop('disabled', "true");
 
                 }
             });
