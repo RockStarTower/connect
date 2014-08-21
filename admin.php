@@ -64,11 +64,29 @@ include "header.php";
 		</div>
 
 		<?php
-        
-            $min = 0;
-            $max = 20;
+        	
+        	if (isset($_GET['Next'])){
+
+        		$start = $_GET['Next'];
+
+        	} else if (isset($_GET['Previous'])) {
+
+        		$start = $_GET['Previous'];
+
+        		if ($start <= 0){
+        			$start = 0;
+        		}
+
+        	} else{	
+
+        		$start = 0;
+
+        	}
+
+            
+            $limit = 20;
     
-			$result = mysqli_query($con, 'SELECT * FROM ticket ORDER BY date DESC LIMIT '.$min.', '.$max.'');
+			$result = mysqli_query($con, 'SELECT * FROM ticket ORDER BY date DESC LIMIT '.$start.', '.$limit.'');
 
 			if (!$result) {
 				printf("Error: %s\n", mysqli_error($con));
@@ -105,6 +123,22 @@ include "header.php";
 			}
 
 			echo "</table>";
+    		
+    		$next = $start + 20;
+    		$previous = $start - 20;
+
+    		if ($previous < 0){
+    			$previous = 0;
+    		}
+
+            	echo '<form id="blogsPagenation" autocomplete="off"  method="get"  style="margin-top: 10px; margin: 0px !important;"> 
+            	<div class="submitCon noBackground" style="width: 322px; text-align: center; margin-right: 0px; padding-left: 0px;">
+                        <button id="pageadminNext" class="submitButton btn-success" style="margin-right: 5px;" value="'.$next.'" name="Next" >Next</button>
+                        
+                    </form>
+					<form id="blogsPagenation2" autocomplete="off"  method="get"  style="margin-top: 10px; display: inline;">
+                    <button id="pageadminPrevious" class="submitButton btn-success" style="margin-right: 5px;" value="'.$previous.'"  name="Previous" >Previous</button>
+                    </div></form>'; 
 		?>
 
 		</div>

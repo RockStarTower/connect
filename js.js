@@ -791,6 +791,18 @@ $(document).ready(function () {
     });
 
 
+    var blogsView = function () {
+
+        $(".blogticketPanel").css('display', 'block');
+        $(".adminPanel").css('display', 'none');
+        $("#newUser").css('display', 'none');
+        $("#userbtn3").addClass("active");
+        $("#userbtn1").removeClass("active");
+        $("#userbtn2").removeClass("active");
+
+    };
+
+
     $("#forgot1").click(function() {
 
         $("#RegisterBox1").css('display', 'none');
@@ -955,6 +967,45 @@ $(document).ready(function () {
             return false;
         });
     }
+
+    $("#pageNext").click(function(e) {
+
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'admin.php',
+            data: $("#blogsPagenation").serialize(),
+            success: function() {
+
+                blogsView();
+            }
+
+
+        });
+        return false;
+    });
+
+     $("#pagePrevious").click(function(e) {
+
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'admin.php',
+            data: $("#blogsPagenation2").serialize(),
+            success: function() {
+
+            }
+
+
+        });
+        return false;
+    });
+
+     if (window.location.href.indexOf("Next") > -1 || window.location.href.indexOf("Previous") > -1) {
+
+            blogsView();
+
+        }
 
 
 });

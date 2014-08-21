@@ -97,7 +97,7 @@ switch($wireframe) {
 	case 16:
 		$box_content = array();
 		for($i = 0; $i < count($_POST['content']['homepage']['box']); $i++) {
-			$box_content[$i] = '<p>' . ${'content' . ($i + 1)} . '</p><img alt="' . ${'title' . ($i + 1)} . '" class="homepage" src="../wp-content/uploads/image' . ($i + 1) . '.jpg" />';
+			$box_content[$i] = '<p>' . ${'content' . ($i + 1)} . '</p><img alt="' . ${'title' . ($i + 1)} . '" class="homepage" src="http://'.$site_url.'/wp-content/uploads/image' . ($i + 1) . '.jpg" />';
 		}
 		$_POST['content']['homepage']['box'] = $box_content;
 		break;
