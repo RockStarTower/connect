@@ -1,6 +1,0 @@
-[15-May-2014 14:38:51] PHP Parse error:  syntax error, unexpected ',' in /home3/zapoonsc/public_html/note/task/customupdateh.php on line 20
-[15-May-2014 14:45:20] PHP Parse error:  syntax error, unexpected T_STRING in /home3/zapoonsc/public_html/note/task/customupdateh.php on line 9
-[15-May-2014 14:45:22] PHP Parse error:  syntax error, unexpected T_STRING in /home3/zapoonsc/public_html/note/task/customupdateh.php on line 9
-[15-May-2014 14:45:22] PHP Parse error:  syntax error, unexpected T_STRING in /home3/zapoonsc/public_html/note/task/customupdateh.php on line 9
-[15-May-2014 16:21:08] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home3/zapoonsc/public_html/note/task/customupdateh.php:78) in /home3/zapoonsc/public_html/note/task/customupdateh.php on line 82
-[18-Jul-2014 09:44:52] PHP Parse error:  syntax error, unexpected T_STRING in /home3/zapoonsc/public_html/connect/task/custombuildh.php on line 80

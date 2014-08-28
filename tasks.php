@@ -73,8 +73,9 @@ include 'header.php';
 
 <div class="right-margin">
 
-
+<?php if ($user_role == 'custom') { ?>
 <div class="working">
+
 	<div class="panel-default">
 		<div class="panel-heading">
 			<div class="panel-title">
@@ -248,7 +249,181 @@ include 'header.php';
 
 ?>
 </div>
+<?php } ?>
+<?php if ($user_role == 'onsite' || $user_role == 'admin') { ?>
 
+		<div class="panel">	
+			<div class="panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+					QA Kickback <span class="sub-panel-title">- (see QA Reports page for more details) </span>
+					</div>
+				</div>
+			</div>
+		
+			<?php
+
+			$result = mysqli_query($con, 'SELECT * FROM onsites WHERE id = "' . $user_id . '" AND QAstatus = "Kickback" ORDER BY date DESC LIMIT 10');
+
+			if (!$result) {
+				printf("Error: %s\n", mysqli_error($con));
+				exit();
+			}
+
+			$i = 0;
+			
+			while ($row = mysqli_fetch_assoc($result)) {
+			
+				if (!$i++) echo "<table class='table table-striped' >
+				<tr class='tRow'>
+				<th class='tTitle'>Client ID</th>
+				<th class='tTitle'>Date</th>
+				<th class='tTitle'>Task Type</th>
+				<th class='tTitle'>Time</th>
+				<th class='tTitle'>Process</th>
+				<th class='tTitle'>QA By</th>
+				</tr>";
+
+				$clientid = $row['clientid'];
+				$date = $row['date'];
+				$task = $row['task'];
+				$time = $row['time'];
+				$status = $row['status'];
+				$QAby = $row['QAby'];
+				
+				echo "<tr class='tRow'>";
+				echo "<td class='tCell'>" . $clientid . "</td>";
+				echo "<td class='tCell'>" . $date . "</td>";
+				echo "<td class='tCell'>" . $task . "</td>";
+				echo "<td class='tCell'>" . $time . "</td>";
+				echo "<td class='tCell'>" . $status . "</td>";
+				echo "<td class='tCell'>" . $QAby . "</td>";
+				echo "</tr>";
+			}
+			echo "</table>";
+
+			
+			?>
+		</div>
+
+
+		<div class="panel">
+				
+			<div class="panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+					Pending QA <span class="sub-panel-title">- Descending </span>
+					</div>
+				</div>
+			</div>
+		
+			<?php
+
+			$result = mysqli_query($con, 'SELECT * FROM onsites WHERE id = "' . $user_id . '" AND QAstatus = "Pending QA" ORDER BY date DESC LIMIT 10');
+
+			if (!$result) {
+				printf("Error: %s\n", mysqli_error($con));
+				exit();
+			}
+
+			$i = 0;
+			
+			while ($row = mysqli_fetch_assoc($result)) {
+			
+				if (!$i++) echo "<table class='table table-striped' >
+				<tr class='tRow'>
+				<th class='tTitle'>Client ID</th>
+				<th class='tTitle'>Date</th>
+				<th class='tTitle'>Task Type</th>
+				<th class='tTitle'>Domain</th>
+				<th class='tTitle'>Time</th>
+				<th class='tTitle'>Process</th>
+				</tr>";
+
+				$clientid = $row['clientid'];
+				$date = $row['date'];
+				$task = $row['task'];
+				$domain = $row['domain'];
+				$time = $row['time'];
+				$status = $row['status'];
+				
+				echo "<tr class='tRow'>";
+				echo "<td class='tCell'>" . $clientid . "</td>";
+				echo "<td class='tCell'>" . $date . "</td>";
+				echo "<td class='tCell'>" . $task . "</td>";
+				echo "<td class='tCell'>" . $domain . "</td>";
+				echo "<td class='tCell'>" . $time . "</td>";
+				echo "<td class='tCell'>" . $status . "</td>";
+				echo "</tr>";
+			}
+			echo "</table>";
+
+			
+			?>
+		</div>
+
+
+
+		<div class="panel">
+				
+			<div class="panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+					Passed QA <span class="sub-panel-title">- Descending</span>
+					</div>
+				</div>
+			</div>
+		
+			<?php
+
+			$result = mysqli_query($con, 'SELECT * FROM onsites WHERE id = "' . $user_id . '" AND QAstatus = "Passed QA" ORDER BY date DESC LIMIT 15');
+
+			if (!$result) {
+				printf("Error: %s\n", mysqli_error($con));
+				exit();
+			}
+
+			$i = 0;
+			
+			while ($row = mysqli_fetch_assoc($result)) {
+			
+				if (!$i++) echo "<table class='table table-striped' >
+				<tr class='tRow'>
+				<th class='tTitle'>Client ID</th>
+				<th class='tTitle'>Date</th>
+				<th class='tTitle'>Task Type</th>
+				<th class='tTitle'>Domain</th>
+				<th class='tTitle'>Time</th>
+				<th class='tTitle'>Process</th>
+				<th class='tTitle'>QA By</th>
+				</tr>";
+
+				$clientid = $row['clientid'];
+				$date = $row['date'];
+				$task = $row['task'];
+				$domain = $row['domain'];
+				$time = $row['time'];
+				$status = $row['status'];
+				$QAby = $row['QAby'];
+				
+				echo "<tr class='tRow'>";
+				echo "<td class='tCell'>" . $clientid . "</td>";
+				echo "<td class='tCell'>" . $date . "</td>";
+				echo "<td class='tCell'>" . $task . "</td>";
+				echo "<td class='tCell'>" . $domain . "</td>";
+				echo "<td class='tCell'>" . $time . "</td>";
+				echo "<td class='tCell'>" . $status . "</td>";
+				echo "<td class='tCell'>" . $QAby . "</td>";
+				echo "</tr>";
+			}
+			echo "</table>";
+
+			
+			?>
+		</div>
+		<?php } ?>
+
+		<?php if ($user_role == 'blogs') { ?>
 		<div class="panel">
 				
 			<div class="panel-default">
@@ -303,6 +478,7 @@ include 'header.php';
 			mysqli_close($con);
 			?>
 		</div>
+		<?php } ?>
 
 </div>
 

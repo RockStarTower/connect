@@ -35,6 +35,62 @@ $total_user_number = mysqli_num_rows($users_result);
 		?>
 
 	<div class="left-wrapper-dash">
+	<?php if ($user_role == 'onsite') { ?>
+		<div class="panel">
+			<div class="panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+					Your Completed Tasks <span class="sub-panel-title">- Descending </span>
+					</div>
+				</div>
+			</div>
+		
+			<?php
+
+			$result = mysqli_query($con, 'SELECT * FROM onsites WHERE id ="'. $user_id .'" ORDER BY date DESC LIMIT 20');
+
+			if (!$result) {
+				printf("Error: %s\n", mysqli_error($con));
+				exit();
+			}
+
+			$i = 0;
+			
+			while ($row = mysqli_fetch_assoc($result)) {
+			
+				if (!$i++) echo "<table class='table table-striped' >
+				<tr class='tRow'>
+				<th class='tTitle'>Client ID</th>
+				<th class='tTitle'>Date</th>
+				<th class='tTitle'>Task Type</th>
+				<th class='tTitle'>Time</th>
+				<th class='tTitle'>Process</th>
+				<th class='tTitle'>QA Status</th>
+				</tr>";
+
+				$clientid = $row['clientid'];
+				$date = $row['date'];
+				$task = $row['task'];
+				$time = $row['time'];
+				$status = $row['status'];
+				$QAstatus = $row['QAstatus'];
+				
+				echo "<tr class='tRow'>";
+				echo "<td class='tCell'>" . $clientid . "</td>";
+				echo "<td class='tCell'>" . $date . "</td>";
+				echo "<td class='tCell'>" . $task . "</td>";
+				echo "<td class='tCell'>" . $time . "</td>";
+				echo "<td class='tCell'>" . $status . "</td>";
+				echo "<td class='tCell'>" . $QAstatus . "</td>";
+				echo "</tr>";
+			}
+			echo "</table>";
+
+			mysqli_close($con);
+			?>
+		</div>
+		<?php } ?>
+		<?php if ($user_role != 'onsite') { ?>
 		 <div style="text-align: center;" class="jumbotron customJumbo">
 			<h1>Welcome to Connect</h1>
 		    <p>Boost Connect houses applications like AutoBuilder and Boost Note. <br> For further instructions click the get started button below. </p>
@@ -51,7 +107,7 @@ $total_user_number = mysqli_num_rows($users_result);
 			<p><a href="devbuilder.php" class="btn btn-primary btn-lg" role="button">Get Started With Autobuilder!</a></p>
 			<?php } ?>
 		</div>
-		
+		<?php } ?>
 		<?php if ($user_role == 'blogs' || $user_role == 'admin') { ?>
 			<div class="panel dashPanel" >
 				<div class="panel-success panel-info">

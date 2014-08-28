@@ -48,6 +48,10 @@ $(document).ready(function () {
 
         $("#userH").addClass("active");
 
+    } else if (window.location.href.indexOf("onsiteqa") > -1) {
+
+        $("#noteH").addClass("active");
+
     }
 
     //Admin panel buttons
@@ -726,6 +730,7 @@ $(document).ready(function () {
 
     $(".userTable").focusout(function() {
 
+
         var ID = $(this).attr("id");
         var firstname = $("#firstname" + ID).text();
         var lastname = $("#lastname" + ID).text();
@@ -733,7 +738,6 @@ $(document).ready(function () {
         var role = $("#role" + ID).val();
         var status = $("#status" + ID).val();
         var manager = $("#manager" + ID).is(':checked');
-
         var dataString = 'user_id=' + ID + '&first_name=' + firstname + '&last_name=' + lastname + '&email=' + email + '&role=' + role + '&status=' + status + '&manager=' + manager;
 
         if (firstname.length > 0 && lastname.length > 0 && email.length > 0) {
@@ -754,6 +758,54 @@ $(document).ready(function () {
                 }
             });
         }
+
+    });
+
+    $(".userTable2").focusout(function() {
+
+        var ID = $(this).attr("id");
+        var comment = $("#comment" + ID).text();
+        var status = $("#status" + ID).val();
+        var username = $("#userValue").val();
+        console.log(status);
+        var dataString = 'id=' + ID + '&comment=' + comment + '&status=' + status + '&username=' + username;
+
+            $.ajax({
+                type: "POST",
+                url: "task/onsiteh.php",
+                data: dataString,
+                cache: false,
+                success: function(html) {
+                    $("#comment" + ID).text(comment);
+                    $("#status" + ID).val(status);
+                }
+            });
+        
+
+    });
+
+   
+
+
+    $(".userTable5").focusout(function() {
+
+        var ID = $(this).attr("id");
+        var comment = $("#scomment" + ID).text();
+        var status = $("#sstatus" + ID).val();
+        var dataString = 'id=' + ID + '&comment=' + comment + '&status=' + status;
+        console.log(dataString);
+            $.ajax({
+                type: "POST",
+                url: "task/onsiteKickback.php",
+                data: dataString,
+                cache: false,
+                success: function(html) {
+                    $("#scomment" + ID).text(comment);
+                    $("#sstatus" + ID).val(status);
+                    
+                }
+            });
+        
 
     });
 
@@ -791,8 +843,7 @@ $(document).ready(function () {
     });
 
 
-    var blogsView = function () {
-
+     var blogsView = function () {
         $(".blogticketPanel").css('display', 'block');
         $(".adminPanel").css('display', 'none');
         $("#newUser").css('display', 'none');

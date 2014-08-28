@@ -593,7 +593,7 @@ margin-top: 16px;
 	border-radius: 4;
 	border-color: black;
 	background-color: white;
-
+	border: none !important;
 }
 
 .cTitle{
@@ -1303,7 +1303,7 @@ textarea {
 /* style onsites' form radio buttons */
 
 .radiostyling          {
-margin: 10px;
+margin: 10px !important;
 }
 
 
@@ -1333,7 +1333,7 @@ div.rightForm {
     background: none repeat scroll 0 0 #428bca;
     border-radius: 3px;
     display: inline-block;
-    margin: 0;
+    margin: 1px;
     padding: 5px;
     width: 0;
 	cursor: pointer;

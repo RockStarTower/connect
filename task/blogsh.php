@@ -14,6 +14,7 @@ $username = mysqli_real_escape_string($con, $_POST['username']);
 $id = mysqli_real_escape_string($con, $_POST['id']);
 $comment = mysqli_real_escape_string($con, $_POST['comment']);
 
+
 mysqli_query($con, "INSERT INTO Blogs (date, amount, time, username, id, comment ) 
 	VALUES ('$date', '$amount', '$time', '$username', '$id', '$comment' )");
 

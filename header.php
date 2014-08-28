@@ -14,7 +14,7 @@ include 'config.php';
 
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 <link href='http://fonts.googleapis.com/css?family=Tauri' rel='stylesheet' type='text/css'>
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="dropzone/css/basic.css">
 <link rel="stylesheet" type="text/css" href="dropzone/css/dropzone.css">
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -70,9 +70,18 @@ date_default_timezone_set('America/Denver');
 						<li style="padding-top: 5px;">
 							<a href="tasks.php">
 								<i class="fa fa-check-square-o"></i>
-								New Task
+								Tasks
 							</a>
 						</li>
+						<?php if ($user_role == 'onsite' || $user_role == 'admin') { ?>
+						<li class="divider"></li>
+						<li>
+							<a href="onsiteqa.php">
+								<i class="fa fa-line-chart"></i>
+								Onsite QA & Reports
+							</a>
+						</li>
+						<?php } ?>
 						<li class="divider"></li>
 						<li>
 							<a href="blogs.php">

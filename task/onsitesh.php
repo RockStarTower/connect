@@ -6,20 +6,20 @@ if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-$clientid = $_POST['clientid'];
-$domain = $_POST['domain'];
-$task = $_POST['task'];
-$time = $_POST['time'];
-$comment = $_POST['comment'];
-$date = $_POST['date'];
-$username = $_POST['username'];
-$id = $_POST['id'];
+$clientid = mysqli_real_escape_string($con, $_POST['clientid']);
+$domain = mysqli_real_escape_string($con, $_POST['domain']);
+$task = mysqli_real_escape_string($con, $_POST['task']);
+$date = mysqli_real_escape_string($con, $_POST['date']);
+$time = mysqli_real_escape_string($con, $_POST['time']);
+$id = mysqli_real_escape_string($con, $_POST['id']);
+$username = mysqli_real_escape_string($con, $_POST['username']);
+$comment = mysqli_real_escape_string($con, $_POST['comment']);
+$status = mysqli_real_escape_string($con, $_POST['status']);
+$QAstatus = mysqli_real_escape_string($con, $_POST['QAstatus']);
 
-$status = $_POST['status'];
 
-
-  mysqli_query($con, "INSERT INTO onsites (clientid, domain, task, time, comment, status, date, username, id ) 
- VALUES ('$clientid', '$domain', '$task', '$time', '$comment', '$status', '$date', '$username', '$id' )"); 
+  mysqli_query($con, "INSERT INTO onsites (clientid, domain, task, date, time, id, username, comment, status, QAstatus) 
+ VALUES ('$clientid', '$domain', '$task', '$date', '$time', '$id', '$username', '$comment', '$status', '$QAstatus')"); 
  
 
 header("refresh:0; ". $root_url ."tasks.php");

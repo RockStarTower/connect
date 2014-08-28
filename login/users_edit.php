@@ -13,7 +13,7 @@ $role=mysql_escape_String($_POST['role']);
 $status=mysql_escape_String($_POST['status']);
 $manager=mysql_escape_String($_POST['manager']);
 mysqli_query($con, "UPDATE users SET firstname='$firstname',lastname='$lastname',email='$email', role='$role', status='$status', manager='$manager' WHERE id='$id'");
-mysql_query($sql);
+
 
 }
 
