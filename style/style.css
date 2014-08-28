@@ -535,6 +535,13 @@ margin-top: 16px;
 }
 
 
+.yourtasklist{
+	width: 90% !important;
+	margin: 0 auto;
+	margin-top: 20px;
+	min-width: 895px;
+}
+
 
 .tTitle {
 	padding: 5px;

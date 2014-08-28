@@ -82,6 +82,7 @@ date_default_timezone_set('America/Denver');
 							</a>
 						</li>
 						<?php } ?>
+						<?php if ($user_role != 'onsite') { ?>
 						<li class="divider"></li>
 						<li>
 							<a href="blogs.php">
@@ -96,6 +97,7 @@ date_default_timezone_set('America/Denver');
 								Custom Web
 							</a>
 						</li>
+						<?php } ?>
 					</ul>
 				</li>
 				<li id="autobuilderH" class="dropdown">

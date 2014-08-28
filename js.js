@@ -767,25 +767,24 @@ $(document).ready(function () {
         var comment = $("#comment" + ID).text();
         var status = $("#status" + ID).val();
         var username = $("#userValue").val();
-        console.log(status);
+
         var dataString = 'id=' + ID + '&comment=' + comment + '&status=' + status + '&username=' + username;
 
-            $.ajax({
-                type: "POST",
-                url: "task/onsiteh.php",
-                data: dataString,
-                cache: false,
-                success: function(html) {
-                    $("#comment" + ID).text(comment);
-                    $("#status" + ID).val(status);
-                }
-            });
+        $.ajax({
+            type: "POST",
+            url: "task/onsiteh.php",
+            data: dataString,
+            cache: false,
+            success: function(html) {
+                $("#comment" + ID).text(comment);
+                $("#status" + ID).val(status);
+                window.location.href = "onsiteqa.php#btn1";
+                location.reload();
+            }
+        });
         
 
     });
-
-   
-
 
     $(".userTable5").focusout(function() {
 
@@ -793,23 +792,88 @@ $(document).ready(function () {
         var comment = $("#scomment" + ID).text();
         var status = $("#sstatus" + ID).val();
         var dataString = 'id=' + ID + '&comment=' + comment + '&status=' + status;
-        console.log(dataString);
-            $.ajax({
-                type: "POST",
-                url: "task/onsiteKickback.php",
-                data: dataString,
-                cache: false,
-                success: function(html) {
-                    $("#scomment" + ID).text(comment);
-                    $("#sstatus" + ID).val(status);
-                    
-                }
-            });
-        
 
+        $.ajax({
+            type: "POST",
+            url: "task/onsiteKickback.php",
+            data: dataString,
+            cache: false,
+            success: function(html) {
+                $("#scomment" + ID).text(comment);
+                $("#sstatus" + ID).val(status);
+                window.location.href = "onsiteqa.php#btn3";
+                location.reload();
+            }
+        });
+        
     });
 
-    $("#userbtn1").click(function() {
+    $(".userTable6").focusout(function() {
+
+        var ID = $(this).attr("id");
+        var clientid = $("#clientid" + ID).text();
+        var task = $("#task" + ID).text();
+        var domain = $("#domain" + ID).text();
+        var hstatus = $("#hstatus" + ID).text();
+        var comment = $("#hcomment" + ID).text();
+
+        var dataString = 'id=' + ID + '&comment=' + comment + '&status=' + hstatus + '&domain=' + domain + '&task=' + task + '&clientid=' + clientid;
+        console.log(dataString);
+        $.ajax({
+            type: "POST",
+            url: "task/onsitep.php",
+            data: dataString,
+            cache: false,
+            success: function(html) {
+                $("#scomment" + ID).text(comment);
+                $("#sstatus" + ID).val(status);
+
+                window.location.href = "onsiteqa.php#btn4";
+                location.reload();
+            }
+        });
+        
+    });
+
+
+
+    var blogsView = function () {
+
+        $(".blogticketPanel").css('display', 'block');
+        $(".adminPanel").css('display', 'none');
+        $("#newUser").css('display', 'none');
+        $("#userbtn3").addClass("active");
+        $("#userbtn1").removeClass("active");
+        $("#userbtn2").removeClass("active");
+        $("#userbtn4").removeClass("active");
+        $(".yourtasklist").css('display', 'none');
+
+    };
+
+    var taskList = function () {
+
+        $(".blogticketPanel").css('display', 'none');
+        $(".adminPanel").css('display', 'none');
+        $("#newUser").css('display', 'none');
+        $("#userbtn3").removeClass("active");
+        $("#userbtn1").removeClass("active");
+        $("#userbtn2").removeClass("active");
+        $("#userbtn4").addClass("active");
+        $(".yourtasklist").css('display', 'block');
+
+    };
+
+    if (window.location.href.indexOf("btn3") > -1) {
+
+        blogsView();
+    }
+
+    if (window.location.href.indexOf("btn4") > -1) {
+
+        taskList();
+    }
+
+    $("#userbtn1").on('click', function() {
 
         $(".adminPanel").css('display', 'block');
         $("#newUser").css('display', 'none');
@@ -817,11 +881,13 @@ $(document).ready(function () {
         $("#userbtn1").addClass("active");
         $("#userbtn2").removeClass("active");
         $("#userbtn3").removeClass("active");
+        $("#userbtn4").removeClass("active");
+        $(".yourtasklist").css('display', 'none');
 
     });
 
 
-    $("#userbtn2").click(function() {
+    $("#userbtn2").on('click', function() {
 
         $(".adminPanel").css('display', 'none');
         $("#newUser").css('display', 'block');
@@ -829,9 +895,12 @@ $(document).ready(function () {
         $("#userbtn2").addClass("active");
         $("#userbtn1").removeClass("active");
         $("#userbtn3").removeClass("active");
+        $("#userbtn4").removeClass("active");
+        $(".yourtasklist").css('display', 'none');
 
     });
-    $("#userbtn3").click(function() {
+
+    $("#userbtn3").on('click', function() {
 
         $(".blogticketPanel").css('display', 'block');
         $(".adminPanel").css('display', 'none');
@@ -839,19 +908,26 @@ $(document).ready(function () {
         $("#userbtn3").addClass("active");
         $("#userbtn1").removeClass("active");
         $("#userbtn2").removeClass("active");
+        $("#userbtn4").removeClass("active");
+        $(".yourtasklist").css('display', 'none');
+
 
     });
 
+    $("#userbtn4").on('click', function() {
 
-     var blogsView = function () {
-        $(".blogticketPanel").css('display', 'block');
+        $(".blogticketPanel").css('display', 'none');
         $(".adminPanel").css('display', 'none');
         $("#newUser").css('display', 'none');
-        $("#userbtn3").addClass("active");
+        $("#userbtn3").removeClass("active");
         $("#userbtn1").removeClass("active");
         $("#userbtn2").removeClass("active");
+        $("#userbtn4").addClass("active");
+        $(".yourtasklist").css('display', 'block');
 
-    };
+    });
+
+     
 
 
     $("#forgot1").click(function() {
