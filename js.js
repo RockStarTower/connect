@@ -816,20 +816,24 @@ $(document).ready(function () {
         var domain = $("#domain" + ID).text();
         var hstatus = $("#hstatus" + ID).text();
         var comment = $("#hcomment" + ID).text();
+        var time = $("#time" + ID).text();
 
-        var dataString = 'id=' + ID + '&comment=' + comment + '&status=' + hstatus + '&domain=' + domain + '&task=' + task + '&clientid=' + clientid;
-        console.log(dataString);
+        var dataString = 'id=' + ID + '&comment=' + comment + '&status=' + hstatus + '&domain=' + domain + '&task=' + task + '&clientid=' + clientid + '&time=' + time;
+
         $.ajax({
             type: "POST",
             url: "task/onsitep.php",
             data: dataString,
             cache: false,
             success: function(html) {
-                $("#scomment" + ID).text(comment);
+
+                $("#clientid" + ID).text(clientid);
+                $("#hstatus" + ID).text(hstatus);
+                $("#task" + ID).text(task);
+                $("#domain" + ID).text(domain);
+                $("#time" + ID).text(time);
                 $("#sstatus" + ID).val(status);
 
-                window.location.href = "onsiteqa.php#btn4";
-                location.reload();
             }
         });
         

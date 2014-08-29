@@ -8,6 +8,8 @@ include 'header.php';
 <div class="lSide">
 
 	<div class="pickTask">
+<!--
+
 		<div class="pickTaskContainer" id="blogsIcon">
 			<img class="taskIcon"  src="images/blogs.png" />
 			<div class="taskText">
@@ -32,6 +34,7 @@ include 'header.php';
 				Design
 			</div>
 		</div>
+
 		<div class="pickTaskContainer">
 			<img class="taskIcon" id="onsiteIcon" src="images/onsite.png" />
 			<div class="taskText">
@@ -44,7 +47,7 @@ include 'header.php';
 				Meetings
 			</div>
 		</div>
-
+-->
 	</div>
 
 
@@ -53,9 +56,7 @@ include 'header.php';
 
 <div class="left-wrapper">
 	
-	<div id="formPH">
-		.
-	</div>
+
 
 	<div id="customCon">
 	<?php include 'task/custombuild.php' ?>

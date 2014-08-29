@@ -16,6 +16,7 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
 	<input class="sInputs" type="number" name="clientid" placeholder="Client ID" required /> </br>
 	<input class="sInputs" type="text" name="domain" placeholder="example.com" required /> </br>
     <select class="sInputs" style="padding-bottom: 0px !important; padding-top: 0px !important;" name="task" required/>
+    <optgroup label="Group 1">
       <option value=" " style="display: none;" default>Please Select a Task</option>
       <option value="Basic Edits – T,D,H1, and Alt ">Basic Edits – T,D,H1, and Alt </option>
       <option value="Google Analytics">Google Analytics</option>
@@ -31,6 +32,10 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
       <option value="Misc. Edits">Misc. Edits</option>
       <option value="Ranking Audit">Ranking Audit</option>
       <option value="CMS Testing">CMS Testing</option>
+      </optgroup>
+      <optgroup label="Group 2">
+      <option value="CMS Testing">GNA Skip</option>
+      </optgroup>
      </select><br>
     <input class="sInputs quicktime" type="text" name="time" placeholder="Time   .5 = half hour"/>
     <div class="show-this1">0.1</div>

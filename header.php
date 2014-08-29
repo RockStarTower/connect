@@ -60,6 +60,7 @@ date_default_timezone_set('America/Denver');
 						My Dashboard
 					</a>
 				</li>
+				<?php if ($user_role == 'onsite' || $user_role == 'admin') { ?>
 				<li id="noteH" class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-pencil-square-o" style="margin-right: 10px;"></i>
@@ -73,15 +74,20 @@ date_default_timezone_set('America/Denver');
 								Tasks
 							</a>
 						</li>
-						<?php if ($user_role == 'onsite' || $user_role == 'admin') { ?>
 						<li class="divider"></li>
 						<li>
 							<a href="onsiteqa.php">
 								<i class="fa fa-line-chart"></i>
-								Onsite QA & Reports
+								Reports
 							</a>
 						</li>
-						<?php } ?>
+						<li class="divider"></li>
+						<li>
+							<a href="audit.php">
+								<i class="fa fa-gavel"></i>
+								 &nbsp;Audit
+							</a>
+						</li>
 						<?php if ($user_role != 'onsite') { ?>
 						<li class="divider"></li>
 						<li>
@@ -100,6 +106,8 @@ date_default_timezone_set('America/Denver');
 						<?php } ?>
 					</ul>
 				</li>
+				<?php } ?>
+				<?php if ($user_role == 'blogs' || $user_role == 'admin') { ?>
 				<li id="autobuilderH" class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-cogs" style="margin-right: 10px;"></i>
@@ -129,6 +137,7 @@ date_default_timezone_set('America/Denver');
 						</li>
 					</ul>
 				</li>
+				<?php } ?>
 			</ul>
 			<!--
 			

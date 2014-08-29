@@ -11,8 +11,9 @@ if($_POST['id'])
 	$domain= mysqli_real_escape_string($con, $_POST['domain']);
 	$task= mysqli_real_escape_string($con, $_POST['task']);
 	$clientid= mysqli_real_escape_string($con, $_POST['clientid']);
+	$time= mysqli_real_escape_string($con, $_POST['time']);
 }
-mysqli_query($con, "UPDATE onsites SET comment='$comment',QAstatus='$role',domain='$domain',task='$task',clientid='$clientid' WHERE counter='$id'");
+mysqli_query($con, "UPDATE onsites SET comment='$comment',QAstatus='$role',domain='$domain',task='$task',clientid='$clientid', time='$time' WHERE counter='$id'");
 
 
 
