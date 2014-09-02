@@ -22,9 +22,8 @@ $QAstatus = mysqli_real_escape_string($con, $_POST['QAstatus']);
  VALUES ('$clientid', '$domain', '$task', '$date', '$time', '$id', '$username', '$comment', '$status', '$QAstatus')"); 
  
 
-header("refresh:0; ". $root_url ."tasks.php");
+header("location: ../tasks.php");
 
 
-mysqli_close($con);
 
 ?>

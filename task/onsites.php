@@ -49,7 +49,7 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
 	<input class="sInputs" type="hidden" name="QAstatus" value="Pending QA" /> 
 	</div>
 	<div class="rightForm">
-	<textarea style="width: 100%; margin-top: 2px; height: 153px !important;" class="input-standard contentForm ctextarea currentcontent" rows="10" cols="60" name="comment" placeholder="Please leave a comment. (Optional)" /></textarea> </br>
+	<textarea style="width: 100%; margin-top: 2px; height: 153px !important; padding: 13px;" class="input-standard contentForm ctextarea currentcontent" rows="10" cols="60" name="comment" placeholder="Please leave a comment. (Optional)" /></textarea> </br>
 	<input class="radiostyling" type="radio" name="status" value="Complete" required />Complete 
 	<input class="radiostyling" type="radio" name="status" value="Incomplete" required />Incomplete 
 	<input class="radiostyling" type="radio" name="status" value="kickback" required />Kickback

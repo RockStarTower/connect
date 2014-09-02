@@ -940,6 +940,19 @@ margin-top: 16px;
 	height: auto !important;
 }
 
+#canvasLine2{
+	width: 97% !important;
+	padding: 5px !important;
+	height: auto !important;
+}
+
+#canvas4{
+	width: 98% !important;
+	padding: 5px !important;
+	height: auto !important;
+}
+
+
 #blueBulletin{
 	list-style-type: square;
 	color: rgba(220,220,220,1);
@@ -949,6 +962,31 @@ margin-top: 16px;
 	list-style-type: square;
 	color: rgba(151,187,205,1);
 }
+#tanBulletin2{
+	list-style-type: square;
+	color: #FDB45C;
+}
+#tanBulletin3{
+	list-style-type: square;
+	color: #F7464A;
+}
+#tanBulletin4{
+	list-style-type: square;
+	color: #949FB1;
+}
+#tanBulletin5{
+	list-style-type: square;
+	color: rgba(220,220,220,1);
+}
+#tanBulletin6{
+	list-style-type: square;
+	color: #46BFBD;
+}
+#tanBulletin7{
+	list-style-type: square;
+	color: rgba(151,187,205,0.8);
+}
+
 
 .graphkey{
 	margin-left: 20px;
@@ -1593,6 +1631,27 @@ float: right;
 	padding-left: 20px;
 	font-size: 14px;
 }
+
+.sqlDelete{
+	opacity: .6;
+}
+
+.sqlDelete:hover{
+	opacity: 1;
+}
+
+
+
+.half-Wrapper-onsite{
+	width: 49%;
+	float: left;
+}
+.right-Wrapper-onsite{
+	width: 49%;
+	float: left;
+	margin-left: 2%;
+}
+
 
 
 /* LIBRARY CSS */

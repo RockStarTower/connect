@@ -13,7 +13,7 @@ if($_POST['id'])
 	$clientid= mysqli_real_escape_string($con, $_POST['clientid']);
 	$time= mysqli_real_escape_string($con, $_POST['time']);
 }
-mysqli_query($con, "UPDATE onsites SET comment='$comment',QAstatus='$role',domain='$domain',task='$task',clientid='$clientid', time='$time' WHERE counter='$id'");
+mysqli_query($con, "UPDATE onsites SET comment='$comment',status='$role',domain='$domain',task='$task',clientid='$clientid', time='$time' WHERE counter='$id'");
 
 
 
