@@ -13,8 +13,8 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
 
 	<div class="leftForm">
 	<input class="sInputs" type="date" name="date" value="<?=$oneday?>" required /> </br>
-	<input class="sInputs" type="number" name="clientid" placeholder="Client ID" required /> </br>
-	<input class="sInputs" type="text" name="domain" placeholder="example.com" required /> </br>
+	<input class="sInputs"  type="number" name="clientid" placeholder="Client ID" required /> </br>
+	<input class="sInputs" id="onsiteDomain" type="text" name="domain" placeholder="example.com" required /> </br>
     <select class="sInputs" style="padding-bottom: 0px !important; padding-top: 0px !important;" name="task" required/>
     <optgroup label="Group 1">
       <option value=" " style="display: none;" default>Please Select a Task</option>

@@ -79,7 +79,7 @@ include "header.php";
 			</div>
 
 			<?php
-				$result = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Pending QA" AND username != "'.$username.'"');
+				$result = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Pending QA" AND username != "'.$username.'" AND status = "Complete" ORDER BY date ASC');
 
 				if (!$result) {
 					printf("Error: %s\n", mysqli_error($con));
@@ -998,9 +998,9 @@ global $accountData7;
 $accountData7 = "{
 	            label: 'My Second dataset',
 	            fillColor: 'rgba(151,187,205,0.5)',
-	            strokeColor: 'rgba(151,187,205,0.8)',
+	            strokeColor: '#32CD32',
 	            highlightFill: 'rgba(151,187,205,0.75)',
-	            highlightStroke: 'rgba(151,187,205,1)',
+	            highlightStroke: '#32CD32',
 	            data: [day617, day517, day417, day317, day217, day117]
 	        },";
 
@@ -1633,9 +1633,9 @@ global $lineDataEcho7;
 
 $lineDataEcho7 = "{
 					fillColor : 'rgba(150,150,150,.1)',
-					strokeColor : 'rgba(151,187,205,0.8)',
+					strokeColor : '#32CD32',
 					pointColor : 'rgba(0,0,0,.0)',
-					pointStrokeColor : 'rgba(151,187,205,0.8))',
+					pointStrokeColor : '#32CD32',
 					data : [day7L7,day6L7,day5L7,day4L7,day3L7,day2L7,day1L7]
 				},";
 
@@ -1775,7 +1775,7 @@ lineData7($con, $lineAccount7);
 			</div>
 
 
-		<div class="panel" id="newUser">
+		<div class="panel" id="newUser" style="min-height: 300px;">
 			<div class="panel-default">
 				<div class="panel-heading">
 					<div class="panel-title">
@@ -1784,7 +1784,7 @@ lineData7($con, $lineAccount7);
 				</div>
 			</div>
 
-			<div class="graphkey">
+			<div class="graphkey" style="float: left; width: 181px !important;">
 				<ul style="margin: 5px;">
 				<li id="tanBulletin"><span style="color: black; font-size: 14px;"><?= $lineAccount1 ?></span></li>
 				<li id="tanBulletin2"><span style="color: black; font-size: 14px;"><?= $lineAccount2 ?></span></li>
@@ -1792,7 +1792,22 @@ lineData7($con, $lineAccount7);
 				<li id="tanBulletin4"><span style="color: black; font-size: 14px;"><?= $lineAccount4 ?></span></li>
 				<li id="tanBulletin5"><span style="color: black; font-size: 14px;"><?= $lineAccount5 ?></span></li>
 				<li id="tanBulletin6"><span style="color: black; font-size: 14px;"><?= $lineAccount6 ?></span></li>
+				<li id="tanBulletin7"><span style="color: black; font-size: 14px;"><?= $lineAccount7 ?></span></li>
 				</ul>
+			</div>
+			<div class="graphDescription" style="margin: 20px;">
+				<p>
+					<strong>Onsite Total Daily Tasks:</strong> This shows the total tasks being completed by the onsite team each day with a 7 day window.
+				</p>
+				<p>
+					<strong>Individual Daily Tasks:</strong> This shows the total tasks being completed by the each member of the onsite team each day with a 7 day window.
+				</p>
+				<p>
+					<strong>Month View:</strong> This shows the total tasks being completed by the each member of the onsite team each month for the past 6 months.
+				</p>
+				<p>
+					<strong>Graph Viewing Scale: </strong> Each graph has a dynamic viewing scale, meaning the highest number will determine the top of the scale, and the rest of the data will be compared in relation to it.
+				</p>
 			</div>
 		</div>
 	</div>

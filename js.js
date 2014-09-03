@@ -435,6 +435,32 @@ $(document).ready(function () {
         textbox.val(someString);
     });
 
+    $("#onsiteDomain").on("keyup", function() {
+        var textbox = $(this);
+        if (textbox.val().substring(0, 4) == "http" || textbox.val().substring(0, 4) == "www.") {
+            if (textbox.val().indexOf("https://www.") === 0) {
+                textbox.val(textbox.val().substring(12));
+            }
+            if (textbox.val().indexOf("http://www.") === 0) {
+                textbox.val(textbox.val().substring(11));
+            }
+            if (textbox.val().indexOf("https://") === 0) {
+                textbox.val(textbox.val().substring(8));
+            }
+            if (textbox.val().indexOf("http://") === 0) {
+                textbox.val(textbox.val().substring(7));
+            }
+            if (textbox.val().indexOf("www.") === 0) {
+                textbox.val(textbox.val().substring(4));
+            }
+
+        }
+
+        var someString = $(this).val();
+        someString = someString.replace(/\//g, "");
+        textbox.val(someString);
+    });
+
     $("#domain").on("keyup", function() {
         var textbox = $(this);
         if (textbox.val().substring(0, 4) == "http" || textbox.val().substring(0, 4) == "www.") {
