@@ -1221,6 +1221,26 @@ $(document).ready(function () {
         
     });
 
+    $("#graphDisplay1").on('click', function () {
+
+        $("#graph2").css("display", "none");
+        $("#graph1").css("display", "block");
+
+        $(this).addClass("active");
+        $("#graphDisplay2").removeClass("active");
+
+    });
+
+    $("#graphDisplay2").on('click', function () {
+
+        $("#graph2").css("display", "block");
+        $("#graph1").css("display", "none");
+
+        $(this).addClass("active");
+        $("#graphDisplay1").removeClass("active");
+
+    });
+
 
 });
 

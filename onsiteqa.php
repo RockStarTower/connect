@@ -1,7 +1,7 @@
 <?php
 include "header.php";
 ?>
-<script src="chart/legend.js"></script>
+
 
 
 <style type="text/css">
@@ -17,7 +17,7 @@ include "header.php";
 
 	
 		<?php
-		$number = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Pending QA" AND username != "'.$username.'"');
+		$number = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Pending QA" AND username != "'.$username.'" AND status = "Complete"');
 		$num = mysqli_num_rows($number);
 
 		$result = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Passed QA" ORDER BY date DESC LIMIT 40');
@@ -361,32 +361,32 @@ $day5 = 0;
 $day6 = 0;
 $day7 = 0;
 
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' ");
+$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND status != 'Kickback' ");
 $totaltime1 = mysqli_fetch_array($totaltime);
 $day1 = $totaltime1[0];
 
 
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' ");
+$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND status != 'Kickback' ");
 $totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
 $day2 = $totaltimetwo1[0];
 
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' ");
+$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND status != 'Kickback' ");
 $totaltimethree1 = mysqli_fetch_array($totaltimethree);
 $day3 = $totaltimethree1[0];
 
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' ");
+$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND status != 'Kickback' ");
 $totaltimefour1 = mysqli_fetch_array($totaltimefour);
 $day4 = $totaltimefour1[0];
 
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' ");
+$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND status != 'Kickback' ");
 $totaltimefive1 = mysqli_fetch_array($totaltimefive);
 $day5 = $totaltimefive1[0];
 
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' ");
+$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND status != 'Kickback' ");
 $totaltimesix1 = mysqli_fetch_array($totaltimesix);
 $day6 = $totaltimesix1[0];
 
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' ");
+$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND status != 'Kickback' ");
 $totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
 $day7 = $totaltimeseven1[0];
 
@@ -406,7 +406,16 @@ echo "<input id='day7' type='hidden' value='" . $day7 . "' ></input>";
 <div class="full-width-wrapper" style="margin-top: 0px !important">
 	<div class="container5" style="display: none;">
 		<div class="half-Wrapper-onsite">
-			<div class="panel">
+
+			<div class="btn-group btn-group-justified" style="margin-bottom: 10px;">
+			  <div class="btn-group">
+			    <button type="button" id="graphDisplay1" class="btn btn-default active">Total Combined</button>
+			  </div>
+			  <div class="btn-group">
+			    <button type="button" id="graphDisplay2" class="btn btn-default">Individual User</button>
+			  </div>
+			</div>
+			<div id="graph1" class="panel">
 					<div class="panel-default">
 							<div class="panel-heading">
 								<div class="panel-title">
@@ -509,6 +518,644 @@ echo "<input id='day7' type='hidden' value='" . $day7 . "' ></input>";
 			</div>
 
 
+
+<?php
+
+$oneday = date('20y-m-d',strtotime("-0 days"));
+$twoday = date('20y-m-d',strtotime("-1 days"));
+$threeday = date('20y-m-d',strtotime("-2 days"));
+$fourday = date('20y-m-d',strtotime("-3 days"));
+$fiveday = date('20y-m-d',strtotime("-4 days"));
+$sixday = date('20y-m-d',strtotime("-5 days"));
+$sevenday = date('20y-m-d',strtotime("-6 days"));
+
+echo "<input id='oneday' type='hidden' value='" . $oneday . "' ></input>";
+echo "<input id='twoday' type='hidden' value='" . $twoday . "' ></input>";
+echo "<input id='threeday' type='hidden' value='" . $threeday . "' ></input>";
+echo "<input id='fourday' type='hidden' value='" . $fourday . "' ></input>";
+echo "<input id='fiveday' type='hidden' value='" . $fiveday . "' ></input>";
+echo "<input id='sixday' type='hidden' value='" . $sixday . "' ></input>";
+echo "<input id='sevenday' type='hidden' value='" . $sevenday . "' ></input>";
+
+
+function lineData1 ($con, $lineAccount1){
+
+$oneday = date('20y-m-d',strtotime("-0 days"));
+$twoday = date('20y-m-d',strtotime("-1 days"));
+$threeday = date('20y-m-d',strtotime("-2 days"));
+$fourday = date('20y-m-d',strtotime("-3 days"));
+$fiveday = date('20y-m-d',strtotime("-4 days"));
+$sixday = date('20y-m-d',strtotime("-5 days"));
+$sevenday = date('20y-m-d',strtotime("-6 days"));
+
+$day1L = 0;
+$day2L = 0;
+$day3L = 0;
+$day4L = 0;
+$day5L = 0;
+$day6L = 0;
+$day7L = 0;
+
+$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount1 . "' AND status != 'Kickback' ");
+$totaltime1 = mysqli_fetch_array($totaltime);
+$day1L = $totaltime1[0];
+
+$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount1 . "' AND status != 'Kickback'  ");
+$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
+$day2L = $totaltimetwo1[0];
+
+$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount1 . "' AND status != 'Kickback' ");
+$totaltimethree1 = mysqli_fetch_array($totaltimethree);
+$day3L = $totaltimethree1[0];
+
+$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount1 . "' AND status != 'Kickback' ");
+$totaltimefour1 = mysqli_fetch_array($totaltimefour);
+$day4L = $totaltimefour1[0];
+
+$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount1 . "' AND status != 'Kickback' ");
+$totaltimefive1 = mysqli_fetch_array($totaltimefive);
+$day5L = $totaltimefive1[0];
+
+$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount1 . "' AND status != 'Kickback' ");
+$totaltimesix1 = mysqli_fetch_array($totaltimesix);
+$day6L = $totaltimesix1[0];
+
+$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount1 . "' AND status != 'Kickback' ");
+$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
+$day7L = $totaltimeseven1[0];
+
+
+
+// Incomplete placed into inputs for javascript to grab
+
+echo "<input id='day1L' type='hidden' value='" . $day1L . "' ></input>";
+echo "<input id='day2L' type='hidden' value='" . $day2L . "' ></input>";
+echo "<input id='day3L' type='hidden' value='" . $day3L . "' ></input>";
+echo "<input id='day4L' type='hidden' value='" . $day4L . "' ></input>";
+echo "<input id='day5L' type='hidden' value='" . $day5L . "' ></input>";
+echo "<input id='day6L' type='hidden' value='" . $day6L . "' ></input>";
+echo "<input id='day7L' type='hidden' value='" . $day7L . "' ></input>";
+
+
+
+global $lineDataEcho1;
+
+$lineDataEcho1 = "{
+					fillColor : 'rgba(200,200,200,.1)',
+					strokeColor : 'rgba(151,187,205,1)',
+					pointColor : 'rgba(151,187,205,1)',
+					pointStrokeColor : '#fff',
+					data : [day7L,day6L,day5L,day4L,day3L,day2L,day1L]
+				},";
+
+}
+
+
+function lineData2 ($con, $lineAccount2){
+
+$oneday = date('20y-m-d',strtotime("-0 days"));
+$twoday = date('20y-m-d',strtotime("-1 days"));
+$threeday = date('20y-m-d',strtotime("-2 days"));
+$fourday = date('20y-m-d',strtotime("-3 days"));
+$fiveday = date('20y-m-d',strtotime("-4 days"));
+$sixday = date('20y-m-d',strtotime("-5 days"));
+$sevenday = date('20y-m-d',strtotime("-6 days"));
+
+$day1L = 0;
+$day2L = 0;
+$day3L = 0;
+$day4L = 0;
+$day5L = 0;
+$day6L = 0;
+$day7L = 0;
+
+$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount2 . "' AND status != 'Kickback' ");
+$totaltime1 = mysqli_fetch_array($totaltime);
+$day1L = $totaltime1[0];
+
+$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount2 . "' AND status != 'Kickback'  ");
+$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
+$day2L = $totaltimetwo1[0];
+
+$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount2 . "' AND status != 'Kickback' ");
+$totaltimethree1 = mysqli_fetch_array($totaltimethree);
+$day3L = $totaltimethree1[0];
+
+$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount2 . "' AND status != 'Kickback' ");
+$totaltimefour1 = mysqli_fetch_array($totaltimefour);
+$day4L = $totaltimefour1[0];
+
+$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount2 . "' AND status != 'Kickback' ");
+$totaltimefive1 = mysqli_fetch_array($totaltimefive);
+$day5L = $totaltimefive1[0];
+
+$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount2 . "' AND status != 'Kickback' ");
+$totaltimesix1 = mysqli_fetch_array($totaltimesix);
+$day6L = $totaltimesix1[0];
+
+$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount2 . "' AND status != 'Kickback' ");
+$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
+$day7L = $totaltimeseven1[0];
+
+// Incomplete placed into inputs for javascript to grab
+echo "<input id='day1L2' type='hidden' value='" . $day1L . "' ></input>";
+echo "<input id='day2L2' type='hidden' value='" . $day2L . "' ></input>";
+echo "<input id='day3L2' type='hidden' value='" . $day3L . "' ></input>";
+echo "<input id='day4L2' type='hidden' value='" . $day4L . "' ></input>";
+echo "<input id='day5L2' type='hidden' value='" . $day5L . "' ></input>";
+echo "<input id='day6L2' type='hidden' value='" . $day6L . "' ></input>";
+echo "<input id='day7L2' type='hidden' value='" . $day7L . "' ></input>";
+
+global $lineDataEcho2;
+
+$lineDataEcho2 = "{
+					fillColor : 'rgba(150,150,150,.1)',
+					strokeColor : '#FDB45C',
+					pointColor : 'rgba(0,0,0,.0)',
+					pointStrokeColor : '#FDB45C',
+					data : [day7L2,day6L2,day5L2,day4L2,day3L2,day2L2,day1L2]
+				},";
+
+}
+
+
+
+function lineData3 ($con, $lineAccount3){
+
+$oneday = date('20y-m-d',strtotime("-0 days"));
+$twoday = date('20y-m-d',strtotime("-1 days"));
+$threeday = date('20y-m-d',strtotime("-2 days"));
+$fourday = date('20y-m-d',strtotime("-3 days"));
+$fiveday = date('20y-m-d',strtotime("-4 days"));
+$sixday = date('20y-m-d',strtotime("-5 days"));
+$sevenday = date('20y-m-d',strtotime("-6 days"));
+
+$day1L = 0;
+$day2L = 0;
+$day3L = 0;
+$day4L = 0;
+$day5L = 0;
+$day6L = 0;
+$day7L = 0;
+
+$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount3 . "' AND status != 'Kickback' ");
+$totaltime1 = mysqli_fetch_array($totaltime);
+$day1L = $totaltime1[0];
+
+$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount3 . "' AND status != 'Kickback'  ");
+$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
+$day2L = $totaltimetwo1[0];
+
+$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount3 . "' AND status != 'Kickback' ");
+$totaltimethree1 = mysqli_fetch_array($totaltimethree);
+$day3L = $totaltimethree1[0];
+
+$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount3 . "' AND status != 'Kickback' ");
+$totaltimefour1 = mysqli_fetch_array($totaltimefour);
+$day4L = $totaltimefour1[0];
+
+$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount3 . "' AND status != 'Kickback' ");
+$totaltimefive1 = mysqli_fetch_array($totaltimefive);
+$day5L = $totaltimefive1[0];
+
+$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount3 . "' AND status != 'Kickback' ");
+$totaltimesix1 = mysqli_fetch_array($totaltimesix);
+$day6L = $totaltimesix1[0];
+
+$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount3 . "' AND status != 'Kickback' ");
+$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
+$day7L = $totaltimeseven1[0];
+
+// Incomplete placed into inputs for javascript to grab
+echo "<input id='day1L3' type='hidden' value='" . $day1L . "' ></input>";
+echo "<input id='day2L3' type='hidden' value='" . $day2L . "' ></input>";
+echo "<input id='day3L3' type='hidden' value='" . $day3L . "' ></input>";
+echo "<input id='day4L3' type='hidden' value='" . $day4L . "' ></input>";
+echo "<input id='day5L3' type='hidden' value='" . $day5L . "' ></input>";
+echo "<input id='day6L3' type='hidden' value='" . $day6L . "' ></input>";
+echo "<input id='day7L3' type='hidden' value='" . $day7L . "' ></input>";
+
+global $lineDataEcho3;
+
+$lineDataEcho3 = "{
+					fillColor : 'rgba(150,150,150,.1)',
+					strokeColor : '#F7464A',
+					pointColor : 'rgba(0,0,0,.0)',
+					pointStrokeColor : '#F7464A',
+					data : [day7L3,day6L3,day5L3,day4L3,day3L3,day2L3,day1L3]
+				},";
+
+}
+
+
+
+function lineData4 ($con, $lineAccount4){
+
+$oneday = date('20y-m-d',strtotime("-0 days"));
+$twoday = date('20y-m-d',strtotime("-1 days"));
+$threeday = date('20y-m-d',strtotime("-2 days"));
+$fourday = date('20y-m-d',strtotime("-3 days"));
+$fiveday = date('20y-m-d',strtotime("-4 days"));
+$sixday = date('20y-m-d',strtotime("-5 days"));
+$sevenday = date('20y-m-d',strtotime("-6 days"));
+
+$day1L = 0;
+$day2L = 0;
+$day3L = 0;
+$day4L = 0;
+$day5L = 0;
+$day6L = 0;
+$day7L = 0;
+
+$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount4 . "' AND status != 'Kickback' ");
+$totaltime1 = mysqli_fetch_array($totaltime);
+$day1L = $totaltime1[0];
+
+$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount4 . "' AND status != 'Kickback'  ");
+$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
+$day2L = $totaltimetwo1[0];
+
+$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount4 . "' AND status != 'Kickback' ");
+$totaltimethree1 = mysqli_fetch_array($totaltimethree);
+$day3L = $totaltimethree1[0];
+
+$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount4 . "' AND status != 'Kickback' ");
+$totaltimefour1 = mysqli_fetch_array($totaltimefour);
+$day4L = $totaltimefour1[0];
+
+$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount4 . "' AND status != 'Kickback' ");
+$totaltimefive1 = mysqli_fetch_array($totaltimefive);
+$day5L = $totaltimefive1[0];
+
+$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount4 . "' AND status != 'Kickback' ");
+$totaltimesix1 = mysqli_fetch_array($totaltimesix);
+$day6L = $totaltimesix1[0];
+
+$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount4 . "' AND status != 'Kickback' ");
+$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
+$day7L = $totaltimeseven1[0];
+
+// Incomplete placed into inputs for javascript to grab
+echo "<input id='day1L4' type='hidden' value='" . $day1L . "' ></input>";
+echo "<input id='day2L4' type='hidden' value='" . $day2L . "' ></input>";
+echo "<input id='day3L4' type='hidden' value='" . $day3L . "' ></input>";
+echo "<input id='day4L4' type='hidden' value='" . $day4L . "' ></input>";
+echo "<input id='day5L4' type='hidden' value='" . $day5L . "' ></input>";
+echo "<input id='day6L4' type='hidden' value='" . $day6L . "' ></input>";
+echo "<input id='day7L4' type='hidden' value='" . $day7L . "' ></input>";
+
+global $lineDataEcho4;
+
+$lineDataEcho4 = "{
+					fillColor : 'rgba(150,150,150,.1)',
+					strokeColor : '#949FB1',
+					pointColor : 'rgba(0,0,0,.0)',
+					pointStrokeColor : '#949FB1',
+					data : [day7L4,day6L4,day5L4,day4L4,day3L4,day2L4,day1L4]
+				},";
+
+}
+
+
+function lineData5 ($con, $lineAccount5){
+
+$oneday = date('20y-m-d',strtotime("-0 days"));
+$twoday = date('20y-m-d',strtotime("-1 days"));
+$threeday = date('20y-m-d',strtotime("-2 days"));
+$fourday = date('20y-m-d',strtotime("-3 days"));
+$fiveday = date('20y-m-d',strtotime("-4 days"));
+$sixday = date('20y-m-d',strtotime("-5 days"));
+$sevenday = date('20y-m-d',strtotime("-6 days"));
+
+$day1L = 0;
+$day2L = 0;
+$day3L = 0;
+$day4L = 0;
+$day5L = 0;
+$day6L = 0;
+$day7L = 0;
+
+$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount5 . "' AND status != 'Kickback' ");
+$totaltime1 = mysqli_fetch_array($totaltime);
+$day1L = $totaltime1[0];
+
+$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount5 . "' AND status != 'Kickback'  ");
+$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
+$day2L = $totaltimetwo1[0];
+
+$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount5 . "' AND status != 'Kickback' ");
+$totaltimethree1 = mysqli_fetch_array($totaltimethree);
+$day3L = $totaltimethree1[0];
+
+$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount5 . "' AND status != 'Kickback' ");
+$totaltimefour1 = mysqli_fetch_array($totaltimefour);
+$day4L = $totaltimefour1[0];
+
+$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount5 . "' AND status != 'Kickback' ");
+$totaltimefive1 = mysqli_fetch_array($totaltimefive);
+$day5L = $totaltimefive1[0];
+
+$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount5 . "' AND status != 'Kickback' ");
+$totaltimesix1 = mysqli_fetch_array($totaltimesix);
+$day6L = $totaltimesix1[0];
+
+$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount5 . "' AND status != 'Kickback' ");
+$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
+$day7L = $totaltimeseven1[0];
+
+// Incomplete placed into inputs for javascript to grab
+echo "<input id='day1L5' type='hidden' value='" . $day1L . "' ></input>";
+echo "<input id='day2L5' type='hidden' value='" . $day2L . "' ></input>";
+echo "<input id='day3L5' type='hidden' value='" . $day3L . "' ></input>";
+echo "<input id='day4L5' type='hidden' value='" . $day4L . "' ></input>";
+echo "<input id='day5L5' type='hidden' value='" . $day5L . "' ></input>";
+echo "<input id='day6L5' type='hidden' value='" . $day6L . "' ></input>";
+echo "<input id='day7L5' type='hidden' value='" . $day7L . "' ></input>";
+
+global $lineDataEcho5;
+
+$lineDataEcho5 = "{
+					fillColor : 'rgba(150,150,150,.1)',
+					strokeColor : 'rgba(220,220,220,1)',
+					pointColor : 'rgba(0,0,0,.0)',
+					pointStrokeColor : 'rgba(220,220,220,1)',
+					data : [day7L5,day6L5,day5L5,day4L5,day3L5,day2L5,day1L5]
+				},";
+
+}
+
+
+
+function lineData6 ($con, $lineAccount6){
+
+$oneday = date('20y-m-d',strtotime("-0 days"));
+$twoday = date('20y-m-d',strtotime("-1 days"));
+$threeday = date('20y-m-d',strtotime("-2 days"));
+$fourday = date('20y-m-d',strtotime("-3 days"));
+$fiveday = date('20y-m-d',strtotime("-4 days"));
+$sixday = date('20y-m-d',strtotime("-5 days"));
+$sevenday = date('20y-m-d',strtotime("-6 days"));
+
+$day1L = 0;
+$day2L = 0;
+$day3L = 0;
+$day4L = 0;
+$day5L = 0;
+$day6L = 0;
+$day7L = 0;
+
+$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount6 . "' AND status != 'Kickback' ");
+$totaltime1 = mysqli_fetch_array($totaltime);
+$day1L = $totaltime1[0];
+
+$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount6 . "' AND status != 'Kickback'  ");
+$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
+$day2L = $totaltimetwo1[0];
+
+$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount6 . "' AND status != 'Kickback' ");
+$totaltimethree1 = mysqli_fetch_array($totaltimethree);
+$day3L = $totaltimethree1[0];
+
+$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount6 . "' AND status != 'Kickback' ");
+$totaltimefour1 = mysqli_fetch_array($totaltimefour);
+$day4L = $totaltimefour1[0];
+
+$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount6 . "' AND status != 'Kickback' ");
+$totaltimefive1 = mysqli_fetch_array($totaltimefive);
+$day5L = $totaltimefive1[0];
+
+$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount6 . "' AND status != 'Kickback' ");
+$totaltimesix1 = mysqli_fetch_array($totaltimesix);
+$day6L = $totaltimesix1[0];
+
+$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount6 . "' AND status != 'Kickback' ");
+$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
+$day7L = $totaltimeseven1[0];
+
+// Incomplete placed into inputs for javascript to grab
+echo "<input id='day1L6' type='hidden' value='" . $day1L . "' ></input>";
+echo "<input id='day2L6' type='hidden' value='" . $day2L . "' ></input>";
+echo "<input id='day3L6' type='hidden' value='" . $day3L . "' ></input>";
+echo "<input id='day4L6' type='hidden' value='" . $day4L . "' ></input>";
+echo "<input id='day5L6' type='hidden' value='" . $day5L . "' ></input>";
+echo "<input id='day6L6' type='hidden' value='" . $day6L . "' ></input>";
+echo "<input id='day7L6' type='hidden' value='" . $day7L . "' ></input>";
+
+global $lineDataEcho6;
+
+$lineDataEcho6 = "{
+					fillColor : 'rgba(150,150,150,.1)',
+					strokeColor : '#46BFBD',
+					pointColor : 'rgba(0,0,0,.0)',
+					pointStrokeColor : '#46BFBD',
+					data : [day7L6,day6L6,day5L6,day4L6,day3L6,day2L6,day1L6]
+				},";
+
+}
+
+
+function lineData7 ($con, $lineAccount7){
+
+$oneday = date('20y-m-d',strtotime("-0 days"));
+$twoday = date('20y-m-d',strtotime("-1 days"));
+$threeday = date('20y-m-d',strtotime("-2 days"));
+$fourday = date('20y-m-d',strtotime("-3 days"));
+$fiveday = date('20y-m-d',strtotime("-4 days"));
+$sixday = date('20y-m-d',strtotime("-5 days"));
+$sevenday = date('20y-m-d',strtotime("-6 days"));
+
+$day1L = 0;
+$day2L = 0;
+$day3L = 0;
+$day4L = 0;
+$day5L = 0;
+$day6L = 0;
+$day7L = 0;
+
+$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount7 . "' AND status != 'Kickback' ");
+$totaltime1 = mysqli_fetch_array($totaltime);
+$day1L = $totaltime1[0];
+
+$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount7 . "' AND status != 'Kickback'  ");
+$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
+$day2L = $totaltimetwo1[0];
+
+$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount7 . "' AND status != 'Kickback' ");
+$totaltimethree1 = mysqli_fetch_array($totaltimethree);
+$day3L = $totaltimethree1[0];
+
+$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount7 . "' AND status != 'Kickback' ");
+$totaltimefour1 = mysqli_fetch_array($totaltimefour);
+$day4L = $totaltimefour1[0];
+
+$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount7 . "' AND status != 'Kickback' ");
+$totaltimefive1 = mysqli_fetch_array($totaltimefive);
+$day5L = $totaltimefive1[0];
+
+$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount7 . "' AND status != 'Kickback' ");
+$totaltimesix1 = mysqli_fetch_array($totaltimesix);
+$day6L = $totaltimesix1[0];
+
+$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount7 . "' AND status != 'Kickback' ");
+$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
+$day7L = $totaltimeseven1[0];
+
+// Incomplete placed into inputs for javascript to grab
+echo "<input id='day1L7' type='hidden' value='" . $day1L . "' ></input>";
+echo "<input id='day2L7' type='hidden' value='" . $day2L . "' ></input>";
+echo "<input id='day3L7' type='hidden' value='" . $day3L . "' ></input>";
+echo "<input id='day4L7' type='hidden' value='" . $day4L . "' ></input>";
+echo "<input id='day5L7' type='hidden' value='" . $day5L . "' ></input>";
+echo "<input id='day6L7' type='hidden' value='" . $day6L . "' ></input>";
+echo "<input id='day7L7' type='hidden' value='" . $day7L . "' ></input>";
+
+global $lineDataEcho7;
+
+$lineDataEcho7 = "{
+					fillColor : 'rgba(150,150,150,.1)',
+					strokeColor : '#32CD32',
+					pointColor : 'rgba(0,0,0,.0)',
+					pointStrokeColor : '#32CD32',
+					data : [day7L7,day6L7,day5L7,day4L7,day3L7,day2L7,day1L7]
+				},";
+
+}
+
+
+//This is where you set the user accounts
+$lineAccount1 = 'rwilson';
+$lineAccount2 = 'towens';
+$lineAccount3 = 'jdiaz';
+$lineAccount4 = 'bpendleton';
+$lineAccount5 = 'swilson';
+$lineAccount6 = 'afunk';
+$lineAccount7 = 'alangford';
+
+lineData1($con, $lineAccount1);
+lineData2($con, $lineAccount2);
+lineData3($con, $lineAccount3);
+lineData4($con, $lineAccount4);
+lineData5($con, $lineAccount5);
+lineData6($con, $lineAccount6);
+lineData7($con, $lineAccount7);
+?>
+
+			<div id="graph2" class="panel" style="display: none;">
+					<div class="panel-default">
+							<div class="panel-heading">
+								<div class="panel-title">
+								Individual Daily Tasks <span class="sub-panel-title">- 7 Day View</span>
+								</div>
+							</div>
+					</div>
+						
+					
+						<canvas id="canvasLine2" height="530px" width="1060px"  ></canvas>
+					
+
+						
+					<script type="text/javascript">
+						
+						$( document ).ready(function() {
+						
+						// This is getting the date and adding it to the graph
+						var oneday = $("#oneday").val();
+						var twoday = $("#twoday").val();
+						var threeday = $("#threeday").val();
+						var fourday = $("#fourday").val();
+						var fiveday = $("#fiveday").val();
+						var sixday = $("#sixday").val();
+						var sevenday = $("#sevenday").val();
+						
+						//User 1
+						var day1L = $("#day1L").val();
+						var day2L = $("#day2L").val();
+						var day3L = $("#day3L").val();
+						var day4L = $("#day4L").val();
+						var day5L = $("#day5L").val();
+						var day6L = $("#day6L").val();
+						var day7L = $("#day7L").val();
+
+						//User 2
+						var day1L2 = $("#day1L2").val();
+						var day2L2 = $("#day2L2").val();
+						var day3L2 = $("#day3L2").val();
+						var day4L2 = $("#day4L2").val();
+						var day5L2 = $("#day5L2").val();
+						var day6L2 = $("#day6L2").val();
+						var day7L2 = $("#day7L2").val();
+
+						//User 3
+						var day1L3 = $("#day1L3").val();
+						var day2L3 = $("#day2L3").val();
+						var day3L3 = $("#day3L3").val();
+						var day4L3 = $("#day4L3").val();
+						var day5L3 = $("#day5L3").val();
+						var day6L3 = $("#day6L3").val();
+						var day7L3 = $("#day7L3").val();
+						
+						//User 4
+						var day1L4 = $("#day1L4").val();
+						var day2L4 = $("#day2L4").val();
+						var day3L4 = $("#day3L4").val();
+						var day4L4 = $("#day4L4").val();
+						var day5L4 = $("#day5L4").val();
+						var day6L4 = $("#day6L4").val();
+						var day7L4 = $("#day7L4").val();
+
+						//User 5
+						var day1L5 = $("#day1L5").val();
+						var day2L5 = $("#day2L5").val();
+						var day3L5 = $("#day3L5").val();
+						var day4L5 = $("#day4L5").val();
+						var day5L5 = $("#day5L5").val();
+						var day6L5 = $("#day6L5").val();
+						var day7L5 = $("#day7L5").val();
+
+						//User 6
+						var day1L6 = $("#day1L6").val();
+						var day2L6 = $("#day2L6").val();
+						var day3L6 = $("#day3L6").val();
+						var day4L6 = $("#day4L6").val();
+						var day5L6 = $("#day5L6").val();
+						var day6L6 = $("#day6L6").val();
+						var day7L6 = $("#day7L6").val();
+
+						//User 7
+						var day1L7 = $("#day1L7").val();
+						var day2L7 = $("#day2L7").val();
+						var day3L7 = $("#day3L7").val();
+						var day4L7 = $("#day4L7").val();
+						var day5L7 = $("#day5L7").val();
+						var day6L7 = $("#day6L7").val();
+						var day7L7 = $("#day7L7").val();
+						
+						var lineChartData = {
+							labels : [ sevenday, sixday, fiveday, fourday, threeday, twoday, oneday],
+							datasets : [
+								<?php 
+				        			echo $lineDataEcho1;
+				        			echo $lineDataEcho2;
+				        			echo $lineDataEcho3;
+				        			echo $lineDataEcho4;
+				        			echo $lineDataEcho5;
+				        			echo $lineDataEcho6;
+				        			echo $lineDataEcho7;
+				        		 ?>
+								
+							]
+							
+						}
+
+					var myLine = new Chart(document.getElementById("canvasLine2").getContext("2d")).Line(lineChartData);
+					
+					});
+					
+					</script>
+			</div>
+
+
+
 <?php
 
 $oneday1 = date('20y-m-d',strtotime("-0 days"));
@@ -572,27 +1219,27 @@ $month5 = date('20y-m-0',strtotime("-4 month"));
 $month6 = date('20y-m-0',strtotime("-5 month"));
 
 
-$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount1 . "' ");
+$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount1 . "' AND status != 'Kickback' ");
 $totaltime11 = mysqli_fetch_array($totaltime1);
 $day111 = $totaltime11[0];
 
-$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount1 . "' ");
+$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount1 . "' AND status != 'Kickback' ");
 $totaltimetwo11 = mysqli_fetch_array($totaltimetwo1);
 $day211 = $totaltimetwo11[0];
 
-$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount1 . "' ");
+$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount1 . "' AND status != 'Kickback' ");
 $totaltimethree11 = mysqli_fetch_array($totaltimethree1);
 $day311 = $totaltimethree11[0];
 
-$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount1 . "' ");
+$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount1 . "' AND status != 'Kickback' ");
 $totaltimefour11 = mysqli_fetch_array($totaltimefour1);
 $day411 = $totaltimefour11[0];
 
-$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount1 . "' ");
+$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount1 . "' AND status != 'Kickback' ");
 $totaltimefive11 = mysqli_fetch_array($totaltimefive1);
 $day511 = $totaltimefive11[0];
 
-$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount1 . "' ");
+$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount1 . "' AND status != 'Kickback' ");
 $totaltimesix11 = mysqli_fetch_array($totaltimesix1);
 $day611 = $totaltimesix11[0];
 
@@ -638,27 +1285,27 @@ $month5 = date('20y-m-0',strtotime("-4 month"));
 $month6 = date('20y-m-0',strtotime("-5 month"));
 
 
-$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount2 . "' ");
+$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount2 . "' AND status != 'Kickback' ");
 $totaltime11 = mysqli_fetch_array($totaltime1);
 $day112 = $totaltime11[0];
 
-$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount2 . "' ");
+$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount2 . "' AND status != 'Kickback' ");
 $totaltimetwo11 = mysqli_fetch_array($totaltimetwo1);
 $day212 = $totaltimetwo11[0];
 
-$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount2 . "' ");
+$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount2 . "' AND status != 'Kickback' ");
 $totaltimethree11 = mysqli_fetch_array($totaltimethree1);
 $day312 = $totaltimethree11[0];
 
-$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount2 . "' ");
+$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount2 . "' AND status != 'Kickback' ");
 $totaltimefour11 = mysqli_fetch_array($totaltimefour1);
 $day412 = $totaltimefour11[0];
 
-$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount2 . "' ");
+$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount2 . "' AND status != 'Kickback' ");
 $totaltimefive11 = mysqli_fetch_array($totaltimefive1);
 $day512 = $totaltimefive11[0];
 
-$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount2 . "' ");
+$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount2 . "' AND status != 'Kickback' ");
 $totaltimesix11 = mysqli_fetch_array($totaltimesix1);
 $day612 = $totaltimesix11[0];
 
@@ -704,27 +1351,27 @@ $month5 = date('20y-m-0',strtotime("-4 month"));
 $month6 = date('20y-m-0',strtotime("-5 month"));
 
 
-$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount3 . "' ");
+$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount3 . "' AND status != 'Kickback' ");
 $totaltime11 = mysqli_fetch_array($totaltime1);
 $day113 = $totaltime11[0];
 
-$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount3 . "' ");
+$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount3 . "' AND status != 'Kickback' ");
 $totaltimetwo11 = mysqli_fetch_array($totaltimetwo1);
 $day213 = $totaltimetwo11[0];
 
-$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount3 . "' ");
+$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount3 . "' AND status != 'Kickback' ");
 $totaltimethree11 = mysqli_fetch_array($totaltimethree1);
 $day313 = $totaltimethree11[0];
 
-$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount3 . "' ");
+$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount3 . "' AND status != 'Kickback' ");
 $totaltimefour11 = mysqli_fetch_array($totaltimefour1);
 $day413 = $totaltimefour11[0];
 
-$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount3 . "' ");
+$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount3 . "' AND status != 'Kickback' ");
 $totaltimefive11 = mysqli_fetch_array($totaltimefive1);
 $day513 = $totaltimefive11[0];
 
-$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount3 . "' ");
+$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount3 . "' AND status != 'Kickback' ");
 $totaltimesix11 = mysqli_fetch_array($totaltimesix1);
 $day613 = $totaltimesix11[0];
 
@@ -768,27 +1415,27 @@ $month5 = date('20y-m-0',strtotime("-4 month"));
 $month6 = date('20y-m-0',strtotime("-5 month"));
 
 
-$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount4 . "' ");
+$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount4 . "' AND status != 'Kickback' ");
 $totaltime11 = mysqli_fetch_array($totaltime1);
 $day114 = $totaltime11[0];
 
-$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount4 . "' ");
+$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount4 . "' AND status != 'Kickback' ");
 $totaltimetwo11 = mysqli_fetch_array($totaltimetwo1);
 $day214 = $totaltimetwo11[0];
 
-$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount4 . "' ");
+$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount4 . "' AND status != 'Kickback' ");
 $totaltimethree11 = mysqli_fetch_array($totaltimethree1);
 $day314 = $totaltimethree11[0];
 
-$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount4 . "' ");
+$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount4 . "' AND status != 'Kickback' ");
 $totaltimefour11 = mysqli_fetch_array($totaltimefour1);
 $day414 = $totaltimefour11[0];
 
-$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount4 . "' ");
+$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount4 . "' AND status != 'Kickback' ");
 $totaltimefive11 = mysqli_fetch_array($totaltimefive1);
 $day514 = $totaltimefive11[0];
 
-$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount4 . "' ");
+$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount4 . "' AND status != 'Kickback' ");
 $totaltimesix11 = mysqli_fetch_array($totaltimesix1);
 $day614 = $totaltimesix11[0];
 
@@ -833,27 +1480,27 @@ $month5 = date('20y-m-0',strtotime("-4 month"));
 $month6 = date('20y-m-0',strtotime("-5 month"));
 
 
-$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount5 . "' ");
+$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount5 . "' AND status != 'Kickback' ");
 $totaltime11 = mysqli_fetch_array($totaltime1);
 $day115 = $totaltime11[0];
 
-$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount5 . "' ");
+$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount5 . "' AND status != 'Kickback' ");
 $totaltimetwo11 = mysqli_fetch_array($totaltimetwo1);
 $day215 = $totaltimetwo11[0];
 
-$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount5 . "' ");
+$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount5 . "' AND status != 'Kickback' ");
 $totaltimethree11 = mysqli_fetch_array($totaltimethree1);
 $day315 = $totaltimethree11[0];
 
-$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount5 . "' ");
+$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount5 . "' AND status != 'Kickback' ");
 $totaltimefour11 = mysqli_fetch_array($totaltimefour1);
 $day415 = $totaltimefour11[0];
 
-$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount5 . "' ");
+$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount5 . "' AND status != 'Kickback' ");
 $totaltimefive11 = mysqli_fetch_array($totaltimefive1);
 $day515 = $totaltimefive11[0];
 
-$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount5 . "' ");
+$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount5 . "' AND status != 'Kickback' ");
 $totaltimesix11 = mysqli_fetch_array($totaltimesix1);
 $day615 = $totaltimesix11[0];
 
@@ -897,27 +1544,27 @@ $month5 = date('20y-m-0',strtotime("-4 month"));
 $month6 = date('20y-m-0',strtotime("-5 month"));
 
 
-$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount6 . "' ");
+$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount6 . "' AND status != 'Kickback' ");
 $totaltime11 = mysqli_fetch_array($totaltime1);
 $day116 = $totaltime11[0];
 
-$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount6 . "' ");
+$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount6 . "' AND status != 'Kickback' ");
 $totaltimetwo11 = mysqli_fetch_array($totaltimetwo1);
 $day216 = $totaltimetwo11[0];
 
-$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount6 . "' ");
+$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount6 . "' AND status != 'Kickback' ");
 $totaltimethree11 = mysqli_fetch_array($totaltimethree1);
 $day316 = $totaltimethree11[0];
 
-$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount6 . "' ");
+$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount6 . "' AND status != 'Kickback' ");
 $totaltimefour11 = mysqli_fetch_array($totaltimefour1);
 $day416 = $totaltimefour11[0];
 
-$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount6 . "' ");
+$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount6 . "' AND status != 'Kickback' ");
 $totaltimefive11 = mysqli_fetch_array($totaltimefive1);
 $day516 = $totaltimefive11[0];
 
-$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount6 . "' ");
+$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount6 . "' AND status != 'Kickback' ");
 $totaltimesix11 = mysqli_fetch_array($totaltimesix1);
 $day616 = $totaltimesix11[0];
 
@@ -962,27 +1609,27 @@ $month5 = date('20y-m-0',strtotime("-4 month"));
 $month6 = date('20y-m-0',strtotime("-5 month"));
 
 
-$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount7 . "' ");
+$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount7 . "' AND status != 'Kickback' ");
 $totaltime11 = mysqli_fetch_array($totaltime1);
 $day117 = $totaltime11[0];
 
-$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount7 . "' ");
+$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount7 . "' AND status != 'Kickback' ");
 $totaltimetwo11 = mysqli_fetch_array($totaltimetwo1);
 $day217 = $totaltimetwo11[0];
 
-$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount7 . "' ");
+$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount7 . "' AND status != 'Kickback' ");
 $totaltimethree11 = mysqli_fetch_array($totaltimethree1);
 $day317 = $totaltimethree11[0];
 
-$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount7 . "' ");
+$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount7 . "' AND status != 'Kickback' ");
 $totaltimefour11 = mysqli_fetch_array($totaltimefour1);
 $day417 = $totaltimefour11[0];
 
-$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount7 . "' ");
+$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount7 . "' AND status != 'Kickback' ");
 $totaltimefive11 = mysqli_fetch_array($totaltimefive1);
 $day517 = $totaltimefive11[0];
 
-$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount7 . "' ");
+$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount7 . "' AND status != 'Kickback' ");
 $totaltimesix11 = mysqli_fetch_array($totaltimesix1);
 $day617 = $totaltimesix11[0];
 
@@ -1137,642 +1784,6 @@ barNumbers7($con, $userAccount7);
 </div>	
 <div class="container5" style="display: none;">
 	<div class="right-Wrapper-onsite">
-
-
-<?php
-
-$oneday = date('20y-m-d',strtotime("-0 days"));
-$twoday = date('20y-m-d',strtotime("-1 days"));
-$threeday = date('20y-m-d',strtotime("-2 days"));
-$fourday = date('20y-m-d',strtotime("-3 days"));
-$fiveday = date('20y-m-d',strtotime("-4 days"));
-$sixday = date('20y-m-d',strtotime("-5 days"));
-$sevenday = date('20y-m-d',strtotime("-6 days"));
-
-echo "<input id='oneday' type='hidden' value='" . $oneday . "' ></input>";
-echo "<input id='twoday' type='hidden' value='" . $twoday . "' ></input>";
-echo "<input id='threeday' type='hidden' value='" . $threeday . "' ></input>";
-echo "<input id='fourday' type='hidden' value='" . $fourday . "' ></input>";
-echo "<input id='fiveday' type='hidden' value='" . $fiveday . "' ></input>";
-echo "<input id='sixday' type='hidden' value='" . $sixday . "' ></input>";
-echo "<input id='sevenday' type='hidden' value='" . $sevenday . "' ></input>";
-
-
-function lineData1 ($con, $lineAccount1){
-
-$oneday = date('20y-m-d',strtotime("-0 days"));
-$twoday = date('20y-m-d',strtotime("-1 days"));
-$threeday = date('20y-m-d',strtotime("-2 days"));
-$fourday = date('20y-m-d',strtotime("-3 days"));
-$fiveday = date('20y-m-d',strtotime("-4 days"));
-$sixday = date('20y-m-d',strtotime("-5 days"));
-$sevenday = date('20y-m-d',strtotime("-6 days"));
-
-$day1L = 0;
-$day2L = 0;
-$day3L = 0;
-$day4L = 0;
-$day5L = 0;
-$day6L = 0;
-$day7L = 0;
-
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount1 . "' ");
-$totaltime1 = mysqli_fetch_array($totaltime);
-$day1L = $totaltime1[0];
-
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount1 . "'  ");
-$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
-$day2L = $totaltimetwo1[0];
-
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount1 . "' ");
-$totaltimethree1 = mysqli_fetch_array($totaltimethree);
-$day3L = $totaltimethree1[0];
-
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount1 . "' ");
-$totaltimefour1 = mysqli_fetch_array($totaltimefour);
-$day4L = $totaltimefour1[0];
-
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount1 . "' ");
-$totaltimefive1 = mysqli_fetch_array($totaltimefive);
-$day5L = $totaltimefive1[0];
-
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount1 . "' ");
-$totaltimesix1 = mysqli_fetch_array($totaltimesix);
-$day6L = $totaltimesix1[0];
-
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount1 . "' ");
-$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
-$day7L = $totaltimeseven1[0];
-
-
-
-// Incomplete placed into inputs for javascript to grab
-
-echo "<input id='day1L' type='hidden' value='" . $day1L . "' ></input>";
-echo "<input id='day2L' type='hidden' value='" . $day2L . "' ></input>";
-echo "<input id='day3L' type='hidden' value='" . $day3L . "' ></input>";
-echo "<input id='day4L' type='hidden' value='" . $day4L . "' ></input>";
-echo "<input id='day5L' type='hidden' value='" . $day5L . "' ></input>";
-echo "<input id='day6L' type='hidden' value='" . $day6L . "' ></input>";
-echo "<input id='day7L' type='hidden' value='" . $day7L . "' ></input>";
-
-
-
-global $lineDataEcho1;
-
-$lineDataEcho1 = "{
-					fillColor : 'rgba(200,200,200,.1)',
-					strokeColor : 'rgba(151,187,205,1)',
-					pointColor : 'rgba(151,187,205,1)',
-					pointStrokeColor : '#fff',
-					data : [day7L,day6L,day5L,day4L,day3L,day2L,day1L]
-				},";
-
-}
-
-
-function lineData2 ($con, $lineAccount2){
-
-$oneday = date('20y-m-d',strtotime("-0 days"));
-$twoday = date('20y-m-d',strtotime("-1 days"));
-$threeday = date('20y-m-d',strtotime("-2 days"));
-$fourday = date('20y-m-d',strtotime("-3 days"));
-$fiveday = date('20y-m-d',strtotime("-4 days"));
-$sixday = date('20y-m-d',strtotime("-5 days"));
-$sevenday = date('20y-m-d',strtotime("-6 days"));
-
-$day1L = 0;
-$day2L = 0;
-$day3L = 0;
-$day4L = 0;
-$day5L = 0;
-$day6L = 0;
-$day7L = 0;
-
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount2 . "' ");
-$totaltime1 = mysqli_fetch_array($totaltime);
-$day1L = $totaltime1[0];
-
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount2 . "'  ");
-$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
-$day2L = $totaltimetwo1[0];
-
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount2 . "' ");
-$totaltimethree1 = mysqli_fetch_array($totaltimethree);
-$day3L = $totaltimethree1[0];
-
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount2 . "' ");
-$totaltimefour1 = mysqli_fetch_array($totaltimefour);
-$day4L = $totaltimefour1[0];
-
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount2 . "' ");
-$totaltimefive1 = mysqli_fetch_array($totaltimefive);
-$day5L = $totaltimefive1[0];
-
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount2 . "' ");
-$totaltimesix1 = mysqli_fetch_array($totaltimesix);
-$day6L = $totaltimesix1[0];
-
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount2 . "' ");
-$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
-$day7L = $totaltimeseven1[0];
-
-// Incomplete placed into inputs for javascript to grab
-echo "<input id='day1L2' type='hidden' value='" . $day1L . "' ></input>";
-echo "<input id='day2L2' type='hidden' value='" . $day2L . "' ></input>";
-echo "<input id='day3L2' type='hidden' value='" . $day3L . "' ></input>";
-echo "<input id='day4L2' type='hidden' value='" . $day4L . "' ></input>";
-echo "<input id='day5L2' type='hidden' value='" . $day5L . "' ></input>";
-echo "<input id='day6L2' type='hidden' value='" . $day6L . "' ></input>";
-echo "<input id='day7L2' type='hidden' value='" . $day7L . "' ></input>";
-
-global $lineDataEcho2;
-
-$lineDataEcho2 = "{
-					fillColor : 'rgba(150,150,150,.1)',
-					strokeColor : '#FDB45C',
-					pointColor : 'rgba(0,0,0,.0)',
-					pointStrokeColor : '#FDB45C',
-					data : [day7L2,day6L2,day5L2,day4L2,day3L2,day2L2,day1L2]
-				},";
-
-}
-
-
-
-function lineData3 ($con, $lineAccount3){
-
-$oneday = date('20y-m-d',strtotime("-0 days"));
-$twoday = date('20y-m-d',strtotime("-1 days"));
-$threeday = date('20y-m-d',strtotime("-2 days"));
-$fourday = date('20y-m-d',strtotime("-3 days"));
-$fiveday = date('20y-m-d',strtotime("-4 days"));
-$sixday = date('20y-m-d',strtotime("-5 days"));
-$sevenday = date('20y-m-d',strtotime("-6 days"));
-
-$day1L = 0;
-$day2L = 0;
-$day3L = 0;
-$day4L = 0;
-$day5L = 0;
-$day6L = 0;
-$day7L = 0;
-
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount3 . "' ");
-$totaltime1 = mysqli_fetch_array($totaltime);
-$day1L = $totaltime1[0];
-
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount3 . "'  ");
-$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
-$day2L = $totaltimetwo1[0];
-
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount3 . "' ");
-$totaltimethree1 = mysqli_fetch_array($totaltimethree);
-$day3L = $totaltimethree1[0];
-
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount3 . "' ");
-$totaltimefour1 = mysqli_fetch_array($totaltimefour);
-$day4L = $totaltimefour1[0];
-
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount3 . "' ");
-$totaltimefive1 = mysqli_fetch_array($totaltimefive);
-$day5L = $totaltimefive1[0];
-
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount3 . "' ");
-$totaltimesix1 = mysqli_fetch_array($totaltimesix);
-$day6L = $totaltimesix1[0];
-
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount3 . "' ");
-$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
-$day7L = $totaltimeseven1[0];
-
-// Incomplete placed into inputs for javascript to grab
-echo "<input id='day1L3' type='hidden' value='" . $day1L . "' ></input>";
-echo "<input id='day2L3' type='hidden' value='" . $day2L . "' ></input>";
-echo "<input id='day3L3' type='hidden' value='" . $day3L . "' ></input>";
-echo "<input id='day4L3' type='hidden' value='" . $day4L . "' ></input>";
-echo "<input id='day5L3' type='hidden' value='" . $day5L . "' ></input>";
-echo "<input id='day6L3' type='hidden' value='" . $day6L . "' ></input>";
-echo "<input id='day7L3' type='hidden' value='" . $day7L . "' ></input>";
-
-global $lineDataEcho3;
-
-$lineDataEcho3 = "{
-					fillColor : 'rgba(150,150,150,.1)',
-					strokeColor : '#F7464A',
-					pointColor : 'rgba(0,0,0,.0)',
-					pointStrokeColor : '#F7464A',
-					data : [day7L3,day6L3,day5L3,day4L3,day3L3,day2L3,day1L3]
-				},";
-
-}
-
-
-
-function lineData4 ($con, $lineAccount4){
-
-$oneday = date('20y-m-d',strtotime("-0 days"));
-$twoday = date('20y-m-d',strtotime("-1 days"));
-$threeday = date('20y-m-d',strtotime("-2 days"));
-$fourday = date('20y-m-d',strtotime("-3 days"));
-$fiveday = date('20y-m-d',strtotime("-4 days"));
-$sixday = date('20y-m-d',strtotime("-5 days"));
-$sevenday = date('20y-m-d',strtotime("-6 days"));
-
-$day1L = 0;
-$day2L = 0;
-$day3L = 0;
-$day4L = 0;
-$day5L = 0;
-$day6L = 0;
-$day7L = 0;
-
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount4 . "' ");
-$totaltime1 = mysqli_fetch_array($totaltime);
-$day1L = $totaltime1[0];
-
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount4 . "'  ");
-$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
-$day2L = $totaltimetwo1[0];
-
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount4 . "' ");
-$totaltimethree1 = mysqli_fetch_array($totaltimethree);
-$day3L = $totaltimethree1[0];
-
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount4 . "' ");
-$totaltimefour1 = mysqli_fetch_array($totaltimefour);
-$day4L = $totaltimefour1[0];
-
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount4 . "' ");
-$totaltimefive1 = mysqli_fetch_array($totaltimefive);
-$day5L = $totaltimefive1[0];
-
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount4 . "' ");
-$totaltimesix1 = mysqli_fetch_array($totaltimesix);
-$day6L = $totaltimesix1[0];
-
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount4 . "' ");
-$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
-$day7L = $totaltimeseven1[0];
-
-// Incomplete placed into inputs for javascript to grab
-echo "<input id='day1L4' type='hidden' value='" . $day1L . "' ></input>";
-echo "<input id='day2L4' type='hidden' value='" . $day2L . "' ></input>";
-echo "<input id='day3L4' type='hidden' value='" . $day3L . "' ></input>";
-echo "<input id='day4L4' type='hidden' value='" . $day4L . "' ></input>";
-echo "<input id='day5L4' type='hidden' value='" . $day5L . "' ></input>";
-echo "<input id='day6L4' type='hidden' value='" . $day6L . "' ></input>";
-echo "<input id='day7L4' type='hidden' value='" . $day7L . "' ></input>";
-
-global $lineDataEcho4;
-
-$lineDataEcho4 = "{
-					fillColor : 'rgba(150,150,150,.1)',
-					strokeColor : '#949FB1',
-					pointColor : 'rgba(0,0,0,.0)',
-					pointStrokeColor : '#949FB1',
-					data : [day7L4,day6L4,day5L4,day4L4,day3L4,day2L4,day1L4]
-				},";
-
-}
-
-
-function lineData5 ($con, $lineAccount5){
-
-$oneday = date('20y-m-d',strtotime("-0 days"));
-$twoday = date('20y-m-d',strtotime("-1 days"));
-$threeday = date('20y-m-d',strtotime("-2 days"));
-$fourday = date('20y-m-d',strtotime("-3 days"));
-$fiveday = date('20y-m-d',strtotime("-4 days"));
-$sixday = date('20y-m-d',strtotime("-5 days"));
-$sevenday = date('20y-m-d',strtotime("-6 days"));
-
-$day1L = 0;
-$day2L = 0;
-$day3L = 0;
-$day4L = 0;
-$day5L = 0;
-$day6L = 0;
-$day7L = 0;
-
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount5 . "' ");
-$totaltime1 = mysqli_fetch_array($totaltime);
-$day1L = $totaltime1[0];
-
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount5 . "'  ");
-$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
-$day2L = $totaltimetwo1[0];
-
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount5 . "' ");
-$totaltimethree1 = mysqli_fetch_array($totaltimethree);
-$day3L = $totaltimethree1[0];
-
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount5 . "' ");
-$totaltimefour1 = mysqli_fetch_array($totaltimefour);
-$day4L = $totaltimefour1[0];
-
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount5 . "' ");
-$totaltimefive1 = mysqli_fetch_array($totaltimefive);
-$day5L = $totaltimefive1[0];
-
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount5 . "' ");
-$totaltimesix1 = mysqli_fetch_array($totaltimesix);
-$day6L = $totaltimesix1[0];
-
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount5 . "' ");
-$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
-$day7L = $totaltimeseven1[0];
-
-// Incomplete placed into inputs for javascript to grab
-echo "<input id='day1L5' type='hidden' value='" . $day1L . "' ></input>";
-echo "<input id='day2L5' type='hidden' value='" . $day2L . "' ></input>";
-echo "<input id='day3L5' type='hidden' value='" . $day3L . "' ></input>";
-echo "<input id='day4L5' type='hidden' value='" . $day4L . "' ></input>";
-echo "<input id='day5L5' type='hidden' value='" . $day5L . "' ></input>";
-echo "<input id='day6L5' type='hidden' value='" . $day6L . "' ></input>";
-echo "<input id='day7L5' type='hidden' value='" . $day7L . "' ></input>";
-
-global $lineDataEcho5;
-
-$lineDataEcho5 = "{
-					fillColor : 'rgba(150,150,150,.1)',
-					strokeColor : 'rgba(220,220,220,1)',
-					pointColor : 'rgba(0,0,0,.0)',
-					pointStrokeColor : 'rgba(220,220,220,1)',
-					data : [day7L5,day6L5,day5L5,day4L5,day3L5,day2L5,day1L5]
-				},";
-
-}
-
-
-
-function lineData6 ($con, $lineAccount6){
-
-$oneday = date('20y-m-d',strtotime("-0 days"));
-$twoday = date('20y-m-d',strtotime("-1 days"));
-$threeday = date('20y-m-d',strtotime("-2 days"));
-$fourday = date('20y-m-d',strtotime("-3 days"));
-$fiveday = date('20y-m-d',strtotime("-4 days"));
-$sixday = date('20y-m-d',strtotime("-5 days"));
-$sevenday = date('20y-m-d',strtotime("-6 days"));
-
-$day1L = 0;
-$day2L = 0;
-$day3L = 0;
-$day4L = 0;
-$day5L = 0;
-$day6L = 0;
-$day7L = 0;
-
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount6 . "' ");
-$totaltime1 = mysqli_fetch_array($totaltime);
-$day1L = $totaltime1[0];
-
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount6 . "'  ");
-$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
-$day2L = $totaltimetwo1[0];
-
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount6 . "' ");
-$totaltimethree1 = mysqli_fetch_array($totaltimethree);
-$day3L = $totaltimethree1[0];
-
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount6 . "' ");
-$totaltimefour1 = mysqli_fetch_array($totaltimefour);
-$day4L = $totaltimefour1[0];
-
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount6 . "' ");
-$totaltimefive1 = mysqli_fetch_array($totaltimefive);
-$day5L = $totaltimefive1[0];
-
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount6 . "' ");
-$totaltimesix1 = mysqli_fetch_array($totaltimesix);
-$day6L = $totaltimesix1[0];
-
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount6 . "' ");
-$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
-$day7L = $totaltimeseven1[0];
-
-// Incomplete placed into inputs for javascript to grab
-echo "<input id='day1L6' type='hidden' value='" . $day1L . "' ></input>";
-echo "<input id='day2L6' type='hidden' value='" . $day2L . "' ></input>";
-echo "<input id='day3L6' type='hidden' value='" . $day3L . "' ></input>";
-echo "<input id='day4L6' type='hidden' value='" . $day4L . "' ></input>";
-echo "<input id='day5L6' type='hidden' value='" . $day5L . "' ></input>";
-echo "<input id='day6L6' type='hidden' value='" . $day6L . "' ></input>";
-echo "<input id='day7L6' type='hidden' value='" . $day7L . "' ></input>";
-
-global $lineDataEcho6;
-
-$lineDataEcho6 = "{
-					fillColor : 'rgba(150,150,150,.1)',
-					strokeColor : '#46BFBD',
-					pointColor : 'rgba(0,0,0,.0)',
-					pointStrokeColor : '#46BFBD',
-					data : [day7L6,day6L6,day5L6,day4L6,day3L6,day2L6,day1L6]
-				},";
-
-}
-
-
-function lineData7 ($con, $lineAccount7){
-
-$oneday = date('20y-m-d',strtotime("-0 days"));
-$twoday = date('20y-m-d',strtotime("-1 days"));
-$threeday = date('20y-m-d',strtotime("-2 days"));
-$fourday = date('20y-m-d',strtotime("-3 days"));
-$fiveday = date('20y-m-d',strtotime("-4 days"));
-$sixday = date('20y-m-d',strtotime("-5 days"));
-$sevenday = date('20y-m-d',strtotime("-6 days"));
-
-$day1L = 0;
-$day2L = 0;
-$day3L = 0;
-$day4L = 0;
-$day5L = 0;
-$day6L = 0;
-$day7L = 0;
-
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount7 . "' ");
-$totaltime1 = mysqli_fetch_array($totaltime);
-$day1L = $totaltime1[0];
-
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount7 . "'  ");
-$totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
-$day2L = $totaltimetwo1[0];
-
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount7 . "' ");
-$totaltimethree1 = mysqli_fetch_array($totaltimethree);
-$day3L = $totaltimethree1[0];
-
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount7 . "' ");
-$totaltimefour1 = mysqli_fetch_array($totaltimefour);
-$day4L = $totaltimefour1[0];
-
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount7 . "' ");
-$totaltimefive1 = mysqli_fetch_array($totaltimefive);
-$day5L = $totaltimefive1[0];
-
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount7 . "' ");
-$totaltimesix1 = mysqli_fetch_array($totaltimesix);
-$day6L = $totaltimesix1[0];
-
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount7 . "' ");
-$totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
-$day7L = $totaltimeseven1[0];
-
-// Incomplete placed into inputs for javascript to grab
-echo "<input id='day1L7' type='hidden' value='" . $day1L . "' ></input>";
-echo "<input id='day2L7' type='hidden' value='" . $day2L . "' ></input>";
-echo "<input id='day3L7' type='hidden' value='" . $day3L . "' ></input>";
-echo "<input id='day4L7' type='hidden' value='" . $day4L . "' ></input>";
-echo "<input id='day5L7' type='hidden' value='" . $day5L . "' ></input>";
-echo "<input id='day6L7' type='hidden' value='" . $day6L . "' ></input>";
-echo "<input id='day7L7' type='hidden' value='" . $day7L . "' ></input>";
-
-global $lineDataEcho7;
-
-$lineDataEcho7 = "{
-					fillColor : 'rgba(150,150,150,.1)',
-					strokeColor : '#32CD32',
-					pointColor : 'rgba(0,0,0,.0)',
-					pointStrokeColor : '#32CD32',
-					data : [day7L7,day6L7,day5L7,day4L7,day3L7,day2L7,day1L7]
-				},";
-
-}
-
-
-//This is where you set the user accounts
-$lineAccount1 = 'rwilson';
-$lineAccount2 = 'towens';
-$lineAccount3 = 'jdiaz';
-$lineAccount4 = 'bpendleton';
-$lineAccount5 = 'swilson';
-$lineAccount6 = 'afunk';
-$lineAccount7 = 'alangford';
-
-lineData1($con, $lineAccount1);
-lineData2($con, $lineAccount2);
-lineData3($con, $lineAccount3);
-lineData4($con, $lineAccount4);
-lineData5($con, $lineAccount5);
-lineData6($con, $lineAccount6);
-lineData7($con, $lineAccount7);
-?>
-
-			<div class="panel">
-					<div class="panel-default">
-							<div class="panel-heading">
-								<div class="panel-title">
-								Individual Daily Tasks <span class="sub-panel-title">- 7 Day View</span>
-								</div>
-							</div>
-					</div>
-						
-					
-						<canvas id="canvasLine2" height="530px" width="1060px"  ></canvas>
-					
-
-						
-					<script type="text/javascript">
-						
-						$( document ).ready(function() {
-						
-						// This is getting the date and adding it to the graph
-						var oneday = $("#oneday").val();
-						var twoday = $("#twoday").val();
-						var threeday = $("#threeday").val();
-						var fourday = $("#fourday").val();
-						var fiveday = $("#fiveday").val();
-						var sixday = $("#sixday").val();
-						var sevenday = $("#sevenday").val();
-						
-						//User 1
-						var day1L = $("#day1L").val();
-						var day2L = $("#day2L").val();
-						var day3L = $("#day3L").val();
-						var day4L = $("#day4L").val();
-						var day5L = $("#day5L").val();
-						var day6L = $("#day6L").val();
-						var day7L = $("#day7L").val();
-
-						//User 2
-						var day1L2 = $("#day1L2").val();
-						var day2L2 = $("#day2L2").val();
-						var day3L2 = $("#day3L2").val();
-						var day4L2 = $("#day4L2").val();
-						var day5L2 = $("#day5L2").val();
-						var day6L2 = $("#day6L2").val();
-						var day7L2 = $("#day7L2").val();
-
-						//User 3
-						var day1L3 = $("#day1L3").val();
-						var day2L3 = $("#day2L3").val();
-						var day3L3 = $("#day3L3").val();
-						var day4L3 = $("#day4L3").val();
-						var day5L3 = $("#day5L3").val();
-						var day6L3 = $("#day6L3").val();
-						var day7L3 = $("#day7L3").val();
-						
-						//User 4
-						var day1L4 = $("#day1L4").val();
-						var day2L4 = $("#day2L4").val();
-						var day3L4 = $("#day3L4").val();
-						var day4L4 = $("#day4L4").val();
-						var day5L4 = $("#day5L4").val();
-						var day6L4 = $("#day6L4").val();
-						var day7L4 = $("#day7L4").val();
-
-						//User 5
-						var day1L5 = $("#day1L5").val();
-						var day2L5 = $("#day2L5").val();
-						var day3L5 = $("#day3L5").val();
-						var day4L5 = $("#day4L5").val();
-						var day5L5 = $("#day5L5").val();
-						var day6L5 = $("#day6L5").val();
-						var day7L5 = $("#day7L5").val();
-
-						//User 6
-						var day1L6 = $("#day1L6").val();
-						var day2L6 = $("#day2L6").val();
-						var day3L6 = $("#day3L6").val();
-						var day4L6 = $("#day4L6").val();
-						var day5L6 = $("#day5L6").val();
-						var day6L6 = $("#day6L6").val();
-						var day7L6 = $("#day7L6").val();
-
-						//User 7
-						var day1L7 = $("#day1L7").val();
-						var day2L7 = $("#day2L7").val();
-						var day3L7 = $("#day3L7").val();
-						var day4L7 = $("#day4L7").val();
-						var day5L7 = $("#day5L7").val();
-						var day6L7 = $("#day6L7").val();
-						var day7L7 = $("#day7L7").val();
-						
-						var lineChartData = {
-							labels : [ sevenday, sixday, fiveday, fourday, threeday, twoday, oneday],
-							datasets : [
-								<?php 
-				        			echo $lineDataEcho1;
-				        			echo $lineDataEcho2;
-				        			echo $lineDataEcho3;
-				        			echo $lineDataEcho4;
-				        			echo $lineDataEcho5;
-				        			echo $lineDataEcho6;
-				        			echo $lineDataEcho7;
-				        		 ?>
-								
-							]
-							
-						}
-
-					var myLine = new Chart(document.getElementById("canvasLine2").getContext("2d")).Line(lineChartData);
-					
-					});
-					
-					</script>
-			</div>
 
 
 		<div class="panel" id="newUser" style="min-height: 300px;">
