@@ -436,6 +436,7 @@ $(document).ready(function () {
     });
 
     $("#onsiteDomain").on("keyup", function() {
+  
         var textbox = $(this);
         if (textbox.val().substring(0, 4) == "http" || textbox.val().substring(0, 4) == "www.") {
             if (textbox.val().indexOf("https://www.") === 0) {
@@ -456,9 +457,10 @@ $(document).ready(function () {
 
         }
 
-        var someString = $(this).val();
-        someString = someString.replace(/\//g, "");
-        textbox.val(someString);
+        textbox = textbox.val().replace(new RegExp(/\/(.*)/),"");
+
+        $(this).val(textbox);
+
     });
 
     $("#domain").on("keyup", function() {
