@@ -18,7 +18,7 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
     <select class="sInputs" style="padding-bottom: 0px !important; padding-top: 0px !important;" name="task" required/>
     <optgroup label="Standard Onsite Tasks">
       <option value=" " style="display: none;" default>Please Select a Task</option>
-      <option value="Basic Edits – T,D,H1, and Alt ">Basic Edits – T,D,H1, and Alt </option>
+      <option value="Basic Onsites">Basic Onsites</option>
       <option value="Google Analytics">Google Analytics</option>
       <option value="301 redirects">301 redirects</option>
       <option value="Canonical tags">Canonical tags</option>
@@ -27,7 +27,7 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
       <option value="Nofollow Tag(s)">Nofollow Tag(s)</option>
       <option value="Page Creation">Page Creation</option>
       <option value="Robots.txt file">Robots.txt file</option>
-      <option value="Schema Creation & Implementation">Schema Creation & Implementation</option>
+      <option value="Schema Tags">Schema Tags</option>
       <option value="Sitemap.xml file">Sitemap.xml file</option>
       <option value="Misc. Edits">Misc. Edits</option>
       <option value="Ranking Audit">Ranking Audit</option>

@@ -320,7 +320,7 @@ include 'header.php';
 		
 			<?php
 
-			$result = mysqli_query($con, 'SELECT * FROM onsites WHERE id = "' . $user_id . '" AND QAstatus = "Pending QA" ORDER BY date DESC LIMIT 10');
+			$result = mysqli_query($con, 'SELECT * FROM onsites WHERE id = "' . $user_id . '" AND QAstatus = "Pending QA" AND status != "Kickback" ORDER BY date DESC LIMIT 10');
 
 			if (!$result) {
 				printf("Error: %s\n", mysqli_error($con));

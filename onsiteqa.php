@@ -114,7 +114,7 @@ include "header.php";
 					echo "<tr id=" . $id . " class='userTable2'>
 						<td class='tCell' >" . $usernameNew . "</td>
 						<td class='tCell'>" . $date . "</td>
-						<td class='tCell'><a href='http://". $domain ."'>" . $domain . "</td>
+						<td class='tCell'><a target='_blank' href='http://". $domain ."'>" . $domain . "</td>
 						<td class='tCell'>" . $task . "</td>
 						<td class='tCell'>" . $status . "</td>
 						<td class='tCell' id='comment" . $id . "' contenteditable>" . $comment . "</td>
@@ -164,6 +164,7 @@ include "header.php";
 				<th class='tTitle'>Domain</th>
 				<th class='tTitle'>Task Type</th>
 				<th class='tTitle'>Process</th>
+				<th class='tTitle'>QA By</th>
 				<th class='tTitle'>Comment</th>
 				</tr>";
 
@@ -172,6 +173,7 @@ include "header.php";
 				$domain = $row['domain'];
 				$task = $row['task'];
 				$status = $row['status'];
+				$QAby = $row['QAby'];
 				$comment = $row['comment'];
 
 				echo "<tr class='userTable3'>
@@ -180,6 +182,7 @@ include "header.php";
 					<td class='tCell'>" . $domain . "</td>
 					<td class='tCell'>" . $task . "</td>
 					<td class='tCell'>" . $status . "</td>
+					<td class='tCell'>" . $QAby . "</td>
 					<td class='tCell'>" . $comment . "</td>
 						</div></td>
 				</tr>";
@@ -362,6 +365,8 @@ $day6 = 0;
 $day7 = 0;
 
 
+$taskName = "Select Task Type";
+
 if (isset($_POST['kickback'])){
 
 	$kickValue = $_POST['kickback'];
@@ -376,10 +381,46 @@ if ( $kickValue == 'true') {
 
    $statusBinding = "AND status = 'Kickback'";
    $checkStatus = "checked";	
+
 } else {
 
 	$statusBinding = "AND status != 'Kickback'";
 	$checkStatus = "";
+}
+
+
+if (isset($_POST['kickback']) && isset($_POST['taskType'])){
+
+		$statusBinding = $_POST['taskType'];
+
+		$taskName = $_POST['taskType'];
+		$taskName = str_replace("AND task = '", "", $taskName);
+		$taskName = str_replace("AND status != '", "", $taskName);
+		$taskName = str_replace("'", "", $taskName);
+		$taskName = str_replace("Kickback", "ALL VIEW", $taskName);
+		$taskName = str_replace("", "ALL VIEW + Kickbacks", $taskName);
+
+		if ($statusBinding === ""){
+
+			$taskName = "ALL VIEW + Kickback";
+
+		}
+
+} else if (isset($_POST['taskType'])){
+
+	$statusBinding = $_POST['taskType'];
+	$taskName = $_POST['taskType'];
+	$taskName = str_replace("AND task = '", "", $taskName);
+	$taskName = str_replace("AND status != '", "", $taskName);
+	$taskName = str_replace("'", "", $taskName);
+	$taskName = str_replace("Kickback", "ALL VIEW", $taskName);
+	$taskName = str_replace("", "ALL VIEW + Kickbacks", $taskName);
+
+	if ($statusBinding === ""){
+
+		$taskName = "ALL VIEW + Kickback";
+
+	}
 }
 
 
@@ -1812,15 +1853,47 @@ barNumbers7($con, $userAccount7, $statusBinding);
 			<div class="panel-default">
 				<div class="panel-heading">
 					<div class="panel-title">
-						Graph Legend <span class="sub-panel-title"></span>
+						Filters & Legend <span class="sub-panel-title"></span>
 					</div>
 				</div>
 			</div>
 			<div style="margin: 10px; margin-left: 20px; margin-bottom: 0px !important;">
+
 				<form action="onsiteqa.php#btn5" method="POST">
-					<strong>Kickback View: </strong><input type="checkbox" name="kickback" value="true" style="width: 20px; height: 20px; margin: 5px; vertical-align: -5px;" <?= $checkStatus ?> >
-					<input style="height: 27px; padding: 0px;" type="submit" value="Submit" class="btn btn-primary">
+					<strong>Kickback View: </strong>
+					<input type="checkbox" name="kickback" value="true" style="width: 20px; height: 20px; margin: 5px; vertical-align: -5px;" <?= $checkStatus ?> onChange="this.form.submit()">
 				</form>
+
+				<form action="onsiteqa.php#btn5" method="POST">
+					<strong>Task Type: </strong>
+					<select onChange="this.form.submit()" name="taskType"  style="height: 33px; width: 250px !important;" class="btn btn-primary input-standard contentForm">
+						<option selected style='display: none;'><?= $taskName ?></option>
+						<optgroup label="Standard Onsite Tasks">
+							<option value="AND status != 'Kickback'">ALL VIEW</option>
+							<option value="">ALL VIEW + Kickbacks</option>
+						    <option value="AND task = 'Basic Onsites'">Basic Onsites</option>
+						    <option value="AND task = 'Google Analytics'">Google Analytics</option>
+						    <option value="AND task = '301 redirects'">301 redirects</option>
+				            <option value="AND task = 'Canonical tags'">Canonical tags</option>
+				     	    <option value="AND task = 'Content Implementation'">Content Implementation</option>
+						    <option value="AND task = 'Crazy egg'">Crazy egg</option>
+						    <option value="AND task = 'Nofollow Tag(s)'">Nofollow Tag(s)</option>
+						    <option value="AND task = 'Page Creation'">Page Creation</option>
+						    <option value="AND task = 'Robots.txt file'">Robots.txt file</option>
+						    <option value="AND task = 'Schema Tags'">Schema Tags</option>
+						    <option value="AND task = 'Sitemap.xml file'">Sitemap.xml file</option>
+						    <option value="AND task = 'Misc. Edits'">Misc. Edits</option>
+						    <option value="AND task = 'Ranking Audit'">Ranking Audit</option>
+						    <option value="AND task = 'CMS Testing'">CMS Testing</option>
+					    </optgroup>
+					    <optgroup label="Other Tasks">
+						    <option value="AND task = 'GNA Skip'">GNA Skip</option>
+						    <option value="AND task = 'CMS Testing'">Self Learning</option>
+						    <option value="AND task = 'Meetings'">Meetings</option>
+					    </optgroup>
+					</select>
+				</form>
+
 			</div>
 				<hr style="margin-top: 11px; margin-bottom: 6px;">
 			<div class="graphkey" style="float: left; width: 181px !important;">
