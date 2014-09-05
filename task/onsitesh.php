@@ -16,7 +16,7 @@ $username = mysqli_real_escape_string($con, $_POST['username']);
 $comment = mysqli_real_escape_string($con, $_POST['comment']);
 $status = mysqli_real_escape_string($con, $_POST['status']);
 $QAstatus = mysqli_real_escape_string($con, $_POST['QAstatus']);
-$docs = $_POST['doc'];
+$docs = mysqli_real_escape_string($con, $_POST['doc']);
 
 $docs = json_encode($docs);
 
