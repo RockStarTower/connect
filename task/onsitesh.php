@@ -18,6 +18,22 @@ $status = mysqli_real_escape_string($con, $_POST['status']);
 $QAstatus = mysqli_real_escape_string($con, $_POST['QAstatus']);
 
 
+$QAstatus = mt_rand(1,100);
+
+if ($QAstatus >= 66){
+
+	$QAstatus = 'Pending QA';
+
+} else {
+
+	$QAstatus = 'Passed QA';
+
+}
+
+
+
+
+
   mysqli_query($con, "INSERT INTO onsites (clientid, domain, task, date, time, id, username, comment, status, QAstatus) 
  VALUES ('$clientid', '$domain', '$task', '$date', '$time', '$id', '$username', '$comment', '$status', '$QAstatus')"); 
  

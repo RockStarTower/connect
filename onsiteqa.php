@@ -402,7 +402,7 @@ if (isset($_POST['kickback']) && isset($_POST['taskType'])){
 
 		if ($statusBinding === ""){
 
-			$taskName = "ALL VIEW + Kickback";
+			$taskName = "ALL VIEW + Kickbacks";
 
 		}
 
@@ -418,7 +418,7 @@ if (isset($_POST['kickback']) && isset($_POST['taskType'])){
 
 	if ($statusBinding === ""){
 
-		$taskName = "ALL VIEW + Kickback";
+		$taskName = "ALL VIEW + Kickbacks";
 
 	}
 }

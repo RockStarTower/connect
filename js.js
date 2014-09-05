@@ -1243,8 +1243,6 @@ $(document).ready(function () {
 
     });
 
-
-
 });
 
 

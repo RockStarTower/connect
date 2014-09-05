@@ -1653,6 +1653,13 @@ float: right;
 }
 
 
+.timer{
+	opacity: .7;
+}
+
+.timer:hover{
+	opacity: 1;
+}
 
 /* LIBRARY CSS */
 
