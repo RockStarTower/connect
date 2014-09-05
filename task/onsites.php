@@ -32,11 +32,13 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
       <option value="Misc. Edits">Misc. Edits</option>
       <option value="Ranking Audit">Ranking Audit</option>
       <option value="CMS Testing">CMS Testing</option>
+      <option value="Post Blog">Post Blog</option>
+      <option value="Setup Blog">Setup Blog</option>
       </optgroup>
       <optgroup label="Other Tasks">
-      <option value="CMS Testing">GNA Skip</option>
-      <option value="CMS Testing">Self Learning</option>
-      <option value="CMS Testing">Meetings</option>
+      <option value="GNA Skip">GNA Skip</option>
+      <option value="Other">Other</option>
+      
       </optgroup>
      </select><br>
     <input class="sInputs quicktime" type="text" name="time" placeholder="Time   .5 = half hour"/>
@@ -51,7 +53,12 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
 	<input class="sInputs" type="hidden" name="QAstatus" value="Pending QA" /> 
 	</div>
 	<div class="rightForm">
-	<textarea style="width: 100%; margin-top: 2px; height: 153px !important; padding: 13px;" class="input-standard contentForm ctextarea currentcontent" rows="10" cols="60" name="comment" placeholder="Please leave a comment. (Optional)" /></textarea> </br>
+	<textarea style="width: 100%; margin-top: 2px; height: 114px !important;; padding: 13px;" class="input-standard contentForm ctextarea currentcontent" rows="10" cols="60" name="comment" placeholder="Please leave a comment. (Optional)" /></textarea> <br>
+
+	<div id="docCon">
+		<input type="text" class="sInputs doc" placeholder="Doc URL" name="doc[]" style="margin-left: 10px; width: 90%;" /><span class="btn btn-primary" id="plusDoc" style="font-size: 18px; width: 3%; padding: 1px; margin-left: 9px; padding-left: 9px; padding-right: 8px;margin-right: 0px;">+</span><br>
+	</div>
+
 	<input class="radiostyling" type="radio" name="status" value="Complete" required />Complete 
 	<input class="radiostyling" type="radio" name="status" value="Other" required />Other 
 	<input class="radiostyling" type="radio" name="status" value="Kickback" required />Kickback

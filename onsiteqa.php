@@ -88,33 +88,50 @@ include "header.php";
 
 				$i = 0;
 				
-				while ($row = mysqli_fetch_assoc($result)) {
 
 					if (!$i++) echo "<table class='table table-striped' >
 					<tr class=''>
 					<th class='tTitle'>Username</th>
 					<th class='tTitle'>Date</th>
 					<th class='tTitle'>Domain</th>
+					<th class='tTitle'>Docs</th>
 					<th class='tTitle'>Task Type</th>
 					<th class='tTitle'>Process</th>
 					<th class='tTitle'>Comment</th>
 					<th class='tTitle'>QA Status</th>
 					</tr>";
 
+				while ($row = mysqli_fetch_assoc($result)) {
+
 					$usernameNew = $row['username'];
 					$date = $row['date'];
 					$domain = $row['domain'];
+					$docs = json_decode($row['docs'], true);
 					$task = $row['task'];
 					$status = $row['status'];
 					$comment = $row['comment'];
 					$QAstatus = $row['QAstatus'];
 					$id = $row['counter'];
 
+					$docItems = "<td class='tCell'>";
+
+					for ($i = 0; $i < count($docs); $i++ ) {
+
+						if ($docs[$i] != "" ){
+
+							$docItems .= "<a target='_blank' href='$docs[$i]'>Download Doc " . ($i + 1) . "</a><br>";
+
+						}
+
+					}
+
+						$docItems .= "</td>";
 
 					echo "<tr id=" . $id . " class='userTable2'>
 						<td class='tCell' >" . $usernameNew . "</td>
 						<td class='tCell'>" . $date . "</td>
 						<td class='tCell'><a target='_blank' href='http://". $domain ."'>" . $domain . "</td>
+						" . $docItems . "
 						<td class='tCell'>" . $task . "</td>
 						<td class='tCell'>" . $status . "</td>
 						<td class='tCell' id='comment" . $id . "' contenteditable>" . $comment . "</td>
@@ -1885,11 +1902,12 @@ barNumbers7($con, $userAccount7, $statusBinding);
 						    <option value="AND task = 'Misc. Edits'">Misc. Edits</option>
 						    <option value="AND task = 'Ranking Audit'">Ranking Audit</option>
 						    <option value="AND task = 'CMS Testing'">CMS Testing</option>
+					        <option value="AND task = 'Post Blog'">Post Blog</option>
+    						<option value="AND task = 'Setup Blog'">Setup Blog</option>
 					    </optgroup>
 					    <optgroup label="Other Tasks">
 						    <option value="AND task = 'GNA Skip'">GNA Skip</option>
-						    <option value="AND task = 'CMS Testing'">Self Learning</option>
-						    <option value="AND task = 'Meetings'">Meetings</option>
+						    <option value="AND task = 'Other'">Other</option>
 					    </optgroup>
 					</select>
 				</form>

@@ -1243,6 +1243,16 @@ $(document).ready(function () {
 
     });
 
+    $("#plusDoc").click(function () {
+
+        $("#docCon").append('<input type="text" class="sInputs doc" placeholder="Doc URL" name="doc[]" style="margin-left: 10px; width: 100%;" /> <br>');
+
+    });
+
+
+
+
+
 });
 
 
