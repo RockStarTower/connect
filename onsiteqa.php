@@ -583,7 +583,7 @@ echo "<input id='day7' type='hidden' value='" . $day7 . "' ></input>";
 									strokeColor : "#4D5360",
 									pointColor : "rgba(151,187,205,1)",
 									pointStrokeColor : "#fff",
-									data : [day7,day6,day5,day4,day3,day2,day1]
+									data : [weekTotal7,weekTotal6,weekTotal5,weekTotal4,weekTotal3,weekTotal2,weekTotal1]
 								},
 								
 							]
@@ -1148,67 +1148,68 @@ lineData7($con, $lineAccount7, $statusBinding);
 						var sevenday = $("#sevenday").val();
 						
 						//User 1
-						var day1L = $("#day1L").val();
-						var day2L = $("#day2L").val();
-						var day3L = $("#day3L").val();
-						var day4L = $("#day4L").val();
-						var day5L = $("#day5L").val();
-						var day6L = $("#day6L").val();
-						var day7L = $("#day7L").val();
+						var day1L = parseInt($("#day1L").val());
+						var day2L = parseInt($("#day2L").val());
+						var day3L = parseInt($("#day3L").val());
+						var day4L = parseInt($("#day4L").val());
+						var day5L = parseInt($("#day5L").val());
+						var day6L = parseInt($("#day6L").val());
+						var day7L = parseInt($("#day7L").val());
+
 
 						//User 2
-						var day1L2 = $("#day1L2").val();
-						var day2L2 = $("#day2L2").val();
-						var day3L2 = $("#day3L2").val();
-						var day4L2 = $("#day4L2").val();
-						var day5L2 = $("#day5L2").val();
-						var day6L2 = $("#day6L2").val();
-						var day7L2 = $("#day7L2").val();
+						var day1L2 = parseInt($("#day1L2").val());
+						var day2L2 = parseInt($("#day2L2").val());
+						var day3L2 = parseInt($("#day3L2").val());
+						var day4L2 = parseInt($("#day4L2").val());
+						var day5L2 = parseInt($("#day5L2").val());
+						var day6L2 = parseInt($("#day6L2").val());
+						var day7L2 = parseInt($("#day7L2").val());
 
 						//User 3
-						var day1L3 = $("#day1L3").val();
-						var day2L3 = $("#day2L3").val();
-						var day3L3 = $("#day3L3").val();
-						var day4L3 = $("#day4L3").val();
-						var day5L3 = $("#day5L3").val();
-						var day6L3 = $("#day6L3").val();
-						var day7L3 = $("#day7L3").val();
+						var day1L3 = parseInt($("#day1L3").val());
+						var day2L3 = parseInt($("#day2L3").val());
+						var day3L3 = parseInt($("#day3L3").val());
+						var day4L3 = parseInt($("#day4L3").val());
+						var day5L3 = parseInt($("#day5L3").val());
+						var day6L3 = parseInt($("#day6L3").val());
+						var day7L3 = parseInt($("#day7L3").val());
 						
 						//User 4
-						var day1L4 = $("#day1L4").val();
-						var day2L4 = $("#day2L4").val();
-						var day3L4 = $("#day3L4").val();
-						var day4L4 = $("#day4L4").val();
-						var day5L4 = $("#day5L4").val();
-						var day6L4 = $("#day6L4").val();
-						var day7L4 = $("#day7L4").val();
+						var day1L4 = parseInt($("#day1L4").val());
+						var day2L4 = parseInt($("#day2L4").val());
+						var day3L4 = parseInt($("#day3L4").val());
+						var day4L4 = parseInt($("#day4L4").val());
+						var day5L4 = parseInt($("#day5L4").val());
+						var day6L4 = parseInt($("#day6L4").val());
+						var day7L4 = parseInt($("#day7L4").val());
 
 						//User 5
-						var day1L5 = $("#day1L5").val();
-						var day2L5 = $("#day2L5").val();
-						var day3L5 = $("#day3L5").val();
-						var day4L5 = $("#day4L5").val();
-						var day5L5 = $("#day5L5").val();
-						var day6L5 = $("#day6L5").val();
-						var day7L5 = $("#day7L5").val();
+						var day1L5 = parseInt($("#day1L5").val());
+						var day2L5 = parseInt($("#day2L5").val());
+						var day3L5 = parseInt($("#day3L5").val());
+						var day4L5 = parseInt($("#day4L5").val());
+						var day5L5 = parseInt($("#day5L5").val());
+						var day6L5 = parseInt($("#day6L5").val());
+						var day7L5 = parseInt($("#day7L5").val());
 
 						//User 6
-						var day1L6 = $("#day1L6").val();
-						var day2L6 = $("#day2L6").val();
-						var day3L6 = $("#day3L6").val();
-						var day4L6 = $("#day4L6").val();
-						var day5L6 = $("#day5L6").val();
-						var day6L6 = $("#day6L6").val();
-						var day7L6 = $("#day7L6").val();
+						var day1L6 = parseInt($("#day1L6").val());
+						var day2L6 = parseInt($("#day2L6").val());
+						var day3L6 = parseInt($("#day3L6").val());
+						var day4L6 = parseInt($("#day4L6").val());
+						var day5L6 = parseInt($("#day5L6").val());
+						var day6L6 = parseInt($("#day6L6").val());
+						var day7L6 = parseInt($("#day7L6").val());
 
 						//User 7
-						var day1L7 = $("#day1L7").val();
-						var day2L7 = $("#day2L7").val();
-						var day3L7 = $("#day3L7").val();
-						var day4L7 = $("#day4L7").val();
-						var day5L7 = $("#day5L7").val();
-						var day6L7 = $("#day6L7").val();
-						var day7L7 = $("#day7L7").val();
+						var day1L7 = parseInt($("#day1L7").val());
+						var day2L7 = parseInt($("#day2L7").val());
+						var day3L7 = parseInt($("#day3L7").val());
+						var day4L7 = parseInt($("#day4L7").val());
+						var day5L7 = parseInt($("#day5L7").val());
+						var day6L7 = parseInt($("#day6L7").val());
+						var day7L7 = parseInt($("#day7L7").val());
 						
 						var lineChartData = {
 							labels : [ sevenday, sixday, fiveday, fourday, threeday, twoday, oneday],
@@ -1234,7 +1235,147 @@ lineData7($con, $lineAccount7, $statusBinding);
 					</script>
 			</div>
 
+<?php
 
+
+$pie1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE username = '" . $lineAccount1 . "' $statusBinding ");
+$pieFetch1 = mysqli_fetch_array($pie1);
+$pieData1 = $pieFetch1[0];
+
+$pie2 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE username = '" . $lineAccount2 . "' $statusBinding ");
+$pieFetch2 = mysqli_fetch_array($pie2);
+$pieData2 = $pieFetch2[0];
+
+$pie3 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE username = '" . $lineAccount3 . "' $statusBinding ");
+$pieFetch3 = mysqli_fetch_array($pie3);
+$pieData3 = $pieFetch3[0];
+
+$pie4 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE username = '" . $lineAccount4 . "' $statusBinding ");
+$pieFetch4 = mysqli_fetch_array($pie4);
+$pieData4 = $pieFetch4[0];
+
+$pie5 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE username = '" . $lineAccount5 . "' $statusBinding ");
+$pieFetch5 = mysqli_fetch_array($pie5);
+$pieData5 = $pieFetch5[0];
+
+$pie6 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE username = '" . $lineAccount6 . "' $statusBinding ");
+$pieFetch6 = mysqli_fetch_array($pie6);
+$pieData6 = $pieFetch6[0];
+
+$pie7 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE username = '" . $lineAccount7 . "' $statusBinding ");
+$pieFetch7 = mysqli_fetch_array($pie7);
+$pieData7 = $pieFetch7[0];
+
+
+echo "<input id='pieData1' type='hidden' value='" . $pieData1 . "' ></input>";
+echo "<input id='pieData2' type='hidden' value='" . $pieData2 . "' ></input>";
+echo "<input id='pieData3' type='hidden' value='" . $pieData3 . "' ></input>";
+echo "<input id='pieData4' type='hidden' value='" . $pieData4 . "' ></input>";
+echo "<input id='pieData5' type='hidden' value='" . $pieData5 . "' ></input>";
+echo "<input id='pieData6' type='hidden' value='" . $pieData6 . "' ></input>";
+echo "<input id='pieData7' type='hidden' value='" . $pieData7 . "' ></input>";
+
+?>
+
+			<div  class="panel" style="display: none;" >
+					<div class="panel-default">
+							<div class="panel-heading">
+								<div class="panel-title">
+								QA Pie Chart <span class="sub-panel-title">- All Time</span>
+								</div>
+							</div>
+					</div>
+						
+					
+						<canvas id="canvasLine5" height="530px" width="1060px"  ></canvas>
+					
+
+						
+					<script type="text/javascript">
+						
+						$( document ).ready(function() {
+						
+							var pieData1 = parseInt($("#pieData1").val());
+							var pieData2 = parseInt($("#pieData2").val());
+							var pieData3 = parseInt($("#pieData3").val());
+							var pieData4 = parseInt($("#pieData4").val());
+							var pieData5 = parseInt($("#pieData5").val());
+							var pieData6 = parseInt($("#pieData6").val());
+							var pieData7 = parseInt($("#pieData7").val());
+							
+							if (pieData1 == 0){
+								pieData1 = 1;
+							}
+							if (pieData2 == 0){
+								pieData2 = 1;
+							}
+							if (pieData3 == 0){
+								pieData3 = 1;
+							}
+							if (pieData4 == 0){
+								pieData4 = 1;
+							}
+							if (pieData5 == 0){
+								pieData5 = 1;
+							}
+							if (pieData6 == 0){
+								pieData6 = 1;
+							}
+							if (pieData7 == 0){
+								pieData7 = 1;
+							}
+
+						var data = [
+						    {
+						        value: pieData1,
+						        color:"#F7464A",
+						        highlight: "#FF5A5E",
+						        label: "Red"
+						    },
+						    {
+						        value: pieData2,
+						        color: "#46BFBD",
+						        highlight: "#5AD3D1",
+						        label: "Green"
+						    },
+						    {
+						        value: pieData3,
+						        color: "#FDB45C",
+						        highlight: "#FFC870",
+						        label: "Yellow"
+						    },
+						    {
+						        value: pieData4,
+						        color: "#FDB45C",
+						        highlight: "#FFC870",
+						        label: "Yellow1"
+						    },
+						    {
+						        value: pieData5,
+						        color: "#FDB45C",
+						        highlight: "#FFC870",
+						        label: "Yellow2"
+						    },
+						    {
+						        value: pieData6,
+						        color: "#FDB45C",
+						        highlight: "#FFC870",
+						        label: "Yellow3"
+						    },
+						    {
+						        value: pieData7,
+						        color: "#FDB45C",
+						        highlight: "#FFC870",
+						        label: "Yellow4"
+						    }
+						]
+
+					var myPieChart = new Chart(document.getElementById("canvasLine5").getContext("2d")).Pie(data);
+					
+					});
+					
+					</script>
+			</div>
 
 <?php
 
@@ -1780,60 +1921,60 @@ barNumbers7($con, $userAccount7, $statusBinding);
 				
 
 				//USER 1
-				var day111 = $("#day111").val();
-				var day211 = $("#day211").val();
-				var day311 = $("#day311").val();
-				var day411 = $("#day411").val();
-				var day511 = $("#day511").val();
-				var day611 = $("#day611").val();
+				var day111 = parseInt($("#day111").val());
+				var day211 = parseInt($("#day211").val());
+				var day311 = parseInt($("#day311").val());
+				var day411 = parseInt($("#day411").val());
+				var day511 = parseInt($("#day511").val());
+				var day611 = parseInt($("#day611").val());
 
 				//USER 2
-				var day112 = $("#day112").val();
-				var day212 = $("#day212").val();
-				var day312 = $("#day312").val();
-				var day412 = $("#day412").val();
-				var day512 = $("#day512").val();
-				var day612 = $("#day612").val();
+				var day112 = parseInt($("#day112").val());
+				var day212 = parseInt($("#day212").val());
+				var day312 = parseInt($("#day312").val());
+				var day412 = parseInt($("#day412").val());
+				var day512 = parseInt($("#day512").val());
+				var day612 = parseInt($("#day612").val());
 
 				//USER 3
-				var day113 = $("#day113").val();
-				var day213 = $("#day213").val();
-				var day313 = $("#day313").val();
-				var day413 = $("#day413").val();
-				var day513 = $("#day513").val();
-				var day613 = $("#day613").val();
+				var day113 = parseInt($("#day113").val());
+				var day213 = parseInt($("#day213").val());
+				var day313 = parseInt($("#day313").val());
+				var day413 = parseInt($("#day413").val());
+				var day513 = parseInt($("#day513").val());
+				var day613 = parseInt($("#day613").val());
 
 				//USER 4
-				var day114 = $("#day114").val();
-				var day214 = $("#day214").val();
-				var day314 = $("#day314").val();
-				var day414 = $("#day414").val();
-				var day514 = $("#day514").val();
-				var day614 = $("#day614").val();
+				var day114 = parseInt($("#day114").val());
+				var day214 = parseInt($("#day214").val());
+				var day314 = parseInt($("#day314").val());
+				var day414 = parseInt($("#day414").val());
+				var day514 = parseInt($("#day514").val());
+				var day614 = parseInt($("#day614").val());
 
 				//USER 5
-				var day115 = $("#day115").val();
-				var day215 = $("#day215").val();
-				var day315 = $("#day315").val();
-				var day415 = $("#day415").val();
-				var day515 = $("#day515").val();
-				var day615 = $("#day615").val();
+				var day115 = parseInt($("#day115").val());
+				var day215 = parseInt($("#day215").val());
+				var day315 = parseInt($("#day315").val());
+				var day415 = parseInt($("#day415").val());
+				var day515 = parseInt($("#day515").val());
+				var day615 = parseInt($("#day615").val());
 
 				//USER 6
-				var day116 = $("#day116").val();
-				var day216 = $("#day216").val();
-				var day316 = $("#day316").val();
-				var day416 = $("#day416").val();
-				var day516 = $("#day516").val();
-				var day616 = $("#day616").val();
+				var day116 = parseInt($("#day116").val());
+				var day216 = parseInt($("#day216").val());
+				var day316 = parseInt($("#day316").val());
+				var day416 = parseInt($("#day416").val());
+				var day516 = parseInt($("#day516").val());
+				var day616 = parseInt($("#day616").val());
 
 				//USER 7
-				var day117 = $("#day117").val();
-				var day217 = $("#day217").val();
-				var day317 = $("#day317").val();
-				var day417 = $("#day417").val();
-				var day517 = $("#day517").val();
-				var day617 = $("#day617").val();
+				var day117 = parseInt($("#day117").val());
+				var day217 = parseInt($("#day217").val());
+				var day317 = parseInt($("#day317").val());
+				var day417 = parseInt($("#day417").val());
+				var day517 = parseInt($("#day517").val());
+				var day617 = parseInt($("#day617").val());
 
 				var data = {
 				    labels: [sixday1, fiveday1, fourday1, threeday1, twoday1, oneday1],
@@ -1859,8 +2000,6 @@ barNumbers7($con, $userAccount7, $statusBinding);
 		</div>
 	</div>
 
-
-	
 </div>	
 <div class="container5" style="display: none;">
 	<div class="right-Wrapper-onsite">
