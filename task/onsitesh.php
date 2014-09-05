@@ -16,7 +16,7 @@ $username = mysqli_real_escape_string($con, $_POST['username']);
 $comment = mysqli_real_escape_string($con, $_POST['comment']);
 $status = mysqli_real_escape_string($con, $_POST['status']);
 $QAstatus = mysqli_real_escape_string($con, $_POST['QAstatus']);
-$docs = mysqli_real_escape_string($con, $_POST['doc']);
+$docs = $_POST['doc'];
 
 $docs = json_encode($docs);
 
@@ -32,10 +32,6 @@ if ($QAstatus >= 66){
 
 
 }
-
-print_r($docs);
-
-
 
   mysqli_query($con, "INSERT INTO onsites (clientid, domain, task, date, time, id, username, comment, status, QAstatus, docs) 
  VALUES ('$clientid', '$domain', '$task', '$date', '$time', '$id', '$username', '$comment', '$status', '$QAstatus', '$docs')") or die ("not working"); 
