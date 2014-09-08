@@ -20,7 +20,7 @@ include "header.php";
 		$number = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Pending QA" AND username != "'.$username.'" AND status = "Complete"');
 		$num = mysqli_num_rows($number);
 
-		$result = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Passed QA" ORDER BY date DESC LIMIT 40');
+		$result = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Passed QA" AND status = "Complete" ');
 		$numBlogs = mysqli_num_rows($result);
 
 		$result2 = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Kickback" AND id = "' . $user_id . '" ');
@@ -163,7 +163,7 @@ include "header.php";
 		</div>
 
 		<?php
-			$result = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Passed QA" ');
+			$result = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Passed QA" AND status = "Complete"');
 
 			if (!$result) {
 				printf("Error: %s\n", mysqli_error($con));
