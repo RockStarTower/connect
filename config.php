@@ -2023,9 +2023,9 @@ More details concerning the collection or processing of Personal Data may be req
 
 Users have the right, at any time, to know whether their Personal Data has been stored and can consult the Data Controller to learn about their contents and origin, to verify their accuracy or to ask for them to be supplemented, cancelled, updated or corrected, or for their transformation into anonymous format or to block any data held in violation of the law, as well as to oppose their treatment for any and all legitimate reasons. Requests should be sent to the Data Controller at the contact information set out above.
 
-<strong>This Application does not support “do not track” requests.</strong>
+<strong>This Application does not support \"do not track\" requests.</strong>
 
-To understand if any of the third party services it uses honor the “do not track” requests, please read their privacy policies.
+To understand if any of the third party services it uses honor the \"do not track\" requests, please read their privacy policies.
 
 <strong>Changes to this privacy policy</strong>
 
