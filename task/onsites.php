@@ -13,12 +13,12 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
 
 	<div class="leftForm">
 	<input class="sInputs" type="date" name="date" value="<?=$oneday?>" required /> </br>
-	<input class="sInputs" type="number" name="clientid" placeholder="Client ID" required /> </br>
-	<input class="sInputs" type="text" name="domain" placeholder="example.com" required /> </br>
+	<input class="sInputs"  type="number" name="clientid" placeholder="Client ID" required /> </br>
+	<input class="sInputs" id="onsiteDomain" type="text" name="domain" placeholder="example.com" required /> </br>
     <select class="sInputs" style="padding-bottom: 0px !important; padding-top: 0px !important;" name="task" required/>
-    <optgroup label="Group 1">
+    <optgroup label="Standard Onsite Tasks">
       <option value=" " style="display: none;" default>Please Select a Task</option>
-      <option value="Basic Edits – T,D,H1, and Alt ">Basic Edits – T,D,H1, and Alt </option>
+      <option value="Basic Onsites">Basic Onsites</option>
       <option value="Google Analytics">Google Analytics</option>
       <option value="301 redirects">301 redirects</option>
       <option value="Canonical tags">Canonical tags</option>
@@ -27,14 +27,18 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
       <option value="Nofollow Tag(s)">Nofollow Tag(s)</option>
       <option value="Page Creation">Page Creation</option>
       <option value="Robots.txt file">Robots.txt file</option>
-      <option value="Schema Creation & Implementation">Schema Creation & Implementation</option>
+      <option value="Schema Tags">Schema Tags</option>
       <option value="Sitemap.xml file">Sitemap.xml file</option>
       <option value="Misc. Edits">Misc. Edits</option>
       <option value="Ranking Audit">Ranking Audit</option>
       <option value="CMS Testing">CMS Testing</option>
+      <option value="Post Blog">Post Blog</option>
+      <option value="Setup Blog">Setup Blog</option>
       </optgroup>
-      <optgroup label="Group 2">
-      <option value="CMS Testing">GNA Skip</option>
+      <optgroup label="Other Tasks">
+      <option value="GNA Skip">GNA Skip</option>
+      <option value="Other">Other</option>
+      
       </optgroup>
      </select><br>
     <input class="sInputs quicktime" type="text" name="time" placeholder="Time   .5 = half hour"/>
@@ -49,10 +53,15 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
 	<input class="sInputs" type="hidden" name="QAstatus" value="Pending QA" /> 
 	</div>
 	<div class="rightForm">
-	<textarea style="width: 100%; margin-top: 2px; height: 153px !important;" class="input-standard contentForm ctextarea currentcontent" rows="10" cols="60" name="comment" placeholder="Please leave a comment. (Optional)" /></textarea> </br>
+	<textarea style="width: 100%; margin-top: 2px; height: 114px !important;; padding: 13px;" class="input-standard contentForm ctextarea currentcontent" rows="10" cols="60" name="comment" placeholder="Please leave a comment. (Optional)" /></textarea> <br>
+
+	<div id="docCon">
+		<input type="text" class="sInputs doc" placeholder="Doc URL" name="doc[]" style="margin-left: 10px; width: 90%;" /><span class="btn btn-primary" id="plusDoc" style="font-size: 18px; width: 3%; padding: 1px; margin-left: 9px; padding-left: 9px; padding-right: 8px;margin-right: 0px;">+</span><br>
+	</div>
+
 	<input class="radiostyling" type="radio" name="status" value="Complete" required />Complete 
-	<input class="radiostyling" type="radio" name="status" value="Incomplete" required />Incomplete 
-	<input class="radiostyling" type="radio" name="status" value="kickback" required />Kickback
+	<input class="radiostyling" type="radio" name="status" value="Other" required />Other 
+	<input class="radiostyling" type="radio" name="status" value="Kickback" required />Kickback
 	</div>
 	<div class="submitCon">
 	<input class="submitButton" type="Submit" name="Submit" />

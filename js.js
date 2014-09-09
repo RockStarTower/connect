@@ -435,6 +435,34 @@ $(document).ready(function () {
         textbox.val(someString);
     });
 
+    $("#onsiteDomain").on("keyup", function() {
+  
+        var textbox = $(this);
+        if (textbox.val().substring(0, 4) == "http" || textbox.val().substring(0, 4) == "www.") {
+            if (textbox.val().indexOf("https://www.") === 0) {
+                textbox.val(textbox.val().substring(12));
+            }
+            if (textbox.val().indexOf("http://www.") === 0) {
+                textbox.val(textbox.val().substring(11));
+            }
+            if (textbox.val().indexOf("https://") === 0) {
+                textbox.val(textbox.val().substring(8));
+            }
+            if (textbox.val().indexOf("http://") === 0) {
+                textbox.val(textbox.val().substring(7));
+            }
+            if (textbox.val().indexOf("www.") === 0) {
+                textbox.val(textbox.val().substring(4));
+            }
+
+        }
+
+        textbox = textbox.val().replace(new RegExp(/\/(.*)/),"");
+
+        $(this).val(textbox);
+
+    });
+
     $("#domain").on("keyup", function() {
         var textbox = $(this);
         if (textbox.val().substring(0, 4) == "http" || textbox.val().substring(0, 4) == "www.") {
@@ -687,7 +715,6 @@ $(document).ready(function () {
         str = str.replace(/[\u02DC|\u00A0]/g, " ");
         $(this).val(str);
         	if ($(this).attr("id") == "title_tag"){
-        		console.log("whatup");
         		newString = str.replace ("'", "|", $(this).val());
         		$(this).val(newString);
         	}
@@ -867,6 +894,21 @@ $(document).ready(function () {
 
     };
 
+     var reportPage = function () {
+
+        $(".blogticketPanel").css('display', 'none');
+        $(".adminPanel").css('display', 'none');
+        $("#newUser").css('display', 'none');
+        $("#userbtn3").removeClass("active");
+        $("#userbtn1").removeClass("active");
+        $("#userbtn2").removeClass("active");
+        $("#userbtn4").removeClass("active");
+        $(".yourtasklist").css('display', 'none');
+        $("#userbtn5").addClass("active")
+        $(".container5").css('display', 'block');
+
+    };
+
     if (window.location.href.indexOf("btn3") > -1) {
 
         blogsView();
@@ -875,6 +917,11 @@ $(document).ready(function () {
     if (window.location.href.indexOf("btn4") > -1) {
 
         taskList();
+    }
+
+     if (window.location.href.indexOf("btn5") > -1) {
+
+        reportPage();
     }
 
     $("#userbtn1").on('click', function() {
@@ -887,6 +934,8 @@ $(document).ready(function () {
         $("#userbtn3").removeClass("active");
         $("#userbtn4").removeClass("active");
         $(".yourtasklist").css('display', 'none');
+        $(".container5").css('display', 'none');
+        $("#userbtn5").removeClass("active")
 
     });
 
@@ -901,6 +950,8 @@ $(document).ready(function () {
         $("#userbtn3").removeClass("active");
         $("#userbtn4").removeClass("active");
         $(".yourtasklist").css('display', 'none');
+        $(".container5").css('display', 'none');
+        $("#userbtn5").removeClass("active")
 
     });
 
@@ -914,6 +965,8 @@ $(document).ready(function () {
         $("#userbtn2").removeClass("active");
         $("#userbtn4").removeClass("active");
         $(".yourtasklist").css('display', 'none');
+        $(".container5").css('display', 'none');
+        $("#userbtn5").removeClass("active")
 
 
     });
@@ -927,11 +980,25 @@ $(document).ready(function () {
         $("#userbtn1").removeClass("active");
         $("#userbtn2").removeClass("active");
         $("#userbtn4").addClass("active");
+        $(".container5").css('display', 'none');
         $(".yourtasklist").css('display', 'block');
-
+        $("#userbtn5").removeClass("active")
     });
 
-     
+    $("#userbtn5").on('click', function() {
+
+        $(".blogticketPanel").css('display', 'none');
+        $(".adminPanel").css('display', 'none');
+        $("#newUser").css('display', 'none');
+        $("#userbtn3").removeClass("active");
+        $("#userbtn1").removeClass("active");
+        $("#userbtn2").removeClass("active");
+        $("#userbtn4").removeClass("active");
+        $(".yourtasklist").css('display', 'none');
+        $("#userbtn5").addClass("active")
+        $(".container5").css('display', 'block');
+
+    });
 
 
     $("#forgot1").click(function() {
@@ -1116,7 +1183,7 @@ $(document).ready(function () {
         return false;
     });
 
-     $("#pagePrevious").click(function(e) {
+    $("#pagePrevious").click(function(e) {
 
         e.preventDefault();
         $.ajax({
@@ -1132,11 +1199,58 @@ $(document).ready(function () {
         return false;
     });
 
-     if (window.location.href.indexOf("Next") > -1 || window.location.href.indexOf("Previous") > -1) {
+    if (window.location.href.indexOf("Next") > -1 || window.location.href.indexOf("Previous") > -1) {
 
             blogsView();
 
-        }
+    }
+
+
+    $(".sqlDelete").dblclick(function() {
+
+        var ID = $(this).attr("id");
+        var dataString = 'id=' + ID;
+
+        $.ajax({
+            type: "POST",
+            url: "task/onsiteDelete.php",
+            data: dataString,
+            cache: false,
+            success: function(html) {
+               location.reload();
+            }
+        });
+        
+    });
+
+    $("#graphDisplay1").on('click', function () {
+
+        $("#graph2").css("display", "none");
+        $("#graph1").css("display", "block");
+
+        $(this).addClass("active");
+        $("#graphDisplay2").removeClass("active");
+
+    });
+
+    $("#graphDisplay2").on('click', function () {
+
+        $("#graph2").css("display", "block");
+        $("#graph1").css("display", "none");
+
+        $(this).addClass("active");
+        $("#graphDisplay1").removeClass("active");
+
+    });
+
+    $("#plusDoc").click(function () {
+
+        $("#docCon").append('<input type="text" class="sInputs doc" placeholder="Doc URL" name="doc[]" style="margin-left: 10px; width: 100%;" /> <br>');
+
+    });
+
+
+
 
 
 });

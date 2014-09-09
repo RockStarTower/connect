@@ -200,9 +200,7 @@ echo "<input id='day7' type='hidden' value='" . $day7 . "' ></input>";
 	</div>
 		
 	<div class="right-wrapper">
-	
 		<div class="right-margin">
-		
 			<div class="panel">
 					
 					<div class="panel-default">
@@ -256,8 +254,8 @@ echo "<input id='day7' type='hidden' value='" . $day7 . "' ></input>";
 
 					mysqli_close($con);
 					?>
-				</div>
 			</div>
+		</div>
 	</div>
 	
 </div>
