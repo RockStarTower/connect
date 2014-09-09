@@ -883,25 +883,8 @@ include 'header.php';
 							<textarea rows="8" cols="50" id="content_box_1" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 1" required ></textarea>
 							<span class="edit_link" > Use Visual Editor</span>
 						</p>
-						<label for="content_heading_2">Content Heading 2:</label>
-						<input type="text" id="content_heading_2" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 2" required />
-						<p>
 							<label class="tLabel" for="content_box_2">Content Box 2:</label>
 							<textarea rows="8" cols="50" id="content_box_2" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 2" required ></textarea>
-							<span class="edit_link" > Use Visual Editor</span>
-						</p>
-						<label for="content_heading_3">Content Heading 3:</label>
-						<input type="text" id="content_heading_3" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 3" required />
-						<p>
-							<label class="tLabel" for="content_box_3">Content Box 3:</label>
-							<textarea rows="8" cols="50" id="content_box_3" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 3" required ></textarea>
-							<span class="edit_link" > Use Visual Editor</span>
-						</p>
-						<label for="content_heading_4">Content Heading 4:</label>
-						<input type="text" id="content_heading_4" name="content[homepage][title][]" class="input-standard contentForm validation" data-min="<?=$ch['min']?>" data-max="<?=$ch['max']?>" placeholder="Content Heading 4" required />
-						<p>
-							<label class="tLabel" for="content_box_4">Content Box 4:</label>
-							<textarea rows="8" cols="50" id="content_box_4" name="content[homepage][box][]" class="input-standard contentForm ctextarea validation" data-min="<?=$cb['min']?>" data-max="<?=$cb['max']?>" placeholder="Content Box 4" required ></textarea>
 							<span class="edit_link" > Use Visual Editor</span>
 						</p>
 						<div class="submitCon noBackground">
