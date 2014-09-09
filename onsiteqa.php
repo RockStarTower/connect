@@ -163,7 +163,7 @@ include "header.php";
 		</div>
 
 		<?php
-			$result = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Passed QA" AND status = "Complete"');
+			$result = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Passed QA" AND status = "Complete" ORDER BY date DESC LIMIT 50 ');
 
 			if (!$result) {
 				printf("Error: %s\n", mysqli_error($con));
@@ -382,33 +382,37 @@ $day6 = 0;
 $day7 = 0;
 
 
-$taskName = "Select Task Type";
 
-if (isset($_POST['kickback'])){
 
-	$kickValue = $_POST['kickback'];
+
+
+if (isset($_POST['time'])){
+
+	$timeValue = 'true';
 
 } else {
 
-	$kickValue = 'false';
+	$timeValue = 'false';
 }
 
 
-if ( $kickValue == 'true') {
+if ( $timeValue == 'true') {
 
-   $statusBinding = "AND status = 'Kickback'";
-   $checkStatus = "checked";	
+	$timeCount = "SUM(time)";
+    $checkStatus = "checked";	
 
 } else {
 
-	$statusBinding = "AND status != 'Kickback'";
+	$timeCount = "count(1)";
 	$checkStatus = "";
 }
 
 
-if (isset($_POST['kickback']) && isset($_POST['taskType'])){
+if (isset($_POST['taskType'])){
 
-		$statusBinding = $_POST['taskType'];
+	$statusBinding = $_POST['taskType'];
+
+	if ($statusBinding != "AND status = 'Kickback'"){
 
 		$taskName = $_POST['taskType'];
 		$taskName = str_replace("AND task = '", "", $taskName);
@@ -416,57 +420,52 @@ if (isset($_POST['kickback']) && isset($_POST['taskType'])){
 		$taskName = str_replace("'", "", $taskName);
 		$taskName = str_replace("Kickback", "ALL VIEW", $taskName);
 		$taskName = str_replace("", "ALL VIEW + Kickbacks", $taskName);
+			
+	} else {
 
-		if ($statusBinding === ""){
-
-			$taskName = "ALL VIEW + Kickbacks";
-
-		}
-
-} else if (isset($_POST['taskType'])){
-
-	$statusBinding = $_POST['taskType'];
-	$taskName = $_POST['taskType'];
-	$taskName = str_replace("AND task = '", "", $taskName);
-	$taskName = str_replace("AND status != '", "", $taskName);
-	$taskName = str_replace("'", "", $taskName);
-	$taskName = str_replace("Kickback", "ALL VIEW", $taskName);
-	$taskName = str_replace("", "ALL VIEW + Kickbacks", $taskName);
+		$taskName = "Kickbacks Only";
+	}
 
 	if ($statusBinding === ""){
 
 		$taskName = "ALL VIEW + Kickbacks";
 
 	}
+
+} else {
+
+	$statusBinding = "AND status != 'Kickback'";
+	$taskName = "Select Task Type";
 }
 
 
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' $statusBinding ");
+
+$totaltime = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $oneday . "' $statusBinding ");
 $totaltime1 = mysqli_fetch_array($totaltime);
 $day1 = $totaltime1[0];
 
 
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' $statusBinding ");
+$totaltimetwo = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $twoday . "' $statusBinding ");
 $totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
 $day2 = $totaltimetwo1[0];
 
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' $statusBinding ");
+$totaltimethree = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $threeday . "' $statusBinding ");
 $totaltimethree1 = mysqli_fetch_array($totaltimethree);
 $day3 = $totaltimethree1[0];
 
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' $statusBinding ");
+$totaltimefour = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fourday . "' $statusBinding ");
 $totaltimefour1 = mysqli_fetch_array($totaltimefour);
 $day4 = $totaltimefour1[0];
 
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' $statusBinding ");
+$totaltimefive = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fiveday . "' $statusBinding ");
 $totaltimefive1 = mysqli_fetch_array($totaltimefive);
 $day5 = $totaltimefive1[0];
 
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' $statusBinding ");
+$totaltimesix = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sixday . "' $statusBinding ");
 $totaltimesix1 = mysqli_fetch_array($totaltimesix);
 $day6 = $totaltimesix1[0];
 
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' $statusBinding ");
+$totaltimeseven = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sevenday . "' $statusBinding ");
 $totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
 $day7 = $totaltimeseven1[0];
 
@@ -618,7 +617,7 @@ echo "<input id='sixday' type='hidden' value='" . $sixday . "' ></input>";
 echo "<input id='sevenday' type='hidden' value='" . $sevenday . "' ></input>";
 
 
-function lineData1 ($con, $lineAccount1, $statusBinding){
+function lineData1 ($con, $lineAccount1, $statusBinding, $timeCount){
 
 $oneday = date('20y-m-d',strtotime("-0 days"));
 $twoday = date('20y-m-d',strtotime("-1 days"));
@@ -636,31 +635,31 @@ $day5L = 0;
 $day6L = 0;
 $day7L = 0;
 
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount1 . "' $statusBinding ");
+$totaltime = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount1 . "' $statusBinding ");
 $totaltime1 = mysqli_fetch_array($totaltime);
 $day1L = $totaltime1[0];
 
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount1 . "' $statusBinding  ");
+$totaltimetwo = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount1 . "' $statusBinding  ");
 $totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
 $day2L = $totaltimetwo1[0];
 
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount1 . "' $statusBinding ");
+$totaltimethree = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount1 . "' $statusBinding ");
 $totaltimethree1 = mysqli_fetch_array($totaltimethree);
 $day3L = $totaltimethree1[0];
 
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount1 . "' $statusBinding ");
+$totaltimefour = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount1 . "' $statusBinding ");
 $totaltimefour1 = mysqli_fetch_array($totaltimefour);
 $day4L = $totaltimefour1[0];
 
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount1 . "' $statusBinding ");
+$totaltimefive = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount1 . "' $statusBinding ");
 $totaltimefive1 = mysqli_fetch_array($totaltimefive);
 $day5L = $totaltimefive1[0];
 
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount1 . "' $statusBinding ");
+$totaltimesix = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount1 . "' $statusBinding ");
 $totaltimesix1 = mysqli_fetch_array($totaltimesix);
 $day6L = $totaltimesix1[0];
 
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount1 . "' $statusBinding ");
+$totaltimeseven = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount1 . "' $statusBinding ");
 $totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
 $day7L = $totaltimeseven1[0];
 
@@ -691,7 +690,7 @@ $lineDataEcho1 = "{
 }
 
 
-function lineData2 ($con, $lineAccount2, $statusBinding){
+function lineData2 ($con, $lineAccount2, $statusBinding, $timeCount){
 
 $oneday = date('20y-m-d',strtotime("-0 days"));
 $twoday = date('20y-m-d',strtotime("-1 days"));
@@ -709,31 +708,31 @@ $day5L = 0;
 $day6L = 0;
 $day7L = 0;
 
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount2 . "' $statusBinding ");
+$totaltime = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount2 . "' $statusBinding ");
 $totaltime1 = mysqli_fetch_array($totaltime);
 $day1L = $totaltime1[0];
 
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount2 . "' $statusBinding  ");
+$totaltimetwo = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount2 . "' $statusBinding  ");
 $totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
 $day2L = $totaltimetwo1[0];
 
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount2 . "' $statusBinding ");
+$totaltimethree = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount2 . "' $statusBinding ");
 $totaltimethree1 = mysqli_fetch_array($totaltimethree);
 $day3L = $totaltimethree1[0];
 
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount2 . "' $statusBinding ");
+$totaltimefour = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount2 . "' $statusBinding ");
 $totaltimefour1 = mysqli_fetch_array($totaltimefour);
 $day4L = $totaltimefour1[0];
 
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount2 . "' $statusBinding ");
+$totaltimefive = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount2 . "' $statusBinding ");
 $totaltimefive1 = mysqli_fetch_array($totaltimefive);
 $day5L = $totaltimefive1[0];
 
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount2 . "' $statusBinding ");
+$totaltimesix = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount2 . "' $statusBinding ");
 $totaltimesix1 = mysqli_fetch_array($totaltimesix);
 $day6L = $totaltimesix1[0];
 
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount2 . "' $statusBinding ");
+$totaltimeseven = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount2 . "' $statusBinding ");
 $totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
 $day7L = $totaltimeseven1[0];
 
@@ -760,7 +759,7 @@ $lineDataEcho2 = "{
 
 
 
-function lineData3 ($con, $lineAccount3, $statusBinding){
+function lineData3 ($con, $lineAccount3, $statusBinding, $timeCount){
 
 $oneday = date('20y-m-d',strtotime("-0 days"));
 $twoday = date('20y-m-d',strtotime("-1 days"));
@@ -778,31 +777,31 @@ $day5L = 0;
 $day6L = 0;
 $day7L = 0;
 
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount3 . "' $statusBinding ");
+$totaltime = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount3 . "' $statusBinding ");
 $totaltime1 = mysqli_fetch_array($totaltime);
 $day1L = $totaltime1[0];
 
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount3 . "' $statusBinding  ");
+$totaltimetwo = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount3 . "' $statusBinding  ");
 $totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
 $day2L = $totaltimetwo1[0];
 
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount3 . "' $statusBinding ");
+$totaltimethree = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount3 . "' $statusBinding ");
 $totaltimethree1 = mysqli_fetch_array($totaltimethree);
 $day3L = $totaltimethree1[0];
 
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount3 . "' $statusBinding ");
+$totaltimefour = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount3 . "' $statusBinding ");
 $totaltimefour1 = mysqli_fetch_array($totaltimefour);
 $day4L = $totaltimefour1[0];
 
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount3 . "' $statusBinding ");
+$totaltimefive = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount3 . "' $statusBinding ");
 $totaltimefive1 = mysqli_fetch_array($totaltimefive);
 $day5L = $totaltimefive1[0];
 
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount3 . "' $statusBinding ");
+$totaltimesix = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount3 . "' $statusBinding ");
 $totaltimesix1 = mysqli_fetch_array($totaltimesix);
 $day6L = $totaltimesix1[0];
 
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount3 . "' $statusBinding ");
+$totaltimeseven = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount3 . "' $statusBinding ");
 $totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
 $day7L = $totaltimeseven1[0];
 
@@ -829,7 +828,7 @@ $lineDataEcho3 = "{
 
 
 
-function lineData4 ($con, $lineAccount4, $statusBinding){
+function lineData4 ($con, $lineAccount4, $statusBinding, $timeCount){
 
 $oneday = date('20y-m-d',strtotime("-0 days"));
 $twoday = date('20y-m-d',strtotime("-1 days"));
@@ -847,31 +846,31 @@ $day5L = 0;
 $day6L = 0;
 $day7L = 0;
 
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount4 . "' $statusBinding ");
+$totaltime = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount4 . "' $statusBinding ");
 $totaltime1 = mysqli_fetch_array($totaltime);
 $day1L = $totaltime1[0];
 
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount4 . "' $statusBinding  ");
+$totaltimetwo = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount4 . "' $statusBinding  ");
 $totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
 $day2L = $totaltimetwo1[0];
 
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount4 . "' $statusBinding ");
+$totaltimethree = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount4 . "' $statusBinding ");
 $totaltimethree1 = mysqli_fetch_array($totaltimethree);
 $day3L = $totaltimethree1[0];
 
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount4 . "' $statusBinding ");
+$totaltimefour = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount4 . "' $statusBinding ");
 $totaltimefour1 = mysqli_fetch_array($totaltimefour);
 $day4L = $totaltimefour1[0];
 
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount4 . "' $statusBinding ");
+$totaltimefive = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount4 . "' $statusBinding ");
 $totaltimefive1 = mysqli_fetch_array($totaltimefive);
 $day5L = $totaltimefive1[0];
 
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount4 . "' $statusBinding ");
+$totaltimesix = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount4 . "' $statusBinding ");
 $totaltimesix1 = mysqli_fetch_array($totaltimesix);
 $day6L = $totaltimesix1[0];
 
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount4 . "' $statusBinding ");
+$totaltimeseven = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount4 . "' $statusBinding ");
 $totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
 $day7L = $totaltimeseven1[0];
 
@@ -897,7 +896,7 @@ $lineDataEcho4 = "{
 }
 
 
-function lineData5 ($con, $lineAccount5, $statusBinding){
+function lineData5 ($con, $lineAccount5, $statusBinding, $timeCount){
 
 $oneday = date('20y-m-d',strtotime("-0 days"));
 $twoday = date('20y-m-d',strtotime("-1 days"));
@@ -915,31 +914,31 @@ $day5L = 0;
 $day6L = 0;
 $day7L = 0;
 
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount5 . "' $statusBinding ");
+$totaltime = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount5 . "' $statusBinding ");
 $totaltime1 = mysqli_fetch_array($totaltime);
 $day1L = $totaltime1[0];
 
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount5 . "' $statusBinding  ");
+$totaltimetwo = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount5 . "' $statusBinding  ");
 $totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
 $day2L = $totaltimetwo1[0];
 
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount5 . "' $statusBinding ");
+$totaltimethree = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount5 . "' $statusBinding ");
 $totaltimethree1 = mysqli_fetch_array($totaltimethree);
 $day3L = $totaltimethree1[0];
 
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount5 . "' $statusBinding ");
+$totaltimefour = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount5 . "' $statusBinding ");
 $totaltimefour1 = mysqli_fetch_array($totaltimefour);
 $day4L = $totaltimefour1[0];
 
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount5 . "' $statusBinding ");
+$totaltimefive = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount5 . "' $statusBinding ");
 $totaltimefive1 = mysqli_fetch_array($totaltimefive);
 $day5L = $totaltimefive1[0];
 
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount5 . "' $statusBinding ");
+$totaltimesix = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount5 . "' $statusBinding ");
 $totaltimesix1 = mysqli_fetch_array($totaltimesix);
 $day6L = $totaltimesix1[0];
 
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount5 . "' $statusBinding ");
+$totaltimeseven = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount5 . "' $statusBinding ");
 $totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
 $day7L = $totaltimeseven1[0];
 
@@ -966,7 +965,7 @@ $lineDataEcho5 = "{
 
 
 
-function lineData6 ($con, $lineAccount6, $statusBinding){
+function lineData6 ($con, $lineAccount6, $statusBinding, $timeCount){
 
 $oneday = date('20y-m-d',strtotime("-0 days"));
 $twoday = date('20y-m-d',strtotime("-1 days"));
@@ -984,31 +983,31 @@ $day5L = 0;
 $day6L = 0;
 $day7L = 0;
 
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount6 . "' $statusBinding ");
+$totaltime = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount6 . "' $statusBinding ");
 $totaltime1 = mysqli_fetch_array($totaltime);
 $day1L = $totaltime1[0];
 
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount6 . "' $statusBinding  ");
+$totaltimetwo = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount6 . "' $statusBinding  ");
 $totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
 $day2L = $totaltimetwo1[0];
 
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount6 . "' $statusBinding ");
+$totaltimethree = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount6 . "' $statusBinding ");
 $totaltimethree1 = mysqli_fetch_array($totaltimethree);
 $day3L = $totaltimethree1[0];
 
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount6 . "' $statusBinding ");
+$totaltimefour = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount6 . "' $statusBinding ");
 $totaltimefour1 = mysqli_fetch_array($totaltimefour);
 $day4L = $totaltimefour1[0];
 
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount6 . "' $statusBinding ");
+$totaltimefive = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount6 . "' $statusBinding ");
 $totaltimefive1 = mysqli_fetch_array($totaltimefive);
 $day5L = $totaltimefive1[0];
 
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount6 . "' $statusBinding ");
+$totaltimesix = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount6 . "' $statusBinding ");
 $totaltimesix1 = mysqli_fetch_array($totaltimesix);
 $day6L = $totaltimesix1[0];
 
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount6 . "' $statusBinding ");
+$totaltimeseven = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount6 . "' $statusBinding ");
 $totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
 $day7L = $totaltimeseven1[0];
 
@@ -1034,7 +1033,7 @@ $lineDataEcho6 = "{
 }
 
 
-function lineData7 ($con, $lineAccount7, $statusBinding){
+function lineData7 ($con, $lineAccount7, $statusBinding, $timeCount){
 
 $oneday = date('20y-m-d',strtotime("-0 days"));
 $twoday = date('20y-m-d',strtotime("-1 days"));
@@ -1052,31 +1051,31 @@ $day5L = 0;
 $day6L = 0;
 $day7L = 0;
 
-$totaltime = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount7 . "' $statusBinding ");
+$totaltime = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $oneday . "' AND username = '" . $lineAccount7 . "' $statusBinding ");
 $totaltime1 = mysqli_fetch_array($totaltime);
 $day1L = $totaltime1[0];
 
-$totaltimetwo = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount7 . "' $statusBinding  ");
+$totaltimetwo = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $twoday . "' AND username = '" . $lineAccount7 . "' $statusBinding  ");
 $totaltimetwo1 = mysqli_fetch_array($totaltimetwo);
 $day2L = $totaltimetwo1[0];
 
-$totaltimethree = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount7 . "' $statusBinding ");
+$totaltimethree = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $threeday . "' AND username = '" . $lineAccount7 . "' $statusBinding ");
 $totaltimethree1 = mysqli_fetch_array($totaltimethree);
 $day3L = $totaltimethree1[0];
 
-$totaltimefour = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount7 . "' $statusBinding ");
+$totaltimefour = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fourday . "' AND username = '" . $lineAccount7 . "' $statusBinding ");
 $totaltimefour1 = mysqli_fetch_array($totaltimefour);
 $day4L = $totaltimefour1[0];
 
-$totaltimefive = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount7 . "' $statusBinding ");
+$totaltimefive = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $fiveday . "' AND username = '" . $lineAccount7 . "' $statusBinding ");
 $totaltimefive1 = mysqli_fetch_array($totaltimefive);
 $day5L = $totaltimefive1[0];
 
-$totaltimesix = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount7 . "' $statusBinding ");
+$totaltimesix = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sixday . "' AND username = '" . $lineAccount7 . "' $statusBinding ");
 $totaltimesix1 = mysqli_fetch_array($totaltimesix);
 $day6L = $totaltimesix1[0];
 
-$totaltimeseven = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount7 . "' $statusBinding ");
+$totaltimeseven = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date = '" . $sevenday . "' AND username = '" . $lineAccount7 . "' $statusBinding ");
 $totaltimeseven1 = mysqli_fetch_array($totaltimeseven);
 $day7L = $totaltimeseven1[0];
 
@@ -1088,6 +1087,7 @@ echo "<input id='day4L7' type='hidden' value='" . $day4L . "' ></input>";
 echo "<input id='day5L7' type='hidden' value='" . $day5L . "' ></input>";
 echo "<input id='day6L7' type='hidden' value='" . $day6L . "' ></input>";
 echo "<input id='day7L7' type='hidden' value='" . $day7L . "' ></input>";
+
 
 global $lineDataEcho7;
 
@@ -1111,13 +1111,13 @@ $lineAccount5 = 'swilson';
 $lineAccount6 = 'afunk';
 $lineAccount7 = 'alangford';
 
-lineData1($con, $lineAccount1, $statusBinding);
-lineData2($con, $lineAccount2, $statusBinding);
-lineData3($con, $lineAccount3, $statusBinding);
-lineData4($con, $lineAccount4, $statusBinding);
-lineData5($con, $lineAccount5, $statusBinding);
-lineData6($con, $lineAccount6, $statusBinding);
-lineData7($con, $lineAccount7, $statusBinding);
+lineData1($con, $lineAccount1, $statusBinding, $timeCount);
+lineData2($con, $lineAccount2, $statusBinding, $timeCount);
+lineData3($con, $lineAccount3, $statusBinding, $timeCount);
+lineData4($con, $lineAccount4, $statusBinding, $timeCount);
+lineData5($con, $lineAccount5, $statusBinding, $timeCount);
+lineData6($con, $lineAccount6, $statusBinding, $timeCount);
+lineData7($con, $lineAccount7, $statusBinding, $timeCount);
 ?>
 
 			<div id="graph2" class="panel" style="display: none;">
@@ -1211,6 +1211,209 @@ lineData7($con, $lineAccount7, $statusBinding);
 						var day6L7 = parseInt($("#day6L7").val());
 						var day7L7 = parseInt($("#day7L7").val());
 						
+						//User 1
+						if (isNaN(day1L)){ 
+							day1L = 0;
+						};
+						
+						if (isNaN(day2L)){ 
+							day2L = 0;
+						};
+						
+						if (isNaN(day3L)){ 
+							day3L = 0;
+						};
+						
+						if (isNaN(day4L)){ 
+							day4L = 0;
+						};
+						
+						if (isNaN(day5L)){ 
+							day5L = 0;
+						};
+						
+						if (isNaN(day6L)){ 
+							day6L = 0;
+						};
+						
+						if (isNaN(day7L)){ 
+							day7L = 0;
+						};
+
+						//User 2
+						if (isNaN(day1L2)){ 
+							day1L2 = 0;
+						};
+						
+						if (isNaN(day2L2)){ 
+							day2L2 = 0;
+						};
+						
+						if (isNaN(day3L2)){ 
+							day3L2 = 0;
+						};
+						
+						if (isNaN(day4L2)){ 
+							day4L2 = 0;
+						};
+						
+						if (isNaN(day5L2)){ 
+							day5L2 = 0;
+						};
+						
+						if (isNaN(day6L2)){ 
+							day6L2 = 0;
+						};
+						
+						if (isNaN(day7L2)){ 
+							day7L2 = 0;
+						};
+
+						//User 3
+						if (isNaN(day1L3)){ 
+							day1L3 = 0;
+						};
+						
+						if (isNaN(day2L3)){ 
+							day2L3 = 0;
+						};
+						
+						if (isNaN(day3L3)){ 
+							day3L3 = 0;
+						};
+						
+						if (isNaN(day4L3)){ 
+							day4L3 = 0;
+						};
+						
+						if (isNaN(day5L3)){ 
+							day5L3 = 0;
+						};
+						
+						if (isNaN(day6L3)){ 
+							day6L3 = 0;
+						};
+						
+						if (isNaN(day7L3)){ 
+							day7L3 = 0;
+						};
+
+						//User 4
+						if (isNaN(day1L4)){ 
+							day1L4 = 0;
+						};
+						
+						if (isNaN(day2L4)){ 
+							day2L4 = 0;
+						};
+						
+						if (isNaN(day3L4)){ 
+							day3L4 = 0;
+						};
+						
+						if (isNaN(day4L4)){ 
+							day4L4 = 0;
+						};
+						
+						if (isNaN(day5L4)){ 
+							day5L4 = 0;
+						};
+						
+						if (isNaN(day6L4)){ 
+							day6L4 = 0;
+						};
+						
+						if (isNaN(day7L4)){ 
+							day7L4 = 0;
+						};
+
+						//User 5
+						if (isNaN(day1L5)){ 
+							day1L5 = 0;
+						};
+						
+						if (isNaN(day2L5)){ 
+							day2L5 = 0;
+						};
+						
+						if (isNaN(day3L5)){ 
+							day3L5 = 0;
+						};
+						
+						if (isNaN(day4L5)){ 
+							day4L5 = 0;
+						};
+						
+						if (isNaN(day5L5)){ 
+							day5L5 = 0;
+						};
+						
+						if (isNaN(day6L5)){ 
+							day6L5 = 0;
+						};
+						
+						if (isNaN(day7L5)){ 
+							day7L5 = 0;
+						};
+
+						//User 6
+						if (isNaN(day1L6)){ 
+							day1L6 = 0;
+						};
+						
+						if (isNaN(day2L6)){ 
+							day2L6 = 0;
+						};
+						
+						if (isNaN(day3L6)){ 
+							day3L6 = 0;
+						};
+						
+						if (isNaN(day4L6)){ 
+							day4L6 = 0;
+						};
+						
+						if (isNaN(day5L6)){ 
+							day5L6 = 0;
+						};
+						
+						if (isNaN(day6L6)){ 
+							day6L6 = 0;
+						};
+						
+						if (isNaN(day7L6)){ 
+							day7L6 = 0;
+						};
+
+						//User 7
+						if (isNaN(day1L7)){ 
+							day1L7 = 0;
+						};
+						
+						if (isNaN(day2L7)){ 
+							day2L7 = 0;
+						};
+						
+						if (isNaN(day3L7)){ 
+							day3L7 = 0;
+						};
+						
+						if (isNaN(day4L7)){ 
+							day4L7 = 0;
+						};
+						
+						if (isNaN(day5L7)){ 
+							day5L7 = 0;
+						};
+						
+						if (isNaN(day6L7)){ 
+							day6L7 = 0;
+						};
+						
+						if (isNaN(day7L7)){ 
+							day7L7 = 0;
+						};
+
 						var lineChartData = {
 							labels : [ sevenday, sixday, fiveday, fourday, threeday, twoday, oneday],
 							datasets : [
@@ -1345,7 +1548,7 @@ $accountData1 = "{
 }
 
 
-function barNumbers2 ($con, $userAccount2, $statusBinding){
+function barNumbers2 ($con, $userAccount2, $statusBinding, $timeCount){
 
 $day112 = 0;
 $day212 = 0;
@@ -1364,27 +1567,27 @@ $month5 = date('20y-m-0',strtotime("-4 month"));
 $month6 = date('20y-m-0',strtotime("-5 month"));
 
 
-$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount2 . "' $statusBinding ");
+$totaltime1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount2 . "' $statusBinding ");
 $totaltime11 = mysqli_fetch_array($totaltime1);
 $day112 = $totaltime11[0];
 
-$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount2 . "' $statusBinding ");
+$totaltimetwo1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount2 . "' $statusBinding ");
 $totaltimetwo11 = mysqli_fetch_array($totaltimetwo1);
 $day212 = $totaltimetwo11[0];
 
-$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount2 . "' $statusBinding ");
+$totaltimethree1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount2 . "' $statusBinding ");
 $totaltimethree11 = mysqli_fetch_array($totaltimethree1);
 $day312 = $totaltimethree11[0];
 
-$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount2 . "' $statusBinding ");
+$totaltimefour1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount2 . "' $statusBinding ");
 $totaltimefour11 = mysqli_fetch_array($totaltimefour1);
 $day412 = $totaltimefour11[0];
 
-$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount2 . "' $statusBinding ");
+$totaltimefive1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount2 . "' $statusBinding ");
 $totaltimefive11 = mysqli_fetch_array($totaltimefive1);
 $day512 = $totaltimefive11[0];
 
-$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount2 . "' $statusBinding ");
+$totaltimesix1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount2 . "' $statusBinding ");
 $totaltimesix11 = mysqli_fetch_array($totaltimesix1);
 $day612 = $totaltimesix11[0];
 
@@ -1411,7 +1614,7 @@ $accountData2 = "{
 }
 
 
-function barNumbers3 ($con, $userAccount3, $statusBinding){
+function barNumbers3 ($con, $userAccount3, $statusBinding, $timeCount){
 
 $day113 = 0;
 $day213 = 0;
@@ -1430,27 +1633,27 @@ $month5 = date('20y-m-0',strtotime("-4 month"));
 $month6 = date('20y-m-0',strtotime("-5 month"));
 
 
-$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount3 . "' $statusBinding ");
+$totaltime1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount3 . "' $statusBinding ");
 $totaltime11 = mysqli_fetch_array($totaltime1);
 $day113 = $totaltime11[0];
 
-$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount3 . "' $statusBinding ");
+$totaltimetwo1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount3 . "' $statusBinding ");
 $totaltimetwo11 = mysqli_fetch_array($totaltimetwo1);
 $day213 = $totaltimetwo11[0];
 
-$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount3 . "' $statusBinding ");
+$totaltimethree1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount3 . "' $statusBinding ");
 $totaltimethree11 = mysqli_fetch_array($totaltimethree1);
 $day313 = $totaltimethree11[0];
 
-$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount3 . "' $statusBinding ");
+$totaltimefour1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount3 . "' $statusBinding ");
 $totaltimefour11 = mysqli_fetch_array($totaltimefour1);
 $day413 = $totaltimefour11[0];
 
-$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount3 . "' $statusBinding ");
+$totaltimefive1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount3 . "' $statusBinding ");
 $totaltimefive11 = mysqli_fetch_array($totaltimefive1);
 $day513 = $totaltimefive11[0];
 
-$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount3 . "' $statusBinding ");
+$totaltimesix1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount3 . "' $statusBinding ");
 $totaltimesix11 = mysqli_fetch_array($totaltimesix1);
 $day613 = $totaltimesix11[0];
 
@@ -1475,7 +1678,7 @@ $accountData3 = "{
 
 }
 
-function barNumbers4 ($con, $userAccount4, $statusBinding){
+function barNumbers4 ($con, $userAccount4, $statusBinding, $timeCount){
 
 $day114 = 0;
 $day214 = 0;
@@ -1494,27 +1697,27 @@ $month5 = date('20y-m-0',strtotime("-4 month"));
 $month6 = date('20y-m-0',strtotime("-5 month"));
 
 
-$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount4 . "' $statusBinding ");
+$totaltime1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount4 . "' $statusBinding ");
 $totaltime11 = mysqli_fetch_array($totaltime1);
 $day114 = $totaltime11[0];
 
-$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount4 . "' $statusBinding ");
+$totaltimetwo1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount4 . "' $statusBinding ");
 $totaltimetwo11 = mysqli_fetch_array($totaltimetwo1);
 $day214 = $totaltimetwo11[0];
 
-$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount4 . "' $statusBinding ");
+$totaltimethree1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount4 . "' $statusBinding ");
 $totaltimethree11 = mysqli_fetch_array($totaltimethree1);
 $day314 = $totaltimethree11[0];
 
-$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount4 . "' $statusBinding ");
+$totaltimefour1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount4 . "' $statusBinding ");
 $totaltimefour11 = mysqli_fetch_array($totaltimefour1);
 $day414 = $totaltimefour11[0];
 
-$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount4 . "' $statusBinding ");
+$totaltimefive1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount4 . "' $statusBinding ");
 $totaltimefive11 = mysqli_fetch_array($totaltimefive1);
 $day514 = $totaltimefive11[0];
 
-$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount4 . "' $statusBinding ");
+$totaltimesix1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount4 . "' $statusBinding ");
 $totaltimesix11 = mysqli_fetch_array($totaltimesix1);
 $day614 = $totaltimesix11[0];
 
@@ -1540,7 +1743,7 @@ $accountData4 = "{
 }
 
 
-function barNumbers5 ($con, $userAccount5, $statusBinding){
+function barNumbers5 ($con, $userAccount5, $statusBinding, $timeCount){
 
 $day115 = 0;
 $day215 = 0;
@@ -1559,27 +1762,27 @@ $month5 = date('20y-m-0',strtotime("-4 month"));
 $month6 = date('20y-m-0',strtotime("-5 month"));
 
 
-$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount5 . "' $statusBinding ");
+$totaltime1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount5 . "' $statusBinding ");
 $totaltime11 = mysqli_fetch_array($totaltime1);
 $day115 = $totaltime11[0];
 
-$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount5 . "' $statusBinding ");
+$totaltimetwo1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount5 . "' $statusBinding ");
 $totaltimetwo11 = mysqli_fetch_array($totaltimetwo1);
 $day215 = $totaltimetwo11[0];
 
-$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount5 . "' $statusBinding ");
+$totaltimethree1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount5 . "' $statusBinding ");
 $totaltimethree11 = mysqli_fetch_array($totaltimethree1);
 $day315 = $totaltimethree11[0];
 
-$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount5 . "' $statusBinding ");
+$totaltimefour1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount5 . "' $statusBinding ");
 $totaltimefour11 = mysqli_fetch_array($totaltimefour1);
 $day415 = $totaltimefour11[0];
 
-$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount5 . "' $statusBinding ");
+$totaltimefive1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount5 . "' $statusBinding ");
 $totaltimefive11 = mysqli_fetch_array($totaltimefive1);
 $day515 = $totaltimefive11[0];
 
-$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount5 . "' $statusBinding ");
+$totaltimesix1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount5 . "' $statusBinding ");
 $totaltimesix11 = mysqli_fetch_array($totaltimesix1);
 $day615 = $totaltimesix11[0];
 
@@ -1605,7 +1808,7 @@ $accountData5 = "{
 }
 
 
-function barNumbers6 ($con, $userAccount6, $statusBinding){
+function barNumbers6 ($con, $userAccount6, $statusBinding, $timeCount){
 
 $day116 = 0;
 $day216 = 0;
@@ -1623,27 +1826,27 @@ $month5 = date('20y-m-0',strtotime("-4 month"));
 $month6 = date('20y-m-0',strtotime("-5 month"));
 
 
-$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount6 . "' $statusBinding ");
+$totaltime1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount6 . "' $statusBinding ");
 $totaltime11 = mysqli_fetch_array($totaltime1);
 $day116 = $totaltime11[0];
 
-$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount6 . "' $statusBinding ");
+$totaltimetwo1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount6 . "' $statusBinding ");
 $totaltimetwo11 = mysqli_fetch_array($totaltimetwo1);
 $day216 = $totaltimetwo11[0];
 
-$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount6 . "' $statusBinding ");
+$totaltimethree1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount6 . "' $statusBinding ");
 $totaltimethree11 = mysqli_fetch_array($totaltimethree1);
 $day316 = $totaltimethree11[0];
 
-$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount6 . "' $statusBinding ");
+$totaltimefour1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount6 . "' $statusBinding ");
 $totaltimefour11 = mysqli_fetch_array($totaltimefour1);
 $day416 = $totaltimefour11[0];
 
-$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount6 . "' $statusBinding ");
+$totaltimefive1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount6 . "' $statusBinding ");
 $totaltimefive11 = mysqli_fetch_array($totaltimefive1);
 $day516 = $totaltimefive11[0];
 
-$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount6 . "' $statusBinding ");
+$totaltimesix1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount6 . "' $statusBinding ");
 $totaltimesix11 = mysqli_fetch_array($totaltimesix1);
 $day616 = $totaltimesix11[0];
 
@@ -1669,7 +1872,7 @@ $accountData6 = "{
 }
 
 
-function barNumbers7 ($con, $userAccount7, $statusBinding){
+function barNumbers7 ($con, $userAccount7, $statusBinding, $timeCount){
 
 $day117 = 0;
 $day217 = 0;
@@ -1688,27 +1891,27 @@ $month5 = date('20y-m-0',strtotime("-4 month"));
 $month6 = date('20y-m-0',strtotime("-5 month"));
 
 
-$totaltime1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount7 . "' $statusBinding ");
+$totaltime1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month1 . "' AND '" . $monthPlus1 . "' AND username = '" . $userAccount7 . "' $statusBinding ");
 $totaltime11 = mysqli_fetch_array($totaltime1);
 $day117 = $totaltime11[0];
 
-$totaltimetwo1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount7 . "' $statusBinding ");
+$totaltimetwo1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month2 . "' AND '" . $month1 . "' AND username = '" . $userAccount7 . "' $statusBinding ");
 $totaltimetwo11 = mysqli_fetch_array($totaltimetwo1);
 $day217 = $totaltimetwo11[0];
 
-$totaltimethree1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount7 . "' $statusBinding ");
+$totaltimethree1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month3 . "' AND '" . $month2 . "' AND username = '" . $userAccount7 . "' $statusBinding ");
 $totaltimethree11 = mysqli_fetch_array($totaltimethree1);
 $day317 = $totaltimethree11[0];
 
-$totaltimefour1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount7 . "' $statusBinding ");
+$totaltimefour1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month4 . "' AND '" . $month3 . "' AND username = '" . $userAccount7 . "' $statusBinding ");
 $totaltimefour11 = mysqli_fetch_array($totaltimefour1);
 $day417 = $totaltimefour11[0];
 
-$totaltimefive1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount7 . "' $statusBinding ");
+$totaltimefive1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month5 . "' AND '" . $month4 . "' AND username = '" . $userAccount7 . "' $statusBinding ");
 $totaltimefive11 = mysqli_fetch_array($totaltimefive1);
 $day517 = $totaltimefive11[0];
 
-$totaltimesix1 = mysqli_query($con, "SELECT count(1) FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount7 . "' $statusBinding ");
+$totaltimesix1 = mysqli_query($con, "SELECT $timeCount FROM onsites WHERE date BETWEEN '" . $month6 . "' AND '" . $month5 . "' AND username = '" . $userAccount7 . "' $statusBinding ");
 $totaltimesix11 = mysqli_fetch_array($totaltimesix1);
 $day617 = $totaltimesix11[0];
 
@@ -1743,13 +1946,13 @@ $userAccount5 = 'swilson';
 $userAccount6 = 'afunk';
 $userAccount7 = 'alangford';
 
-barNumbers1($con, $userAccount1, $statusBinding);
-barNumbers2($con, $userAccount2, $statusBinding);
-barNumbers3($con, $userAccount3, $statusBinding);
-barNumbers4($con, $userAccount4, $statusBinding);
-barNumbers5($con, $userAccount5, $statusBinding);
-barNumbers6($con, $userAccount6, $statusBinding);
-barNumbers7($con, $userAccount7, $statusBinding);
+barNumbers1($con, $userAccount1, $statusBinding, $timeCount);
+barNumbers2($con, $userAccount2, $statusBinding, $timeCount);
+barNumbers3($con, $userAccount3, $statusBinding, $timeCount);
+barNumbers4($con, $userAccount4, $statusBinding, $timeCount);
+barNumbers5($con, $userAccount5, $statusBinding, $timeCount);
+barNumbers6($con, $userAccount6, $statusBinding, $timeCount);
+barNumbers7($con, $userAccount7, $statusBinding, $timeCount);
 ?>
 
 	<div class="panel">
@@ -1834,6 +2037,191 @@ barNumbers7($con, $userAccount7, $statusBinding);
 				var day517 = parseInt($("#day517").val());
 				var day617 = parseInt($("#day617").val());
 
+				//User 1
+				if (isNaN(day111)){ 
+					day111 = 0;
+				};
+				
+				if (isNaN(day211)){ 
+					day211 = 0;
+				};
+				
+				if (isNaN(day311)){ 
+					day311 = 0;
+				};
+				
+				if (isNaN(day411)){ 
+					day411 = 0;
+				};
+				
+				if (isNaN(day511)){ 
+					day511 = 0;
+				};
+				
+				if (isNaN(day611)){ 
+					day611 = 0;
+				};
+				
+
+				//User 2
+				if (isNaN(day112)){ 
+					day112 = 0;
+				};
+				
+				if (isNaN(day212)){ 
+					day212 = 0;
+				};
+				
+				if (isNaN(day312)){ 
+					day312 = 0;
+				};
+				
+				if (isNaN(day412)){ 
+					day412 = 0;
+				};
+				
+				if (isNaN(day512)){ 
+					day512 = 0;
+				};
+				
+				if (isNaN(day612)){ 
+					day612 = 0;
+				};
+				;
+
+
+				//User 3
+				if (isNaN(day113)){ 
+					day113 = 0;
+				};
+				
+				if (isNaN(day213)){ 
+					day213 = 0;
+				};
+				
+				if (isNaN(day313)){ 
+					day313 = 0;
+				};
+				
+				if (isNaN(day413)){ 
+					day413 = 0;
+				};
+				
+				if (isNaN(day513)){ 
+					day513 = 0;
+				};
+				
+				if (isNaN(day613)){ 
+					day613 = 0;
+				};
+
+
+				//User 4
+				if (isNaN(day114)){ 
+					day114 = 0;
+				};
+				
+				if (isNaN(day214)){ 
+					day214 = 0;
+				};
+				
+				if (isNaN(day314)){ 
+					day314 = 0;
+				};
+				
+				if (isNaN(day414)){ 
+					day414 = 0;
+				};
+				
+				if (isNaN(day514)){ 
+					day514 = 0;
+				};
+				
+				if (isNaN(day614)){ 
+					day614 = 0;
+				};
+				
+
+
+				//User 5
+				if (isNaN(day115)){ 
+					day115 = 0;
+				};
+				
+				if (isNaN(day215)){ 
+					day215 = 0;
+				};
+				
+				if (isNaN(day315)){ 
+					day315 = 0;
+				};
+				
+				if (isNaN(day415)){ 
+					day415 = 0;
+				};
+				
+				if (isNaN(day515)){ 
+					day515 = 0;
+				};
+				
+				if (isNaN(day615)){ 
+					day615 = 0;
+				};
+				
+
+				//User 6
+				if (isNaN(day116)){ 
+					day116 = 0;
+				};
+				
+				if (isNaN(day216)){ 
+					day216 = 0;
+				};
+				
+				if (isNaN(day316)){ 
+					day316 = 0;
+				};
+				
+				if (isNaN(day416)){ 
+					day416 = 0;
+				};
+				
+				if (isNaN(day516)){ 
+					day516 = 0;
+				};
+				
+				if (isNaN(day616)){ 
+					day616 = 0;
+				};
+				
+
+				//User 7
+				if (isNaN(day117)){ 
+					day117 = 0;
+				};
+				
+				if (isNaN(day217)){ 
+					day217 = 0;
+				};
+				
+				if (isNaN(day317)){ 
+					day317 = 0;
+				};
+				
+				if (isNaN(day417)){ 
+					day417 = 0;
+				};
+				
+				if (isNaN(day517)){ 
+					day517 = 0;
+				};
+				
+				if (isNaN(day617)){ 
+					day617 = 0;
+				};
+				
+
+
 				var data = {
 				    labels: [sixday1, fiveday1, fourday1, threeday1, twoday1, oneday1],
 				    datasets: [
@@ -1874,17 +2262,16 @@ barNumbers7($con, $userAccount7, $statusBinding);
 			<div style="margin: 10px; margin-left: 20px; margin-bottom: 0px !important;">
 
 				<form action="onsiteqa.php#btn5" method="POST">
-					<strong>Kickback View: </strong>
-					<input type="checkbox" name="kickback" value="true" style="width: 20px; height: 20px; margin: 5px; vertical-align: -5px;" <?= $checkStatus ?> onChange="this.form.submit()">
-				</form>
+					<strong>Time View: </strong>
+					<input onChange="this.form.submit()" type="checkbox" name="time" value="true" style="width: 20px; height: 20px; margin: 5px; vertical-align: -5px;" <?= $checkStatus ?> >
 
-				<form action="onsiteqa.php#btn5" method="POST">
 					<strong>Task Type: </strong>
-					<select onChange="this.form.submit()" name="taskType"  style="height: 33px; width: 250px !important;" class="btn btn-primary input-standard contentForm">
-						<option selected style='display: none;'><?= $taskName ?></option>
+					<select onChange="this.form.submit()"  name="taskType"  style="height: 33px; width: 250px !important;" class="btn btn-primary input-standard contentForm">
+						<?php echo '<option selected style="display: none;" value="' . $statusBinding . '" >' . $taskName . '</option>'; ?>
 						<optgroup label="Standard Onsite Tasks">
 							<option value="AND status != 'Kickback'">ALL VIEW</option>
 							<option value="">ALL VIEW + Kickbacks</option>
+							<option value="AND status = 'Kickback'">Kickbacks Only</option>
 						    <option value="AND task = 'Basic Onsites'">Basic Onsites</option>
 						    <option value="AND task = 'Google Analytics'">Google Analytics</option>
 						    <option value="AND task = '301 redirects'">301 redirects</option>
