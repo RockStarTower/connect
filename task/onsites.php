@@ -15,9 +15,8 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
 	<input class="sInputs" type="date" name="date" value="<?=$oneday?>" required /> </br>
 	<input class="sInputs"  type="number" name="clientid" placeholder="Client ID" required /> </br>
 	<input class="sInputs" id="onsiteDomain" type="text" name="domain" placeholder="example.com" required /> </br>
-    <select class="sInputs" style="padding-bottom: 0px !important; padding-top: 0px !important;" name="task" required/>
+    <select class="sInputs" id="taskSelect" style="padding-bottom: 0px !important; padding-top: 0px !important;" name="task" required/>
     <optgroup label="Standard Onsite Tasks">
-      <option value=" " style="display: none;" default>Please Select a Task</option>
       <option value="Basic Onsites">Basic Onsites</option>
       <option value="Google Analytics">Google Analytics</option>
       <option value="301 redirects">301 redirects</option>

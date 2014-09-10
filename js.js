@@ -1249,10 +1249,26 @@ $(document).ready(function () {
 
     });
 
+    $(".comHeight").hover(function (){
 
+        var find = $(this);
+        $(find).delay(700).animate({
+            height: 200,
+        }, 350);  
+     
+    });
 
+     $(".comHeight").mouseleave(function (){
 
+        var find = $(this);
+         $(find).clearQueue();
+        $(find).delay(500).animate({
+            height: 32,
+        }, 350);
 
+    });
+
+     $("#taskSelect").prop("selectedIndex", -1);
 });
 
 

@@ -1652,6 +1652,25 @@ float: right;
 	margin-left: 2%;
 }
 
+.commentTable{
+	
+	min-width: 400px;
+
+}
+
+.comHeight{
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    word-wrap: break-word;
+	width: 400px;
+	height: 30px;
+}
+
+.comHeight:hover {
+	overflow-y: auto;
+}
+
 
 .timer{
 	opacity: .7;

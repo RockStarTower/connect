@@ -10,7 +10,7 @@ if($_POST['id'])
 	$role= mysqli_real_escape_string($con, $_POST['status']);
 	$username= mysqli_real_escape_string($con, $_POST['username']);
 }
-mysqli_query($con, "UPDATE onsites SET comment='$comment',QAstatus='$role', QAby='$username' WHERE counter='$id'");
+mysqli_query($con, "UPDATE onsites SET QAcomment='$comment',QAstatus='$role', QAby='$username' WHERE counter='$id'");
 
 
 

@@ -94,10 +94,11 @@ include "header.php";
 					<th class='tTitle'>Username</th>
 					<th class='tTitle'>Date</th>
 					<th class='tTitle'>Domain</th>
-					<th class='tTitle'>Docs</th>
 					<th class='tTitle'>Task Type</th>
 					<th class='tTitle'>Process</th>
-					<th class='tTitle'>Comment</th>
+					<th class='tTitle commentTable'>Comment</th>
+					<th class='tTitle'>Docs</th>
+					<th class='tTitle commentTable'>QA Comment</th>
 					<th class='tTitle'>QA Status</th>
 					</tr>";
 
@@ -111,6 +112,7 @@ include "header.php";
 					$status = $row['status'];
 					$comment = $row['comment'];
 					$QAstatus = $row['QAstatus'];
+					$QAcomment = $row['QAcomment'];
 					$id = $row['counter'];
 
 					$docItems = "<td class='tCell'>";
@@ -131,10 +133,11 @@ include "header.php";
 						<td class='tCell' >" . $usernameNew . "</td>
 						<td class='tCell'>" . $date . "</td>
 						<td class='tCell'><a target='_blank' href='http://". $domain ."'>" . $domain . "</td>
-						" . $docItems . "
 						<td class='tCell'>" . $task . "</td>
 						<td class='tCell'>" . $status . "</td>
-						<td class='tCell' id='comment" . $id . "' contenteditable>" . $comment . "</td>
+						<td class='tCell'><div class='comHeight'>" . htmlspecialchars($comment) . "</div></td>
+						" . $docItems . "
+						<td class='tCell' id='comment" . $id . "' contenteditable><div class='comHeight'>" . htmlspecialchars($QAcomment) . "</div></td>
 						<td class='tCell'>
 							<select id='status" . $id . "' name='status' style='height: 33px;' class='btn btn-primary input-standard contentForm'>
 								<option selected style='display: none;'>" . $QAstatus . "</option>
@@ -182,7 +185,8 @@ include "header.php";
 				<th class='tTitle'>Task Type</th>
 				<th class='tTitle'>Process</th>
 				<th class='tTitle'>QA By</th>
-				<th class='tTitle'>Comment</th>
+				<th class='tTitle commentTable'>QA Comment</th>
+				<th class='tTitle commentTable'>Comment</th>
 				</tr>";
 
 				$username = $row['username'];
@@ -192,6 +196,7 @@ include "header.php";
 				$status = $row['status'];
 				$QAby = $row['QAby'];
 				$comment = $row['comment'];
+				$QAcomment = $row['QAcomment'];
 
 				echo "<tr class='userTable3'>
 					<td class='tCell'>" . $username . "</td>
@@ -200,7 +205,8 @@ include "header.php";
 					<td class='tCell'>" . $task . "</td>
 					<td class='tCell'>" . $status . "</td>
 					<td class='tCell'>" . $QAby . "</td>
-					<td class='tCell'>" . $comment . "</td>
+					<td class='tCell'><div class='comHeight'>" . $QAcomment . "</div></td>
+					<td class='tCell'><div class='comHeight'>" . htmlspecialchars($comment) . "</div></td>
 						</div></td>
 				</tr>";
 			}
@@ -231,10 +237,8 @@ include "header.php";
 				}
 
 				$i = 0;
-				
-				while ($row = mysqli_fetch_assoc($result)) {
-				
-					if (!$i++) echo "<table class='table table-striped' >
+
+				if (!$i++) echo "<table class='table table-striped' >
 					<tr class='tRow'>
 					<th class='tTitle'>Client ID</th>
 					<th class='tTitle'>Date</th>
@@ -242,10 +246,16 @@ include "header.php";
 					<th class='tTitle'>Time</th>
 					<th class='tTitle'>Domain</th>
 					<th class='tTitle'>Process</th>
-					<th class='tTitle'>Comment</th>
+					<th class='tTitle'>Docs</th>
+					<th class='tTitle commentTable'>Comment</th>
 					<th class='tTitle'>QA By</th>
+					<th class='tTitle commentTable'>QA Comment</th>
 					<th class='tTitle'>QA Status</th>
 					</tr>";
+				
+				while ($row = mysqli_fetch_assoc($result)) {
+				
+					
 
 					$clientid = $row['clientid'];
 					$date = $row['date'];
@@ -256,7 +266,23 @@ include "header.php";
 					$id = $row['counter'];
 					$comment = $row['comment'];
 					$QAby = $row['QAby'];
+					$QAcomment = $row['QAcomment'];
 					$QAstatus = $row['QAstatus'];
+					$docs = json_decode($row['docs'], true);
+
+					$docItems = "<td class='tCell'>";
+
+					for ($i = 0; $i < count($docs); $i++ ) {
+
+						if ($docs[$i] != "" ){
+
+							$docItems .= "<a target='_blank' href='$docs[$i]'>Download Doc " . ($i + 1) . "</a><br>";
+
+						}
+
+					}
+
+					$docItems .= "</td>";
 					
 					echo "<tr id=" . $id . " class='tRow userTable5'>";
 					echo "<td class='tCell'>" . $clientid . "</td>";
@@ -265,8 +291,10 @@ include "header.php";
 					echo "<td class='tCell'>" . $time . "</td>";
 					echo "<td class='tCell'>" . $domain . "</td>";
 					echo "<td class='tCell'>" . $status . "</td>";
-					echo "<td class='tCell' id='scomment" . $id . "' contenteditable>" . $comment . "</td>";
+					echo "" . $docItems . "";
+					echo "<td class='tCell' id='scomment" . $id . "' contenteditable><div class='comHeight'>" . htmlspecialchars($comment) . "</div></td>";
 					echo "<td class='tCell'>" . $QAby . "</td>";
+					echo "<td class='tCell'><div class='comHeight'>" . htmlspecialchars($QAcomment) . "</div></td>";
 					echo "<td class='tCell'>
 							<select id='sstatus" . $id . "' name='status' style='height: 33px;' class='btn btn-primary input-standard contentForm'>
 								<option selected style='display: none;'>" . $QAstatus . "</option>
@@ -317,7 +345,7 @@ include "header.php";
 					<th class='tTitle'>Time</th>
 					<th class='tTitle'>Domain</th>
 					<th class='tTitle'>Process</th>
-					<th class='tTitle'>Comment</th>
+					<th class='tTitle commentTable'>Comment</th>
 					<th class='tTitle'>QA By</th>
 					<th class='tTitle'>QA Status</th>
 					<th class='tTitle'>Delete Task</th>
@@ -341,7 +369,7 @@ include "header.php";
 					echo "<td class='tCell' id='time" . $id . "' contenteditable>" . $time . "</td>";
 					echo "<td class='tCell' id='domain" . $id . "' contenteditable>" . $domain . "</td>";
 					echo "<td class='tCell' id='hstatus" . $id . "' contenteditable>" . $status . "</td>";
-					echo "<td class='tCell' id='hcomment" . $id . "' contenteditable>" . $comment . "</td>";
+					echo "<td class='tCell' id='hcomment" . $id . "' contenteditable><div class='comHeight'>" . htmlspecialchars($comment) . "</div></td>";
 					echo "<td class='tCell'>" . $QAby . "</td>";
 					echo "<td class='tCell'>" . $QAstatus . "</td>";
 					echo "<td class='tCell'><button id='" . $id . "' class='btn btn-danger sqlDelete' data-toggle='tooltip' data-placement='top' title='Double Click to Delete Task, This action cannot be undone!'>Delete</button>";
