@@ -115,6 +115,7 @@ date_default_timezone_set('America/Denver');
 						<span class="caret" style="margin-left: 5px;"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu">
+						<?php if ($username != "gnelson"){ ?>
 						<li style="padding-top: 5px;">
 							<a href="contentbuilder.php">
 								<i class="fa fa-keyboard-o"></i>
@@ -129,6 +130,7 @@ date_default_timezone_set('America/Denver');
 							</a>
 						</li>
 						<li class="divider"></li>
+						<?php } ?>
 						<li>
 							<a href="devbuilder.php">
 								<i class="fa fa-code"></i>

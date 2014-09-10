@@ -1253,7 +1253,7 @@ $(document).ready(function () {
 
         var find = $(this);
         $(find).delay(700).animate({
-            height: 200,
+            height: 150,
         }, 350);  
      
     });

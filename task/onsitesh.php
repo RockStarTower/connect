@@ -22,7 +22,7 @@ $docs = json_encode($docs);
 
 $QAstatus = mt_rand(1,100);
 
-if ($QAstatus >= 66){
+if ($QAstatus >= 50){
 
 	$QAstatus = 'Pending QA';
 
