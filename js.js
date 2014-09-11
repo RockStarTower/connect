@@ -794,8 +794,10 @@ $(document).ready(function () {
         var comment = $("#comment" + ID).text();
         var status = $("#status" + ID).val();
         var username = $("#userValue").val();
+        var orgUser = $("#orgUser" + ID).text();
+        var taskType = $("#taskType" + ID).text();
 
-        var dataString = 'id=' + ID + '&comment=' + comment + '&status=' + status + '&username=' + username;
+        var dataString = 'id=' + ID + '&comment=' + comment + '&status=' + status + '&username=' + username + '&orgUser=' + orgUser + '&taskType=' + taskType;
 
         $.ajax({
             type: "POST",

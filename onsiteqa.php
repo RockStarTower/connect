@@ -130,10 +130,10 @@ include "header.php";
 						$docItems .= "</td>";
 
 					echo "<tr id=" . $id . " class='userTable2'>
-						<td class='tCell' >" . $usernameNew . "</td>
+						<td class='tCell' id='orgUser" . $id . "'>" . $usernameNew . "</td>
 						<td class='tCell'>" . $date . "</td>
 						<td class='tCell'><a target='_blank' href='http://". $domain ."'>Domain Link</td>
-						<td class='tCell'>" . $task . "</td>
+						<td class='tCell' id='taskType" . $id . "'>" . $task . "</td>
 						<td class='tCell'>" . $status . "</td>
 						<td class='tCell'><div class='comHeight'>" . htmlspecialchars($comment) . "</div></td>
 						" . $docItems . "

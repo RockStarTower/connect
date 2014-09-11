@@ -1641,6 +1641,9 @@ float: right;
 }
 
 
+.userTable2:hover{
+	background-color: rgb(1,0,0, .2);
+}
 
 .half-Wrapper-onsite{
 	width: 49%;
@@ -1663,8 +1666,8 @@ float: right;
 	overflow: hidden;
 	text-overflow: ellipsis;
     word-wrap: break-word;
-	width: 400px;
 	height: 30px;
+	text-align: left;
 }
 
 .comHeight:hover {
