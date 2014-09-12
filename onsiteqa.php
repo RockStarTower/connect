@@ -79,7 +79,7 @@ include "header.php";
 			</div>
 
 			<?php
-				$result = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Pending QA" AND username != "'.$username.'" AND status = "Complete" ORDER BY date ASC LIMIT 5 ');
+				$result = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Pending QA" AND username != "'.$username.'" AND status = "Complete" AND QAowner = "'.$username.'" ORDER BY date ASC');
 
 				if (!$result) {
 					printf("Error: %s\n", mysqli_error($con));

@@ -358,6 +358,19 @@ include 'header.php';
 <?php } ?>
 <?php if ($user_role == 'onsite' || $user_role == 'admin') { ?>
 
+
+		<div class="panel">
+			<div class="panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+					Note Pad <span class="sub-panel-title"> - Quick Notes</span>
+					</div>
+				</div>
+			</div>
+				<textarea id="notePad" class="input-standard contentNotes" name="notePad" placeholder="Enter any notes here..."></textarea>
+		</div>
+
+
 		<div class="panel">	
 			<div class="panel-default">
 				<div class="panel-heading">
@@ -470,63 +483,7 @@ include 'header.php';
 
 
 
-		<div class="panel">
-				
-			<div class="panel-default">
-				<div class="panel-heading">
-					<div class="panel-title">
-					Passed QA <span class="sub-panel-title">- Descending</span>
-					</div>
-				</div>
-			</div>
 		
-			<?php
-
-			$result = mysqli_query($con, 'SELECT * FROM onsites WHERE id = "' . $user_id . '" AND QAstatus = "Passed QA" ORDER BY date DESC LIMIT 10');
-
-			if (!$result) {
-				printf("Error: %s\n", mysqli_error($con));
-				exit();
-			}
-
-			$i = 0;
-			
-			while ($row = mysqli_fetch_assoc($result)) {
-			
-				if (!$i++) echo "<table class='table table-striped' >
-				<tr class='tRow'>
-				<th class='tTitle'>Client ID</th>
-				<th class='tTitle'>Date</th>
-				<th class='tTitle'>Task Type</th>
-				<th class='tTitle'>Domain</th>
-				<th class='tTitle'>Time</th>
-				<th class='tTitle'>Process</th>
-				<th class='tTitle'>QA By</th>
-				</tr>";
-
-				$clientid = $row['clientid'];
-				$date = $row['date'];
-				$task = $row['task'];
-				$domain = $row['domain'];
-				$time = $row['time'];
-				$status = $row['status'];
-				$QAby = $row['QAby'];
-				
-				echo "<tr class='tRow'>";
-				echo "<td class='tCell'>" . $clientid . "</td>";
-				echo "<td class='tCell'>" . $date . "</td>";
-				echo "<td class='tCell'>" . $task . "</td>";
-				echo "<td class='tCell'>" . $domain . "</td>";
-				echo "<td class='tCell'>" . $time . "</td>";
-				echo "<td class='tCell'>" . $status . "</td>";
-				echo "<td class='tCell'>" . $QAby . "</td>";
-				echo "</tr>";
-			}
-			echo "</table>";
-
-			
-			?>
-		</div>
 		<?php } ?>
 
 		<?php if ($user_role == 'blogs') { ?>

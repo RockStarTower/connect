@@ -1260,7 +1260,7 @@ $(document).ready(function () {
      
     });
 
-     $(".comHeight").mouseleave(function (){
+    $(".comHeight").mouseleave(function (){
 
         var find = $(this);
          $(find).clearQueue();
@@ -1270,7 +1270,24 @@ $(document).ready(function () {
 
     });
 
-     $("#taskSelect").prop("selectedIndex", -1);
+    $("#taskSelect").prop("selectedIndex", -1);
+    /*
+     $("#notePad").focusout(function() {
+
+        var ID = $(this).attr("id");
+
+        $.ajax({
+            type: 'POST',
+            url: 'login/forgotpassword.php',
+            data: $("#login2").serialize(),
+            success: function(e) {
+                $("#emailmessage").html(e);
+            }
+
+        });
+       
+    });
+    */
 });
 
 

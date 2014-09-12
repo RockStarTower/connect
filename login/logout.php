@@ -1,10 +1,10 @@
 <?php
 
-session_start();
-unset($_SESSION["username"]); 
-unset($_SESSION["id"]); 
-unset($_SESSION["role"]); 
-unset($_SESSION["manager"]); 
+setcookie('username', "", time()-3600, '/');
+setcookie('id', "", time()-3600, '/');
+setcookie('role', "", time()-3600, '/');
+setcookie('manager', "", time()-3600, '/');
+
 header("Location: ../index.php");
 
 ?>

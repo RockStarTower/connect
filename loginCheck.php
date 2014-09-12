@@ -3,8 +3,8 @@
 $username;
 $user_id;
 
-session_start();
-if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+
+if (!isset($_COOKIE['username']) || empty($_COOKIE['username'])) {
       // redirect to your login page
 	  header("Location: index.php");
       exit();
@@ -12,10 +12,10 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 
 } else{
 	
-	$username = $_SESSION['username'];
-	$user_id = $_SESSION['id'];
-	$user_role = $_SESSION['role'];
-	$manager = $_SESSION['manager'];
+	$username = $_COOKIE['username'];
+	$user_id = $_COOKIE['id'];
+	$user_role = $_COOKIE['role'];
+	$manager = $_COOKIE['manager'];
 }
 
 

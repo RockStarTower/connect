@@ -29,11 +29,11 @@ if ($username_login && $password_login) {
 
             if ($status == "active"){
 
-			session_start();
-			$_SESSION['username'] = $username_login;
-			$_SESSION['id'] = $result;
-			$_SESSION['role'] = $dbrole;
-            $_SESSION['manager'] = $manager;
+			setcookie('username', $username_login, time()+60*60*24*30, '/');
+            setcookie('id', $result, time()+60*60*24*30, '/');
+            setcookie('role', $dbrole, time()+60*60*24*30, '/' );
+            setcookie('manager', $manager, time()+60*60*24*30, '/' );
+
             echo true;
 
 			}else{

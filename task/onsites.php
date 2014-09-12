@@ -13,8 +13,8 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
 
 	<div class="leftForm">
 	<input class="sInputs" type="date" name="date" value="<?=$oneday?>" required /> </br>
-	<input class="sInputs"  type="number" name="clientid" placeholder="Client ID" required /> </br>
-	<input class="sInputs" id="onsiteDomain" type="text" name="domain" placeholder="example.com" required /> </br>
+	<input class="sInputs"  type="number" name="clientid" placeholder="Client ID"  required/> </br>
+	<input class="sInputs" id="onsiteDomain" type="text" name="domain" placeholder="example.com"  required/> </br>
     <select class="sInputs" id="taskSelect" style="padding-bottom: 0px !important; padding-top: 0px !important;" name="task" required/>
     <optgroup label="Standard Onsite Tasks">
       <option value="Basic Onsites">Basic Onsites</option>
@@ -37,19 +37,18 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
       <optgroup label="Other Tasks">
       <option value="GNA Skip">GNA Skip</option>
       <option value="Other">Other</option>
-      
       </optgroup>
      </select><br>
-    <input class="sInputs quicktime" type="text" name="time" placeholder="Time   .5 = half hour"/>
+    <input class="sInputs quicktime" type="text" name="time" required placeholder="Time   .5 = half hour"/>
     <div class="show-this1">0.1</div>
     <div class="show-this2">0.25</div>
     <div class="show-this3">0.5</div>
     <div class="show-this4">0.75</div>
     <div class="show-this5">1</div>
  
-	<input class="sInputs" type="hidden" name="id" value="<?=$user_id?>" /> 
-	<input class="sInputs" type="hidden" name="username" value="<?=$username?>" /> 
-	<input class="sInputs" type="hidden" name="QAstatus" value="Pending QA" /> 
+	<input class="sInputs" type="hidden" name="id" value="<?=$user_id?>" required/> 
+	<input class="sInputs" type="hidden" name="username" value="<?=$username?>" required/> 
+	<input class="sInputs" type="hidden" name="QAstatus" value="Pending QA" required/> 
 	</div>
 	<div class="rightForm">
 	<textarea style="width: 100%; margin-top: 2px; height: 114px !important;; padding: 13px;" class="input-standard contentForm ctextarea currentcontent" rows="10" cols="60" name="comment" placeholder="Please leave a comment. (Optional)" /></textarea> <br>
@@ -58,13 +57,12 @@ $oneday = date('20y-m-d',strtotime("-0 days"));
 		<input type="text" class="sInputs doc" placeholder="Doc URL" name="doc[]" style="margin-left: 10px; width: 90%;" /><span class="btn btn-primary" id="plusDoc" style="font-size: 18px; width: 3%; padding: 1px; margin-left: 9px; padding-left: 9px; padding-right: 8px;margin-right: 0px;">+</span><br>
 	</div>
 
-	<input class="radiostyling" type="radio" name="status" value="Complete" required />Complete 
-	<input class="radiostyling" type="radio" name="status" value="Other" required />Other 
-	<input class="radiostyling" type="radio" name="status" value="Kickback" required />Kickback
+	<input class="radiostyling" type="radio" name="status" value="Complete"  />Complete 
+	<input class="radiostyling" type="radio" name="status" value="Other"  />Other 
+	<input class="radiostyling" type="radio" name="status" value="Kickback"  />Kickback
 	</div>
 	<div class="submitCon">
-	<input class="submitButton" type="Submit" name="Submit" />
-      
+  	<input class="btn btn-success submitButton" type="Submit" name="Submit" />
 	</div>
 </div>
 </form>
