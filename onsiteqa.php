@@ -709,8 +709,8 @@ global $lineDataEcho1;
 
 $lineDataEcho1 = "{
 					fillColor : 'rgba(200,200,200,.1)',
-					strokeColor : 'rgba(151,187,205,1)',
-					pointColor : 'rgba(151,187,205,1)',
+					strokeColor : '#FF0DFF',
+					pointColor : '#FF0DFF',
 					pointStrokeColor : '#fff',
 					data : [day7L,day6L,day5L,day4L,day3L,day2L,day1L]
 				},";
@@ -915,9 +915,9 @@ global $lineDataEcho4;
 
 $lineDataEcho4 = "{
 					fillColor : 'rgba(150,150,150,.1)',
-					strokeColor : '#949FB1',
+					strokeColor : '#0ACC39',
 					pointColor : 'rgba(0,0,0,.0)',
-					pointStrokeColor : '#949FB1',
+					pointStrokeColor : '#0ACC39',
 					data : [day7L4,day6L4,day5L4,day4L4,day3L4,day2L4,day1L4]
 				},";
 
@@ -983,9 +983,9 @@ global $lineDataEcho5;
 
 $lineDataEcho5 = "{
 					fillColor : 'rgba(150,150,150,.1)',
-					strokeColor : 'rgba(220,220,220,1)',
+					strokeColor : '#FFCF13',
 					pointColor : 'rgba(0,0,0,.0)',
-					pointStrokeColor : 'rgba(220,220,220,1)',
+					pointStrokeColor : '#FFCF13',
 					data : [day7L5,day6L5,day5L5,day4L5,day3L5,day2L5,day1L5]
 				},";
 
@@ -1121,9 +1121,9 @@ global $lineDataEcho7;
 
 $lineDataEcho7 = "{
 					fillColor : 'rgba(150,150,150,.1)',
-					strokeColor : '#32CD32',
+					strokeColor : '#2340A6',
 					pointColor : 'rgba(0,0,0,.0)',
-					pointStrokeColor : '#32CD32',
+					pointStrokeColor : '#2340A6',
 					data : [day7L7,day6L7,day5L7,day4L7,day3L7,day2L7,day1L7]
 				},";
 
@@ -1565,10 +1565,10 @@ global $accountData1;
 
 $accountData1 = "{
 	            label: 'My Second dataset',
-	            fillColor: 'rgba(151,187,205,0.5)',
-	            strokeColor: 'rgba(151,187,205,0.8)',
+	            fillColor: '#FF0DFF',
+	            strokeColor: '#FF0DFF',
 	            highlightFill: 'rgba(151,187,205,0.75)',
-	            highlightStroke: 'rgba(151,187,205,1)',
+	            highlightStroke: '#FF0DFF',
 	            data: [day611, day511, day411, day311, day211, day111]
 	        },";
 
@@ -1632,7 +1632,7 @@ global $accountData2;
 $accountData2 = "{
 	            label: 'My Second dataset',
 	            fillColor: '#FDB45C',
-	            strokeColor: 'rgba(151,187,205,0.8)',
+	            strokeColor: 'rgba(151,187,205,1)',
 	            highlightFill: 'rgba(151,187,205,0.75)',
 	            highlightStroke: 'rgba(151,187,205,1)',
 	            data: [day612, day512, day412, day312, day212, day112]
@@ -1697,7 +1697,7 @@ global $accountData3;
 $accountData3 = "{
 	            label: 'My Second dataset',
 	            fillColor: '#F7464A',
-	            strokeColor: 'rgba(151,187,205,0.8)',
+	            strokeColor: 'rgba(151,187,205,1)',
 	            highlightFill: 'rgba(151,187,205,0.75)',
 	            highlightStroke: 'rgba(151,187,205,1)',
 	            data: [day613, day513, day413, day313, day213, day113]
@@ -1760,10 +1760,10 @@ global $accountData4;
 
 $accountData4 = "{
 	            label: 'My Second dataset',
-	            fillColor: '#949FB1',
-	            strokeColor: 'rgba(151,187,205,0.8)',
+	            fillColor: '#0ACC39',
+	            strokeColor: '#0ACC39',
 	            highlightFill: 'rgba(151,187,205,0.75)',
-	            highlightStroke: 'rgba(151,187,205,1)',
+	            highlightStroke: '#0ACC39',
 	            data: [day614, day514, day414, day314, day214, day114]
 	        },";
 
@@ -1825,10 +1825,10 @@ global $accountData5;
 
 $accountData5 = "{
 				label: 'My First dataset',
-	            fillColor: 'rgba(220,220,220,0.5)',
-	            strokeColor: 'rgba(220,220,220,1)',
+	            fillColor: '#FFCF13',
+	            strokeColor: '#FFCF13',
 	            highlightFill: 'rgba(220,220,220,0.75)',
-	            highlightStroke: 'rgba(220,220,220,1)',
+	            highlightStroke: '#FFCF13',
 	            data: [day615, day515, day415, day315, day215, day115]
 	        },";
 
@@ -1890,7 +1890,7 @@ global $accountData6;
 $accountData6 = "{
 	            label: 'My Second dataset',
 	            fillColor: '#46BFBD',
-	            strokeColor: 'rgba(151,187,205,0.8)',
+	            strokeColor: 'rgba(151,187,205,1)',
 	            highlightFill: 'rgba(151,187,205,0.75)',
 	            highlightStroke: 'rgba(151,187,205,1)',
 	            data: [day616, day516, day416, day316, day216, day116]
@@ -1954,10 +1954,10 @@ global $accountData7;
 
 $accountData7 = "{
 	            label: 'My Second dataset',
-	            fillColor: 'rgba(151,187,205,0.5)',
-	            strokeColor: '#32CD32',
+	            fillColor: '#2340A6',
+	            strokeColor: '#2340A6',
 	            highlightFill: 'rgba(151,187,205,0.75)',
-	            highlightStroke: '#32CD32',
+	            highlightStroke: '#2340A6',
 	            data: [day617, day517, day417, day317, day217, day117]
 	        },";
 

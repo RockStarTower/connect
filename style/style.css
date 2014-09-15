@@ -960,7 +960,7 @@ margin-top: 16px;
 
 #tanBulletin{
 	list-style-type: square;
-	color: rgba(151,187,205,1);
+	color: #FF0DFF;
 }
 #tanBulletin2{
 	list-style-type: square;
@@ -972,11 +972,11 @@ margin-top: 16px;
 }
 #tanBulletin4{
 	list-style-type: square;
-	color: #949FB1;
+	color: #0ACC39;
 }
 #tanBulletin5{
 	list-style-type: square;
-	color: rgba(220,220,220,1);
+	color: #FFCF13;
 }
 #tanBulletin6{
 	list-style-type: square;
@@ -984,7 +984,7 @@ margin-top: 16px;
 }
 #tanBulletin7{
 	list-style-type: square;
-	color: #32CD32;
+	color: #2340A6;
 }
 
 

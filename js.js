@@ -1271,23 +1271,28 @@ $(document).ready(function () {
     });
 
     $("#taskSelect").prop("selectedIndex", -1);
-    /*
-     $("#notePad").focusout(function() {
+    
+    $("#notePad").focusout(function() {
 
         var ID = $(this).attr("id");
+        var text = $("#notePad").val();
+        var username = $("#noteUsername").val();
 
+        var dataString = 'text=' + text + '&username=' + username;
+        console.log(dataString);
         $.ajax({
+
             type: 'POST',
-            url: 'login/forgotpassword.php',
-            data: $("#login2").serialize(),
+            url: 'task/noteh.php',
+            data: dataString,
             success: function(e) {
-                $("#emailmessage").html(e);
+                $("#notePad").html(text);
             }
 
         });
        
     });
-    */
+    
 });
 
 

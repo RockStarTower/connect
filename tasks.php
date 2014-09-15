@@ -357,7 +357,12 @@ include 'header.php';
 </div>
 <?php } ?>
 <?php if ($user_role == 'onsite' || $user_role == 'admin') { ?>
-
+		
+		<?php 
+				$results = mysqli_query($con, 'SELECT * FROM users WHERE id= "'.$user_id.'" ');
+				$notevalue1 = mysqli_fetch_array($results);
+				$noteValue = $notevalue1['notes'];
+		?>
 
 		<div class="panel">
 			<div class="panel-default">
@@ -367,7 +372,10 @@ include 'header.php';
 					</div>
 				</div>
 			</div>
-				<textarea id="notePad" class="input-standard contentNotes" name="notePad" placeholder="Enter any notes here..."></textarea>
+				<form>
+				<?php echo'<textarea id="notePad" class="input-standard contentNotes" name="notePad" placeholder="Enter any notes here...">' . $noteValue . '</textarea>'; ?>
+				<?php echo '<input type="hidden" name="username" id="noteUsername" value="' . $username . '" />'; ?>
+				</form>
 		</div>
 
 
