@@ -270,8 +270,7 @@ echo "<input id='day7' type='hidden' value='" . $day7 . "' ></input>";
 				var sum4 = weekTotal7;
 				
 				var weekTotal = sum1+sum2+sum3+sum4;
-				
-				console.log(weekTotal);
+
 				
 				$("#weekTotal").html(weekTotal);
 				

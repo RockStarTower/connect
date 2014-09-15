@@ -17,7 +17,7 @@ include "header.php";
 
 	
 		<?php
-		$number = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Pending QA" AND username != "'.$username.'" AND status = "Complete"');
+		$number = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Pending QA" AND status = "Complete"');
 		$num = mysqli_num_rows($number);
 
 		$result = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Passed QA" AND status = "Complete" ');
@@ -94,8 +94,8 @@ include "header.php";
 					<th class='tTitle'>Username</th>
 					<th class='tTitle'>Date</th>
 					<th class='tTitle'>Domain</th>
+					<th class='tTitle'>Client ID</th>
 					<th class='tTitle'>Task Type</th>
-					<th class='tTitle'>Process</th>
 					<th class='tTitle commentTable'>Comment</th>
 					<th class='tTitle'>Docs</th>
 					<th class='tTitle commentTable'>QA Comment</th>
@@ -109,7 +109,7 @@ include "header.php";
 					$domain = $row['domain'];
 					$docs = json_decode($row['docs'], true);
 					$task = $row['task'];
-					$status = $row['status'];
+					$clientid = $row['clientid'];
 					$comment = $row['comment'];
 					$QAstatus = $row['QAstatus'];
 					$QAcomment = $row['QAcomment'];
@@ -133,8 +133,8 @@ include "header.php";
 						<td class='tCell' id='orgUser" . $id . "'>" . $usernameNew . "</td>
 						<td class='tCell'>" . $date . "</td>
 						<td class='tCell'><a target='_blank' href='http://". $domain ."'>Domain Link</td>
+						<td class='tCell'>" . $clientid . "</td>
 						<td class='tCell' id='taskType" . $id . "'>" . $task . "</td>
-						<td class='tCell'>" . $status . "</td>
 						<td class='tCell'><div class='comHeight'>" . htmlspecialchars($comment) . "</div></td>
 						" . $docItems . "
 						<td class='tCell' id='comment" . $id . "' contenteditable><div class='comHeight'>" . htmlspecialchars($QAcomment) . "</div></td>
