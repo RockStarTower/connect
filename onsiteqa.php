@@ -1632,9 +1632,9 @@ global $accountData2;
 $accountData2 = "{
 	            label: 'My Second dataset',
 	            fillColor: '#FDB45C',
-	            strokeColor: 'rgba(151,187,205,1)',
+	            strokeColor: '#FDB45C',
 	            highlightFill: 'rgba(151,187,205,0.75)',
-	            highlightStroke: 'rgba(151,187,205,1)',
+	            highlightStroke: '#FDB45C',
 	            data: [day612, day512, day412, day312, day212, day112]
 	        },";
 
@@ -1697,9 +1697,9 @@ global $accountData3;
 $accountData3 = "{
 	            label: 'My Second dataset',
 	            fillColor: '#F7464A',
-	            strokeColor: 'rgba(151,187,205,1)',
+	            strokeColor: '#F7464A',
 	            highlightFill: 'rgba(151,187,205,0.75)',
-	            highlightStroke: 'rgba(151,187,205,1)',
+	            highlightStroke: '#F7464A',
 	            data: [day613, day513, day413, day313, day213, day113]
 	        },";
 
