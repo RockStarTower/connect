@@ -911,6 +911,21 @@ $(document).ready(function () {
 
     };
 
+     var totalTaskList = function() {
+        
+        $(".adminPanel").css('display', 'none');
+        $("#newUser").css('display', 'block');
+        $(".blogticketPanel").css('display', 'none');
+        $("#userbtn2").addClass("active");
+        $("#userbtn1").removeClass("active");
+        $("#userbtn3").removeClass("active");
+        $("#userbtn4").removeClass("active");
+        $(".yourtasklist").css('display', 'none');
+        $(".container5").css('display', 'none');
+        $("#userbtn5").removeClass("active")
+
+    };
+
     if (window.location.href.indexOf("btn3") > -1) {
 
         blogsView();
@@ -921,9 +936,14 @@ $(document).ready(function () {
         taskList();
     }
 
-     if (window.location.href.indexOf("btn5") > -1) {
+    if (window.location.href.indexOf("btn5") > -1) {
 
         reportPage();
+    }
+
+    if (window.location.href.indexOf("btn2") > -1) {
+
+        totalTaskList();
     }
 
     $("#userbtn1").on('click', function() {
@@ -1292,6 +1312,9 @@ $(document).ready(function () {
         });
        
     });
+
+    $("#userFilterDetails").prop("selectedIndex", -1);
+    $("#taskFilterDetails").prop("selectedIndex", -1);
     
 });
 

@@ -81,11 +81,20 @@ date_default_timezone_set('America/Denver');
 								Reports
 							</a>
 						</li>
+					<?php if ($user_role == 'onsite' && $manager == 'true' || $user_role == 'admin') { ?>
+						<li class="divider"></li>
+						<li>
+							<a href="onsitedetails.php">
+								<i class="fa fa-lock"></i>
+								 Onsite Manager
+							</a>
+						</li>
+					<?php } ?>
 						<li class="divider"></li>
 						<li>
 							<a href="audit.php">
 								<i class="fa fa-gavel"></i>
-								 &nbsp;Audit
+								 Audit
 							</a>
 						</li>
 						<?php if ($user_role != 'onsite') { ?>
