@@ -368,7 +368,7 @@ include 'header.php';
 			<div class="panel-default">
 				<div class="panel-heading">
 					<div class="panel-title">
-					Note Pad <span class="sub-panel-title"> - Quick Notes</span>
+					Note Pad <span class="sub-panel-title"> - Auto Save On Off Click</span>
 					</div>
 				</div>
 			</div>

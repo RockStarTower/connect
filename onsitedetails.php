@@ -33,12 +33,18 @@ include "header.php";
 			   		<li id="userbtn1" style="width: 170px; margin: 5; float: left;" class="active">
 					    <a id="currentUsers" href="#btn1" >
 					        <span style="margin: 2px;" class="badge pull-right"><?php echo $num ?></span>
-					        Pending QA List
+					        Pending QA 
 					    </a>
 					</li>
 				    <li id="userbtn2" style="width: 170px; margin: 5; float: left;" >
 					    <a href="#btn2">
-					    	Completed Tasks List
+					    	Completed Tasks
+					    </a>
+				  </li>
+				  <li id="userbtn3" style="width: 170px; margin: 5; float: left;" >
+					    <a href="#btn3" >
+					    	<span style="margin: 2px;" class="badge pull-right"><?php echo $numBlogs2 ?></span>
+					    	Kickbacks
 					    </a>
 				  </li>
 				</ul>
@@ -273,11 +279,97 @@ include "header.php";
 
 </div>
 
+<div id="container2">
+	<div class="panel blogticketPanel" id="newUser" style="display: none;">
+			<div class="panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+					<span class="glyphicon glyphicon-folder-open">&nbsp;</span> Tasks Pending QA <span class="sub-panel-title">- Total List</span>
+					</div>
+				</div>
+			</div>
 
+			<?php
 
+				if (isset($_GET['order'])) {
 
+					$order = $_GET['order'];
 
+				} else {
 
+					$order = "date";
+
+				}
+
+				$result = mysqli_query($con, 'SELECT * FROM onsites WHERE QAstatus = "Kickback" AND status = "Complete" ORDER BY ' . $order . ' ASC');
+
+				if (!$result) {
+					printf("Error: %s\n", mysqli_error($con));
+					exit();
+				}
+
+				$i = 0;
+				
+
+					if (!$i++) echo "<table class='table table-striped' >
+					<tr class=''>
+					<th class='tTitle'>Username</th>
+					<th class='tTitle'><a href='onsitedetails.php?order=QAowner'>QA Owner</a></th>
+					<th class='tTitle'><a href='onsitedetails.php?order=date'>Date</a></th>
+					<th class='tTitle'>Domain</th>
+					<th class='tTitle'>Client ID</th>
+					<th class='tTitle'>Task Type</th>
+					<th class='tTitle commentTable'>Comment</th>
+					<th class='tTitle'>Docs</th>
+					<th class='tTitle commentTable'>QA Comment</th>
+					</tr>";
+
+				while ($row = mysqli_fetch_assoc($result)) {
+
+					$usernameNew = $row['username'];
+					$date = $row['date'];
+					$domain = $row['domain'];
+					$docs = json_decode($row['docs'], true);
+					$task = $row['task'];
+					$clientid = $row['clientid'];
+					$comment = $row['comment'];
+					$QAcomment = $row['QAcomment'];
+					$id = $row['counter'];
+					$QAowner = $row['QAowner'];
+
+					$docItems = "<td class='tCell'>";
+
+					for ($i = 0; $i < count($docs); $i++ ) {
+
+						if ($docs[$i] != "" ){
+
+							$docItems .= "<a target='_blank' href='$docs[$i]'>Download Doc " . ($i + 1) . "</a><br>";
+
+						}
+
+					}
+
+						$docItems .= "</td>";
+
+					echo "<tr id=" . $id . " '>
+						<td class='tCell' id='orgUser" . $id . "'>" . $usernameNew . "</td>
+						<td class='tCell' >" . $QAowner . "</td>
+						<td class='tCell'>" . $date . "</td>
+						<td class='tCell'><a target='_blank' href='http://". $domain ."'>Domain Link</td>
+						<td class='tCell'>" . $clientid . "</td>
+						<td class='tCell' id='taskType" . $id . "'>" . $task . "</td>
+						<td class='tCell'><div class='comHeight'>" . htmlspecialchars($comment) . "</div></td>
+						" . $docItems . "
+						<td class='tCell' id='comment" . $id . "' ><div class='comHeight'>" . htmlspecialchars($QAcomment) . "</div></td>
+						</div></td><input id='userValue' type='hidden' value='".$username."' name='userInput' />
+					</tr>";
+				}
+
+				echo "</table>";
+			?>
+
+	</div>
+</div>
 
 
 
