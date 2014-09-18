@@ -43,7 +43,6 @@ include "header.php";
 				  </li>
 				  <li id="userbtn3" style="width: 170px; margin: 5; float: left;" >
 					    <a href="#btn3" >
-					    	<span style="margin: 2px;" class="badge pull-right"><?php echo $numBlogs2 ?></span>
 					    	Kickbacks
 					    </a>
 				  </li>
