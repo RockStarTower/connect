@@ -209,6 +209,7 @@ include "header.php";
 			    <option value="task = 'CMS Testing'">CMS Testing</option>
 		        <option value="task = 'Post Blog'">Post Blog</option>
 				<option value="task = 'Setup Blog'">Setup Blog</option>
+				<option value="status = 'Kickback'">Kickbacks</option>
 		</select>
 		<input type="submit" class="btn btn-primary"/>
 		</form> <span>Filtered by: <?php echo $userFilter; ?> <?php echo $secondDET; ?> <?php echo $taskFilter; ?> </span>

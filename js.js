@@ -1457,11 +1457,11 @@ $(document).ready(function () {
  
         if (curText != ""){
 
-            $(".currentcontent").val(curText + "\n\nWe were only able to partially complete this action due to lack of access. Kicking back to see what the AM would like us to complete the action 'as is'.");
+            $(".currentcontent").val(curText + '\n\nWe were only able to partially complete this action due to lack of access. Kicking back to see what the AM would like us to complete the action "as is".');
 
         } else {
 
-             $(".currentcontent").val("We were only able to partially complete this action due to lack of access. Kicking back to see what the AM would like us to complete the action 'as is'.");
+             $(".currentcontent").val('We were only able to partially complete this action due to lack of access. Kicking back to see what the AM would like us to complete the action "as is".');
 
         }
 
