@@ -6,8 +6,23 @@ if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-$clientid = mysqli_real_escape_string($con, $_POST['clientid']);
-$domain = mysqli_real_escape_string($con, $_POST['domain']);
+if (isset($_POST['clientid'])){
+	$clientid = mysqli_real_escape_string($con, $_POST['clientid']);
+} else {
+	$clientid = '0';
+}
+
+if (isset($_POST['domain'])){
+	$domain = mysqli_real_escape_string($con, $_POST['domain']);
+} else {
+	$domain = '';
+}
+if (isset($_POST['doc'])){
+	$docs = $_POST['doc'];
+} else {
+	$docs = '';
+}
+
 $task = mysqli_real_escape_string($con, $_POST['task']);
 $date = mysqli_real_escape_string($con, $_POST['date']);
 $time = mysqli_real_escape_string($con, $_POST['time']);
@@ -15,14 +30,13 @@ $id = mysqli_real_escape_string($con, $_POST['id']);
 $username = mysqli_real_escape_string($con, $_POST['username']);
 $comment = mysqli_real_escape_string($con, $_POST['comment']);
 $status = mysqli_real_escape_string($con, $_POST['status']);
-$QAstatus = mysqli_real_escape_string($con, $_POST['QAstatus']);
-$docs = $_POST['doc'];
+
 
 $docs = json_encode($docs);
 
 $QAstatus = mt_rand(1,100);
 
-if ($QAstatus >= 66){
+if ($QAstatus >= 50){
 
 	$QAstatus = 'Pending QA';
 
@@ -76,6 +90,10 @@ if ($OwnerRand == 1){
 	} else {
 		$QAowner = "rwilson";
 	}
+}
+
+if ($status == 'Other'){
+	$QAstatus = 'Passed QA';
 }
 
 

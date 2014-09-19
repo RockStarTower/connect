@@ -1291,6 +1291,7 @@ $(document).ready(function () {
     });
 
     $("#taskSelect").prop("selectedIndex", -1);
+    $("#taskSelect2").prop("selectedIndex", -1);
     
     $("#notePad").focusout(function() {
 
@@ -1315,7 +1316,203 @@ $(document).ready(function () {
 
     $("#userFilterDetails").prop("selectedIndex", -1);
     $("#taskFilterDetails").prop("selectedIndex", -1);
-    
+
+
+    $("#taskStandard").on('click', function() {
+
+        $("#taskStandard").addClass('active');
+        $("#taskOther").removeClass('active');
+
+        $(".taskCon1").css('display', 'block');
+        $(".taskCon2").css('display', 'none');
+
+    });
+
+    $("#taskOther").on('click', function() {
+
+        $("#taskStandard").removeClass('active');
+        $("#taskOther").addClass('active');
+
+        $(".taskCon1").css('display', 'none');
+        $(".taskCon2").css('display', 'block');
+        
+    });
+
+    $("#kickbackRadioSelect").click(function (){
+        var find = $(this);
+        $(".stockKickbackOption").delay(700).animate({
+            height: 80,
+        }, 350);  
+     
+    });
+
+    $("#completeRadioSelect").click(function (){
+        var find = $(this);
+        $(".stockKickbackOption").delay(700).animate({
+            height: 0,
+        }, 350);  
+     
+    });
+
+/*
+*
+*  This is where we get kickback canned responses. Each "quick" class below is one of the buttons.
+*
+*
+*
+*
+*/
+    $(".quick1").click(function (){
+        var curText = $(".currentcontent").val();
+ 
+        if (curText != ""){
+
+            $(".currentcontent").val(curText + "\n\nNo logins were provided for this action. Kicking back for CMS, FTP, or Host logins.");
+
+        } else {
+
+             $(".currentcontent").val("No logins were provided for this action. Kicking back for CMS, FTP, or Host logins.");
+
+        }
+
+    });
+
+    $(".quick2").click(function (){
+        var curText = $(".currentcontent").val();
+ 
+        if (curText != ""){
+
+            $(".currentcontent").val(curText + "\n\nThe logins we were given aren't working. Kicking back for updated logins.");
+
+        } else {
+
+             $(".currentcontent").val("The logins we were given aren't working. Kicking back for updated logins.");
+
+        }
+
+    });
+
+    $(".quick3").click(function (){
+        var curText = $(".currentcontent").val();
+ 
+        if (curText != ""){
+
+            $(".currentcontent").val(curText + "\n\nWe'll need the client's FTP access in order to complete this action. Kicking back for FTP logins.");
+
+        } else {
+
+             $(".currentcontent").val("We'll need the client's FTP access in order to complete this action. Kicking back for FTP logins.");
+
+        }
+
+    });
+
+    $(".quick4").click(function (){
+        var curText = $(".currentcontent").val();
+ 
+        if (curText != ""){
+
+            $(".currentcontent").val(curText + "\n\nWe'll need the client's Host access in order to complete this action. Kicking back for Host logins.");
+
+        } else {
+
+             $(".currentcontent").val("We'll need the client's Host access in order to complete this action. Kicking back for Host logins.");
+
+        }
+
+    });
+
+    $(".quick5").click(function (){
+        var curText = $(".currentcontent").val();
+ 
+        if (curText != ""){
+
+            $(".currentcontent").val(curText + "\n\nWe'll need access to the client's CMS in order to complete this action. Kicking back for CMS logins.");
+
+        } else {
+
+             $(".currentcontent").val("We'll need access to the client's CMS in order to complete this action. Kicking back for CMS logins.");
+
+        }
+
+    });
+
+    $(".quick6").click(function (){
+        var curText = $(".currentcontent").val();
+ 
+        if (curText != ""){
+
+            $(".currentcontent").val(curText + "\n\nThe AM's instructions were too vague for this action. Kicking back for more specific instructions.");
+
+        } else {
+
+             $(".currentcontent").val("The AM's instructions were too vague for this action. Kicking back for more specific instructions.");
+
+        }
+
+    });
+
+    $(".quick7").click(function (){
+        var curText = $(".currentcontent").val();
+ 
+        if (curText != ""){
+
+            $(".currentcontent").val(curText + "\n\nWe were only able to partially complete this action due to lack of access. Kicking back to see what the AM would like us to complete the action 'as is'.");
+
+        } else {
+
+             $(".currentcontent").val("We were only able to partially complete this action due to lack of access. Kicking back to see what the AM would like us to complete the action 'as is'.");
+
+        }
+
+    });
+
+    $(".quick8").click(function (){
+        var curText = $(".currentcontent").val();
+ 
+        if (curText != ""){
+
+            $(".currentcontent").val(curText + "\n\nWe will need higher access in the client's CMS in order to complete the action. Kicking back for more permissions/access.");
+
+        } else {
+
+             $(".currentcontent").val("We will need higher access in the client's CMS in order to complete the action. Kicking back for more permissions/access.");
+
+        }
+
+    });
+
+    $(".quick9").click(function (){
+        var curText = $(".currentcontent").val();
+ 
+        if (curText != ""){
+
+            $(".currentcontent").val(curText + "\n\nThe page this action is for is giving a 404 error. Kicking back to have AM target a different page, possible inform the client, and let us know what they would like to be done.");
+
+        } else {
+
+             $(".currentcontent").val("The page this action is for is giving a 404 error. Kicking back to have AM target a different page, possible inform the client, and let us know what they would like to be done.");
+
+        }
+
+    });
+
+    $(".quick10").click(function (){
+        var curText = $(".currentcontent").val();
+ 
+        if (curText != ""){
+
+            $(".currentcontent").val(curText + "\n\nWe are unable to complete this action as requested despite having enough access. Kicking back to see what the AM would like done.");
+
+        } else {
+
+             $(".currentcontent").val("We are unable to complete this action as requested despite having enough access. Kicking back to see what the AM would like done.");
+
+        }
+
+    });
+
+
 });
 
 
