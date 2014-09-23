@@ -178,6 +178,14 @@ include "header.php";
 		$secondDET = '';
 
 	}
+
+	if (isset($_POST['limit'])){
+
+		$limit = $_POST['limit'];
+
+	} else {
+		$limit = 100;
+	}
 ?>
 
 <div class="panel adminPanel" id="newUser" style="display: none;">
@@ -211,8 +219,10 @@ include "header.php";
 				<option value="task = 'Setup Blog'">Setup Blog</option>
 				<option value="status = 'Kickback'">Kickbacks</option>
 		</select>
+		Limit: <input type="number" name="limit" class="sInputs" placeholder="Limit" style="height: 33px;
+width: 120px !important; margin-right: 20px;" id="limit" />
 		<input type="submit" class="btn btn-primary"/>
-		</form> <span>Filtered by: <?php echo $userFilter; ?> <?php echo $secondDET; ?> <?php echo $taskFilter; ?> </span>
+		</form> <span>Filtered by: <?php echo $userFilter; ?> <?php echo $secondDET; ?> <?php echo $taskFilter; ?> Limit <?php echo $limit ?> </span>
 		</div>
 	</div>
 </div>
@@ -221,7 +231,7 @@ include "header.php";
 
 
 
-	$result = mysqli_query($con, "SELECT * FROM onsites $firstDET $userFilter $secondDET $taskFilter ORDER BY date DESC LIMIT 200");
+	$result = mysqli_query($con, "SELECT * FROM onsites $firstDET $userFilter $secondDET $taskFilter ORDER BY date DESC LIMIT $limit");
 
 	if (!$result) {
 		printf("Error: %s\n", mysqli_error($con));

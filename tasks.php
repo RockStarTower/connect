@@ -178,9 +178,10 @@ include 'header.php';
 <div class="right-wrapper">
 
 <div class="right-margin">
-
 <?php if ($user_role == 'custom') { ?>
+
 <div class="working">
+
 
 	<div class="panel-default">
 		<div class="panel-heading">
@@ -363,6 +364,7 @@ include 'header.php';
 				$notevalue1 = mysqli_fetch_array($results);
 				$noteValue = $notevalue1['notes'];
 		?>
+
 
 		<div class="panel">
 			<div class="panel-default">
